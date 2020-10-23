@@ -15,10 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Multiplayer Bomber"
-config/description="A multiplayer implementation of the classical bomberman game.
-One of the players should press 'host', while the other
-should type in his address and press 'play'."
+config/name="GameJam 2020 ArcadeSpaceShooter"
+config/description="A multiplayer space shoot-em-up."
 run/main_scene="res://lobby.tscn"
 config/icon="res://icon.png"
 
