@@ -4,6 +4,8 @@ const MOTION_SPEED = 90.0
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
+ 
+export (PackedScene) var Bullet
 
 export var stunned = false
 
@@ -20,6 +22,11 @@ var current_anim = ""
 var prev_bombing = false
 var bomb_index = 0
 
+func shoot():
+	var b = Bullet.instance()
+	add_child(b)
+	b.transform = $Muzzle.transform
+
 func _physics_process(_delta):
 	var motion = Vector2()
 
@@ -32,8 +39,11 @@ func _physics_process(_delta):
 			motion += Vector2(0, -1)
 		if Input.is_action_pressed("move_down"):
 			motion += Vector2(0, 1)
+			
+		if Input.is_action_just_pressed("shoot"):
+			shoot()
 
-		var bombing = Input.is_action_pressed("set_bomb")
+		var bombing = false
 
 		if stunned:
 			bombing = false
@@ -68,6 +78,8 @@ func _physics_process(_delta):
 	if new_anim != current_anim:
 		current_anim = new_anim
 		get_node("anim").play(current_anim)
+		
+	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
 
 	# FIXME: Use move_and_slide
 	move_and_slide(motion * MOTION_SPEED)
