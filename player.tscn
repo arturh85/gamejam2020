@@ -51,4 +51,4 @@ texture = ExtResource( 5 )
 current = true
 
 [node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( 67.0018, 1.59951 )
+position = Vector2( 45.3107, 1.59951 )
