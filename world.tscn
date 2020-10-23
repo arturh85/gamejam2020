@@ -6,6 +6,7 @@
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://data/images/bricks/floor_metal.png" type="Texture" id=5]
 [ext_resource path="res://data/images/background.png" type="Texture" id=6]
+[ext_resource path="res://Mob.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 48, 48, 0, 48, 0, 0, 48, 0 )
@@ -166,4 +167,10 @@ text = "EXIT GAME"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Mob" parent="." instance=ExtResource( 6 )]
+position = Vector2( -84.1322, 258.746 )
+
+[node name="Mob2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 676.233, 179.376 )
 [connection signal="pressed" from="Winner/ExitGame" to="Score" method="_on_exit_game_pressed"]
