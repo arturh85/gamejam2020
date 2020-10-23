@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/explosion.png-730076d88b39dbfd5c22ad71f1135b01.stex"
+path="res://.import/brickfloor.png-1ce413e4c011fbd447287b441234b9f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://explosion.png"
-dest_files=[ "res://.import/explosion.png-730076d88b39dbfd5c22ad71f1135b01.stex" ]
+source_file="res://assets/brickfloor.png"
+dest_files=[ "res://.import/brickfloor.png-1ce413e4c011fbd447287b441234b9f9.stex" ]
 
 [params]
 

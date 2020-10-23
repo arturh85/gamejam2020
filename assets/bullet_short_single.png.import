@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rock_bit.png-cd30ec3dce7edf848ee632b29d4d0c95.stex"
+path="res://.import/bullet_short_single.png-edfc040f9d6d0b4be7bfa1b04a3f0fce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rock_bit.png"
-dest_files=[ "res://.import/rock_bit.png-cd30ec3dce7edf848ee632b29d4d0c95.stex" ]
+source_file="res://assets/bullet_short_single.png"
+dest_files=[ "res://.import/bullet_short_single.png-edfc040f9d6d0b4be7bfa1b04a3f0fce.stex" ]
 
 [params]
 

@@ -24,8 +24,8 @@ var bomb_index = 0
 
 func shoot():
 	var b = Bullet.instance()
-	add_child(b)
-	b.transform = $Muzzle.transform
+	get_node("../..").add_child(b)
+	b.transform = $Muzzle.global_transform
 
 func _physics_process(_delta):
 	var motion = Vector2()
@@ -77,11 +77,12 @@ func _physics_process(_delta):
 
 	if new_anim != current_anim:
 		current_anim = new_anim
-		get_node("anim").play(current_anim)
+#		get_node("anim").play(current_anim)
 		
-	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
+#	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
 
 	# FIXME: Use move_and_slide
+	look_at(get_global_mouse_position())
 	move_and_slide(motion * MOTION_SPEED)
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter

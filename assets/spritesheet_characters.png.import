@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/charwalk.png-a9f067962a6454cc2f52a6e82832cbc5.stex"
+path="res://.import/spritesheet_characters.png-3c0c465fcc2845a959d42c5252927ed4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://charwalk.png"
-dest_files=[ "res://.import/charwalk.png-a9f067962a6454cc2f52a6e82832cbc5.stex" ]
+source_file="res://assets/spritesheet_characters.png"
+dest_files=[ "res://.import/spritesheet_characters.png-3c0c465fcc2845a959d42c5252927ed4.stex" ]
 
 [params]
 
