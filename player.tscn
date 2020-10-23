@@ -1,32 +1,26 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
+[ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://bullet.tscn" type="PackedScene" id=4]
-
-[sub_resource type="StreamTexture" id=10]
-flags = 4
-load_path = "res://.import/spritesheet_characters.png-3c0c465fcc2845a959d42c5252927ed4.stex"
+[ext_resource path="res://data/images/sprites/weapon_shotgun.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=2]
 size = 14
 font_data = ExtResource( 3 )
-
-[sub_resource type="StreamTexture" id=9]
-flags = 4
-load_path = "res://.import/bullet_short_single.png-1dd0f4e5dc73d320ce6dd59d92235848.stex"
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 Bullet = ExtResource( 4 )
 
 [node name="sprite" type="Sprite" parent="."]
-position = Vector2( 0.0750351, 0.062604 )
-texture = SubResource( 10 )
-region_enabled = true
+position = Vector2( 0, -4.118 )
+rotation = -1.76627
+texture = ExtResource( 2 )
 region_rect = Rect2( 264, 132, 47, 43 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
@@ -39,7 +33,7 @@ margin_right = 85.0
 margin_bottom = -14.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 2 )
 text = "Player 1"
 align = 1
 __meta__ = {
@@ -49,15 +43,12 @@ __meta__ = {
 [node name="Pointer" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pointer"]
-position = Vector2( 0.374573, -0.374575 )
+position = Vector2( 21.107, 1.72673 )
 rotation = 1.5708
-scale = Vector2( 1, 0.503279 )
-texture = SubResource( 9 )
-centered = false
-offset = Vector2( -2.5, -45 )
+texture = ExtResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
 [node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( 24.6206, -0.402756 )
+position = Vector2( 67.0018, 1.59951 )
