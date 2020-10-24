@@ -4,25 +4,24 @@ const MOTION_SPEED = 90.0
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
+puppet var puppet_rotation = 0 
  
 export (PackedScene) var Bullet
 
 export var stunned = false
 
 # Use sync because it will be called everywhere
-sync func setup_bomb(bomb_name, pos, by_who):
-	var bomb = preload("res://bomb.tscn").instance()
-	bomb.set_name(bomb_name) # Ensure unique name for the bomb
-	bomb.position = pos
-	bomb.from_player = by_who
+sync func setup_bullet(by_who):
+	var b = Bullet.instance()
+	b.transform = $Group/Muzzle.global_transform
+	b.from_player = by_who
 	# No need to set network master to bomb, will be owned by server by default
-	get_node("../..").add_child(bomb)
+	get_node("../..").add_child(b)
 
-var current_anim = ""
-var prev_bombing = false
-var bomb_index = 0
+var prev_shooting = false
+var shoot_index = 0
 
-var speed = 50
+var speed = 150
 var health = 50
 var max_health = 50
 
@@ -33,6 +32,7 @@ sync func shoot():
 
 func _physics_process(_delta):
 	var motion = Vector2()
+	var rotation = 0
 
 	if is_network_master():
 		if Input.is_action_pressed("move_left"):
@@ -44,53 +44,35 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("move_down"):
 			motion += Vector2(0, 1)
 			
-		motion = motion.normalized() * 3
+		motion = motion.normalized()
 
-		var bombing = false
+		var shooting = Input.is_action_pressed("shoot")
 
 		if stunned:
-			bombing = false
+			shooting = false
 			motion = Vector2()
 
-		if bombing and not prev_bombing:
-			var bomb_name = get_name() + str(bomb_index)
-			var bomb_pos = position
-			rpc("setup_bomb", bomb_name, bomb_pos, get_tree().get_network_unique_id())
+		if shooting and not prev_shooting:
+			#var bomb_pos = position
+			rpc("setup_bullet", get_tree().get_network_unique_id())
+			
+		rotation = get_angle_to(get_global_mouse_position())
 
-		prev_bombing = bombing
+		prev_shooting = shooting
 
 		rset("puppet_motion", motion)
+		rset("puppet_rotation", rotation)
 		rset("puppet_pos", position)
 	else:
 		position = puppet_pos
 		motion = puppet_motion
-
+		rotation = puppet_rotation
 			
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
-			
-	var new_anim = "standing"
-	if motion.y < 0:
-		new_anim = "walk_up"
-	elif motion.y > 0:
-		new_anim = "walk_down"
-	elif motion.x < 0:
-		new_anim = "walk_left"
-	elif motion.x > 0:
-		new_anim = "walk_right"
-
-	if stunned:
-		new_anim = "stunned"
-
-	if new_anim != current_anim:
-		current_anim = new_anim
-#		get_node("anim").play(current_anim)
-		
 #	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
 
 	# FIXME: Use move_and_slide
 	# $Group.look_at(get_global_mouse_position())
-	$Group.rotation = get_angle_to(get_global_mouse_position())
+	$Group.rotation = rotation
 	
 	move_and_slide(motion * MOTION_SPEED)
 	if not is_network_master():

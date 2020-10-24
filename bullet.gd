@@ -1,6 +1,7 @@
 extends Area2D
 
 var speed = 750
+var from_player
 
 func _physics_process(delta):
 	position += transform.x * speed * delta
