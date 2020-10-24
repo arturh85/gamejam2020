@@ -22,10 +22,14 @@ var current_anim = ""
 var prev_bombing = false
 var bomb_index = 0
 
-func shoot():
+var speed = 50
+var health = 50
+var max_health = 50
+
+sync func shoot():
 	var b = Bullet.instance()
 	get_node("../..").add_child(b)
-	b.transform = $Muzzle.global_transform
+	b.transform = $Group/Muzzle.global_transform
 
 func _physics_process(_delta):
 	var motion = Vector2()
@@ -84,7 +88,9 @@ func _physics_process(_delta):
 #	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
 
 	# FIXME: Use move_and_slide
-	look_at(get_global_mouse_position())
+	# $Group.look_at(get_global_mouse_position())
+	$Group.rotation = get_angle_to(get_global_mouse_position())
+	
 	move_and_slide(motion * MOTION_SPEED)
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
@@ -104,3 +110,10 @@ func set_player_name(new_name):
 func _ready():
 	stunned = false
 	puppet_pos = position
+	
+	
+func take_damage(amount):
+	health -= amount
+	$HealthDisplay.update_healthbar(health)
+	if health <= 0:
+		queue_free()
