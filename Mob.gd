@@ -22,7 +22,7 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 	rotation = velocity.angle()
 
-func take_damage(amount):
+sync func take_damage(amount):
 	health -= amount
 	$HealthDisplay.update_healthbar(health)
 	if health <= 0:

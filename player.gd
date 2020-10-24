@@ -45,9 +45,6 @@ func _physics_process(_delta):
 			motion += Vector2(0, 1)
 			
 		motion = motion.normalized() * 3
-			
-		if Input.is_action_just_pressed("shoot"):
-			shoot()
 
 		var bombing = false
 
@@ -68,6 +65,10 @@ func _physics_process(_delta):
 		position = puppet_pos
 		motion = puppet_motion
 
+			
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+			
 	var new_anim = "standing"
 	if motion.y < 0:
 		new_anim = "walk_up"
@@ -110,9 +111,11 @@ func set_player_name(new_name):
 func _ready():
 	stunned = false
 	puppet_pos = position
+	if is_network_master():
+		$Group/Camera2D.make_current()
 	
 	
-func take_damage(amount):
+sync func take_damage(amount):
 	health -= amount
 	$HealthDisplay.update_healthbar(health)
 	if health <= 0:
