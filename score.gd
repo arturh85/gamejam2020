@@ -1,6 +1,7 @@
 extends HBoxContainer
 
 var player_labels = {}
+var player_colors = [ Color(0, 0.72, 0.56), Color(0.72, 0, 0.41) , Color(0.13, 0.69, 0.29), Color(0.85, 0.58, 0.07) ]
 
 func _process(_delta):
 	var rocks_left = $"../../Rocks".get_child_count()
@@ -20,17 +21,17 @@ sync func increase_score(for_who):
 	assert(for_who in player_labels)
 	var pl = player_labels[for_who]
 	pl.score += 1
-	pl.label.set_text(pl.name + "\n" + str(pl.score))
+	pl.label.set_text(pl.name + ": " + str(pl.score) + "\n")
 
 
 func add_player(id, new_player_name):
 	var l = Label.new()
-	l.set_align(Label.ALIGN_CENTER)
-	l.set_text(new_player_name + "\n" + "0")
+	l.set_text(new_player_name + ": 0" + "\n")
 	l.set_h_size_flags(SIZE_EXPAND_FILL)
 	var font = DynamicFont.new()
 	font.set_size(18)
 	font.set_font_data(preload("res://montserrat.otf"))
+	l.add_color_override("font_color", player_colors[(id - 1) % player_colors.size()])
 	l.add_font_override("font", font)
 	add_child(l)
 

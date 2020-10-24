@@ -45,7 +45,7 @@ func _process(delta):
 		if item:
 			var obj_pos = (item.position - children.position) * grid_scale + grid.rect_size / 2
 			# If marker is outside grid, hide or shrink it.
-			if grid.get_rect().has_point(obj_pos + grid.rect_position):
+			if grid.get_rect().size.x / 2.0 < obj_pos:
 				markers[item].scale = Vector2(1, 1)
 	#			markers[item].show()
 			else:
