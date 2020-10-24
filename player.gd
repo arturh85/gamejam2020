@@ -135,6 +135,10 @@ func _ready():
 	print("Master: ", is_network_master())
 	print("Name: ", get_name(), " instance -> network    ", get_tree().get_network_unique_id())
 
+	var colors = get_node("../../CanvasLayer/Score").player_colors;
+	$label.add_color_override("font_color", colors[(get_tree().get_network_unique_id() - 1) % colors.size()])
+	
+
 	if is_network_master():
 		$Group/Camera2D.make_current()
 	

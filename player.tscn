@@ -10,12 +10,12 @@
 [ext_resource path="res://weapons/AnimatedGun.tscn" type="PackedScene" id=8]
 [ext_resource path="res://weapons/ManualFireGun.tscn" type="PackedScene" id=9]
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 11.2304
+
 [sub_resource type="DynamicFont" id=1]
 size = 14
 font_data = ExtResource( 3 )
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 11.2304
 
 [node name="player" type="KinematicBody2D" groups=[
 "players",
@@ -25,20 +25,6 @@ Weapon1 = ExtResource( 9 )
 Weapon2 = ExtResource( 4 )
 Weapon3 = ExtResource( 5 )
 Weapon4 = ExtResource( 8 )
-
-[node name="label" type="Label" parent="."]
-margin_left = -81.3326
-margin_top = -47.681
-margin_right = 85.6674
-margin_bottom = -26.681
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 1 )
-text = "Player 1"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Group" type="Node2D" parent="."]
 
@@ -76,3 +62,17 @@ visible = false
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2( 0.166855, 0.834274 )
 shape = SubResource( 2 )
+
+[node name="label" type="Label" parent="."]
+margin_left = -81.3326
+margin_top = -47.681
+margin_right = 85.6674
+margin_bottom = -26.681
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
+text = "Player 1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
