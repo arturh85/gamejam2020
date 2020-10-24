@@ -1,8 +1,12 @@
 # Whenever a push is made to the master branch then run the job
-on: 
+
+name: Godot Export
+
+on:
   push:
-    branches:
-      - master
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   # job id, can be anything
