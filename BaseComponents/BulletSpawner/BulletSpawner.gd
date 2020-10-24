@@ -11,6 +11,9 @@ export var spread = 0.3
 #MUST CONNECT spawn METHOD TO START/END ATTACK IN EDITOR!
 
 func spawn():
+	rpc("spawn2")
+
+sync func spawn2():
 	#create bullet
 	var b = load(bullet_scene_path).instance()
 	get_tree().get_root().add_child(b)

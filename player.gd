@@ -45,10 +45,10 @@ func switch_weapon(index):
 		push_error("invalid weapon")
 		return
 
-	var current_weapon = get_node("Group").get_child(2)
-	get_node("Group").remove_child(current_weapon)
+	var current_weapon = get_node("Group/Gun").get_child(0)
+	get_node("Group/Gun").remove_child(current_weapon)
 	current_weapon.call_deferred("free")
-	get_node("Group").add_child(w, true)
+	get_node("Group/Gun").add_child(w, true)
 
 func _physics_process(delta):
 	var motion = Vector2()
