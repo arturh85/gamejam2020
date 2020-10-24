@@ -130,6 +130,8 @@ func set_player_name(new_name):
 func _ready():
 	stunned = false
 	puppet_pos = position
+	get_node("../../CanvasLayer/HealthDisplay").show_always()
+	
 	print("Master: ", is_network_master())
 	print("Name: ", get_name(), " instance -> network    ", get_tree().get_network_unique_id())
 

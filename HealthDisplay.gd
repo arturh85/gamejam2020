@@ -6,9 +6,16 @@ var bar_yellow = preload("res://assets/barHorizontal_yellow.png")
 
 onready var healthbar = $HealthBar
 
+var showBar = false
+
 func _ready():
-	hide()
-	pass
+	if not showBar:
+		hide()
+		
+	
+func show_always():
+	showBar = true
+	show()
 	
 func _process(delta):
 	global_rotation = 0
@@ -23,5 +30,6 @@ func update_healthbar(value, max_health):
 	if value < healthbar.max_value:
 		show()
 	else:
-		hide()
+		if not showBar:
+			hide()
 	healthbar.value = value
