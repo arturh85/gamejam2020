@@ -22,4 +22,6 @@ func update_healthbar(value):
 		healthbar.texture_progress = bar_red
 	if value < healthbar.max_value:
 		show()
+	else:
+		hide()
 	healthbar.value = value

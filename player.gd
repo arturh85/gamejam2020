@@ -23,6 +23,7 @@ var shoot_index = 0
 
 var speed = 150
 var health = 50
+var health_regeneration = 1
 var max_health = 50
 
 sync func shoot():
@@ -30,7 +31,11 @@ sync func shoot():
 	get_node("../..").add_child(b)
 	b.transform = $Group/Muzzle.global_transform
 
-func _physics_process(_delta):
+func _process(delta):
+	health = min(health + health_regeneration * delta, max_health)
+	$HealthDisplay.update_healthbar(health)
+	
+func _physics_process(delta):
 	var motion = Vector2()
 	var rotation = 0
 

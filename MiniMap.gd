@@ -36,7 +36,11 @@ func _process(delta):
 	if !player:
 		return
 	# Arrow texture points upwards, so add 90 degrees.
-	player_marker.rotation = get_node(player).rotation + PI/2
+	var player_node = get_node(player)
+	var children = player_node.get_child(0)
+	var group_node = children.find_node("Group")
+	
+	player_marker.rotation = group_node.rotation + PI/2
 	for item in markers:
 		var obj_pos = (item.position - get_node(player).position) * grid_scale + grid.rect_size / 2
 		# If marker is outside grid, hide or shrink it.
