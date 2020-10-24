@@ -14,10 +14,10 @@ var _burst_auto = preload("../../BaseComponents/AutoAttack/AutoAttack.tscn").ins
 
 # IMPLEMENT THESE TWO FUNCTIONS:
 func _apply_burst_cooldown():
-	# cooldown.get_node("Timer").wait_time = 0.25
+	cooldown.get_node("Timer").wait_time = 0.25
 	pass
 func _apply_original_cooldown():
-	# cooldown.get_node("Timer").wait_time = 2
+	cooldown.get_node("Timer").wait_time = 2
 	pass
 
 

@@ -6,7 +6,10 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 puppet var puppet_rotation = 0 
  
-#sexport (PackedScene) var Weapon
+export (PackedScene) var Weapon1
+export (PackedScene) var Weapon2
+export (PackedScene) var Weapon3
+export (PackedScene) var Weapon4
 
 export var stunned = false
 
@@ -28,6 +31,25 @@ func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
 	$HealthDisplay.update_healthbar(health)
 	
+func switch_weapon(index):
+	var w
+	if index == 1:
+		w = Weapon1.instance()
+	elif index == 2:
+		w = Weapon2.instance()
+	elif index == 3:
+		w = Weapon3.instance()
+	elif index == 4:
+		w = Weapon4.instance()
+	else:
+		push_error("invalid weapon")
+		return
+
+	var current_weapon = get_node("Group").get_child(2)
+	get_node("Group").remove_child(current_weapon)
+	current_weapon.call_deferred("free")
+	get_node("Group").add_child(w, true)
+
 func _physics_process(delta):
 	var motion = Vector2()
 	var rotation = 0
@@ -50,6 +72,15 @@ func _physics_process(delta):
 			$Group/Camera2D/flashlight.visible = not flashlight
 			flashlight = not flashlight
 			
+		if Input.is_action_just_pressed("weapon1"):
+			switch_weapon(1)
+		if Input.is_action_just_pressed("weapon2"):
+			switch_weapon(2)
+		if Input.is_action_just_pressed("weapon3"):
+			switch_weapon(3)
+		if Input.is_action_just_pressed("weapon4"):
+			switch_weapon(4)
+
 		motion = motion.normalized()
 
 		var shooting = Input.is_action_pressed("shoot")
