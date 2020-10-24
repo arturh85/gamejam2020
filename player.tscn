@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://bullet.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/images/sprites/weapon_plasma.png" type="Texture" id=5]
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
-[ext_resource path="res://data/images/lights/area.png" type="Texture" id=8]
+[ext_resource path="res://weapons/ManualFireGun.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -20,7 +18,6 @@ radius = 11.2304
 "players",
 ]]
 script = ExtResource( 1 )
-Bullet = ExtResource( 4 )
 
 [node name="label" type="Label" parent="."]
 margin_left = -81.3326
@@ -50,39 +47,6 @@ rotation = -1.55334
 texture = ExtResource( 2 )
 region_rect = Rect2( 264, 132, 47, 43 )
 
-[node name="Pointer" type="Node2D" parent="Group"]
-
-[node name="Sprite" type="Sprite" parent="Group/Pointer"]
-modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
-position = Vector2( 21.2739, 6.06496 )
-rotation = 1.5708
-texture = ExtResource( 5 )
-
-[node name="Light2D2" type="Light2D" parent="Group/Pointer"]
-position = Vector2( 32.751, 6.17364 )
-scale = Vector2( 0.207439, 0.0875122 )
-texture = ExtResource( 8 )
-offset = Vector2( -20.3374, 0 )
-energy = 2.81
-range_item_cull_mask = 2
-
-[node name="Light2D3" type="Light2D" parent="Group/Pointer"]
-position = Vector2( 16.2502, 3.17025 )
-scale = Vector2( 0.105762, 0.0249417 )
-texture = ExtResource( 8 )
-offset = Vector2( -20.3374, 0 )
-energy = 2.81
-range_item_cull_mask = 2
-
-[node name="Light2D4" type="Light2D" parent="Group/Pointer"]
-position = Vector2( 16.417, 9.01017 )
-scale = Vector2( 0.105762, 0.0249417 )
-texture = ExtResource( 8 )
-offset = Vector2( -20.3374, 0 )
-energy = 2.81
-range_item_cull_mask = 2
-
 [node name="Camera2D" type="Camera2D" parent="Group"]
 
 [node name="flashlight" type="Light2D" parent="Group/Camera2D"]
@@ -90,15 +54,15 @@ light_mask = 2
 position = Vector2( 0, 8 )
 scale = Vector2( 4.82131, 4.10324 )
 texture = ExtResource( 7 )
-texture_scale = 0.1
-energy = 2.5
+texture_scale = 0.3
+energy = 2.0
 range_item_cull_mask = 2
 shadow_enabled = true
-shadow_gradient_length = 0.5
-shadow_filter_smooth = 1.0
+shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="Muzzle" type="Position2D" parent="Group"]
-position = Vector2( 68.835, 5.93774 )
+[node name="ManualFireGun" parent="Group" instance=ExtResource( 9 )]
+position = Vector2( 35, 5 )
+rotation = 1.5708
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
