@@ -93,6 +93,9 @@ func set_player_name(new_name):
 func _ready():
 	stunned = false
 	puppet_pos = position
+	print("Master: ", is_network_master())
+	print("Name: ", get_name(), " instance -> network    ", get_tree().get_network_unique_id())
+
 	if is_network_master():
 		$Group/Camera2D.make_current()
 	
@@ -101,4 +104,5 @@ sync func take_damage(amount):
 	health -= amount
 	$HealthDisplay.update_healthbar(health)
 	if health <= 0:
-		queue_free()
+		health = max_health
+		$HealthDisplay.update_healthbar(health)

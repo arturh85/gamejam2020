@@ -96,7 +96,6 @@ energy = 2.81
 range_item_cull_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="Group"]
-current = true
 
 [node name="Muzzle" type="Position2D" parent="Group"]
 position = Vector2( 68.835, 5.93774 )
