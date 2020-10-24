@@ -40,6 +40,8 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("move_down"):
 			motion += Vector2(0, 1)
 			
+		motion = motion.normalized() * 3
+			
 		if Input.is_action_just_pressed("shoot"):
 			shoot()
 
