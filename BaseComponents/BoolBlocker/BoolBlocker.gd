@@ -9,7 +9,7 @@ func flip():
 	pass #implement in children
 
 func _process(delta):
-	if Input.is_action_just_pressed(input_action_trigger):
+	if is_network_master() and Input.is_action_just_pressed(input_action_trigger):
 		flip()
 
 func _set_input_trigger(val):
