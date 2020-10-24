@@ -20,6 +20,9 @@ spread = 0.1
 input_action_trigger = "shoot"
 auto_reset = true
 try_start_attack_after_set = true
+
+[node name="Muzzle" type="Node2D" parent="." index="4"]
+position = Vector2( 0.23597, -20.0573 )
 [connection signal="began" from="." to="." method="end_attack"]
 [connection signal="ended" from="." to="BulletSpawner2D" method="spawn"]
 [connection signal="began" from="FiringCooldown" to="FiringCooldown/Timer" method="start"]
