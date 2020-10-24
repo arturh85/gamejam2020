@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://rock.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://data/images/background.png" type="Texture" id=5]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://MiniMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -25,6 +26,12 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -2796.49, 344.389 )
+scale = Vector2( 3.90953, 4.00339 )
+texture = ExtResource( 8 )
+energy = 1.25
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
