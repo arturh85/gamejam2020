@@ -98,6 +98,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 shape = SubResource( 1 )
 
 [node name="Shape2" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.529724 )
 shape = SubResource( 2 )
 
 [node name="Explosion1" type="Particles2D" parent="."]

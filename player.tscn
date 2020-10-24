@@ -4,7 +4,7 @@
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://bullet.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/images/sprites/weapon_shotgun.png" type="Texture" id=5]
+[ext_resource path="res://data/images/sprites/weapon_plasma.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -19,11 +19,12 @@ Bullet = ExtResource( 4 )
 
 [node name="sprite" type="Sprite" parent="."]
 position = Vector2( 0, -4.118 )
-rotation = -1.76627
+rotation = -1.55334
 texture = ExtResource( 2 )
 region_rect = Rect2( 264, 132, 47, 43 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2( 0.166855, 0.834274 )
 shape = SubResource( 1 )
 
 [node name="label" type="Label" parent="."]
@@ -43,7 +44,7 @@ __meta__ = {
 [node name="Pointer" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pointer"]
-position = Vector2( 21.107, 1.72673 )
+position = Vector2( 21.2739, 6.06496 )
 rotation = 1.5708
 texture = ExtResource( 5 )
 
@@ -51,4 +52,4 @@ texture = ExtResource( 5 )
 current = true
 
 [node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( 45.3107, 1.59951 )
+position = Vector2( 68.835, 5.93774 )
