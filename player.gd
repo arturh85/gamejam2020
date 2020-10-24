@@ -29,7 +29,7 @@ var max_health = 50
 
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
-	$HealthDisplay.update_healthbar(health)
+	_updateBar(health)
 	
 func switch_weapon(index):
 	var w
@@ -139,7 +139,12 @@ func _ready():
 	
 sync func take_damage(amount):
 	health -= amount
-	$HealthDisplay.update_healthbar(health)
+	_updateBar(health)
 	if health <= 0:
 		health = max_health
-		$HealthDisplay.update_healthbar(health)
+		_updateBar(health)
+
+func _updateBar(health):
+	$HealthDisplay.update_healthbar(health, max_health)
+	if is_network_master():
+		get_node("../../CanvasLayer/HealthDisplay").update_healthbar(health, max_health)

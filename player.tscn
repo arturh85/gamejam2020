@@ -71,6 +71,7 @@ rotation = 1.5708
 [node name="Default" parent="Group/Gun" instance=ExtResource( 9 )]
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2( 0.166855, 0.834274 )

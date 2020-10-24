@@ -17,7 +17,7 @@ func _ready():
 	
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
-	$HealthDisplay.update_healthbar(health)
+	$HealthDisplay.update_healthbar(health, max_health)
 	
 func _physics_process(delta):
 	velocity = transform.x * speed
@@ -28,6 +28,6 @@ func _physics_process(delta):
 
 sync func take_damage(amount):
 	health -= amount
-	$HealthDisplay.update_healthbar(health)
+	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
 		queue_free()

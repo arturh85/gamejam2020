@@ -8,13 +8,13 @@ onready var healthbar = $HealthBar
 
 func _ready():
 	hide()
-	if get_parent() and get_parent().get("max_health"):
-		healthbar.max_value = get_parent().max_health
+	pass
 	
 func _process(delta):
 	global_rotation = 0
 	
-func update_healthbar(value):
+func update_healthbar(value, max_health):
+	healthbar.max_value = max_health
 	healthbar.texture_progress = bar_green
 	if value < healthbar.max_value * 0.7:
 		healthbar.texture_progress = bar_yellow

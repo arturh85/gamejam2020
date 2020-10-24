@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://rock.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://data/sounds/music/background.wav" type="AudioStream" id=9]
 [ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=10]
 [ext_resource path="res://crosshair.tscn" type="PackedScene" id=11]
+[ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -175,6 +176,10 @@ position = Vector2( 621.786, 65.5318 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="HealthDisplay" parent="CanvasLayer" instance=ExtResource( 12 )]
+position = Vector2( 850, 580 )
+scale = Vector2( 1.27, 0.35 )
+
 [node name="Score" type="HBoxContainer" parent="CanvasLayer"]
 margin_left = 14.1703
 margin_top = 11.2599
@@ -188,10 +193,10 @@ __meta__ = {
 }
 
 [node name="MiniMap" parent="CanvasLayer" instance=ExtResource( 7 )]
-margin_left = 55.0
-margin_top = 367.0
-margin_right = 252.0
-margin_bottom = 551.0
+margin_left = 13.4695
+margin_top = 444.398
+margin_right = 215.47
+margin_bottom = 651.398
 player = NodePath("../../Players")
 
 [node name="Winner" type="Label" parent="CanvasLayer"]

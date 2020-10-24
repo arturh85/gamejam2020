@@ -1,14 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MiniMap.gd" type="Script" id=1]
+[ext_resource path="res://data/images/minimap/frame.png" type="Texture" id=2]
 [ext_resource path="res://data/images/minimap/player.png" type="Texture" id=3]
 [ext_resource path="res://data/images/minimap/enemy.png" type="Texture" id=4]
 [ext_resource path="res://assets/minimapIcon_exclamationYellow.png" type="Texture" id=6]
-[ext_resource path="res://data/images/minimap_border.png" type="Texture" id=7]
 
 [node name="MiniMap" type="MarginContainer"]
 margin_right = 200.0
 margin_bottom = 200.0
+rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
@@ -17,6 +18,12 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BG" type="Sprite" parent="."]
+position = Vector2( 14.4324, 14.1622 )
+scale = Vector2( 0.672873, 0.686793 )
+texture = ExtResource( 2 )
+offset = Vector2( 128, 128 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 light_mask = 2
@@ -28,12 +35,6 @@ custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
-
-[node name="BG" type="Sprite" parent="MarginContainer"]
-position = Vector2( 13, 6 )
-scale = Vector2( 0.672873, 0.686793 )
-texture = ExtResource( 7 )
-offset = Vector2( 128, 128 )
 
 [node name="Grid" type="TextureRect" parent="MarginContainer"]
 light_mask = 2
