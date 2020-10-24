@@ -22,6 +22,13 @@ sync func spawn2():
 	#initialize bullet
 	if weapon is Node2D:
 		b.global_rotation = weapon.global_rotation + rand_range(-spread, spread)
-		b.global_position = weapon.global_position
+		
+		var muzzle = weapon.get_node("Muzzle")
+		if muzzle:
+			print("use muzzle")
+			b.global_position = weapon.global_position + muzzle.position
+		else:
+			print("NO use muzzle")
+			b.global_position = weapon.global_position
 	else:
 		pass
