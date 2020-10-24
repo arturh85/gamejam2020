@@ -147,6 +147,10 @@ sync func take_damage(amount, by_who):
 	health -= amount
 	_updateBar(health)
 	if health <= 0:
+		#var world = get_node("../..")
+		#var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+
+		$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		health = max_health
 		_updateBar(health)
 
