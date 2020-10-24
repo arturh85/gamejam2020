@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://weapons/Pistol.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons/Sword.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
+[ext_resource path="res://weapons/AnimatedGun.tscn" type="PackedScene" id=8]
 [ext_resource path="res://weapons/ManualFireGun.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
@@ -18,6 +21,10 @@ radius = 11.2304
 "players",
 ]]
 script = ExtResource( 1 )
+Weapon1 = ExtResource( 9 )
+Weapon2 = ExtResource( 4 )
+Weapon3 = ExtResource( 5 )
+Weapon4 = ExtResource( 8 )
 
 [node name="label" type="Label" parent="."]
 margin_left = -81.3326
@@ -32,10 +39,6 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2( 0.166855, 0.834274 )
-shape = SubResource( 2 )
 
 [node name="Group" type="Node2D" parent="."]
 
@@ -61,8 +64,12 @@ shadow_enabled = true
 shadow_gradient_length = 0.5
 shadow_item_cull_mask = 2
 
-[node name="ManualFireGun" parent="Group" instance=ExtResource( 9 )]
+[node name="Gun" parent="Group" instance=ExtResource( 9 )]
 position = Vector2( 35, 5 )
 rotation = 1.5708
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2( 0.166855, 0.834274 )
+shape = SubResource( 2 )
