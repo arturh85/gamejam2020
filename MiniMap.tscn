@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MiniMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/pattern_blueprintPaper.png" type="Texture" id=3]
 [ext_resource path="res://assets/minimapIcon_arrowA.png" type="Texture" id=4]
 [ext_resource path="res://assets/minimapIcon_jewelRed.png" type="Texture" id=5]
 [ext_resource path="res://assets/minimapIcon_exclamationYellow.png" type="Texture" id=6]
-[ext_resource path="res://data/images/minimap_border.png" type="Texture" id=7]
 
 [node name="MiniMap" type="MarginContainer"]
 margin_right = 200.0
@@ -30,13 +29,6 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="Light2D" type="Light2D" parent="MarginContainer"]
-position = Vector2( 96.5012, 94.6126 )
-scale = Vector2( 0.603625, 0.594931 )
-texture = ExtResource( 7 )
-mode = 3
-range_item_cull_mask = -2147483647
-
 [node name="Grid" type="TextureRect" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
@@ -50,10 +42,12 @@ position = Vector2( 75, 75 )
 texture = ExtResource( 4 )
 
 [node name="MobMarker" type="Sprite" parent="MarginContainer/Grid"]
+visible = false
 position = Vector2( 36.8283, 37.6892 )
 texture = ExtResource( 5 )
 
 [node name="AlertMarker" type="Sprite" parent="MarginContainer/Grid"]
+visible = false
 position = Vector2( 122.93, 112.982 )
 texture = ExtResource( 6 )
 [connection signal="gui_input" from="." to="." method="_on_MiniMap_gui_input"]

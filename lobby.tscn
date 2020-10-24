@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://lobby.gd" type="Script" id=1]
+[ext_resource path="res://data/sounds/music/menu.wav" type="AudioStream" id=2]
+[ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=3]
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
@@ -62,6 +64,9 @@ margin_right = 138.5
 margin_bottom = 83.5
 size_flags_horizontal = 2
 size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NameLabel" type="Label" parent="Connect"]
 margin_left = 14.0
@@ -133,6 +138,13 @@ margin_bottom = 58.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 window_title = "Warnung!"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+bus = "Music"
+script = ExtResource( 3 )
 [connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
+[connection signal="finished" from="Music" to="Music" method="_on_AudioStreamPlayer_finished"]

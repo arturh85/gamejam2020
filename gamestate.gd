@@ -73,8 +73,9 @@ remote func pre_start_game(spawn_points):
 	# Change scene.
 	var world = load("res://world.tscn").instance()
 	get_tree().get_root().add_child(world)
-
-	get_tree().get_root().get_node("Lobby").hide()
+	var lobby = get_tree().get_root().get_node("Lobby")
+	lobby.hide()
+	lobby.get_node("Music").stopMusic()
 
 	var player_scene = load("res://player.tscn")
 

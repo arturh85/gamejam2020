@@ -49,6 +49,10 @@ func _physics_process(delta):
 		if Input.is_action_pressed("move_down"):
 			motion += Vector2(0, 1)
 			
+			
+		if Input.is_action_just_pressed("mute"):
+			AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
+			
 		motion = motion.normalized()
 
 		var shooting = Input.is_action_pressed("shoot")
