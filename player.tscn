@@ -84,7 +84,6 @@ energy = 2.81
 range_item_cull_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="Group"]
-current = true
 
 [node name="Light2D" type="Light2D" parent="Group/Camera2D"]
 light_mask = 2

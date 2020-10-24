@@ -59,7 +59,7 @@ func _connected_fail():
 
 remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
-	print(id)
+	print("register player with id", id, " as ", new_player_name)
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
 
