@@ -19,6 +19,7 @@ margin_left = -4246.61
 margin_top = -3981.91
 margin_right = 5857.39
 margin_bottom = 4822.09
+rect_pivot_offset = Vector2( 1324.22, 4708.32 )
 texture = ExtResource( 5 )
 stretch_mode = 2
 __meta__ = {
@@ -37,6 +38,9 @@ __meta__ = {
 
 [node name="0" type="Position2D" parent="SpawnPoints"]
 position = Vector2( -3064, 308 )
+
+[node name="1" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -3180.87, 427.865 )
 
 [node name="Rocks" type="Node2D" parent="."]
 
