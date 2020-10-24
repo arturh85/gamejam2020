@@ -139,7 +139,7 @@ func _ready():
 		$Group/Camera2D.make_current()
 	
 	
-sync func take_damage(amount):
+sync func take_damage(amount, by_who):
 	health -= amount
 	_updateBar(health)
 	if health <= 0:

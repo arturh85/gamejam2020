@@ -26,8 +26,9 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 	rotation = velocity.angle()
 
-sync func take_damage(amount):
+sync func take_damage(amount, by_who):
 	health -= amount
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
+		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
 		queue_free()

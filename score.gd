@@ -17,10 +17,10 @@ func _process(_delta):
 		$"../Winner".show()
 
 
-sync func increase_score(for_who):
+sync func increase_score(for_who, amount):
 	assert(for_who in player_labels)
 	var pl = player_labels[for_who]
-	pl.score += 1
+	pl.score += amount
 	pl.label.set_text(pl.name + ": " + str(pl.score) + "\n")
 
 
