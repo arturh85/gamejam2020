@@ -6,17 +6,14 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 puppet var puppet_rotation = 0 
  
-export (PackedScene) var Bullet
+#export (PackedScene) var Bullet
 
 export var stunned = false
 
 # Use sync because it will be called everywhere
 sync func setup_bullet(by_who):
-	var b = Bullet.instance()
-	b.transform = $Group/Muzzle.global_transform
-	b.from_player = by_who
-	# No need to set network master to bomb, will be owned by server by default
-	get_node("../..").add_child(b)
+	#$Group/ChargeGun.start_attack()
+	pass
 
 var prev_shooting = false
 var shoot_index = 0
@@ -25,11 +22,6 @@ var speed = 150
 var health = 50
 var health_regeneration = 1
 var max_health = 50
-
-sync func shoot():
-	var b = Bullet.instance()
-	get_node("../..").add_child(b)
-	b.transform = $Group/Muzzle.global_transform
 
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
@@ -61,9 +53,9 @@ func _physics_process(delta):
 			shooting = false
 			motion = Vector2()
 
-		if shooting and not prev_shooting:
-			#var bomb_pos = position
-			rpc("setup_bullet", get_tree().get_network_unique_id())
+		#if shooting and not prev_shooting:
+		#	#var bomb_pos = position
+		#	rpc("setup_bullet", get_tree().get_network_unique_id())
 			
 		rotation = get_angle_to(get_global_mouse_position())
 

@@ -9,12 +9,102 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "GDWeaponsCapacity",
+"class": "GDWeaponsAmmo",
+"language": "GDScript",
+"path": "res://BaseComponents/Ammo/Ammo.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsAutoAttack",
+"language": "GDScript",
+"path": "res://BaseComponents/AutoAttack/AutoAttack.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsBoolBlocker",
+"language": "GDScript",
+"path": "res://BaseComponents/BoolBlocker/BoolBlocker.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsBulletSpawner",
+"language": "GDScript",
+"path": "res://BaseComponents/BulletSpawner/BulletSpawner.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsBurst",
+"language": "GDScript",
+"path": "res://CommonComponents/Burst/Burst.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsCapacity",
+"language": "GDScript",
+"path": "res://Util/Capacity/Capacity.gd"
+}, {
+"base": "GDWeaponsCapacity",
+"class": "GDWeaponsCharge",
+"language": "GDScript",
+"path": "res://BaseComponents/Charge/Charge.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsCombo",
+"language": "GDScript",
+"path": "res://CommonComponents/Combo/Combo.gd"
+}, {
+"base": "GDWeaponsBoolBlocker",
+"class": "GDWeaponsEndBlocker",
+"language": "GDScript",
+"path": "res://BaseComponents/BoolBlocker/EndBlocker.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsLongAction",
+"language": "GDScript",
+"path": "res://Util/LongAction/LongAction.gd"
+}, {
+"base": "GDWeaponsCapacity",
+"class": "GDWeaponsMagCapacity",
+"language": "GDScript",
+"path": "res://BaseComponents/Magazine/MagCapacity.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsMagazine",
+"language": "GDScript",
+"path": "res://BaseComponents/Magazine/Magazine.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsRecoil",
+"language": "GDScript",
+"path": "res://CommonComponents/Recoil/Recoil.gd"
+}, {
+"base": "GDWeaponsBoolBlocker",
+"class": "GDWeaponsStartBlocker",
+"language": "GDScript",
+"path": "res://BaseComponents/BoolBlocker/StartBlocker.gd"
+}, {
+"base": "GDWeaponsLongAction",
+"class": "GDWeaponsWeapon",
+"language": "GDScript",
+"path": "res://Weapon.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Mob",
 "language": "GDScript",
 "path": "res://Mob.gd"
 } ]
 _global_script_class_icons={
+"GDWeaponsAmmo": "",
+"GDWeaponsAutoAttack": "",
+"GDWeaponsBoolBlocker": "",
+"GDWeaponsBulletSpawner": "",
+"GDWeaponsBurst": "",
+"GDWeaponsCapacity": "",
+"GDWeaponsCharge": "",
+"GDWeaponsCombo": "",
+"GDWeaponsEndBlocker": "",
+"GDWeaponsLongAction": "",
+"GDWeaponsMagCapacity": "",
+"GDWeaponsMagazine": "",
+"GDWeaponsRecoil": "",
+"GDWeaponsStartBlocker": "",
+"GDWeaponsWeapon": "",
 "Mob": ""
 }
 
@@ -88,10 +178,5 @@ shoot={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
-mute={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"unicode":0,"echo":false,"script":null)
  ]
 }
