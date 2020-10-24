@@ -4,7 +4,7 @@ class_name GDWeaponsBulletSpawner
 
 onready var weapon = get_node(GDWeaponsWeapon.WEAPON_PATH_FROM_COMPONENT)
 
-export var bullet_scene_path = "res://bullets/SimpleBullet.tscn"
+export(PackedScene) var bullet_scene_path = load("res://bullets/SimpleBullet.tscn")
 
 export var spread = 0.3
 
@@ -15,7 +15,7 @@ func spawn():
 
 sync func spawn2():
 	#create bullet
-	var b = load(bullet_scene_path).instance()
+	var b = bullet_scene_path.instance()
 	get_tree().get_root().add_child(b)
 
 	#initialize bullet
