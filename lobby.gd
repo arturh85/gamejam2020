@@ -13,6 +13,8 @@ func _ready():
 	else:
 		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
 		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
+	
+	$AnimationPlayer.play("Background")
 
 
 func _on_host_pressed():
@@ -90,4 +92,5 @@ func _on_start_pressed():
 func _process(_delta):
 	if Input.is_action_just_pressed("mute"):
 		AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
+		
 		

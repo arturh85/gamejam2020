@@ -54,11 +54,11 @@ light_mask = 2
 position = Vector2( 0, 8 )
 scale = Vector2( 4.82131, 4.10324 )
 texture = ExtResource( 7 )
-texture_scale = 0.3
+texture_scale = 0.1
 energy = 2.0
 range_item_cull_mask = 2
 shadow_enabled = true
-shadow_gradient_length = 2.0
+shadow_gradient_length = 0.5
 shadow_item_cull_mask = 2
 
 [node name="ManualFireGun" parent="Group" instance=ExtResource( 9 )]
