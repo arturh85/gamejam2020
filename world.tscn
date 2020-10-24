@@ -19,10 +19,11 @@ font_data = ExtResource( 4 )
 [node name="World" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -4246.61
-margin_top = -3981.91
-margin_right = 5857.39
-margin_bottom = 4822.09
+margin_left = -6598.97
+margin_top = -6348.23
+margin_right = 18472.0
+margin_bottom = 10209.8
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 1324.22, 4708.32 )
 texture = ExtResource( 5 )
 stretch_mode = 2
@@ -41,17 +42,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light2D" type="Light2D" parent="TileMap"]
-position = Vector2( -185.028, 343.654 )
-scale = Vector2( 3.90953, 4.00339 )
-texture = ExtResource( 8 )
-texture_scale = 2.43
-energy = 3.31
-range_item_cull_mask = 2
-shadow_enabled = true
-shadow_gradient_length = 2.0
-shadow_item_cull_mask = 2
-
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="SpawnPoints"]
@@ -59,6 +49,104 @@ position = Vector2( 629.217, 862.992 )
 
 [node name="1" type="Position2D" parent="SpawnPoints"]
 position = Vector2( -3180.87, 427.865 )
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="Light2D" type="Light2D" parent="Lights"]
+position = Vector2( 30.1754, 279.471 )
+scale = Vector2( 3.90953, 4.00339 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.878431, 0.631373, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D2" type="Light2D" parent="Lights"]
+position = Vector2( 669.433, 2186.08 )
+scale = Vector2( 3.90953, 4.00339 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.878431, 0.631373, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D3" type="Light2D" parent="Lights"]
+position = Vector2( 1320.02, 150.934 )
+scale = Vector2( 3.90953, 4.00339 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.878431, 0.631373, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D4" type="Light2D" parent="Lights"]
+position = Vector2( 561.148, -1351.01 )
+scale = Vector2( 2.66427, 2.67647 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.878431, 0.631373, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D6" type="Light2D" parent="Lights"]
+position = Vector2( -4317.08, -2074.32 )
+scale = Vector2( 3.90953, 4.00339 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.631373, 0.882353, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D7" type="Light2D" parent="Lights"]
+position = Vector2( -3015.63, 228.771 )
+scale = Vector2( 1.21713, 1.16205 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.631373, 0.882353, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D8" type="Light2D" parent="Lights"]
+position = Vector2( -3162.03, 1022.18 )
+scale = Vector2( 1.53793, 1.58596 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.631373, 0.882353, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light2D9" type="Light2D" parent="Lights"]
+position = Vector2( -2518.29, 3163.95 )
+scale = Vector2( 3.90953, 4.00339 )
+texture = ExtResource( 8 )
+texture_scale = 2.43
+color = Color( 0.631373, 0.882353, 0.968627, 1 )
+energy = 3.31
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
 
 [node name="Rocks" type="Node2D" parent="."]
 
@@ -86,7 +174,6 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

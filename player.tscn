@@ -85,7 +85,7 @@ range_item_cull_mask = 2
 
 [node name="Camera2D" type="Camera2D" parent="Group"]
 
-[node name="Light2D" type="Light2D" parent="Group/Camera2D"]
+[node name="flashlight" type="Light2D" parent="Group/Camera2D"]
 light_mask = 2
 position = Vector2( 0, 8 )
 scale = Vector2( 4.82131, 4.10324 )

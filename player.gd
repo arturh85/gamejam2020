@@ -20,6 +20,7 @@ sync func setup_bullet(by_who):
 
 var prev_shooting = false
 var shoot_index = 0
+var flashlight = true
 
 var speed = 150
 var health = 50
@@ -52,6 +53,10 @@ func _physics_process(delta):
 			
 		if Input.is_action_just_pressed("mute"):
 			AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
+			
+		if Input.is_action_just_pressed("flashlight"):
+			$Group/Camera2D/flashlight.visible = not flashlight
+			flashlight = not flashlight
 			
 		motion = motion.normalized()
 
