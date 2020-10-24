@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://rock.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://data/images/background.png" type="Texture" id=5]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=6]
+[ext_resource path="res://MiniMap.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -15,9 +16,9 @@ font_data = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -4246.61
-margin_top = -3979.08
+margin_top = -3981.91
 margin_right = 5857.39
-margin_bottom = 4824.92
+margin_bottom = 4822.09
 texture = ExtResource( 5 )
 stretch_mode = 2
 __meta__ = {
@@ -103,5 +104,13 @@ __meta__ = {
 position = Vector2( 404.717, 979.421 )
 
 [node name="Mob2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 676.233, 179.376 )
+position = Vector2( 621.786, 65.5318 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MiniMap" parent="CanvasLayer" instance=ExtResource( 7 )]
+margin_left = 55.0
+margin_top = 367.0
+margin_right = 252.0
+margin_bottom = 551.0
 [connection signal="pressed" from="Winner/ExitGame" to="Score" method="_on_exit_game_pressed"]
