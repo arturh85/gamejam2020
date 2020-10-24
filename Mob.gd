@@ -3,10 +3,11 @@ class_name Mob
 
 signal removed
 
-var speed = 50
+var speed = 100
 var velocity = Vector2()
-var health = 50
-var max_health = 50
+var health = 150
+var max_health = 150
+var health_regeneration = 1
 
 var minimap_icon = "mob"
 	
@@ -14,6 +15,9 @@ var minimap_icon = "mob"
 func _ready():
 	rotation = rand_range(0, 2*PI)
 	
+func _process(delta):
+	health = min(health + health_regeneration * delta, max_health)
+	$HealthDisplay.update_healthbar(health)
 	
 func _physics_process(delta):
 	velocity = transform.x * speed
