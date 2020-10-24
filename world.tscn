@@ -137,4 +137,5 @@ margin_left = 55.0
 margin_top = 367.0
 margin_right = 252.0
 margin_bottom = 551.0
+player = NodePath("../../Players")
 [connection signal="pressed" from="Winner/ExitGame" to="Score" method="_on_exit_game_pressed"]
