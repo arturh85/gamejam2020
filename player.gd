@@ -6,7 +6,7 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 puppet var puppet_rotation = 0 
  
-#export (PackedScene) var Bullet
+#sexport (PackedScene) var Weapon
 
 export var stunned = false
 

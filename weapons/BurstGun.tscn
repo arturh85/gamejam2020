@@ -15,6 +15,7 @@ wait_time = 0.5
 texture = ExtResource( 2 )
 
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
+spread = 0.08
 
 [node name="AutoAttack" parent="." index="3" instance=ExtResource( 4 )]
 
