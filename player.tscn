@@ -1,31 +1,24 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://bullet.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/images/sprites/weapon_plasma.png" type="Texture" id=5]
+[ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 11.2304
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 14
 font_data = ExtResource( 3 )
 
-[node name="player" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 11.2304
+
+[node name="player" type="KinematicBody2D" groups=[
+"players",
+]]
 script = ExtResource( 1 )
 Bullet = ExtResource( 4 )
-
-[node name="sprite" type="Sprite" parent="."]
-position = Vector2( 0, -4.118 )
-rotation = -1.55334
-texture = ExtResource( 2 )
-region_rect = Rect2( 264, 132, 47, 43 )
-
-[node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2( 0.166855, 0.834274 )
-shape = SubResource( 1 )
 
 [node name="label" type="Label" parent="."]
 margin_left = -82.0
@@ -34,22 +27,36 @@ margin_right = 85.0
 margin_bottom = -14.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Player 1"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pointer" type="Node2D" parent="."]
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2( 0.166855, 0.834274 )
+shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Pointer"]
+[node name="Group" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite" parent="Group"]
+position = Vector2( 0, -4.118 )
+rotation = -1.55334
+texture = ExtResource( 2 )
+region_rect = Rect2( 264, 132, 47, 43 )
+
+[node name="Pointer" type="Node2D" parent="Group"]
+
+[node name="Sprite" type="Sprite" parent="Group/Pointer"]
 position = Vector2( 21.2739, 6.06496 )
 rotation = 1.5708
 texture = ExtResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Group"]
 current = true
 
-[node name="Muzzle" type="Position2D" parent="."]
+[node name="Muzzle" type="Position2D" parent="Group"]
 position = Vector2( 68.835, 5.93774 )
+
+[node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
