@@ -12,12 +12,12 @@ export (PackedScene) var Weapon5
 export (PackedScene) var Weapon6
 export (PackedScene) var Weapon7
 
-var has_weapon2 = false
-var has_weapon3 = false
-var has_weapon4 = false
-var has_weapon5 = false
-var has_weapon6 = false
-var has_weapon7 = false
+puppet var has_weapon2 = false
+puppet var has_weapon3 = false
+puppet var has_weapon4 = false
+puppet var has_weapon5 = false
+puppet var has_weapon6 = false
+puppet var has_weapon7 = false
 
 export var stunned = false
 
@@ -87,19 +87,19 @@ func _physics_process(delta):
 			flashlight = not flashlight
 			
 		if Input.is_action_just_pressed("weapon1"):
-			switch_weapon(1)
+			rpc("switch_weapon", 1)
 		if Input.is_action_just_pressed("weapon2"):
-			switch_weapon(2)
+			rpc("switch_weapon", 2)
 		if Input.is_action_just_pressed("weapon3"):
-			switch_weapon(3)
+			rpc("switch_weapon", 3)
 		if Input.is_action_just_pressed("weapon4"):
-			switch_weapon(4)
+			rpc("switch_weapon", 4)
 		if Input.is_action_just_pressed("weapon5"):
-			switch_weapon(5)
+			rpc("switch_weapon", 5)
 		if Input.is_action_just_pressed("weapon6"):
-			switch_weapon(6)
+			rpc("switch_weapon", 6)
 		if Input.is_action_just_pressed("weapon7"):
-			switch_weapon(7)
+			rpc("switch_weapon", 7)
 
 		motion = motion.normalized()
 

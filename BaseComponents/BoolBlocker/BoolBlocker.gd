@@ -2,6 +2,7 @@ extends Node
 
 class_name GDWeaponsBoolBlocker
 
+onready var weapon2 = get_node(GDWeaponsWeapon.WEAPON_PATH_FROM_COMPONENT)
 export var input_action_trigger = "" setget _set_input_trigger
 export var auto_reset = false
 
@@ -13,5 +14,6 @@ func _set_input_trigger(val):
 	set_process(input_action_trigger != "") #optimization! may need to remove if adding stuff in process beyond input checking
 
 func _process(delta):
-	if is_network_master() and Input.is_action_just_pressed(input_action_trigger):
+	var player = weapon2.get_parent().get_parent().get_parent()
+	if player.is_network_master() and Input.is_action_just_pressed(input_action_trigger):
 		flip()
