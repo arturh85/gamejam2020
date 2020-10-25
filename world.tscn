@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
+[ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
 [ext_resource path="res://score.gd" type="Script" id=3]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://data/images/background.png" type="Texture" id=5]
@@ -11,6 +12,7 @@
 [ext_resource path="res://AudioStreamPlayer.gd" type="Script" id=10]
 [ext_resource path="res://crosshair.tscn" type="PackedScene" id=11]
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=12]
+[ext_resource path="res://data/images/grid.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -71,17 +73,20 @@ position = Vector2( -80.2323, -1477.02 )
 [node name="Lights" type="Node" parent="."]
 
 [node name="Light2D" type="Light2D" parent="Lights"]
-position = Vector2( -197.13, -203.984 )
-scale = Vector2( 2.36364, 2.23017 )
+position = Vector2( -99.1631, -227.768 )
+scale = Vector2( 3.36535, 2.66603 )
 texture = ExtResource( 8 )
 offset = Vector2( -14.6973, 0 )
 texture_scale = 2.43
 color = Color( 0.878431, 0.631373, 0.968627, 1 )
-energy = 5.97
+energy = 4.88
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Light2D2" type="Light2D" parent="Lights"]
 position = Vector2( 793.538, -918.057 )
@@ -182,6 +187,23 @@ text = "EXIT GAME"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+margin_left = 729.0
+margin_top = 551.0
+margin_right = 1240.0
+margin_bottom = 578.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 856.619, 558.784 )
+scale = Vector2( 0.541241, 0.370514 )
+texture = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
