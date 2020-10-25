@@ -10,6 +10,10 @@ Based on the following example: [Multiplayer Bomber Demo](https://godotengine.or
 
 ![Screenshot](screenshots/game2.png)
 
+## Controls
+
+- Move with `WASD`, shoot with `Left Mouse Click` or `Space`, change weapons with `1-7` or `mouse wheel`, toggle flashlight with `F` and toggle music with `M`.
+
 ## Context
 
 This is our Contribution to the [team neusta gamejam](http://team-neusta-gamejam.de/) 2020.
