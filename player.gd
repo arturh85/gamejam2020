@@ -38,13 +38,6 @@ func _process(delta):
 	updateBar(health)
 	
 sync func switch_weapon(index):
-	print("SWITCH TO ", index)
-	print("has 2", has_weapon2)
-	print("has 3", has_weapon3)
-	print("has 4", has_weapon4)
-	print("has 5", has_weapon5)
-	print("has 6", has_weapon6)
-	print("has 7", has_weapon7)
 	var w
 	if index == 1:
 		w = Weapon1.instance()
@@ -94,19 +87,19 @@ func _physics_process(delta):
 			flashlight = not flashlight
 			
 		if Input.is_action_just_pressed("weapon1"):
-			switch_weapon(1)
+			rpc("switch_weapon", 1)
 		if Input.is_action_just_pressed("weapon2"):
-			switch_weapon(2)
+			rpc("switch_weapon", 2)
 		if Input.is_action_just_pressed("weapon3"):
-			switch_weapon(3)
+			rpc("switch_weapon", 3)
 		if Input.is_action_just_pressed("weapon4"):
-			switch_weapon(4)
+			rpc("switch_weapon", 4)
 		if Input.is_action_just_pressed("weapon5"):
-			switch_weapon(5)
+			rpc("switch_weapon", 5)
 		if Input.is_action_just_pressed("weapon6"):
-			switch_weapon(6)
+			rpc("switch_weapon", 6)
 		if Input.is_action_just_pressed("weapon7"):
-			switch_weapon(7)
+			rpc("switch_weapon", 7)
 
 		motion = motion.normalized()
 
