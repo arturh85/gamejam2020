@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://data/images/sprites/weapon_plasma_bullet.png" type="Texture" id=1]
-[ext_resource path="res://bullets/SimpleBullet.gd" type="Script" id=2]
+[ext_resource path="res://bullets/PlasmagunBullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.49443
-height = 47.5
+radius = 7.97699
+height = 46.3405
 
 [node name="SimpleBullet" type="Area2D"]
 script = ExtResource( 2 )

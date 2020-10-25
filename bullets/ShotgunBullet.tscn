@@ -1,18 +1,21 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://data/images/sprites/waepon_laser_bullet.png" type="Texture" id=1]
-[ext_resource path="res://bullets/OtherBullet.gd" type="Script" id=2]
+[ext_resource path="res://data/images/sprites/weapon_shotgun_bullet.png" type="Texture" id=1]
+[ext_resource path="res://bullets/ShotgunBullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.49443
-height = 47.5
+height = 0.324967
 
 [node name="OtherBullet" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.117981 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.176974, 0.117978 )
+scale = Vector2( 0.240968, 0.243273 )
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_OtherBullet_body_entered"]

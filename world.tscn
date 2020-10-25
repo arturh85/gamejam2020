@@ -71,20 +71,17 @@ position = Vector2( -80.2323, -1477.02 )
 [node name="Lights" type="Node" parent="."]
 
 [node name="Light2D" type="Light2D" parent="Lights"]
-position = Vector2( -134.812, -252.067 )
-scale = Vector2( 3.90953, 4.00339 )
+position = Vector2( -197.13, -203.984 )
+scale = Vector2( 2.36364, 2.23017 )
 texture = ExtResource( 8 )
 offset = Vector2( -14.6973, 0 )
 texture_scale = 2.43
 color = Color( 0.878431, 0.631373, 0.968627, 1 )
-energy = 2.34
+energy = 5.97
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Light2D2" type="Light2D" parent="Lights"]
 position = Vector2( 793.538, -918.057 )
