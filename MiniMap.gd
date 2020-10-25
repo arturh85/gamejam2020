@@ -35,23 +35,35 @@ func _process(delta):
 	# Arrow texture points upwards, so add 90 degrees.
 	var player_node = get_node(player)
 	var group_node = player_node.find_node("Group")
-
-	
 	player_marker.rotation = group_node.rotation + PI/2
 	for item in markers:
 		var obj_pos = (item.position - player_node.position) * grid_scale + grid.rect_size / 2
+
+		#print("grid.rect_position", grid.rect_position)
+		var grid_radius = grid.get_rect().size[0] / 2
+		
+		var grid_center = Vector2(grid_radius, grid_radius)
+		var obj_direction = obj_pos - grid_center
+		var obj_distance = obj_direction.length()
 		# If marker is outside grid, hide or shrink it.
-		if grid.get_rect().has_point(obj_pos + grid.rect_position):
-			markers[item].scale = Vector2(1, 1)
+		
+		#print("distance ", obj_distance, " radius ", grid_radius)
+		if obj_distance < grid_radius:
+		#if grid.get_rect().has_point(obj_pos + grid.rect_position):
+			markers[item].scale = Vector2(3, 3)
 #			markers[item].show()
 		else:
 			markers[item].scale = Vector2(0.75, 0.75)
 #			markers[item].hide()
 		# Don't draw markers outside grid rectangle.
-		obj_pos.x = clamp(obj_pos.x, 0, grid.rect_size.x)
-		obj_pos.y = clamp(obj_pos.y, 0, grid.rect_size.y)
+		
+		if obj_distance > grid_radius:
+			obj_pos = grid_center + (obj_direction.normalized() * grid_radius)
+		
+		#obj_pos.x = clamp(obj_pos.x, 0, grid.rect_size.x)
+		#obj_pos.y = clamp(obj_pos.y, 0, grid.rect_size.y)
 		markers[item].position = obj_pos
-	
+		#print("obj_distance", obj_distance)
 	
 	
 func _on_object_removed(object):
