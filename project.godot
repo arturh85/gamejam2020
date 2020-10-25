@@ -110,8 +110,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GameJam 2020 ArcadeSpaceShooter"
-config/description="A multiplayer space shoot-em-up."
+config/name="Spaceship Arena"
+config/description="A multiplayer space shoot-em-up in a desolate space station."
 run/main_scene="res://lobby.tscn"
 config/icon="res://assets/icon.png"
 

@@ -1,8 +1,6 @@
-# Multiplayer Bomber
+# Spaceship Arena
 
-A multiplayer implementation of the classical bomberman game.
-One of the players should press "host", while the other
-should type in his address and press "play".
+A multiplayer space shoot-em-up in a desolate space station.
 
 Language: GDScript
 
@@ -10,4 +8,4 @@ Renderer: GLES 3
 
 ## Screenshots
 
-![Screenshot](screenshots/bomber.png)
+(todo)

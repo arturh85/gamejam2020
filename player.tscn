@@ -54,7 +54,7 @@ shadow_item_cull_mask = 2
 position = Vector2( 24, 5 )
 rotation = 1.5708
 
-[node name="ManualFireGun" parent="Group/Gun" instance=ExtResource( 4 )]
+[node name="Default Gun" parent="Group/Gun" instance=ExtResource( 4 )]
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
 visible = false
