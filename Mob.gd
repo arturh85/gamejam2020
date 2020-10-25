@@ -44,6 +44,7 @@ func _physics_process(delta):
 	if is_network_master():
 		velocity = transform.x * speed		
 		if chase_player:
+			$AnimationPlayer.play("Attack")
 			var space_state = get_world_2d().direct_space_state
 			var result = space_state.intersect_ray(position, chase_player.position)
 			if result and result.collider and result.collider.is_in_group("players"):
@@ -56,6 +57,7 @@ func _physics_process(delta):
 						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 					rotation = velocity.angle()
 		else:
+			$AnimationPlayer.play("Idle")
 			var collision = move_and_collide(velocity * delta)
 			if collision:
 				velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
