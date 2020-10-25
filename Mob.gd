@@ -21,9 +21,11 @@ var harm_player = null
 
 var respawn_at = null
 var last_harm = 0
+var dying = false
 	
 func _ready():
 	rotation = rand_range(0, 2*PI)
+	
 	
 func hitsound():
 	if health > 0:
@@ -43,6 +45,10 @@ func _physics_process(delta):
 	if respawn_at: 
 		position = respawn_at
 		respawn_at = null
+		show()
+		$AnimationPlayer.play("Spawn")
+		$CollisionShape2D.set_deferred("disabled", false)
+		dying = false
 		return
 	if health <= 0:
 		return
@@ -76,28 +82,23 @@ func _physics_process(delta):
 		rotation = puppet_rotation
 
 sync func take_damage(amount, by_who):
-	if health <= 0:
+	if health <= 0 or dying:
 		return
 	health -= amount
 	rset("health", health)
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
+		dying = true
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
-		#$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer.play("Die")
-		yield(get_tree().create_timer(2), "timeout")
-		
+		yield(get_tree().create_timer(3), "timeout")
 		health = max_health
 		rset("health", health)
 		var SpawnPoints = get_node("../SpawnPoints")
 		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 		respawn_at = spawn.position
-		rset("respawn_at", spawn.position)		
-		
-		yield(get_tree().create_timer(1), "timeout")
-		#$CollisionShape2D.disabled = false
-		$AnimationPlayer.play("Spawn")
-		
+		rset("respawn_at", spawn.position)				
 
 
 func _on_Detect_body_entered(body):
