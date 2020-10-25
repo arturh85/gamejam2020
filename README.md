@@ -6,6 +6,11 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 Engine: [Godot](https://godotengine.org/)
 Based on the following example: [Multiplayer Bomber Demo](https://godotengine.org/asset-library/asset/139)
 
+## Download
+
+- [Releases](https://github.com/arturh85/gamejam2020/releases)
+- [Web Version](https://arturh85.github.io/gamejam2020/)
+
 ## Screenshots
 
 ![Screenshot](screenshots/game2.png)
@@ -26,3 +31,7 @@ The themes this year were:
 - *Time Travel*
   - done through Backstory, planned to have Powerups which take us back in time
 
+## Creators
+
+- Artur Hallmann
+- Nils Keller
