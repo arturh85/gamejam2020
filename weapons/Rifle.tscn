@@ -76,11 +76,13 @@ position = Vector2( 8.09133e-06, -42.1077 )
 anims/Flash = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="." index="6"]
+visible = false
 position = Vector2( -0.082058, -53.2832 )
 scale = Vector2( 0.259948, 0.716276 )
 texture = ExtResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="." index="7"]
+visible = false
 light_mask = 2
 position = Vector2( 0.674194, -109.264 )
 scale = Vector2( 1.89065, 2.27782 )

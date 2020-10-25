@@ -153,10 +153,10 @@ position = Vector2( 276.49, 594.835 )
 scale = Vector2( 1.27, 0.35 )
 
 [node name="Score" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 14.1703
-margin_top = 11.2599
-margin_right = 207.17
-margin_bottom = 36.2599
+margin_left = 14.0
+margin_top = 11.0
+margin_right = 1014.0
+margin_bottom = 36.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 3 )
