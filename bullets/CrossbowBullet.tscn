@@ -40,4 +40,4 @@ shadow_item_cull_mask = 2
 position = Vector2( -0.0495491, -21.8112 )
 scale = Vector2( 0.0183674, 0.561745 )
 texture = ExtResource( 1 )
-[connection signal="body_entered" from="." to="." method="_on_CrossbowBullet_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

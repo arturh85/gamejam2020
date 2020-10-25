@@ -22,4 +22,4 @@ light_mask = 2
 position = Vector2( -0.000679463, -29.0179 )
 scale = Vector2( 0.444416, 1.16415 )
 texture = ExtResource( 1 )
-[connection signal="body_entered" from="." to="." method="_on_RifleBullet_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
