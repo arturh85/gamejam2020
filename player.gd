@@ -182,6 +182,15 @@ sync func take_damage(amount, by_who):
 			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		else:
 			$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
+			
+		rpc("switch_weapon", 1)
+		has_weapon2 = false
+		has_weapon3 = false
+		has_weapon4 = false
+		has_weapon5 = false
+		has_weapon6 = false
+		has_weapon7 = false
+		
 		health = max_health
 		rset("health", health)
 		updateBar(health)
