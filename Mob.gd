@@ -12,6 +12,8 @@ var health_regeneration = 1
 var minimap_icon = "mob"
 var chase_player = null
 var harm_player = null
+
+var respawn_at = null
 	
 func _ready():
 	rotation = rand_range(0, 2*PI)
@@ -25,6 +27,10 @@ func _process(delta):
 		harm_player.take_damage(40*delta, 0)
 	
 func _physics_process(delta):
+	if respawn_at: 
+		position = respawn_at
+		respawn_at = null
+		return
 	if health <= 0:
 		return
 	velocity = transform.x * speed
@@ -44,7 +50,13 @@ sync func take_damage(amount, by_who):
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
 		$AnimationPlayer.play("Die")
 		yield(get_tree().create_timer(2), "timeout")
-		queue_free()
+		
+		health = max_health
+		var SpawnPoints = get_node("../SpawnPoints")
+		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+		respawn_at = spawn.position
+		rset("respawn_at", spawn.position)		
+		
 
 
 func _on_Detect_body_entered(body):
