@@ -111,9 +111,10 @@ _global_script_class_icons={
 [application]
 
 config/name="Spaceship Arena"
-config/description="A multiplayer space shoot-em-up in a desolate space station."
+config/description="A multiplayer space shoot-em-up in a desolate space station. The isolation is getting to you. Everyone is just waiting for their moment to snapand when strange blobs start attacking everyone the rampage starts."
 run/main_scene="res://lobby.tscn"
 config/icon="res://assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
 
 [autoload]
 
