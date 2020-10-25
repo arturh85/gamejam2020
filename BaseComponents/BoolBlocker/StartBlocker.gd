@@ -24,8 +24,5 @@ func _set_can_start(val):
 	if auto_reset and can_start:
 		call_deferred("flip")
 
-func _process(delta):
-	if is_network_master() and Input.is_action_just_pressed(input_action_trigger):
-		flip()
 func flip():
 	_set_can_start(not can_start)
