@@ -9,6 +9,10 @@ export (PackedScene) var Weapon2
 export (PackedScene) var Weapon3
 export (PackedScene) var Weapon4
 
+var has_weapon2 = false
+var has_weapon3 = false
+var has_weapon4 = false
+
 export var stunned = false
 
 # Use sync because it will be called everywhere
@@ -34,20 +38,17 @@ func switch_weapon(index):
 	var w
 	if index == 1:
 		w = Weapon1.instance()
-	elif index == 2:
+	elif index == 2 and has_weapon2:
 		w = Weapon2.instance()
-	elif index == 3:
+	elif index == 3 and has_weapon3:
 		w = Weapon3.instance()
-	elif index == 4:
+	elif index == 4 and has_weapon4:
 		w = Weapon4.instance()
-	else:
-		push_error("invalid weapon")
-		return
-
-	var current_weapon = get_node("Group/Gun").get_child(0)
-	get_node("Group/Gun").remove_child(current_weapon)
-	current_weapon.call_deferred("free")
-	get_node("Group/Gun").add_child(w, true)
+	if w:
+		var current_weapon = get_node("Group/Gun").get_child(0)
+		get_node("Group/Gun").remove_child(current_weapon)
+		current_weapon.call_deferred("free")
+		get_node("Group/Gun").add_child(w, true)
 
 func _physics_process(delta):
 	var motion = Vector2()

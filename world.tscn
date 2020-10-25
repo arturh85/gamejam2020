@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=12]
 [ext_resource path="res://data/images/grid.png" type="Texture" id=13]
 [ext_resource path="res://powerups/firerate.tscn" type="PackedScene" id=14]
+[ext_resource path="res://items/weapon2.tscn" type="PackedScene" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -216,5 +217,8 @@ script = ExtResource( 10 )
 
 [node name="FireRatePowerUp" parent="." instance=ExtResource( 14 )]
 position = Vector2( 119.818, -154.93 )
+
+[node name="Weapon2Item" parent="." instance=ExtResource( 15 )]
+position = Vector2( -213.415, -85.5263 )
 [connection signal="pressed" from="CanvasLayer/Winner/ExitGame" to="CanvasLayer/Score" method="_on_exit_game_pressed"]
 [connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]
