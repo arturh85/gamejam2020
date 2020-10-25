@@ -9,6 +9,8 @@ height = 56.4306
 
 [node name="RifleBullet" type="Area2D"]
 script = ExtResource( 2 )
+speed = 2000
+damage = 80
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0599861, -28.7302 )

@@ -8,8 +8,10 @@
 radius = 1.8596
 height = 64.1694
 
-[node name="PlasmagunBullet" type="Area2D"]
+[node name="RailgunBullet" type="Area2D"]
 script = ExtResource( 2 )
+speed = 3500
+damage = 110
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0599858, -34.2103 )

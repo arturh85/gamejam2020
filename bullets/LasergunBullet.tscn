@@ -10,6 +10,7 @@ height = 46.3405
 
 [node name="PlasmagunBullet" type="Area2D"]
 script = ExtResource( 2 )
+damage = 80
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.943874, -29.6141 )

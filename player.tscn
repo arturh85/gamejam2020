@@ -14,7 +14,7 @@
 [ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 13.4989
+radius = 9.53851
 
 [sub_resource type="DynamicFont" id=2]
 size = 14

@@ -52,7 +52,7 @@ tracks/2/keys = {
 [node name="Shotgun" instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="FiringCooldown" index="0"]
-wait_time = 0.5
+wait_time = 0.6
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
@@ -62,7 +62,7 @@ texture = ExtResource( 5 )
 
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
 bullet_scene_path = ExtResource( 2 )
-spread = 0.2
+spread = 0.1
 
 [node name="StartBlocker" parent="." index="3" instance=ExtResource( 4 )]
 input_action_trigger = "shoot"

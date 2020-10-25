@@ -11,6 +11,8 @@ height = 37.2134
 
 [node name="PlasmagunBullet" type="Area2D"]
 script = ExtResource( 2 )
+speed = 600
+damage = 32
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 light_mask = 2
