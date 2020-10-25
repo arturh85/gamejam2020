@@ -20,6 +20,7 @@ var chase_player = null
 var harm_player = null
 
 var respawn_at = null
+var last_harm = 0
 	
 func _ready():
 	rotation = rand_range(0, 2*PI)
@@ -29,8 +30,9 @@ func _process(delta):
 		return
 	health = min(health + health_regeneration * delta, max_health)
 	$HealthDisplay.update_healthbar(health, max_health)
-	if harm_player:
-		harm_player.take_damage(40*delta, 0)
+	if harm_player and OS.get_unix_time() - last_harm > 0.3:
+		last_harm = OS.get_unix_time()
+		harm_player.take_damage(30, 0)
 	
 func _physics_process(delta):
 	if respawn_at: 
@@ -39,20 +41,25 @@ func _physics_process(delta):
 		return
 	if health <= 0:
 		return
-		
-		
 	if is_network_master():
-		velocity = transform.x * speed
-		
+		velocity = transform.x * speed		
 		if chase_player:
 			var space_state = get_world_2d().direct_space_state
 			var result = space_state.intersect_ray(position, chase_player.position)
 			if result and result.collider and result.collider.is_in_group("players"):
 				velocity = position.direction_to(chase_player.position) * speed * 1.5
-		var collision = move_and_collide(velocity * delta)
-		if collision:
-			velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
-		rotation = velocity.angle()
+				if chase_player.position.distance_to(position) < 40:
+					velocity = Vector2(0,0)
+				else:
+					var collision = move_and_collide(velocity * delta)
+					if collision:
+						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
+					rotation = velocity.angle()
+		else:
+			var collision = move_and_collide(velocity * delta)
+			if collision:
+				velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
+			rotation = velocity.angle()
 		rset("puppet_velocity", velocity)
 		rset("puppet_rotation", rotation)
 		rset("puppet_pos", position)
@@ -97,6 +104,7 @@ func _on_Detect_body_exited(body):
 func _on_Harm_body_entered(body):
 	if body.is_in_group("players"):
 		harm_player = body
+		last_harm = OS.get_unix_time()
 
 func _on_Harm_body_exited(body):
 	if body.is_in_group("players"):
