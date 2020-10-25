@@ -14,4 +14,5 @@ func _on_body_entered(body):
 
 func _on_RespawnTimer_timeout():
 	$RespawnTimer.stop()
+	$AnimationPlayer.play_backwards("Collect")
 	show()

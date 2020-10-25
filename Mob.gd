@@ -14,7 +14,6 @@ var chase_player = null
 var harm_player = null
 
 var respawn_at = null
-var died = false
 	
 func _ready():
 	rotation = rand_range(0, 2*PI)
@@ -28,7 +27,7 @@ func _process(delta):
 		harm_player.take_damage(40*delta, 0)
 	
 func _physics_process(delta):
-	if not died:	if respawn_at: 
+	if respawn_at: 
 		position = respawn_at
 		respawn_at = null
 		return
@@ -50,7 +49,6 @@ sync func take_damage(amount, by_who):
 	if health <= 0:
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
 		$AnimationPlayer.play("Die")
-		died = true
 		yield(get_tree().create_timer(2), "timeout")
 		
 		health = max_health
@@ -58,6 +56,9 @@ sync func take_damage(amount, by_who):
 		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 		respawn_at = spawn.position
 		rset("respawn_at", spawn.position)		
+		
+		yield(get_tree().create_timer(1), "timeout")
+		$AnimationPlayer.play_backwards("Die")
 		
 
 
