@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://lobby.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/menu.wav" type="AudioStream" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://cursor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/images/background.png" type="Texture" id=5]
 [ext_resource path="res://data/images/menubg.png" type="Texture" id=6]
-[ext_resource path="res://data/images/enemies/blob.png" type="Texture" id=7]
-[ext_resource path="res://data/images/enemies/blob2.png" type="Texture" id=8]
+[ext_resource path="res://data/images/title.png" type="Texture" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Background"
@@ -47,7 +46,7 @@ anims/Background = SubResource( 1 )
 visible = false
 modulate = Color( 1, 1, 1, 0.823529 )
 margin_left = 330.0
-margin_top = 130.0
+margin_top = 215.0
 margin_right = 730.0
 margin_bottom = 530.0
 texture = ExtResource( 6 )
@@ -55,16 +54,6 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sprite4" type="Sprite" parent="Players"]
-position = Vector2( 34, 358 )
-scale = Vector2( 1.875, 1.84375 )
-texture = ExtResource( 8 )
-
-[node name="Sprite5" type="Sprite" parent="Players"]
-position = Vector2( 373, 363 )
-scale = Vector2( 1.875, 1.84375 )
-texture = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="Players"]
 margin_left = 22.0
@@ -76,10 +65,10 @@ size_flags_vertical = 0
 text = "Awaiting Players..."
 
 [node name="Start" type="Button" parent="Players"]
-margin_left = 145.0
-margin_top = 339.5
-margin_right = 270.0
-margin_bottom = 368.5
+margin_left = 142.172
+margin_top = 267.375
+margin_right = 267.172
+margin_bottom = 296.375
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "START!"
@@ -89,36 +78,31 @@ __meta__ = {
 
 [node name="List" type="ItemList" parent="Players"]
 margin_left = 18.0
-margin_top = 50.0
+margin_top = 49.0
 margin_right = 378.0
-margin_bottom = 291.0
+margin_bottom = 252.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 512.493, 123.133 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+
 [node name="Connect" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.823529 )
 margin_left = 330.0
-margin_top = 130.0
+margin_top = 214.0
 margin_right = 730.0
-margin_bottom = 530.0
+margin_bottom = 536.0
 texture = ExtResource( 6 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sprite2" type="Sprite" parent="Connect"]
-position = Vector2( 34, 358 )
-scale = Vector2( 1.875, 1.84375 )
-texture = ExtResource( 8 )
-
-[node name="Sprite3" type="Sprite" parent="Connect"]
-position = Vector2( 373, 363 )
-scale = Vector2( 1.875, 1.84375 )
-texture = ExtResource( 7 )
 
 [node name="NameLabel" type="Label" parent="Connect"]
 margin_left = 23.5
@@ -156,9 +140,9 @@ text = "IP:"
 
 [node name="Host2" type="Label" parent="Connect"]
 margin_left = 27.0
-margin_top = 201.0
+margin_top = 220.0
 margin_right = 103.0
-margin_bottom = 215.0
+margin_bottom = 234.0
 rect_pivot_offset = Vector2( 21, 14 )
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -181,9 +165,9 @@ __meta__ = {
 
 [node name="Host" type="Button" parent="Connect"]
 margin_left = 27.5
-margin_top = 223.5
+margin_top = 242.5
 margin_right = 92.5
-margin_bottom = 243.5
+margin_bottom = 262.5
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"

@@ -113,6 +113,7 @@ _global_script_class_icons={
 config/name="Spaceship Arena"
 config/description="A multiplayer space shoot-em-up in a desolate space station."
 run/main_scene="res://lobby.tscn"
+boot_splash/image="res://data/images/splash.png"
 config/icon="res://assets/icon.png"
 
 [autoload]
