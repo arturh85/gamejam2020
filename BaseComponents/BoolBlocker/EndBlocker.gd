@@ -28,3 +28,7 @@ func _set_can_end(val):
 
 	if auto_reset and can_end:
 		call_deferred("flip")
+
+func _process(delta):
+	if is_network_master() and Input.is_action_just_released(input_action_trigger):
+		flip()

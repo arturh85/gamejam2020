@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://weapons/Plasmagun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
-[ext_resource path="res://weapons/ChargeGun.tscn" type="PackedScene" id=8]
+[ext_resource path="res://weapons/BurstGun.tscn" type="PackedScene" id=8]
+[ext_resource path="res://weapons/AutoOnTriggerGun.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 13.4989
@@ -23,6 +24,7 @@ script = ExtResource( 1 )
 Weapon1 = ExtResource( 4 )
 Weapon2 = ExtResource( 5 )
 Weapon3 = ExtResource( 8 )
+Weapon4 = ExtResource( 9 )
 
 [node name="Group" type="Node2D" parent="."]
 
