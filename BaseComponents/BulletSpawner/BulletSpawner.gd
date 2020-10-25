@@ -14,10 +14,14 @@ func spawn():
 	rpc("spawn2")
 
 sync func spawn2():
+	var shooter = weapon.get_parent().get_parent().get_parent()
+	if shooter.dying:
+		return
+	
 	#create bullet
 	var b = bullet_scene_path.instance()
 	b.by_who = get_tree().get_network_unique_id()
-	b.shooter = weapon.get_parent().get_parent().get_parent()
+	b.shooter = shooter
 	get_tree().get_root().add_child(b)
 
 	#initialize bullet
