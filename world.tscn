@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://items/MachineGun.tscn" type="PackedScene" id=18]
 [ext_resource path="res://items/Railgun.tscn" type="PackedScene" id=19]
 [ext_resource path="res://powerups/speedup.tscn" type="PackedScene" id=20]
+[ext_resource path="res://powerups/doubledamage.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -227,42 +228,49 @@ autoplay = true
 bus = "Music"
 script = ExtResource( 10 )
 
-[node name="Node2D" parent="." instance=ExtResource( 11 )]
+[node name="Crosshair" parent="." instance=ExtResource( 11 )]
 
-[node name="W_Plasmagun" parent="." instance=ExtResource( 15 )]
-position = Vector2( 1218.49, -161.076 )
+[node name="Items" type="Node" parent="."]
 
-[node name="W_Crossbow" parent="." instance=ExtResource( 16 )]
-position = Vector2( 286.503, 1064.12 )
-
-[node name="W_Rifle" parent="." instance=ExtResource( 17 )]
-position = Vector2( -824.352, -1147.81 )
-
-[node name="W_Machinegun" parent="." instance=ExtResource( 18 )]
-position = Vector2( -405.745, -130.301 )
-
-[node name="W_Railgun" parent="." instance=ExtResource( 19 )]
-position = Vector2( 892.7, -1442.88 )
-
-[node name="SpeedupPowerUp" parent="." instance=ExtResource( 20 )]
+[node name="SpeedupPowerUp" parent="Items" instance=ExtResource( 20 )]
 position = Vector2( 1060.81, -649.453 )
 
-[node name="SpeedupPowerUp2" parent="." instance=ExtResource( 20 )]
+[node name="SpeedupPowerUp2" parent="Items" instance=ExtResource( 20 )]
 position = Vector2( -463.191, -777.453 )
 
-[node name="FireRatePowerUp" parent="." instance=ExtResource( 14 )]
+[node name="HealthPack" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( -66, -94 )
 
-[node name="FireRatePowerUp2" parent="." instance=ExtResource( 14 )]
+[node name="HealthPack2" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( 695.012, 831.973 )
 
-[node name="FireRatePowerUp3" parent="." instance=ExtResource( 14 )]
+[node name="HealthPack5" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( 561.46, -1445.96 )
 
-[node name="FireRatePowerUp4" parent="." instance=ExtResource( 14 )]
+[node name="HealthPack3" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( -821.933, -967.195 )
 
-[node name="FireRatePowerUp5" parent="." instance=ExtResource( 14 )]
+[node name="HealthPack4" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( 1080.55, -1025.15 )
+
+[node name="DoubleDamage" parent="Items" instance=ExtResource( 21 )]
+position = Vector2( 420.784, 945.837 )
+
+[node name="Weapons" type="Node" parent="."]
+
+[node name="Plasmagun" parent="Weapons" instance=ExtResource( 15 )]
+position = Vector2( 1218.49, -161.076 )
+
+[node name="Crossbow" parent="Weapons" instance=ExtResource( 16 )]
+position = Vector2( 286.503, 1064.12 )
+
+[node name="Rifle" parent="Weapons" instance=ExtResource( 17 )]
+position = Vector2( -824.352, -1147.81 )
+
+[node name="Machinegun" parent="Weapons" instance=ExtResource( 18 )]
+position = Vector2( -405.745, -130.301 )
+
+[node name="Railgun" parent="Weapons" instance=ExtResource( 19 )]
+position = Vector2( 892.7, -1442.88 )
 [connection signal="pressed" from="CanvasLayer/Winner/ExitGame" to="CanvasLayer/Score" method="_on_exit_game_pressed"]
 [connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]

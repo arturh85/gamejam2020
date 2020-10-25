@@ -1,16 +1,17 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/images/sprites/weapon_plasma_bullet.png" type="Texture" id=1]
-[ext_resource path="res://bullets/PlasmagunBullet.gd" type="Script" id=2]
+[ext_resource path="res://bullets/LasergunBullet.gd" type="Script" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.97699
 height = 46.3405
 
-[node name="PlasmagunBullet" type="Area2D"]
+[node name="LasergunBullet" type="Area2D"]
 script = ExtResource( 2 )
-damage = 80
+speed = 1000
+damage = 35
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.943874, -29.6141 )
@@ -30,4 +31,4 @@ energy = 2.97
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_item_cull_mask = 2
-[connection signal="body_entered" from="." to="." method="_on_SimpleBullet_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_LasergunBullet_body_entered"]

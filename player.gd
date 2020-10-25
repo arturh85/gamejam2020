@@ -26,16 +26,20 @@ var shoot_index = 0
 var flashlight = true
 
 var speed = 200
-var health = 50
+var health = 100
 var health_regeneration = 1
 var firerate_multiplier = 1
-var max_health = 50
+var damage_multiplier = 1
+var max_health = 100
 
 var respawn_at = null
 
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
 	updateBar(health)
+	
+func setdamagemultiplier(f):
+	damage_multiplier = f
 	
 sync func switch_weapon(index):
 	var w
@@ -190,6 +194,10 @@ sync func take_damage(amount, by_who):
 		has_weapon5 = false
 		has_weapon6 = false
 		has_weapon7 = false
+		
+		health_regeneration = 1
+		firerate_multiplier = 1
+		damage_multiplier = 1
 		
 		health = max_health
 		rset("health", health)
