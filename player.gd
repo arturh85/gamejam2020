@@ -133,7 +133,6 @@ func _ready():
 	var colors = get_node("../../CanvasLayer/Score").player_colors;
 	$label.add_color_override("font_color", colors[(get_tree().get_network_unique_id() - 1) % colors.size()])
 	
-
 	if is_network_master():
 		$Group/Camera2D.make_current()
 	
@@ -146,8 +145,8 @@ sync func take_damage(amount, by_who):
 		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 		rset("position", spawn.position)
 		print("respawn to ", spawn.position)
-
-		$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
+		if by_who > 0:
+			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		health = max_health
 		updateBar(health)
 

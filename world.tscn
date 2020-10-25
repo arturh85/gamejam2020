@@ -52,7 +52,7 @@ __meta__ = {
 position = Vector2( 629.217, 862.992 )
 
 [node name="1" type="Position2D" parent="SpawnPoints"]
-position = Vector2( -241.685, -249.315 )
+position = Vector2( 307.03, 873.571 )
 
 [node name="2" type="Position2D" parent="SpawnPoints"]
 position = Vector2( -739.495, -1063.3 )
@@ -125,13 +125,19 @@ __meta__ = {
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Mob" parent="." instance=ExtResource( 6 )]
-position = Vector2( 418.171, 949.149 )
+position = Vector2( 484.096, 336.341 )
+
+[node name="Mob4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1621.31, 962.634 )
+
+[node name="Mob5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1861.04, 24.6937 )
 
 [node name="Mob2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 584.786, -936.817 )
 
 [node name="Mob3" parent="." instance=ExtResource( 6 )]
-position = Vector2( -188.838, -445.733 )
+position = Vector2( -19.1323, -485.331 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
