@@ -131,8 +131,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Players" type="Node2D" parent="."]
-
 [node name="Mob" parent="." instance=ExtResource( 6 )]
 position = Vector2( 484.096, 336.341 )
 
@@ -230,16 +228,21 @@ script = ExtResource( 10 )
 
 [node name="Crosshair" parent="." instance=ExtResource( 11 )]
 
+[node name="Players" type="Node2D" parent="."]
+
 [node name="Items" type="Node" parent="."]
 
 [node name="SpeedupPowerUp" parent="Items" instance=ExtResource( 20 )]
 position = Vector2( 1060.81, -649.453 )
 
+[node name="SpeedupPowerUp3" parent="Items" instance=ExtResource( 20 )]
+position = Vector2( 1061.33, -503.242 )
+
 [node name="SpeedupPowerUp2" parent="Items" instance=ExtResource( 20 )]
 position = Vector2( -463.191, -777.453 )
 
 [node name="HealthPack" parent="Items" instance=ExtResource( 14 )]
-position = Vector2( -66, -94 )
+position = Vector2( -396, -462 )
 
 [node name="HealthPack2" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( 695.012, 831.973 )
@@ -254,7 +257,7 @@ position = Vector2( -821.933, -967.195 )
 position = Vector2( 1080.55, -1025.15 )
 
 [node name="DoubleDamage" parent="Items" instance=ExtResource( 21 )]
-position = Vector2( 420.784, 945.837 )
+position = Vector2( -133.216, -244.163 )
 
 [node name="Weapons" type="Node" parent="."]
 
@@ -268,7 +271,7 @@ position = Vector2( 286.503, 1064.12 )
 position = Vector2( -824.352, -1147.81 )
 
 [node name="Machinegun" parent="Weapons" instance=ExtResource( 18 )]
-position = Vector2( -405.745, -130.301 )
+position = Vector2( 66.255, 5.69901 )
 
 [node name="Railgun" parent="Weapons" instance=ExtResource( 19 )]
 position = Vector2( 892.7, -1442.88 )

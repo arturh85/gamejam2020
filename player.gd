@@ -29,8 +29,34 @@ var speed = 200
 var health = 100
 var health_regeneration = 1
 var firerate_multiplier = 1
+var speed_multiplier = 1
 var damage_multiplier = 1
 var max_health = 100
+
+func setDefaults():
+	
+	has_weapon2 = false
+	has_weapon3 = false
+	has_weapon4 = false
+	has_weapon5 = false
+	has_weapon6 = false
+	has_weapon7 = false
+
+	stunned = false
+
+	prev_shooting = false
+	shoot_index = 0
+	flashlight = true
+
+	health_regeneration = 1
+	firerate_multiplier = 1
+	speed_multiplier = 1
+	damage_multiplier = 1
+	
+	speed = 200
+	max_health = 100
+	health = max_health
+
 
 var respawn_at = null
 
@@ -40,6 +66,9 @@ func _process(delta):
 	
 func setdamagemultiplier(f):
 	damage_multiplier = f
+	
+func setspeedmultiplier(f):
+	speed_multiplier = f
 	
 sync func switch_weapon(index):
 	var w
@@ -67,6 +96,9 @@ func _physics_process(delta):
 	if respawn_at: 
 		position = respawn_at
 		respawn_at = null
+		return
+	
+	if dying:
 		return
 	
 	var motion = Vector2()
@@ -135,7 +167,7 @@ func _physics_process(delta):
 	# $Group.look_at(get_global_mouse_position())
 	$Group.rotation = rotation
 	
-	move_and_slide(motion * speed)
+	move_and_slide(motion * speed * speed_multiplier)
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
 
@@ -156,6 +188,7 @@ func set_player_name(new_name):
 	get_node("label").set_text(new_name)
 
 func _ready():
+	setDefaults()
 	stunned = false
 	puppet_pos = position
 	get_node("../../CanvasLayer/HealthDisplay").show_always()
@@ -188,18 +221,9 @@ sync func take_damage(amount, by_who):
 			$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
 			
 		rpc("switch_weapon", 1)
-		has_weapon2 = false
-		has_weapon3 = false
-		has_weapon4 = false
-		has_weapon5 = false
-		has_weapon6 = false
-		has_weapon7 = false
 		
-		health_regeneration = 1
-		firerate_multiplier = 1
-		damage_multiplier = 1
+		setDefaults()
 		
-		health = max_health
 		rset("health", health)
 		updateBar(health)
 		$AnimationPlayer.play("Spawn")
