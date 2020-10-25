@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -20,10 +20,13 @@ func _ready():
 func _on_FireRatePowerUp_body_entered(body):
 	if body.is_in_group("players") and $Timer.is_stopped():
 		$Timer.start()
+		hide()
 		body.firerate_multiplier = 5
 		modified_player = body
 
 
 func _on_Timer_timeout():
+	show()
 	modified_player.firerate_multiplier = 1
+	$Timer.stop()
 	pass # Replace with function body.
