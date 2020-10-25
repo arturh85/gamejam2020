@@ -4,18 +4,10 @@ var player_labels = {}
 var player_colors = [ Color(0, 0.72, 0.56), Color(0.72, 0, 0.41) , Color(0.13, 0.69, 0.29), Color(0.85, 0.58, 0.07) ]
 
 func _process(_delta):
-	var rocks_left = $"../../Rocks".get_child_count()
-	if rocks_left == 0:
-		var winner_name = ""
-		var winner_score = 0
-		for p in player_labels:
-			if player_labels[p].score > winner_score:
-				winner_score = player_labels[p].score
-				winner_name = player_labels[p].name
-
-		$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
-		$"../Winner".show()
-
+	
+	#	$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
+	#	$"../Winner".show()
+	pass
 
 sync func increase_score(for_who, amount):
 	assert(for_who in player_labels)
