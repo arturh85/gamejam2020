@@ -51,6 +51,7 @@ func setDefaults():
 
 
 var respawn_at = null
+var respawn_time = null
 
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
@@ -122,6 +123,10 @@ func _physics_process(delta):
 	if respawn_at: 
 		position = respawn_at
 		respawn_at = null
+		show()
+		$shape.set_deferred("disabled", false)
+		$AnimationPlayer.play("Spawn")
+		dying = false
 		return
 	
 	if dying:
@@ -244,24 +249,22 @@ sync func take_damage(amount, by_who):
 	if health <= 0:
 		dying = true
 		$AnimationPlayer.play("Die")
-		yield(get_tree().create_timer(1), "timeout")
-		var SpawnPoints = get_node("../../SpawnPoints")
-		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-		respawn_at = spawn.position
-		rset("respawn_at", spawn.position)		
+		$shape.set_deferred("disabled", true)
 		if by_who > 0:
 			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		else:
 			$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
-			
-		rpc("switch_weapon", 1)
-		
+		yield(get_tree().create_timer(1), "timeout")
+		hide()
+		yield(get_tree().create_timer(5), "timeout")
+		var SpawnPoints = get_node("../../SpawnPoints")
+		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+		respawn_at = spawn.position
+		rset("respawn_at", spawn.position)					
+		rpc("switch_weapon", 1)		
 		setDefaults()
-		
 		rset("health", health)
 		updateBar(health)
-		$AnimationPlayer.play("Spawn")
-		dying = false
 
 func updateBar(health):
 	$HealthDisplay.update_healthbar(health, max_health)
