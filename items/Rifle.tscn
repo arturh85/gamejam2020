@@ -100,7 +100,7 @@ anims/Spawn = SubResource( 3 )
 shape = SubResource( 4 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 60.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
