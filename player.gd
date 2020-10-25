@@ -12,12 +12,12 @@ export (PackedScene) var Weapon5
 export (PackedScene) var Weapon6
 export (PackedScene) var Weapon7
 
-var has_weapon2 = false
-var has_weapon3 = false
-var has_weapon4 = false
-var has_weapon5 = false
-var has_weapon6 = false
-var has_weapon7 = false
+puppet var has_weapon2 = false
+puppet var has_weapon3 = false
+puppet var has_weapon4 = false
+puppet var has_weapon5 = false
+puppet var has_weapon6 = false
+puppet var has_weapon7 = false
 
 export var stunned = false
 
@@ -38,6 +38,13 @@ func _process(delta):
 	updateBar(health)
 	
 sync func switch_weapon(index):
+	print("SWITCH TO ", index)
+	print("has 2", has_weapon2)
+	print("has 3", has_weapon3)
+	print("has 4", has_weapon4)
+	print("has 5", has_weapon5)
+	print("has 6", has_weapon6)
+	print("has 7", has_weapon7)
 	var w
 	if index == 1:
 		w = Weapon1.instance()
