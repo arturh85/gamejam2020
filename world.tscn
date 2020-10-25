@@ -219,6 +219,6 @@ script = ExtResource( 10 )
 position = Vector2( 119.818, -154.93 )
 
 [node name="Weapon2Item" parent="." instance=ExtResource( 15 )]
-position = Vector2( -213.415, -85.5263 )
+position = Vector2( -247.67, 953.293 )
 [connection signal="pressed" from="CanvasLayer/Winner/ExitGame" to="CanvasLayer/Score" method="_on_exit_game_pressed"]
 [connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]

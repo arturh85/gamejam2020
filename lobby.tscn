@@ -37,7 +37,6 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 511.107, 292.902 )
-rotation = 1.89124
 scale = Vector2( 0.654786, 0.637795 )
 texture = ExtResource( 5 )
 

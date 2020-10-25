@@ -31,4 +31,6 @@ sync func take_damage(amount, by_who):
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
+		$AnimationPlayer.play("Die")
+		yield(get_tree().create_timer(2), "timeout")
 		queue_free()
