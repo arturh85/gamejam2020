@@ -70,6 +70,10 @@ func setdamagemultiplier(f):
 func setspeedmultiplier(f):
 	speed_multiplier = f
 	
+func hitsound():
+	if not dying:
+		$AnimationPlayer2.play("Hit")
+	
 sync func switch_weapon(index):
 	var w
 	if index == 1:

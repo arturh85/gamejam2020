@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Mob.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/blob.png" type="Texture" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://data/sounds/death_mob.wav" type="AudioStream" id=4]
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/sounds/hit_mob.wav" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.2508
@@ -69,11 +70,15 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2.0, 0.0 ]
+"values": [ 0.0 ]
 }
+
+[sub_resource type="Animation" id=8]
+resource_name = "Hit"
+length = 0.5
 
 [sub_resource type="Animation" id=7]
 resource_name = "Idle"
@@ -136,6 +141,22 @@ radius = 335.074
 [sub_resource type="CircleShape2D" id=6]
 radius = 43.9744
 
+[sub_resource type="Animation" id=9]
+resource_name = "Hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer2D2:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="Mob" type="KinematicBody2D" groups=[
 "minimap_objects",
 "mobs",
@@ -169,6 +190,7 @@ shadow_item_cull_mask = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 2 )
 anims/Die = SubResource( 3 )
+anims/Hit = SubResource( 8 )
 anims/Idle = SubResource( 7 )
 anims/Spawn = SubResource( 4 )
 
@@ -185,6 +207,14 @@ shape = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Harm"]
 shape = SubResource( 6 )
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = 5.0
+bus = "Effects"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/Hit = SubResource( 9 )
 [connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_Detect_body_exited"]
 [connection signal="body_entered" from="Harm" to="." method="_on_Harm_body_entered"]

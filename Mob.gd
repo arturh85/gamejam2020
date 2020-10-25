@@ -25,6 +25,10 @@ var last_harm = 0
 func _ready():
 	rotation = rand_range(0, 2*PI)
 	
+func hitsound():
+	if health > 0:
+		$AnimationPlayer2.play("Hit")
+		
 func _process(delta):
 	if health <= 0:
 		return
@@ -33,6 +37,7 @@ func _process(delta):
 	if harm_player and OS.get_unix_time() - last_harm > 0.3:
 		last_harm = OS.get_unix_time()
 		harm_player.take_damage(30, 0)
+		harm_player.hitsound()
 	
 func _physics_process(delta):
 	if respawn_at: 
@@ -78,7 +83,7 @@ sync func take_damage(amount, by_who):
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
-		$CollisionShape2D.disabled = true
+		#$CollisionShape2D.disabled = true
 		$AnimationPlayer.play("Die")
 		yield(get_tree().create_timer(2), "timeout")
 		
@@ -90,7 +95,7 @@ sync func take_damage(amount, by_who):
 		rset("respawn_at", spawn.position)		
 		
 		yield(get_tree().create_timer(1), "timeout")
-		$CollisionShape2D.disabled = false
+		#$CollisionShape2D.disabled = false
 		$AnimationPlayer.play("Spawn")
 		
 
