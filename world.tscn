@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
@@ -25,6 +25,90 @@
 [sub_resource type="DynamicFont" id=1]
 size = 44
 font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "DD"
+loop = true
+
+[sub_resource type="Animation" id=3]
+resource_name = "Damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 0.933033 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0.568627, 0, 0, 0.419608 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Heal"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 0.594603, 0.25 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0.0823529, 0.533333, 0.00392157, 0.184314 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "None"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "DD"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("DDLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.27451, 0.929412, 1, 0 ), Color( 0.0862745, 0.909804, 1, 0.0392157 ), Color( 0.0862745, 0.909804, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "None"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("DDLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.0862745, 0.909804, 1, 0 ) ]
+}
 
 [node name="World" type="Node2D"]
 
@@ -163,6 +247,26 @@ position = Vector2( -19.1323, -485.331 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="HealthLayer" type="ColorRect" parent="CanvasLayer"]
+margin_left = -10.0
+margin_top = -5.0
+margin_right = 1030.0
+margin_bottom = 605.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DDLayer" type="ColorRect" parent="CanvasLayer"]
+margin_left = -10.0
+margin_top = -5.0
+margin_right = 1030.0
+margin_bottom = 605.0
+color = Color( 0.27451, 0.929412, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HealthDisplay" parent="CanvasLayer" instance=ExtResource( 12 )]
 position = Vector2( 276.49, 594.835 )
 scale = Vector2( 1.27, 0.35 )
@@ -234,6 +338,16 @@ __meta__ = {
 position = Vector2( 283.109, 573.619 )
 scale = Vector2( 0.541241, 0.370514 )
 texture = ExtResource( 2 )
+
+[node name="HealthAnimations" type="AnimationPlayer" parent="CanvasLayer"]
+anims/DD = SubResource( 4 )
+anims/Damage = SubResource( 3 )
+anims/Heal = SubResource( 2 )
+anims/None = SubResource( 5 )
+
+[node name="DDAnimation" type="AnimationPlayer" parent="CanvasLayer"]
+anims/DD = SubResource( 6 )
+anims/None = SubResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
