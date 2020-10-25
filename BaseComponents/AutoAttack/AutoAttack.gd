@@ -2,12 +2,27 @@ extends Node
 
 class_name GDWeaponsAutoAttack
 
+export var input_action_trigger = "" setget _set_input_trigger
 onready var weapon = get_node(GDWeaponsWeapon.WEAPON_PATH_FROM_COMPONENT)
 onready var magazine = weapon.get_node("Magazine") if weapon.has_node("Magazine") else null
 
+func _set_input_trigger(val):
+	input_action_trigger = val
+	set_process(input_action_trigger != "") #optimization! may need to remove if adding stuff in process beyond input checking
+
 func _ready():
-	call_deferred("start_auto_attack")
-	connect("tree_exited",self,"end_auto_attack")
+	if input_action_trigger == "":
+		call_deferred("start_auto_attack")
+		connect("tree_exited",self,"end_auto_attack")
+	pass
+	
+func _process(_delta):
+	if is_network_master() and input_action_trigger != "":
+		if Input.is_action_just_pressed(input_action_trigger):
+			call_deferred("start_auto_attack")
+		elif Input.is_action_just_released(input_action_trigger):
+			call_deferred("end_auto_attack")
+
 
 func start_auto_attack():
 	_connect_weapon(true)

@@ -111,10 +111,11 @@ _global_script_class_icons={
 [application]
 
 config/name="Spaceship Arena"
-config/description="A multiplayer space shoot-em-up in a desolate space station."
+config/description="A multiplayer space shoot-em-up in a desolate space station. The isolation is getting to you. Everyone is just waiting for their moment to snapand when strange blobs start attacking everyone the rampage starts."
 run/main_scene="res://lobby.tscn"
 boot_splash/image="res://data/images/splash.png"
 config/icon="res://assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
 
 [autoload]
 
@@ -209,5 +210,20 @@ weapon3={
 weapon4={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon5={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon6={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":54,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon7={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":55,"unicode":0,"echo":false,"script":null)
  ]
 }
