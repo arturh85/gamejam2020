@@ -16,9 +16,6 @@ var markers = {}  # Dictionary of object: marker.
 
 
 func _ready():
-	var a = 5
-	if a in range(6, 10):
-		print("in")
 	# Center the player marker in the grid.
 	player_marker.position = grid.rect_size / 2
 	# Find the scale factor for marker placement.
