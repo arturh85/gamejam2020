@@ -32,7 +32,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.05 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -76,11 +76,13 @@ position = Vector2( 7.62939e-06, -22.1077 )
 anims/Flash = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="." index="6"]
+visible = false
 position = Vector2( -0.529358, -30.0979 )
 scale = Vector2( 0.256468, 0.515776 )
 texture = ExtResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="." index="7"]
+visible = false
 light_mask = 2
 position = Vector2( 0.674194, -109.264 )
 scale = Vector2( 1.89065, 2.27782 )

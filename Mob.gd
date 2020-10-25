@@ -76,6 +76,7 @@ sync func take_damage(amount, by_who):
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
+		$CollisionShape2D.disabled = true
 		$AnimationPlayer.play("Die")
 		yield(get_tree().create_timer(2), "timeout")
 		
@@ -87,6 +88,7 @@ sync func take_damage(amount, by_who):
 		rset("respawn_at", spawn.position)		
 		
 		yield(get_tree().create_timer(1), "timeout")
+		$CollisionShape2D.disabled = false
 		$AnimationPlayer.play("Spawn")
 		
 
