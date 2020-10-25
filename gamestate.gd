@@ -90,6 +90,7 @@ remote func pre_start_game(spawn_points):
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
+			world.get_node("CanvasLayer/MiniMap").player = "/root/World/Players/" + str(p_id)
 		else:
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
