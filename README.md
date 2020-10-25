@@ -8,4 +8,4 @@ Renderer: GLES 3
 
 ## Screenshots
 
-(todo)
+![Screenshot](screenshots/game2.png)
