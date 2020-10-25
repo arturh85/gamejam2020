@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Mob.gd" type="Script" id=1]
-[ext_resource path="res://data/images/sprites/enemy_timepolice.png" type="Texture" id=2]
-[ext_resource path="res://data/images/sprites/weapon_shotgun.png" type="Texture" id=3]
+[ext_resource path="res://data/images/sprites/blob.png" type="Texture" id=2]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -18,18 +18,21 @@ script = ExtResource( 1 )
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 light_mask = 2
 position = Vector2( 3, 0 )
-rotation = -0.13439
 texture = ExtResource( 2 )
-
-[node name="Sprite2" type="Sprite" parent="."]
-modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
-position = Vector2( 10, 10 )
-rotation = 1.5708
-texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 5 )]
-position = Vector2( 0, -10 )
+position = Vector2( 0, -21 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+position = Vector2( -0.128037, 0.105028 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+color = Color( 0.431373, 1, 0, 1 )
+energy = 2.81
+range_item_cull_mask = 2
+shadow_color = Color( 0.435294, 1, 0.278431, 0 )
+shadow_item_cull_mask = 2
