@@ -83,8 +83,8 @@ func _physics_process(delta):
 			AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
 			
 		if Input.is_action_just_pressed("flashlight"):
-			$Group/Camera2D/flashlight.visible = not flashlight
 			flashlight = not flashlight
+			rpc("update_flashlight", flashlight)
 			
 		if Input.is_action_just_pressed("weapon1"):
 			rpc("switch_weapon", 1)
@@ -134,6 +134,10 @@ func _physics_process(delta):
 	move_and_slide(motion * speed)
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
+
+sync func update_flashlight(visible):
+	$Group/Camera2D/flashlight.visible = visible
+
 
 puppet func stun():
 	stunned = true
