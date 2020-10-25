@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/images/lights/area.png" type="Texture" id=1]
-[ext_resource path="res://bullets/CrossbowBullet.gd" type="Script" id=2]
+[ext_resource path="res://bullets/Bullet.gd" type="Script" id=2]
 [ext_resource path="res://data/images/sprites/weapon_crossbow_bullet.png" type="Texture" id=3]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=4]
 
@@ -11,6 +11,8 @@ height = 37.2134
 
 [node name="CrossbowBullet" type="Area2D"]
 script = ExtResource( 2 )
+speed = 800
+damage = 49
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
 light_mask = 2

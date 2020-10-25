@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/images/sprites/waepon_railgun_bullet.png" type="Texture" id=1]
-[ext_resource path="res://bullets/RailgunBullet.gd" type="Script" id=2]
+[ext_resource path="res://bullets/Bullet.gd" type="Script" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
