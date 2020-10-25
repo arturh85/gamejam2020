@@ -25,6 +25,8 @@ var health_regeneration = 1
 var firerate_multiplier = 1
 var max_health = 50
 
+var respawn_at = null
+
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
 	updateBar(health)
@@ -46,6 +48,11 @@ sync func switch_weapon(index):
 		get_node("Group/Gun").add_child(w, true)
 
 func _physics_process(delta):
+	if respawn_at: 
+		position = respawn_at
+		respawn_at = null
+		return
+	
 	var motion = Vector2()
 	var rotation = 0
 
@@ -143,8 +150,8 @@ sync func take_damage(amount, by_who):
 	if health <= 0:
 		var SpawnPoints = get_node("../../SpawnPoints")
 		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-		rset("position", spawn.position)
-		print("respawn to ", spawn.position)
+		respawn_at = spawn.position
+		rset("respawn_at", spawn.position)		
 		if by_who > 0:
 			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		health = max_health

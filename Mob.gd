@@ -17,12 +17,16 @@ func _ready():
 	rotation = rand_range(0, 2*PI)
 	
 func _process(delta):
+	if health <= 0:
+		return
 	health = min(health + health_regeneration * delta, max_health)
 	$HealthDisplay.update_healthbar(health, max_health)
 	if harm_player:
 		harm_player.take_damage(40*delta, 0)
 	
 func _physics_process(delta):
+	if health <= 0:
+		return
 	velocity = transform.x * speed
 	if chase_player:
 		velocity = position.direction_to(chase_player.position) * speed * 1.5
@@ -32,6 +36,8 @@ func _physics_process(delta):
 	rotation = velocity.angle()
 
 sync func take_damage(amount, by_who):
+	if health <= 0:
+		return
 	health -= amount
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
