@@ -4,18 +4,20 @@
 [ext_resource path="res://bullets/ShotgunBullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.49443
+radius = 2.7495
 height = 0.324967
 
-[node name="OtherBullet" type="Area2D"]
+[node name="ShotgunBullet" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -0.117981 )
+position = Vector2( -0.0181084, -2.5983 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.176974, 0.117978 )
-scale = Vector2( 0.240968, 0.243273 )
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+position = Vector2( -0.170278, -2.58556 )
+scale = Vector2( 0.173173, 0.176561 )
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_OtherBullet_body_entered"]

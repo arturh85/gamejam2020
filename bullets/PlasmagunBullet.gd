@@ -1,6 +1,6 @@
 extends Area2D
 
-export var speed = 400
+export var speed = 800
 
 var by_who = 0
 

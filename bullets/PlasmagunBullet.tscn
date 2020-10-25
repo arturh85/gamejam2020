@@ -7,12 +7,14 @@
 radius = 7.97699
 height = 46.3405
 
-[node name="SimpleBullet" type="Area2D"]
+[node name="PlasmagunBullet" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.943874, -29.6141 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.943874, -29.6141 )
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_SimpleBullet_body_entered"]
