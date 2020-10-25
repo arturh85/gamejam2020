@@ -60,7 +60,7 @@ tracks/3/keys = {
 "values": [ 2.81, 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "Spawn"
 length = 0.2
 tracks/0/type = "value"
@@ -100,10 +100,10 @@ tracks/2/keys = {
 "values": [ 2.81 ]
 }
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 335.074
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 43.9744
 
 [node name="Mob" type="KinematicBody2D" groups=[
@@ -138,7 +138,7 @@ shadow_item_cull_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Die = SubResource( 2 )
-anims/Spawn = SubResource( 5 )
+anims/Spawn = SubResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -147,12 +147,12 @@ bus = "Effects"
 [node name="Detect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Harm" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Harm"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 [connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_Detect_body_exited"]
 [connection signal="body_entered" from="Harm" to="." method="_on_Harm_body_entered"]
