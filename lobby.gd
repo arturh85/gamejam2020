@@ -90,7 +90,7 @@ func _on_start_pressed():
 	gamestate.begin_game()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("mute"):
+	if is_visible_in_tree() and Input.is_action_just_pressed("mute"):
 		AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
 		
 		

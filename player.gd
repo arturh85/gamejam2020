@@ -21,11 +21,6 @@ var has_weapon7 = false
 
 export var stunned = false
 
-# Use sync because it will be called everywhere
-sync func setup_bullet(by_who):
-	#$Group/ChargeGun.start_attack()
-	pass
-
 var prev_shooting = false
 var shoot_index = 0
 var flashlight = true
@@ -36,11 +31,13 @@ var health_regeneration = 1
 var firerate_multiplier = 1
 var max_health = 50
 
+var respawn_at = null
+
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
 	updateBar(health)
 	
-func switch_weapon(index):
+sync func switch_weapon(index):
 	var w
 	if index == 1:
 		w = Weapon1.instance()
@@ -63,6 +60,11 @@ func switch_weapon(index):
 		get_node("Group/Gun").add_child(w, true)
 
 func _physics_process(delta):
+	if respawn_at: 
+		position = respawn_at
+		respawn_at = null
+		return
+	
 	var motion = Vector2()
 	var rotation = 0
 
@@ -156,7 +158,6 @@ func _ready():
 	var colors = get_node("../../CanvasLayer/Score").player_colors;
 	$label.add_color_override("font_color", colors[(get_tree().get_network_unique_id() - 1) % colors.size()])
 	
-
 	if is_network_master():
 		$Group/Camera2D.make_current()
 	
@@ -165,10 +166,14 @@ sync func take_damage(amount, by_who):
 	health -= amount
 	updateBar(health)
 	if health <= 0:
-		#var world = get_node("../..")
-		#var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-
-		$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
+		var SpawnPoints = get_node("../../SpawnPoints")
+		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+		respawn_at = spawn.position
+		rset("respawn_at", spawn.position)		
+		if by_who > 0:
+			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
+		else:
+			$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
 		health = max_health
 		updateBar(health)
 

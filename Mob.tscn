@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Mob.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/blob.png" type="Texture" id=2]
@@ -48,6 +48,12 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 335.074
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 43.9744
+
 [node name="Mob" type="KinematicBody2D" groups=[
 "minimap_objects",
 "mobs",
@@ -83,3 +89,17 @@ anims/Die = SubResource( 2 )
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 bus = "Effects"
+
+[node name="Detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
+shape = SubResource( 3 )
+
+[node name="Harm" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Harm"]
+shape = SubResource( 4 )
+[connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
+[connection signal="body_exited" from="Detect" to="." method="_on_Detect_body_exited"]
+[connection signal="body_entered" from="Harm" to="." method="_on_Harm_body_entered"]
+[connection signal="body_exited" from="Harm" to="." method="_on_Harm_body_exited"]

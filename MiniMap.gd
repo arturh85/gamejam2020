@@ -42,20 +42,19 @@ func _process(delta):
 	
 	player_marker.rotation = group_node.rotation + PI/2
 	for item in markers:
-		if item:
-			var obj_pos = (item.position - children.position) * grid_scale + grid.rect_size / 2
-			# If marker is outside grid, hide or shrink it.
-			if grid.get_rect().has_point(obj_pos + grid.rect_position):
-				markers[item].scale = Vector2(1, 1)
-	#			markers[item].show()
-			else:
-				markers[item].scale = Vector2(0.75, 0.75)
-	#			markers[item].hide()
-			# Don't draw markers outside grid rectangle.
-			obj_pos.x = clamp(obj_pos.x, 0, grid.rect_size.x)
-			obj_pos.y = clamp(obj_pos.y, 0, grid.rect_size.y)
-			markers[item].position = obj_pos
-		
+		var obj_pos = (item.position - children.position) * grid_scale + grid.rect_size / 2
+		# If marker is outside grid, hide or shrink it.
+		if grid.get_rect().has_point(obj_pos + grid.rect_position):
+			markers[item].scale = Vector2(1, 1)
+#			markers[item].show()
+		else:
+			markers[item].scale = Vector2(0.75, 0.75)
+#			markers[item].hide()
+		# Don't draw markers outside grid rectangle.
+		obj_pos.x = clamp(obj_pos.x, 0, grid.rect_size.x)
+		obj_pos.y = clamp(obj_pos.y, 0, grid.rect_size.y)
+		markers[item].position = obj_pos
+	
 	
 	
 func _on_object_removed(object):
