@@ -30,14 +30,15 @@ font_data = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -6598.97
-margin_top = -6348.23
+margin_top = -6350.23
 margin_right = 18472.0
-margin_bottom = 10209.8
+margin_bottom = 10207.8
 rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 1324.22, 4708.32 )
 texture = ExtResource( 5 )
 stretch_mode = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -90,7 +91,22 @@ texture = ExtResource( 8 )
 offset = Vector2( -14.6973, 0 )
 texture_scale = 2.43
 color = Color( 0.878431, 0.631373, 0.968627, 1 )
-energy = 4.88
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D4" type="Light2D" parent="Lights"]
+position = Vector2( -737.977, -1084.16 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 8 )
+offset = Vector2( -14.6973, 0 )
+color = Color( 0.541176, 0.980392, 0.619608, 1 )
+energy = 3.0
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_gradient_length = 2.0
@@ -100,13 +116,12 @@ __meta__ = {
 }
 
 [node name="Light2D2" type="Light2D" parent="Lights"]
-position = Vector2( 793.538, -918.057 )
-scale = Vector2( 3.90953, 4.00339 )
+position = Vector2( 885.766, -955.812 )
+scale = Vector2( 4.66168, 1.99766 )
 texture = ExtResource( 8 )
 offset = Vector2( -14.6973, 0 )
-texture_scale = 2.43
 color = Color( 0.631373, 0.913725, 0.968627, 1 )
-energy = 1.96
+energy = 4.0
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_gradient_length = 2.0
@@ -245,7 +260,7 @@ position = Vector2( -463.191, -777.453 )
 position = Vector2( -396, -462 )
 
 [node name="HealthPack2" parent="Items" instance=ExtResource( 14 )]
-position = Vector2( 695.012, 831.973 )
+position = Vector2( 701.362, 835.148 )
 
 [node name="HealthPack5" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( 561.46, -1445.96 )

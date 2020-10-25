@@ -112,7 +112,7 @@ anims/Spawn = SubResource( 3 )
 shape = SubResource( 4 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 35.0
 
 [node name="Light2D" type="Light2D" parent="."]
 light_mask = 2

@@ -209,5 +209,6 @@ shadow_item_cull_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Effects"
 [connection signal="body_entered" from="." to="." method="_on_FireRatePowerUp_body_entered"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
