@@ -12,12 +12,8 @@ export (PackedScene) var Weapon5
 export (PackedScene) var Weapon6
 export (PackedScene) var Weapon7
 
-puppet var has_weapon2 = false
-puppet var has_weapon3 = false
-puppet var has_weapon4 = false
-puppet var has_weapon5 = false
-puppet var has_weapon6 = false
-puppet var has_weapon7 = false
+puppet var has_weapons = [true, false, false, false, false, false, false]
+puppet var current_weapon = 1
 
 export var stunned = false
 
@@ -34,16 +30,9 @@ var damage_multiplier = 1
 var max_health = 100
 
 func setDefaults():
-	
-	has_weapon2 = false
-	has_weapon3 = false
-	has_weapon4 = false
-	has_weapon5 = false
-	has_weapon6 = false
-	has_weapon7 = false
-
+	has_weapons = [true, false, false, false, false, false, false]
+	switch_weapon(1)
 	stunned = false
-
 	prev_shooting = false
 	shoot_index = 0
 	flashlight = true
@@ -74,27 +63,41 @@ func hitsound():
 	if not dying:
 		$AnimationPlayer2.play("Hit")
 	
+sync func switch_weapon_relative(rel):
+	var found = null
+	var next = current_weapon + rel
+	while not found:
+		if next > 7:
+			next = 1
+		if next < 1:
+			next = 7
+		if has_weapons[next-1]:
+			return switch_weapon(next)
+		next = next + rel
+	
 sync func switch_weapon(index):
-	var w
-	if index == 1:
-		w = Weapon1.instance()
-	elif index == 2 and has_weapon2:
-		w = Weapon2.instance()
-	elif index == 3 and has_weapon3:
-		w = Weapon3.instance()
-	elif index == 4 and has_weapon4:
-		w = Weapon4.instance()
-	elif index == 5 and has_weapon5:
-		w = Weapon5.instance()
-	elif index == 6 and has_weapon6:
-		w = Weapon6.instance()
-	elif index == 7 and has_weapon7:
-		w = Weapon7.instance()
+	var w = null
+	if has_weapons[index-1]:
+		if index == 1:
+			w = Weapon1.instance()
+		elif index == 2:
+			w = Weapon2.instance()
+		elif index == 3:
+			w = Weapon3.instance()
+		elif index == 4:
+			w = Weapon4.instance()
+		elif index == 5:
+			w = Weapon5.instance()
+		elif index == 6:
+			w = Weapon6.instance()
+		elif index == 7:
+			w = Weapon7.instance()
 	if w:
-		var current_weapon = get_node("Group/Gun").get_child(0)
-		get_node("Group/Gun").remove_child(current_weapon)
-		current_weapon.call_deferred("free")
+		var current_weapon_node = get_node("Group/Gun").get_child(0)
+		get_node("Group/Gun").remove_child(current_weapon_node)
+		current_weapon_node.call_deferred("free")
 		get_node("Group/Gun").add_child(w, true)
+		current_weapon = index
 
 func _physics_process(delta):
 	if respawn_at: 
@@ -140,6 +143,10 @@ func _physics_process(delta):
 			rpc("switch_weapon", 6)
 		if Input.is_action_just_pressed("weapon7"):
 			rpc("switch_weapon", 7)
+		if Input.is_action_just_released("weapon_next"):
+			rpc("switch_weapon_relative", 1)
+		if Input.is_action_just_released("weapon_prev"):
+			rpc("switch_weapon_relative", -1)
 
 		motion = motion.normalized()
 
@@ -204,6 +211,10 @@ func _ready():
 		$Group/Camera2D.make_current()
 	
 var dying = false	
+	
+sync func add_weapon(nr):
+	has_weapons[nr-1] = true
+	switch_weapon(nr)
 	
 sync func take_damage(amount, by_who):
 	if health <= 0 or dying:
