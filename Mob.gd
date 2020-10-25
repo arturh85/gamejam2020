@@ -10,7 +10,7 @@ var max_health = 150
 var health_regeneration = 1
 
 var minimap_icon = "mob"
-	
+var died = false
 	
 func _ready():
 	rotation = rand_range(0, 2*PI)
@@ -20,11 +20,12 @@ func _process(delta):
 	$HealthDisplay.update_healthbar(health, max_health)
 	
 func _physics_process(delta):
-	velocity = transform.x * speed
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
-	rotation = velocity.angle()
+	if not died:
+		velocity = transform.x * speed
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
+		rotation = velocity.angle()
 
 sync func take_damage(amount, by_who):
 	health -= amount
@@ -32,5 +33,6 @@ sync func take_damage(amount, by_who):
 	if health <= 0:
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
 		$AnimationPlayer.play("Die")
+		died = true
 		yield(get_tree().create_timer(2), "timeout")
 		queue_free()

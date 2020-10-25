@@ -8,10 +8,16 @@ export (PackedScene) var Weapon1
 export (PackedScene) var Weapon2
 export (PackedScene) var Weapon3
 export (PackedScene) var Weapon4
+export (PackedScene) var Weapon5
+export (PackedScene) var Weapon6
+export (PackedScene) var Weapon7
 
 var has_weapon2 = false
 var has_weapon3 = false
 var has_weapon4 = false
+var has_weapon5 = false
+var has_weapon6 = false
+var has_weapon7 = false
 
 export var stunned = false
 
@@ -44,6 +50,12 @@ func switch_weapon(index):
 		w = Weapon3.instance()
 	elif index == 4 and has_weapon4:
 		w = Weapon4.instance()
+	elif index == 5 and has_weapon5:
+		w = Weapon5.instance()
+	elif index == 6 and has_weapon6:
+		w = Weapon6.instance()
+	elif index == 7 and has_weapon7:
+		w = Weapon7.instance()
 	if w:
 		var current_weapon = get_node("Group/Gun").get_child(0)
 		get_node("Group/Gun").remove_child(current_weapon)
@@ -80,6 +92,12 @@ func _physics_process(delta):
 			switch_weapon(3)
 		if Input.is_action_just_pressed("weapon4"):
 			switch_weapon(4)
+		if Input.is_action_just_pressed("weapon5"):
+			switch_weapon(5)
+		if Input.is_action_just_pressed("weapon6"):
+			switch_weapon(6)
+		if Input.is_action_just_pressed("weapon7"):
+			switch_weapon(7)
 
 		motion = motion.normalized()
 

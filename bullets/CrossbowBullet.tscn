@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://data/images/lights/area.png" type="Texture" id=1]
+[ext_resource path="res://bullets/PlasmagunBullet.gd" type="Script" id=2]
+[ext_resource path="res://data/images/sprites/weapon_crossbow_bullet.png" type="Texture" id=3]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.74455
+height = 37.2134
+
+[node name="PlasmagunBullet" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+position = Vector2( -0.116787, -21.8359 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = -2147483646
+position = Vector2( 0.413547, -22.3663 )
+texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+position = Vector2( 0.019455, 0.274597 )
+scale = Vector2( 0.478013, 1.10286 )
+texture = ExtResource( 4 )
+color = Color( 0.572549, 1, 0.968627, 1 )
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( -0.0495491, -21.8112 )
+scale = Vector2( 0.0183674, 0.561745 )
+texture = ExtResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_SimpleBullet_body_entered"]

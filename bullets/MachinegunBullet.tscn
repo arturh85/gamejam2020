@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/images/sprites/weapon_machinegun_bullet.png" type="Texture" id=1]
+[ext_resource path="res://bullets/PlasmagunBullet.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.25583
+height = 3.5953
+
+[node name="MachinegunBullet" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.108212, -2.71353 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = -2147483646
+position = Vector2( -0.00308441, -2.78392 )
+scale = Vector2( 0.237937, 0.434012 )
+texture = ExtResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_SimpleBullet_body_entered"]
