@@ -25,6 +25,7 @@ var flashlight = true
 var speed = 150
 var health = 50
 var health_regeneration = 1
+var firerate_multiplier = 1
 var max_health = 50
 
 func _process(delta):
