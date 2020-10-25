@@ -10,7 +10,7 @@ func _on_FireRatePowerUp_body_entered(body):
 	if body.is_in_group("players") and $RespawnTimer.is_stopped():
 		$RespawnTimer.start()
 		$AnimationPlayer.play("Collect")
-		yield(get_tree().create_timer(1), "timeout")
+		yield(get_tree().create_timer(3), "timeout")
 		hide()
 
 		body.setdamagemultiplier(2)

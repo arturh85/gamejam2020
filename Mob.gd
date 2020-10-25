@@ -44,6 +44,7 @@ func _physics_process(delta):
 	if is_network_master():
 		velocity = transform.x * speed		
 		if chase_player:
+			$AnimationPlayer.play("Attack")
 			var space_state = get_world_2d().direct_space_state
 			var result = space_state.intersect_ray(position, chase_player.position)
 			if result and result.collider and result.collider.is_in_group("players"):
@@ -56,6 +57,7 @@ func _physics_process(delta):
 						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 					rotation = velocity.angle()
 		else:
+			$AnimationPlayer.play("Idle")
 			var collision = move_and_collide(velocity * delta)
 			if collision:
 				velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
@@ -76,6 +78,7 @@ sync func take_damage(amount, by_who):
 	$HealthDisplay.update_healthbar(health, max_health)
 	if health <= 0:
 		$"../CanvasLayer/Score".rpc("increase_score", by_who, 20)
+		$CollisionShape2D.disabled = true
 		$AnimationPlayer.play("Die")
 		yield(get_tree().create_timer(2), "timeout")
 		
@@ -87,6 +90,7 @@ sync func take_damage(amount, by_who):
 		rset("respawn_at", spawn.position)		
 		
 		yield(get_tree().create_timer(1), "timeout")
+		$CollisionShape2D.disabled = false
 		$AnimationPlayer.play("Spawn")
 		
 
