@@ -12,5 +12,5 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("mobs") or body.is_in_group("players"):
-		body.take_damage(damage * shooter.damage_multiplier, by_who)
+		body.rpc("take_damage", damage * shooter.damage_multiplier, by_who)
 	queue_free()
