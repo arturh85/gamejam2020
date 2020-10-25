@@ -160,26 +160,35 @@ func _ready():
 	print("Name: ", get_name(), " instance -> network    ", get_tree().get_network_unique_id())
 
 	var colors = get_node("../../CanvasLayer/Score").player_colors;
-	$label.add_color_override("font_color", colors[(get_tree().get_network_unique_id() - 1) % colors.size()])
+	$label.add_color_override("font_color", colors[(int(get_name()) - 1) % colors.size()])
 	
 	if is_network_master():
 		$Group/Camera2D.make_current()
 	
-	
+var dying = false
 sync func take_damage(amount, by_who):
-	health -= amount
-	updateBar(health)
-	if health <= 0:
-		var SpawnPoints = get_node("../../SpawnPoints")
-		var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-		respawn_at = spawn.position
-		rset("respawn_at", spawn.position)		
-		if by_who > 0:
-			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
-		else:
-			$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
-		health = max_health
+	if not dying:
+		health -= amount
 		updateBar(health)
+		print(health)
+		if health <= 0:
+			health = max_health
+			dying = true
+			$AnimationPlayer.play("Die")
+			yield(get_tree().create_timer(1), "timeout")
+			
+			var SpawnPoints = get_node("../../SpawnPoints")
+			var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+			respawn_at = spawn.position
+			rset("respawn_at", spawn.position)		
+			if by_who > 0:
+				$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
+			else:
+				$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
+			health = max_health
+			updateBar(health)
+			$AnimationPlayer.play("Spawn")
+			dying = false
 
 func updateBar(health):
 	$HealthDisplay.update_healthbar(health, max_health)

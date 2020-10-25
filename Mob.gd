@@ -76,7 +76,7 @@ sync func take_damage(amount, by_who):
 		rset("respawn_at", spawn.position)		
 		
 		yield(get_tree().create_timer(1), "timeout")
-		$AnimationPlayer.play_backwards("Die")
+		$AnimationPlayer.play("Spawn")
 		
 
 
