@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-const MOTION_SPEED = 200.0
-
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 puppet var puppet_rotation = 0 
@@ -22,7 +20,7 @@ var prev_shooting = false
 var shoot_index = 0
 var flashlight = true
 
-var speed = 150
+var speed = 200
 var health = 50
 var health_regeneration = 1
 var firerate_multiplier = 1
@@ -30,7 +28,7 @@ var max_health = 50
 
 func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
-	_updateBar(health)
+	updateBar(health)
 	
 func switch_weapon(index):
 	var w
@@ -112,7 +110,7 @@ func _physics_process(delta):
 	# $Group.look_at(get_global_mouse_position())
 	$Group.rotation = rotation
 	
-	move_and_slide(motion * MOTION_SPEED)
+	move_and_slide(motion * speed)
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
 
@@ -146,16 +144,16 @@ func _ready():
 	
 sync func take_damage(amount, by_who):
 	health -= amount
-	_updateBar(health)
+	updateBar(health)
 	if health <= 0:
 		#var world = get_node("../..")
 		#var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 
 		$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		health = max_health
-		_updateBar(health)
+		updateBar(health)
 
-func _updateBar(health):
+func updateBar(health):
 	$HealthDisplay.update_healthbar(health, max_health)
 	if is_network_master():
 		get_node("../../CanvasLayer/HealthDisplay").update_healthbar(health, max_health)

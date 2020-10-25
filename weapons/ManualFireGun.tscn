@@ -11,8 +11,6 @@
 wait_time = 0.5
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
-modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
 texture = ExtResource( 2 )
 
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
