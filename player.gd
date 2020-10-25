@@ -15,11 +15,6 @@ var has_weapon4 = false
 
 export var stunned = false
 
-# Use sync because it will be called everywhere
-sync func setup_bullet(by_who):
-	#$Group/ChargeGun.start_attack()
-	pass
-
 var prev_shooting = false
 var shoot_index = 0
 var flashlight = true
@@ -34,7 +29,7 @@ func _process(delta):
 	health = min(health + health_regeneration * delta, max_health)
 	updateBar(health)
 	
-func switch_weapon(index):
+sync func switch_weapon(index):
 	var w
 	if index == 1:
 		w = Weapon1.instance()
