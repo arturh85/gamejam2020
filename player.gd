@@ -105,6 +105,7 @@ func _physics_process(delta):
 		position = respawn_at
 		respawn_at = null
 		show()
+		$shape.set_deferred("disabled", false)
 		$AnimationPlayer.play("Spawn")
 		dying = false
 		return
@@ -229,6 +230,7 @@ sync func take_damage(amount, by_who):
 	if health <= 0:
 		dying = true
 		$AnimationPlayer.play("Die")
+		$shape.set_deferred("disabled", true)
 		if by_who > 0:
 			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
 		else:
