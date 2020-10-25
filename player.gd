@@ -45,6 +45,9 @@ func setDefaults():
 	speed = 200
 	max_health = 100
 	health = max_health
+	
+	setdamagemultiplier(1)
+	setspeedmultiplier(1)
 
 
 var respawn_at = null
@@ -55,13 +58,29 @@ func _process(delta):
 	
 func setdamagemultiplier(f):
 	damage_multiplier = f
+	if f > 1:
+		$DDAnimationPlayer.play("DD")
+		get_node("../../CanvasLayer/DDAnimation").play("DD")
+	else:
+		$DDAnimationPlayer.play("Default")
+		get_node("../../CanvasLayer/DDAnimation").play("None")
 	
 func setspeedmultiplier(f):
 	speed_multiplier = f
+	if f > 1:
+		$SpeedAnimationPlayer.play("Speed")
+	else:
+		$SpeedAnimationPlayer.play("Default")
 	
 func hitsound():
 	if not dying:
-		$AnimationPlayer2.play("Hit")
+		$HitPlayer.play("Hit")
+		get_node("../../CanvasLayer/HealthAnimations").play("Damage")
+	
+func addhealth(h):
+	health = min(health + h, max_health)
+	get_node("../../CanvasLayer/HealthAnimations").play("Heal")
+	
 	
 sync func switch_weapon_relative(rel):
 	var found = null

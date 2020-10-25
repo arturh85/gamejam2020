@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://weapons/Railgun.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
 [ext_resource path="res://data/sounds/hit.wav" type="AudioStream" id=13]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.53851
@@ -178,9 +179,80 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "DD"
+length = 0.5
+loop = true
+
+[sub_resource type="Animation" id=8]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Group/sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Speed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Group/sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.619608, 0, 0.686275, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "DD"
+length = 0.04
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("DD:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04 ),
+"transitions": PoolRealArray( 1, 1.7411, 2 ),
+"update": 0,
+"values": [ 0.0, 4.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("DD:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [node name="player" type="KinematicBody2D" groups=[
 "players",
 ]]
+z_index = 2
 script = ExtResource( 1 )
 Weapon1 = ExtResource( 4 )
 Weapon2 = ExtResource( 5 )
@@ -253,5 +325,22 @@ bus = "Effects"
 stream = ExtResource( 13 )
 bus = "Effects"
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+[node name="HitPlayer" type="AnimationPlayer" parent="."]
 anims/Hit = SubResource( 6 )
+
+[node name="SpeedAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DD = SubResource( 7 )
+anims/Default = SubResource( 8 )
+anims/Speed = SubResource( 9 )
+
+[node name="DDAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DD = SubResource( 10 )
+anims/Default = SubResource( 11 )
+
+[node name="DD" type="Light2D" parent="."]
+light_mask = 2
+texture = ExtResource( 14 )
+color = Color( 0, 0.976471, 1, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+shadow_item_cull_mask = 2
