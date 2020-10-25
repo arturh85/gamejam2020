@@ -154,6 +154,8 @@ sync func take_damage(amount, by_who):
 		rset("respawn_at", spawn.position)		
 		if by_who > 0:
 			$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
+		else:
+			$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
 		health = max_health
 		updateBar(health)
 
