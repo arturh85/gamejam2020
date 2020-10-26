@@ -18,7 +18,7 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 
 ## Screenshots
 
-![Screenshot](screenshots/game2.png)
+![Screenshot](screenshots/game.png)
 
 ## Controls
 
