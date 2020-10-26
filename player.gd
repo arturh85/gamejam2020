@@ -13,6 +13,7 @@ export (PackedScene) var Weapon6
 export (PackedScene) var Weapon7
 
 puppet var has_weapons = [true, false, false, false, false, false, false]
+puppet var ammo = [10, 10, 10, 10, 10, 10, 10]
 puppet var current_weapon = 1
 
 export var stunned = false
@@ -31,6 +32,7 @@ var max_health = 100
 
 func setDefaults():
 	has_weapons = [true, false, false, false, false, false, false]
+	ammo = [10, 10, 10, 10, 10, 10, 10]
 	switch_weapon(1)
 	stunned = false
 	prev_shooting = false
@@ -117,8 +119,9 @@ sync func switch_weapon(index):
 		current_weapon_node.call_deferred("free")
 		get_node("Group/Gun").add_child(w, true)
 		var wchiulds = current_weapon_node.get_children()
-		var ammo = w.get_node("Ammo")
-		if ammo:
+		var ammo_node = w.get_node("Ammo")
+		if ammo_node:
+			ammo_node.current_capacity = ammo[index-1]
 			get_node("/root/World/CanvasLayer/AmmoHUD").show()
 		else:
 			get_node("/root/World/CanvasLayer/AmmoHUD").hide()
@@ -275,3 +278,8 @@ func updateBar(health):
 	$HealthDisplay.update_healthbar(health, max_health)
 	if is_network_master():
 		get_node("../../CanvasLayer/HealthDisplay").update_healthbar(health, max_health)
+		
+		
+func on_Ammo_changed(val):
+	get_node("/root/World/CanvasLayer/AmmoHUD/AmmoCounter").text = "Ammo: " + str(val)
+	ammo[current_weapon - 1] = val

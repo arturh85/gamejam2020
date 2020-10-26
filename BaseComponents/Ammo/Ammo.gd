@@ -22,4 +22,6 @@ func set_curr_capacity(val):
 
 
 func _on_Ammo_changed(val):
-	get_node("/root/World/CanvasLayer/AmmoHUD/AmmoCounter").text = "Ammo: " + str(val)
+	if weapon:
+		var player = weapon.get_parent().get_parent().get_parent()
+		player.on_Ammo_changed(val)
