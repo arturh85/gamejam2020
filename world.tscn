@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
@@ -21,12 +21,13 @@
 [ext_resource path="res://items/Railgun.tscn" type="PackedScene" id=19]
 [ext_resource path="res://powerups/speedup.tscn" type="PackedScene" id=20]
 [ext_resource path="res://powerups/doubledamage.tscn" type="PackedScene" id=21]
+[ext_resource path="res://data/images/title.png" type="Texture" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "DD"
 loop = true
 
@@ -46,8 +47,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0.568627, 0, 0, 0.419608 ), Color( 0, 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Heal"
+[sub_resource type="Animation" id=4]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("HealthLayer:color")
@@ -112,17 +112,22 @@ tracks/0/keys = {
 
 [node name="World" type="Node2D"]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -6598.97
-margin_top = -6350.23
-margin_right = 18472.0
-margin_bottom = 10207.8
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = -5200.0
+margin_top = -5704.0
+margin_right = 15328.0
+margin_bottom = 7576.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 1324.22, 4708.32 )
 texture = ExtResource( 5 )
 stretch_mode = 2
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -137,13 +142,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Logo" type="Sprite" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 0.560784 )
+light_mask = 2
+position = Vector2( -144.389, -246.074 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 22 )
+
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 629.217, 862.992 )
+position = Vector2( 629.217, 1031.99 )
 
 [node name="1" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 307.03, 873.571 )
+position = Vector2( -589.142, -127.166 )
 
 [node name="2" type="Position2D" parent="SpawnPoints"]
 position = Vector2( -739.495, -1063.3 )
@@ -340,9 +352,9 @@ scale = Vector2( 0.541241, 0.370514 )
 texture = ExtResource( 2 )
 
 [node name="HealthAnimations" type="AnimationPlayer" parent="CanvasLayer"]
-anims/DD = SubResource( 4 )
+anims/DD = SubResource( 2 )
 anims/Damage = SubResource( 3 )
-anims/Heal = SubResource( 2 )
+anims/Heal = SubResource( 4 )
 anims/None = SubResource( 5 )
 
 [node name="DDAnimation" type="AnimationPlayer" parent="CanvasLayer"]
@@ -371,7 +383,10 @@ position = Vector2( 1061.33, -503.242 )
 position = Vector2( -463.191, -777.453 )
 
 [node name="HealthPack" parent="Items" instance=ExtResource( 14 )]
-position = Vector2( -396, -462 )
+position = Vector2( -284.876, -528.225 )
+
+[node name="HealthPack6" parent="Items" instance=ExtResource( 14 )]
+position = Vector2( -334.265, -528.225 )
 
 [node name="HealthPack2" parent="Items" instance=ExtResource( 14 )]
 position = Vector2( 701.362, 835.148 )
@@ -386,7 +401,7 @@ position = Vector2( -821.933, -967.195 )
 position = Vector2( 1080.55, -1025.15 )
 
 [node name="DoubleDamage" parent="Items" instance=ExtResource( 21 )]
-position = Vector2( -133.216, -244.163 )
+position = Vector2( 479.648, -256.51 )
 
 [node name="Weapons" type="Node" parent="."]
 
@@ -400,7 +415,7 @@ position = Vector2( 286.503, 1064.12 )
 position = Vector2( -824.352, -1147.81 )
 
 [node name="Machinegun" parent="Weapons" instance=ExtResource( 18 )]
-position = Vector2( 66.255, 5.69901 )
+position = Vector2( 46.0507, -11.1379 )
 
 [node name="Railgun" parent="Weapons" instance=ExtResource( 19 )]
 position = Vector2( 892.7, -1442.88 )
