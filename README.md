@@ -7,6 +7,10 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 - Engine: [Godot](https://godotengine.org/)
 - Based on the following example: [Multiplayer Bomber Demo](https://godotengine.org/asset-library/asset/139)
 
+## Youtube
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/TZ-BwkwCHXw/0.jpg)](http://www.youtube.com/watch?v=TZ-BwkwCHXw "Introduction Video")
+
 ## Download
 
 - [Releases](https://github.com/arturh85/gamejam2020/releases)
@@ -14,7 +18,7 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 
 ## Screenshots
 
-![Screenshot](screenshots/game2.png)
+![Screenshot](screenshots/game.png)
 
 ## Controls
 
