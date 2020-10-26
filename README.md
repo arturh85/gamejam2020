@@ -2,7 +2,7 @@
 
 A multiplayer space shoot-em-up in a desolate space station.
 
-The isolation is getting to you. Everyone is just waiting for their moment to snapand when strange blobs start attacking everyone the rampage starts.
+The isolation is getting to you. Everyone is just waiting for their moment to snap - and when strange blobs start attacking everyone the rampage starts.
 
 - Engine: [Godot](https://godotengine.org/)
 - Based on the following example: [Multiplayer Bomber Demo](https://godotengine.org/asset-library/asset/139)
