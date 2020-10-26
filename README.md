@@ -9,7 +9,7 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 
 ## Youtube
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/TZ-BwkwCHXw/0.jpg)](http://www.youtube.com/watch?v=TZ-BwkwCHXw "Introduction Video")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/adsBKHRUIb4/0.jpg)](http://www.youtube.com/watch?v=adsBKHRUIb4 "Introduction Video")
 
 ## Download
 
