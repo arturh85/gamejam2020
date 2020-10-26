@@ -11,9 +11,9 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/adsBKHRUIb4/0.jpg)](http://www.youtube.com/watch?v=adsBKHRUIb4 "Introduction Video")
 
-## Download
+## Play
 
-- [Releases](https://github.com/arturh85/gamejam2020/releases)
+- [Downloads](https://github.com/arturh85/gamejam2020/releases)
 - [Web Version](https://arturh85.github.io/gamejam2020/)
 
 ## Screenshots
