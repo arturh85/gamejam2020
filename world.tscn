@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://powerups/speedup.tscn" type="PackedScene" id=20]
 [ext_resource path="res://powerups/doubledamage.tscn" type="PackedScene" id=21]
 [ext_resource path="res://data/images/title.png" type="Texture" id=22]
+[ext_resource path="res://ammo_hud.tscn" type="PackedScene" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -303,6 +304,7 @@ margin_bottom = 651.398
 player = NodePath("../../Players")
 
 [node name="Winner" type="Label" parent="CanvasLayer"]
+visible = false
 margin_right = 1031.0
 margin_bottom = 617.0
 size_flags_horizontal = 2
@@ -322,6 +324,7 @@ __meta__ = {
 }
 
 [node name="ExitGame" type="Button" parent="CanvasLayer/Winner"]
+visible = false
 margin_left = 384.0
 margin_top = 408.0
 margin_right = 649.0
@@ -360,6 +363,8 @@ anims/None = SubResource( 5 )
 [node name="DDAnimation" type="AnimationPlayer" parent="CanvasLayer"]
 anims/DD = SubResource( 6 )
 anims/None = SubResource( 7 )
+
+[node name="AmmoHUD" parent="CanvasLayer" instance=ExtResource( 23 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
@@ -415,7 +420,7 @@ position = Vector2( 286.503, 1064.12 )
 position = Vector2( -824.352, -1147.81 )
 
 [node name="Machinegun" parent="Weapons" instance=ExtResource( 18 )]
-position = Vector2( 46.0507, -11.1379 )
+position = Vector2( 298.035, 855.688 )
 
 [node name="Railgun" parent="Weapons" instance=ExtResource( 19 )]
 position = Vector2( 892.7, -1442.88 )

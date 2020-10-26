@@ -2,6 +2,7 @@ extends Node
 
 class_name GDWeaponsCapacity
 
+signal changed(val)
 signal emptied()
 signal filled()
 signal decremented(val)
@@ -19,11 +20,13 @@ func decrement():
 	if current_capacity >= step:
 		set_curr_capacity(current_capacity - step)
 		emit_signal("decremented",current_capacity)
+		emit_signal("changed",current_capacity)
 
 func increment():
 	if current_capacity < max_capacity:
 		set_curr_capacity(current_capacity + step)
 		emit_signal("incremented",current_capacity)
+		emit_signal("changed",current_capacity)
 
 func set_curr_capacity(new_val):
 	var prev_value = current_capacity
@@ -35,6 +38,7 @@ func set_curr_capacity(new_val):
 		emit_signal("not_enough_capacity")
 	else:
 		current_capacity = clamped_val
+		emit_signal("changed",current_capacity)
 		if current_capacity == 0 and prev_value != 0:
 			emit_signal("emptied")
 		elif current_capacity == max_capacity and prev_value != max_capacity:

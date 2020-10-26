@@ -1,0 +1,25 @@
+[gd_scene format=2]
+
+[node name="AmmoHUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoCounter" type="TextEdit" parent="."]
+margin_left = 706.142
+margin_top = 522.496
+margin_right = 806.142
+margin_bottom = 562.496
+rect_scale = Vector2( 3.06001, 1.55611 )
+text = "Ammo: 1
+"
+readonly = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+virtual_keyboard_enabled = false
+selecting_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

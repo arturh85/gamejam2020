@@ -7,6 +7,7 @@ onready var weapon = get_node("..")
 signal ended()
 
 func _ready():
+	print(get_node("/root/World/CanvasLayer/AmmoHUD/AmmoCounter"))
 	weapon.add_action_to_interupt_start(self)
 	weapon.connect("ended",self,"decrement")
 #	connect("not_enough_capacity",self,"turn_off_ability_to_act")
@@ -18,3 +19,7 @@ func can_start_action():
 func set_curr_capacity(val):
 	.set_curr_capacity(val)
 	emit_signal("ended")
+
+
+func _on_Ammo_changed(val):
+	get_node("/root/World/CanvasLayer/AmmoHUD/AmmoCounter").text = "Ammo: " + str(val)
