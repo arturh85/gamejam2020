@@ -35,7 +35,6 @@ func setDefaults():
 	stunned = false
 	prev_shooting = false
 	shoot_index = 0
-	flashlight = true
 
 	health_regeneration = 1
 	firerate_multiplier = 1
