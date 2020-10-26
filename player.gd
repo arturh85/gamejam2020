@@ -13,7 +13,7 @@ export (PackedScene) var Weapon6
 export (PackedScene) var Weapon7
 
 puppet var has_weapons = [true, false, false, false, false, false, false]
-puppet var ammo = [10, 10, 10, 10, 10, 10, 10]
+puppet var ammo = [0, 0, 0, 0, 0, 0, 0]
 puppet var current_weapon = 1
 
 export var stunned = false
@@ -32,7 +32,7 @@ var max_health = 100
 
 func setDefaults():
 	has_weapons = [true, false, false, false, false, false, false]
-	ammo = [10, 10, 10, 10, 10, 10, 10]
+	ammo = [0, 0, 0, 0, 0, 0, 0]
 	switch_weapon(1)
 	stunned = false
 	prev_shooting = false
@@ -244,8 +244,9 @@ func _ready():
 	
 var dying = false	
 	
-sync func add_weapon(nr):
+sync func add_weapon(nr, ammo_amount=0):
 	has_weapons[nr-1] = true
+	ammo[nr-1] += ammo_amount
 	switch_weapon(nr)
 	
 sync func take_damage(amount, by_who):

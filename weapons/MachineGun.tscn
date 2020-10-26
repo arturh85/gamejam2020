@@ -100,7 +100,7 @@ stream = ExtResource( 5 )
 bus = "Effects"
 
 [node name="Ammo" parent="." index="9" instance=ExtResource( 10 )]
-max_capacity = 20
+max_capacity = 500
 [connection signal="began" from="." to="." method="end_attack"]
 [connection signal="ended" from="." to="BulletSpawner2D" method="spawn"]
 [connection signal="began" from="FiringCooldown" to="FiringCooldown/Timer" method="start"]
