@@ -20,6 +20,10 @@ The isolation is getting to you. Everyone is just waiting for their moment to sn
 
 ![Screenshot](screenshots/game.png)
 
+## Network Port
+
+You need to open `Port 10567` on your router to host a server.
+
 ## Controls
 
 - Move with `WASD`, shoot with `Left Mouse Click` or `Space`, change weapons with `1-7` or `mouse wheel`, toggle flashlight with `F` and toggle music with `M`.
