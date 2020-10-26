@@ -30,10 +30,8 @@ sync func spawn2():
 		
 		var muzzle = weapon.get_node("Muzzle")
 		if muzzle:
-			print("use muzzle")
 			b.global_position = weapon.global_position + muzzle.position.rotated(weapon.global_rotation)
 		else:
-			print("NO use muzzle")
 			b.global_position = weapon.global_position
 			
 	else:
@@ -42,6 +40,5 @@ sync func spawn2():
 
 	var flash = weapon.get_node("AnimationPlayer")
 	if flash:
-		print("flash")
 		flash.play("Flash")
 		

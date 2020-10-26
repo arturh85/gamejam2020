@@ -116,6 +116,12 @@ sync func switch_weapon(index):
 		get_node("Group/Gun").remove_child(current_weapon_node)
 		current_weapon_node.call_deferred("free")
 		get_node("Group/Gun").add_child(w, true)
+		var wchiulds = current_weapon_node.get_children()
+		var ammo = w.get_node("Ammo")
+		if ammo:
+			get_node("/root/World/CanvasLayer/AmmoHUD").show()
+		else:
+			get_node("/root/World/CanvasLayer/AmmoHUD").hide()
 		current_weapon = index
 
 func _physics_process(delta):

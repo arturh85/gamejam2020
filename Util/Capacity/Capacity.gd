@@ -13,6 +13,9 @@ export var max_capacity = 1
 export var step = 1.0
 onready var current_capacity = max_capacity setget set_curr_capacity
 
+func _ready():
+	emit_signal("changed",current_capacity)
+
 func refill():
 	current_capacity = max_capacity
 
