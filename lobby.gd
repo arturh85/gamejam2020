@@ -13,6 +13,8 @@ func _ready():
 	else:
 		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
 		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
+	if $Connect/Name.text == ".":
+		$Connect/Name.text = "Player"
 	
 	$AnimationPlayer.play("Background")
 

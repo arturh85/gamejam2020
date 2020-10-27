@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Mob.gd" type="Script" id=1]
+[ext_resource path="res://mobs/Blob.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/blob.png" type="Texture" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://data/sounds/death_mob.wav" type="AudioStream" id=4]
@@ -206,7 +206,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[node name="Mob" type="KinematicBody2D" groups=[
+[node name="BlobMob" type="KinematicBody2D" groups=[
 "minimap_objects",
 "mobs",
 ]]
@@ -238,7 +238,7 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 texture_scale = 0.75
 color = Color( 0.431373, 1, 0, 1 )
-energy = 0.0
+energy = 2.0
 range_item_cull_mask = 2
 shadow_color = Color( 0.435294, 1, 0.278431, 0 )
 shadow_item_cull_mask = 2

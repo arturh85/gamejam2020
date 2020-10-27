@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "BlobMob",
+"language": "GDScript",
+"path": "res://mobs/Blob.gd"
+}, {
 "base": "GDWeaponsCapacity",
 "class": "GDWeaponsAmmo",
 "language": "GDScript",
@@ -85,11 +90,12 @@ _global_script_classes=[ {
 "path": "res://WeaponComponents/Weapon.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Mob",
+"class": "TimeCopMob",
 "language": "GDScript",
-"path": "res://Mob.gd"
+"path": "res://mobs/TimeCop.gd"
 } ]
 _global_script_class_icons={
+"BlobMob": "",
 "GDWeaponsAmmo": "",
 "GDWeaponsAutoAttack": "",
 "GDWeaponsBoolBlocker": "",
@@ -105,7 +111,7 @@ _global_script_class_icons={
 "GDWeaponsRecoil": "",
 "GDWeaponsStartBlocker": "",
 "GDWeaponsWeapon": "",
-"Mob": ""
+"TimeCopMob": ""
 }
 
 [application]

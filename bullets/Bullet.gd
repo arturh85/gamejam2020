@@ -13,5 +13,6 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("mobs") or body.is_in_group("players"):
 		body.rpc("take_damage", damage * shooter.damage_multiplier, by_who)
-		body.hitsound()
+		if body.has_method("hitsound"):
+			body.hitsound()
 	queue_free()

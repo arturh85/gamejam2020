@@ -1,11 +1,11 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
 [ext_resource path="res://score.gd" type="Script" id=3]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://data/images/background.png" type="Texture" id=5]
-[ext_resource path="res://Mob.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mobs/Blob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://MiniMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=8]
 [ext_resource path="res://data/sounds/music/background.wav" type="AudioStream" id=9]
@@ -24,6 +24,8 @@
 [ext_resource path="res://data/images/title.png" type="Texture" id=22]
 [ext_resource path="res://ammo_hud.tscn" type="PackedScene" id=23]
 [ext_resource path="res://items/MachineGunAmmo.tscn" type="PackedScene" id=24]
+[ext_resource path="res://crt_material.tres" type="Material" id=25]
+[ext_resource path="res://mobs/TimeCop.tscn" type="PackedScene" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -244,22 +246,35 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Mob" parent="." instance=ExtResource( 6 )]
+[node name="BlobMob1" parent="." instance=ExtResource( 6 )]
 position = Vector2( 484.096, 336.341 )
 
-[node name="Mob4" parent="." instance=ExtResource( 6 )]
+[node name="BlobMob2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1621.31, 962.634 )
 
-[node name="Mob5" parent="." instance=ExtResource( 6 )]
+[node name="BlobMob3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1861.04, 24.6937 )
 
-[node name="Mob2" parent="." instance=ExtResource( 6 )]
+[node name="BlobMob4" parent="." instance=ExtResource( 6 )]
 position = Vector2( 584.786, -936.817 )
 
-[node name="Mob3" parent="." instance=ExtResource( 6 )]
+[node name="BlobMob5" parent="." instance=ExtResource( 6 )]
 position = Vector2( -19.1323, -485.331 )
 
+[node name="TimeCopMob1" parent="." instance=ExtResource( 26 )]
+position = Vector2( 73.417, 960.415 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ShaderRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = ExtResource( 25 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
 
 [node name="HealthLayer" type="ColorRect" parent="CanvasLayer"]
 margin_left = -10.0
