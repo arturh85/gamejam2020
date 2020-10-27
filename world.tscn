@@ -410,10 +410,10 @@ position = Vector2( 1080.55, -1025.15 )
 position = Vector2( 479.648, -256.51 )
 
 [node name="MachineGunAmmoItem" parent="Items" instance=ExtResource( 24 )]
-position = Vector2( -641.31, 339.704 )
+position = Vector2( -701.631, 298.431 )
 
 [node name="MachineGunAmmoItem2" parent="Items" instance=ExtResource( 24 )]
-position = Vector2( -95.244, 958.79 )
+position = Vector2( -339.704, -1022.29 )
 
 [node name="MachineGunAmmoItem3" parent="Items" instance=ExtResource( 24 )]
 position = Vector2( 1114.36, 961.965 )
@@ -430,7 +430,7 @@ position = Vector2( 286.503, 1064.12 )
 position = Vector2( -824.352, -1147.81 )
 
 [node name="Machinegun" parent="Weapons" instance=ExtResource( 18 )]
-position = Vector2( 298.035, 855.688 )
+position = Vector2( 145.645, -138.025 )
 
 [node name="Railgun" parent="Weapons" instance=ExtResource( 19 )]
 position = Vector2( 892.7, -1442.88 )

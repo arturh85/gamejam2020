@@ -11,7 +11,6 @@
 [ext_resource path="res://WeaponComponents/AutoAttack/AutoAttack.gd" type="Script" id=9]
 [ext_resource path="res://WeaponComponents/Ammo/Ammo.tscn" type="PackedScene" id=10]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
 length = 0.05
