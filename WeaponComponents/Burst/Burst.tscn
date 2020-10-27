@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://CommonComponents/Burst/Burst.gd" type="Script" id=1]
+[ext_resource path="res://WeaponComponents/Burst/Burst.gd" type="Script" id=1]
+
+
 
 
 [node name="Burst" type="Node"]
