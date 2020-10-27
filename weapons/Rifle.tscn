@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Weapon2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://WeaponComponents/Weapon2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/images/sprites/waepon_rifle.png" type="Texture" id=2]
 [ext_resource path="res://WeaponComponents/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://WeaponComponents/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
@@ -8,6 +8,7 @@
 [ext_resource path="res://data/images/sprites/muzzleflash2.png" type="Texture" id=6]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=7]
 [ext_resource path="res://bullets/RifleBullet.tscn" type="PackedScene" id=8]
+
 
 
 [sub_resource type="Animation" id=1]

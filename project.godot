@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "GDWeaponsLongAction",
 "class": "GDWeaponsWeapon",
 "language": "GDScript",
-"path": "res://Weapon.gd"
+"path": "res://WeaponComponents/Weapon.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Mob",
