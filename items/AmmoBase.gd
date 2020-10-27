@@ -1,6 +1,6 @@
 extends Node2D
 
-export var weapon_nr = 1
+export var weapon_nr = 0
 export var weapon_ammo = 100
 
 func _ready():

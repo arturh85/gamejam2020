@@ -212,6 +212,7 @@ tracks/0/keys = {
 ]]
 z_index = 1
 script = ExtResource( 3 )
+speed = 100
 
 [node name="Sprite2" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )

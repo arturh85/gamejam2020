@@ -1,16 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://weapons/Shotgun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://weapons/Plasmagun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
-[ext_resource path="res://weapons/MachineGun.tscn" type="PackedScene" id=8]
-[ext_resource path="res://weapons/Crossbow.tscn" type="PackedScene" id=9]
-[ext_resource path="res://weapons/Rifle.tscn" type="PackedScene" id=10]
-[ext_resource path="res://weapons/Railgun.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
 [ext_resource path="res://data/sounds/hit.wav" type="AudioStream" id=13]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=14]
@@ -256,12 +251,6 @@ z_index = 2
 script = ExtResource( 1 )
 has_weapons = [ true, false, false, false, false, false, false ]
 health_regeneration = 2
-Weapon1 = ExtResource( 4 )
-Weapon2 = ExtResource( 5 )
-Weapon3 = ExtResource( 8 )
-Weapon4 = ExtResource( 9 )
-Weapon5 = ExtResource( 10 )
-Weapon6 = ExtResource( 11 )
 
 [node name="Group" type="Node2D" parent="."]
 

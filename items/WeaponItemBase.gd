@@ -1,6 +1,6 @@
 extends Node2D
 
-export var weapon_nr = 1
+export var weapon_nr = 0
 export var weapon_ammo = 0
 
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.is_in_group("players") and $RespawnTimer.is_stopped():
-		if weapon_ammo > 0 or body.has_weapons[weapon_nr-1] == false:
+		if weapon_ammo > 0 or body.has_weapons[weapon_nr] == false:
 			body.rpc('add_weapon', weapon_nr, weapon_ammo)
 			$RespawnTimer.start()
 			$AnimationPlayer.play("Collect")

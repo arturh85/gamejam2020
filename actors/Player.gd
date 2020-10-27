@@ -3,14 +3,6 @@ class_name Player
 
 puppet var puppet_motion = Vector2()
  
-export (PackedScene) var Weapon1
-export (PackedScene) var Weapon2
-export (PackedScene) var Weapon3
-export (PackedScene) var Weapon4
-export (PackedScene) var Weapon5
-export (PackedScene) var Weapon6
-export (PackedScene) var Weapon7
-
 var stunned = false
 
 var prev_shooting = false
@@ -24,7 +16,7 @@ var respawn_time = null
 func setDefaults():
 	has_weapons = [true, false, false, false, false, false, false]
 	ammo = [0, 0, 0, 0, 0, 0, 0]
-	switch_weapon(1)
+	switch_weapon(0)
 	stunned = false
 	prev_shooting = false
 	shoot_index = 0
@@ -65,49 +57,6 @@ func addhealth(h):
 	get_node("../../CanvasLayer/HealthAnimations").play("Heal")
 	
 	
-sync func switch_weapon_relative(rel):
-	var found = null
-	var next = current_weapon + rel
-	while not found:
-		if next > 7:
-			next = 1
-		if next < 1:
-			next = 7
-		if has_weapons[next-1]:
-			return switch_weapon(next)
-		next = next + rel
-	
-sync func switch_weapon(index):
-	var w = null
-	if has_weapons[index-1]:
-		if index == 1:
-			w = Weapon1.instance()
-		elif index == 2:
-			w = Weapon2.instance()
-		elif index == 3:
-			w = Weapon3.instance()
-		elif index == 4:
-			w = Weapon4.instance()
-		elif index == 5:
-			w = Weapon5.instance()
-		elif index == 6:
-			w = Weapon6.instance()
-		elif index == 7:
-			w = Weapon7.instance()
-	if w:
-		var current_weapon_node = get_node("Group/Gun").get_child(0)
-		get_node("Group/Gun").remove_child(current_weapon_node)
-		current_weapon_node.call_deferred("free")
-		get_node("Group/Gun").add_child(w, true)
-		var wchiulds = current_weapon_node.get_children()
-		var ammo_node = w.get_node("Ammo")
-		if ammo_node:
-			ammo_node.current_capacity = ammo[index-1]
-			get_node("/root/World/CanvasLayer/AmmoHUD").show()
-		else:
-			get_node("/root/World/CanvasLayer/AmmoHUD").hide()
-		current_weapon = index
-
 func _physics_process(delta):
 	if health <= 0:
 		return
@@ -134,19 +83,19 @@ func _physics_process(delta):
 			rpc("update_flashlight", flashlight)
 			
 		if Input.is_action_just_pressed("weapon1"):
-			rpc("switch_weapon", 1)
+			rpc("switch_weapon", 0)
 		if Input.is_action_just_pressed("weapon2"):
-			rpc("switch_weapon", 2)
+			rpc("switch_weapon", 1)
 		if Input.is_action_just_pressed("weapon3"):
-			rpc("switch_weapon", 3)
+			rpc("switch_weapon", 2)
 		if Input.is_action_just_pressed("weapon4"):
-			rpc("switch_weapon", 4)
+			rpc("switch_weapon", 3)
 		if Input.is_action_just_pressed("weapon5"):
-			rpc("switch_weapon", 5)
+			rpc("switch_weapon", 4)
 		if Input.is_action_just_pressed("weapon6"):
-			rpc("switch_weapon", 6)
+			rpc("switch_weapon", 5)
 		if Input.is_action_just_pressed("weapon7"):
-			rpc("switch_weapon", 7)
+			rpc("switch_weapon", 6)
 		if Input.is_action_just_released("weapon_next"):
 			rpc("switch_weapon_relative", 1)
 		if Input.is_action_just_released("weapon_prev"):
@@ -216,21 +165,10 @@ func _ready():
 	
 var dying = false	
 	
-sync func add_weapon(nr, ammo_amount=0):
-	has_weapons[nr-1] = true
-	ammo[nr-1] += ammo_amount
-	switch_weapon(nr)
-	
-	
-sync func add_ammo(nr, ammo_amount=0):
-	ammo[nr-1] += ammo_amount
-	if has_weapons[nr-1]:
-		switch_weapon(nr)
-	
 		
 func on_Ammo_changed(val):
 	get_node("/root/World/CanvasLayer/AmmoHUD/AmmoCounter").text = "Ammo: " + str(val)
-	ammo[current_weapon - 1] = val
+	ammo[current_weapon] = val
 
 
 func _on_damage():

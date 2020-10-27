@@ -96,7 +96,7 @@ height = 1.12494
 
 [node name="MachineGunItem" type="Area2D"]
 script = ExtResource( 2 )
-weapon_nr = 3
+weapon_nr = 2
 weapon_ammo = 20
 
 [node name="Sprite" type="Sprite" parent="."]
