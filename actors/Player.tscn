@@ -1,0 +1,353 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://actors/Player.gd" type="Script" id=1]
+[ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
+[ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://weapons/Shotgun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons/Plasmagun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
+[ext_resource path="res://weapons/MachineGun.tscn" type="PackedScene" id=8]
+[ext_resource path="res://weapons/Crossbow.tscn" type="PackedScene" id=9]
+[ext_resource path="res://weapons/Rifle.tscn" type="PackedScene" id=10]
+[ext_resource path="res://weapons/Railgun.tscn" type="PackedScene" id=11]
+[ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
+[ext_resource path="res://data/sounds/hit.wav" type="AudioStream" id=13]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=14]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 9.53851
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Group/sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.2, 0.2, 0.2, 1 ), Color( 0.0352941, 0.0117647, 0.0117647, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Group/Gun:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Group/Camera2D/flashlight:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("HealthDisplay:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Hit"
+length = 0.3
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Group/Camera2D/flashlight:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Group/Gun:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HealthDisplay:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Group/sprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer2D2:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "DD"
+length = 0.5
+loop = true
+
+[sub_resource type="Animation" id=8]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Group/sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Speed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Group/sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.619608, 0, 0.686275, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "DD"
+length = 0.04
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("DD:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04 ),
+"transitions": PoolRealArray( 1, 1.7411, 2 ),
+"update": 0,
+"values": [ 0.0, 4.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("DD:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="player" type="KinematicBody2D" groups=[
+"players",
+]]
+z_index = 2
+script = ExtResource( 1 )
+has_weapons = [ true, false, false, false, false, false, false ]
+health_regeneration = 2
+Weapon1 = ExtResource( 4 )
+Weapon2 = ExtResource( 5 )
+Weapon3 = ExtResource( 8 )
+Weapon4 = ExtResource( 9 )
+Weapon5 = ExtResource( 10 )
+Weapon6 = ExtResource( 11 )
+
+[node name="Group" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+position = Vector2( 4, -4.118 )
+rotation = -1.59872
+texture = ExtResource( 2 )
+region_rect = Rect2( 264, 132, 47, 43 )
+
+[node name="Camera2D" type="Camera2D" parent="Group"]
+
+[node name="flashlight" type="Light2D" parent="Group/Camera2D"]
+light_mask = 2
+position = Vector2( 9, 2 )
+scale = Vector2( 4.82131, 4.10324 )
+texture = ExtResource( 7 )
+texture_scale = 0.1
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 0.5
+shadow_item_cull_mask = 2
+
+[node name="Gun" type="Node2D" parent="Group"]
+position = Vector2( 24, 5 )
+rotation = 1.5708
+
+[node name="Default Gun" parent="Group/Gun" instance=ExtResource( 4 )]
+
+[node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.166855, 0.834274 )
+shape = SubResource( 1 )
+
+[node name="label" type="Label" parent="."]
+margin_left = -84.1106
+margin_top = -72.2857
+margin_right = 82.8894
+margin_bottom = -51.2857
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "Player 1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 3 )
+anims/Hit = SubResource( 4 )
+anims/Spawn = SubResource( 5 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+bus = "Effects"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+bus = "Effects"
+
+[node name="HitPlayer" type="AnimationPlayer" parent="."]
+anims/Hit = SubResource( 6 )
+
+[node name="SpeedAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DD = SubResource( 7 )
+anims/Default = SubResource( 8 )
+anims/Speed = SubResource( 9 )
+
+[node name="DDAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DD = SubResource( 10 )
+anims/Default = SubResource( 11 )
+
+[node name="DD" type="Light2D" parent="."]
+light_mask = 2
+texture = ExtResource( 14 )
+color = Color( 0, 0.976471, 1, 1 )
+energy = 0.0
+range_item_cull_mask = 2
+shadow_item_cull_mask = 2
+[connection signal="on_damage" from="." to="." method="_on_damage"]
+[connection signal="on_death" from="." to="." method="_on_death"]
+[connection signal="on_heal" from="." to="." method="_on_heal"]
+[connection signal="on_health_changed" from="." to="." method="_on_health_changed"]
+[connection signal="on_respawn" from="." to="." method="_on_respawn"]

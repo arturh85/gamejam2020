@@ -12,87 +12,92 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BlobMob",
 "language": "GDScript",
-"path": "res://mobs/Blob.gd"
+"path": "res://actors/BlobMob.gd"
 }, {
 "base": "GDWeaponsCapacity",
 "class": "GDWeaponsAmmo",
 "language": "GDScript",
-"path": "res://WeaponComponents/Ammo/Ammo.gd"
+"path": "res://weapons-mixins/Ammo/Ammo.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsAutoAttack",
 "language": "GDScript",
-"path": "res://WeaponComponents/AutoAttack/AutoAttack.gd"
+"path": "res://weapons-mixins/AutoAttack/AutoAttack.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsBoolBlocker",
 "language": "GDScript",
-"path": "res://WeaponComponents/BoolBlocker/BoolBlocker.gd"
+"path": "res://weapons-mixins/BoolBlocker/BoolBlocker.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsBulletSpawner",
 "language": "GDScript",
-"path": "res://WeaponComponents/BulletSpawner/BulletSpawner.gd"
+"path": "res://weapons-mixins/BulletSpawner/BulletSpawner.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsBurst",
 "language": "GDScript",
-"path": "res://WeaponComponents/Burst/Burst.gd"
+"path": "res://weapons-mixins/Burst/Burst.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsCapacity",
 "language": "GDScript",
-"path": "res://WeaponComponents/Capacity/Capacity.gd"
+"path": "res://weapons-mixins/Capacity/Capacity.gd"
 }, {
 "base": "GDWeaponsCapacity",
 "class": "GDWeaponsCharge",
 "language": "GDScript",
-"path": "res://WeaponComponents/Charge/Charge.gd"
+"path": "res://weapons-mixins/Charge/Charge.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsCombo",
 "language": "GDScript",
-"path": "res://WeaponComponents/Combo/Combo.gd"
+"path": "res://weapons-mixins/Combo/Combo.gd"
 }, {
 "base": "GDWeaponsBoolBlocker",
 "class": "GDWeaponsEndBlocker",
 "language": "GDScript",
-"path": "res://WeaponComponents/BoolBlocker/EndBlocker.gd"
+"path": "res://weapons-mixins/BoolBlocker/EndBlocker.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsLongAction",
 "language": "GDScript",
-"path": "res://WeaponComponents/LongAction/LongAction.gd"
+"path": "res://weapons-mixins/LongAction/LongAction.gd"
 }, {
 "base": "GDWeaponsCapacity",
 "class": "GDWeaponsMagCapacity",
 "language": "GDScript",
-"path": "res://WeaponComponents/Magazine/MagCapacity.gd"
+"path": "res://weapons-mixins/Magazine/MagCapacity.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsMagazine",
 "language": "GDScript",
-"path": "res://WeaponComponents/Magazine/Magazine.gd"
+"path": "res://weapons-mixins/Magazine/Magazine.gd"
 }, {
 "base": "Node",
 "class": "GDWeaponsRecoil",
 "language": "GDScript",
-"path": "res://WeaponComponents/Recoil/Recoil.gd"
+"path": "res://weapons-mixins/Recoil/Recoil.gd"
 }, {
 "base": "GDWeaponsBoolBlocker",
 "class": "GDWeaponsStartBlocker",
 "language": "GDScript",
-"path": "res://WeaponComponents/BoolBlocker/StartBlocker.gd"
+"path": "res://weapons-mixins/BoolBlocker/StartBlocker.gd"
 }, {
 "base": "GDWeaponsLongAction",
 "class": "GDWeaponsWeapon",
 "language": "GDScript",
-"path": "res://WeaponComponents/Weapon.gd"
+"path": "res://weapons-mixins/Weapon.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://actors/Player.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "TimeCopMob",
 "language": "GDScript",
-"path": "res://mobs/TimeCop.gd"
+"path": "res://actors/TimeCop.gd"
 } ]
 _global_script_class_icons={
 "BlobMob": "",
@@ -111,6 +116,7 @@ _global_script_class_icons={
 "GDWeaponsRecoil": "",
 "GDWeaponsStartBlocker": "",
 "GDWeaponsWeapon": "",
+"Player": "",
 "TimeCopMob": ""
 }
 
@@ -118,14 +124,18 @@ _global_script_class_icons={
 
 config/name="Spaceship Arena"
 config/description="A multiplayer space shoot-em-up in a desolate space station. The isolation is getting to you. Everyone is just waiting for their moment to snapand when strange blobs start attacking everyone the rampage starts."
-run/main_scene="res://lobby.tscn"
+run/main_scene="res://scenes/Lobby.tscn"
 boot_splash/image="res://data/images/splash.png"
-config/icon="res://assets/icon.png"
+config/icon="res://data/images/sprites/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
+
+[audio]
+
+default_bus_layout="res://data/default_bus_layout.tres"
 
 [autoload]
 
-gamestate="*res://gamestate.gd"
+gamestate="*res://scenes/gamestate.gd"
 
 [debug]
 

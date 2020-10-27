@@ -1,14 +1,15 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://WeaponComponents/Weapon2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons-mixins/Weapon2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/sounds/weapons/laser.wav" type="AudioStream" id=2]
-[ext_resource path="res://WeaponComponents/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://WeaponComponents/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons-mixins/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons-mixins/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/images/sprites/waepon_railgun.png" type="Texture" id=5]
 [ext_resource path="res://data/images/sprites/muzzleflash1.png" type="Texture" id=6]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=7]
 [ext_resource path="res://bullets/RailgunBullet.tscn" type="PackedScene" id=8]
 [ext_resource path="res://data/images/lights/area.png" type="Texture" id=9]
+
 
 
 
