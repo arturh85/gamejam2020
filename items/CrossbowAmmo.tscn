@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/images/sprites/weapon_crossbow.png" type="Texture" id=1]
-[ext_resource path="res://items/WeaponItemBase.gd" type="Script" id=2]
+[ext_resource path="res://items/AmmoBase.gd" type="Script" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://data/sounds/collectwaepon.wav" type="AudioStream" id=4]
 
@@ -94,7 +94,7 @@ tracks/1/keys = {
 radius = 18.4668
 height = 1.12494
 
-[node name="CrossbowItem" type="Area2D"]
+[node name="CrossobowAmmoItem" type="Area2D"]
 script = ExtResource( 2 )
 weapon_nr = 4
 

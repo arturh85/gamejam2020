@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://auto_tileset_with_coll_nav.tres" type="TileSet" id=1]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://powerups/doubledamage.tscn" type="PackedScene" id=21]
 [ext_resource path="res://data/images/title.png" type="Texture" id=22]
 [ext_resource path="res://ammo_hud.tscn" type="PackedScene" id=23]
+[ext_resource path="res://items/MachineGunAmmo.tscn" type="PackedScene" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -407,6 +408,15 @@ position = Vector2( 1080.55, -1025.15 )
 
 [node name="DoubleDamage" parent="Items" instance=ExtResource( 21 )]
 position = Vector2( 479.648, -256.51 )
+
+[node name="MachineGunAmmoItem" parent="Items" instance=ExtResource( 24 )]
+position = Vector2( -641.31, 339.704 )
+
+[node name="MachineGunAmmoItem2" parent="Items" instance=ExtResource( 24 )]
+position = Vector2( -95.244, 958.79 )
+
+[node name="MachineGunAmmoItem3" parent="Items" instance=ExtResource( 24 )]
+position = Vector2( 1114.36, 961.965 )
 
 [node name="Weapons" type="Node" parent="."]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/sounds/collectwaepon.wav" type="AudioStream" id=1]
-[ext_resource path="res://items/MachineGun.gd" type="Script" id=2]
+[ext_resource path="res://items/WeaponItemBase.gd" type="Script" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://data/images/sprites/weapon_machinegun.png" type="Texture" id=4]
 
@@ -96,6 +96,8 @@ height = 1.12494
 
 [node name="MachineGunItem" type="Area2D"]
 script = ExtResource( 2 )
+weapon_nr = 3
+weapon_ammo = 100
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )

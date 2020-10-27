@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/sounds/collectwaepon.wav" type="AudioStream" id=1]
-[ext_resource path="res://items/Railgun.gd" type="Script" id=2]
+[ext_resource path="res://items/WeaponItemBase.gd" type="Script" id=2]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://data/images/sprites/waepon_railgun.png" type="Texture" id=4]
 
@@ -94,8 +94,9 @@ tracks/1/keys = {
 radius = 18.4668
 height = 1.12494
 
-[node name="Railgun" type="Area2D"]
+[node name="RailgunItem" type="Area2D"]
 script = ExtResource( 2 )
+weapon_nr = 6
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )

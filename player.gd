@@ -249,6 +249,12 @@ sync func add_weapon(nr, ammo_amount=0):
 	ammo[nr-1] += ammo_amount
 	switch_weapon(nr)
 	
+	
+sync func add_ammo(nr, ammo_amount=0):
+	ammo[nr-1] += ammo_amount
+	if has_weapons[nr-1]:
+		switch_weapon(nr)
+	
 sync func take_damage(amount, by_who):
 	if health <= 0 or dying:
 		return
