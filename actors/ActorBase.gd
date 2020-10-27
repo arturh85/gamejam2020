@@ -35,6 +35,7 @@ puppet var puppet_rotation = 0
 
 
 var velocity = Vector2()
+var damage_multiplier = 1
 var respawn_position = null
 
 signal on_damage

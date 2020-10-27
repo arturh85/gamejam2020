@@ -10,7 +10,6 @@ var shoot_index = 0
 var flashlight = true
 var firerate_multiplier = 1
 var speed_multiplier = 1
-var damage_multiplier = 1
 var respawn_time = null
 
 func setDefaults():

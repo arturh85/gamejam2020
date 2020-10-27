@@ -9,6 +9,12 @@ var last_harm = null
 
 func _ready():
 	rotation = rand_range(0, 2*PI)
+	has_weapons[5] = true
+	switch_weapon(5)
+	var current_weapon_node = get_node("Group/Gun").get_child(0)
+	var blocker = current_weapon_node.get_node("StartBlocker")
+	if blocker:
+		blocker.input_action_trigger = ""
 			
 func _process(delta):
 	if health <= 0:

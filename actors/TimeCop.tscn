@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://data/images/sprites/teleporter.png" type="Texture" id=5]
 [ext_resource path="res://data/images/sprites/enemy_timepolice.png" type="Texture" id=6]
 [ext_resource path="res://data/sounds/death_mob.wav" type="AudioStream" id=7]
+[ext_resource path="res://weapons/Plasmagun.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.2508
@@ -234,6 +235,14 @@ shape = SubResource( 1 )
 [node name="HealthDisplay" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -21 )
 
+[node name="Group" type="Node2D" parent="."]
+
+[node name="Gun" type="Node2D" parent="Group"]
+position = Vector2( 13.25, 7.375 )
+rotation = 1.5708
+
+[node name="ManualFireGun" parent="Group/Gun" instance=ExtResource( 8 )]
+
 [node name="Light2D" type="Light2D" parent="."]
 light_mask = 2
 position = Vector2( -0.128037, 0.105028 )
@@ -258,11 +267,13 @@ stream = ExtResource( 7 )
 bus = "Effects"
 
 [node name="Detect" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
 shape = SubResource( 7 )
 
 [node name="Harm" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Harm"]
 shape = SubResource( 8 )

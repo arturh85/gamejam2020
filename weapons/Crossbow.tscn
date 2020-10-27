@@ -8,9 +8,6 @@
 [ext_resource path="res://data/images/sprites/weapon_crossbow.png" type="Texture" id=6]
 [ext_resource path="res://data/sounds/weapons/crossbow.wav" type="AudioStream" id=7]
 
-
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
 length = 0.5

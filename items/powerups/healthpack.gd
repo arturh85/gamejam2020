@@ -14,7 +14,7 @@ func _on_FireRatePowerUp_body_entered(body):
 			#var val = 100
 			#body.max_health += val
 			#body.health = body.max_health
-			body.updateBar(body.health) 
+			#body.updateBar(body.health) 
 			#yield(get_tree().create_timer($EffectTimer.wait_time), "timeout")
 			#body.health -= val
 			#body.max_health -= val

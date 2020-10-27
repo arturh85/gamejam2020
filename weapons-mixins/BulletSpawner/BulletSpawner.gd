@@ -15,7 +15,7 @@ func spawn():
 
 sync func spawn2():
 	var shooter = weapon.get_parent().get_parent().get_parent()
-	if shooter.dying:
+	if shooter.health <= 0:
 		return
 	
 	#create bullet
