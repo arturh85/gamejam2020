@@ -18,18 +18,13 @@ enum TILE {
 func _ready():
 	generateMap()
 			
+	createSpawn()
+	
+	createItems()
 			
-			
-	self.update_bitmask_region()
 
 	
 	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func generateMap():
 	
 	for x in range(blockSize * blocksXY):
@@ -43,7 +38,7 @@ func generateMap():
 					
 					
 			
-	_create_random_path()
+	create_random_path()
 	
 	for bX in range(blocksXY):
 		for bY in range(blocksXY):
@@ -57,25 +52,61 @@ func generateMap():
 						self.set_cell(- blockSize * blocksXY / 2 + x, - blockSize * blocksXY / 2  + y, map[x][y]);
 					
 			
+	self.update_bitmask_region()
 			
+			
+func createSpawn():
 	
 	var spawn = Position2D.new()
 	spawn.name = "0"
 	spawn.position.x = (- blockSize * blocksXY / 2 + endpoint.x) * self.cell_size.x + self.cell_size.x / 2
 	spawn.position.y = (- blockSize * blocksXY / 2 + endpoint.y) * self.cell_size.y + self.cell_size.y / 2
-	#var foundSpawn = false
-	#while not foundSpawn:
-	#	var x = rnd.randi()%(blockSize*blocksXY)
-	#	var y = rnd.randi()%(blockSize*blocksXY)
-	#	
-	#	if map[x][y] == TILE.AutoTile:
-	#		spawn.position.x = (- blockSize * blocksXY / 2 + x) * self.cell_size.x + self.cell_size.x / 2
-	#		spawn.position.y = (- blockSize * blocksXY / 2 + y) * self.cell_size.y + self.cell_size.y / 2
-	#		foundSpawn = true
 		
 	get_node("../SpawnPoints").add_child(spawn)
 
-func _create_random_path():
+func createItems():
+	
+	addWeapon("Plasmagun", getValidRandomPos())
+	addWeapon("MachineGun", getValidRandomPos())
+	addWeapon("Railgun", getValidRandomPos())
+	addWeapon("Rifle", getValidRandomPos())
+	addWeapon("Crossbow", getValidRandomPos())
+	
+	for blobs in range(20):
+		addMob("BlobMob", getValidRandomPos())
+		
+	for cop in range(10):
+		addMob("TimeCop", getValidRandomPos())
+	
+func addWeapon(name, pos):
+	var item = Position2D.new()
+	var scn = load("res://items/weapons/" + name + ".tscn")
+	var object = scn.instance()
+	object.position = pos
+	get_node("../Weapons").add_child(object)
+	
+	
+func addMob(name, pos):
+	var item = Position2D.new()
+	var scn = load("res://actors/" + name + ".tscn")
+	var object = scn.instance()
+	object.position = pos
+	get_node("../Mobs").add_child(object)
+	
+	
+func getValidRandomPos():
+	
+	while true:
+		var x = rnd.randi()%(blockSize*blocksXY)
+		var y = rnd.randi()%(blockSize*blocksXY)
+		
+		if map[x][y] == TILE.AutoTile:
+			var xx = (- blockSize * blocksXY / 2 + x) * self.cell_size.x + self.cell_size.x / 2
+			var yy = (- blockSize * blocksXY / 2 + y) * self.cell_size.y + self.cell_size.y / 2
+			
+			return Vector2(xx, yy)
+		
+func create_random_path():
 	rnd.randomize()
 	
 	var tmpMap = Array()
@@ -95,10 +126,6 @@ func _create_random_path():
 	# random walk
 	while itr < max_iterations:
 		
-		# Perform random walk
-		# 1- choose random direction
-		# 2- check that direction is in bounds
-		# 3- move in that direction
 		var random_direction = GetRandomDirection()
 		
 		var rwx = walker.x + random_direction.x - blockSize * blocksXY / 2
@@ -117,10 +144,6 @@ func _create_random_path():
 	# random walk
 	while itr < max_iterations:
 		
-		# Perform random walk
-		# 1- choose random direction
-		# 2- check that direction is in bounds
-		# 3- move in that direction
 		var random_direction = GetRandomDirection()
 		
 		var rwx = walker.x + random_direction.x - blockSize * blocksXY / 2
@@ -132,8 +155,6 @@ func _create_random_path():
 				itr += 1
 				endpoint.x = walker.x
 				endpoint.y = walker.y
-	
-	# stroke
 	
 	for x in range(blockSize * blocksXY):
 		for y in range(blockSize * blocksXY):

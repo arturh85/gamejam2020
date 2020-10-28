@@ -34,3 +34,7 @@ format = 1
 script = ExtResource( 1 )
 
 [node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Mobs" type="Node2D" parent="."]
