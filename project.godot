@@ -127,7 +127,7 @@ config/description="A multiplayer space shoot-em-up in a desolate space station.
 run/main_scene="res://scenes/Lobby.tscn"
 boot_splash/image="res://data/images/splash.png"
 config/icon="res://data/images/sprites/icon.png"
-config/windows_native_icon="res://assets/icon.ico"
+config/windows_native_icon="res://data/icon.ico"
 
 [audio]
 

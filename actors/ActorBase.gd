@@ -58,9 +58,11 @@ func _process(delta):
 		emit_signal("on_health_changed")	
 		
 master func respawn_at(position):
+	health = max_health
+	emit_signal("on_health_changed")	
 	respawn_position = position
 
-sync func take_damage(amount, by_who):
+master func take_damage(amount, by_who):
 	if health <= 0:
 		return
 	health = max(0, health - amount)
