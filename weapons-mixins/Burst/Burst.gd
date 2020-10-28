@@ -4,20 +4,23 @@ class_name GDWeaponsBurst
 
 var current_attack_in_burst = 0
 export var attacks_in_burst = 2 # 2 or more
+export var burst_wait_time = 0.1
+export var normal_wait_time = 0.5
 
 onready var weapon = get_node(GDWeaponsWeapon.WEAPON_PATH_FROM_COMPONENT)
 onready var cooldown = weapon.get_node("FiringCooldown")
 onready var ammo = weapon.get_node("Ammo") if weapon.has_node("Ammo") else null
 onready var magazine = weapon.get_node("Magazine") if weapon.has_node("Magazine") else null
 
-var _burst_auto = preload("../../BaseComponents/AutoAttack/AutoAttack.tscn").instance()
+var _burst_auto = preload("../AutoAttack/AutoAttack.tscn").instance()
 
 # IMPLEMENT THESE TWO FUNCTIONS:
 func _apply_burst_cooldown():
-	cooldown.get_node("Timer").wait_time = 0.25
+	cooldown.get_node("Timer").wait_time = burst_wait_time
 	pass
+	
 func _apply_original_cooldown():
-	cooldown.get_node("Timer").wait_time = 2
+	cooldown.get_node("Timer").wait_time = normal_wait_time
 	pass
 
 

@@ -5,9 +5,6 @@
 [ext_resource path="res://weapons-mixins/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://weapons-mixins/AutoAttack/AutoAttack.tscn" type="PackedScene" id=4]
 
-
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Cooldown"
 length = 0.5

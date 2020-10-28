@@ -6,9 +6,6 @@
 [ext_resource path="res://weapons-mixins/AutoAttack/AutoAttack.tscn" type="PackedScene" id=4]
 [ext_resource path="res://weapons-mixins/Ammo/Ammo.tscn" type="PackedScene" id=5]
 
-
-
-
 [node name="AmmoGun" instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="FiringCooldown" index="0"]

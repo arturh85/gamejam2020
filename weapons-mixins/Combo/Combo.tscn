@@ -2,12 +2,6 @@
 
 [ext_resource path="res://weapons-mixins/Combo/Combo.gd" type="Script" id=1]
 
-
-
-
-
-
-
 [node name="Combo" type="Node"]
 script = ExtResource( 1 )
 

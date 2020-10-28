@@ -6,10 +6,6 @@
 [ext_resource path="res://weapons-mixins/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://weapons-mixins/Combo/Combo.tscn" type="PackedScene" id=5]
 
-
-
-
-
 [node name="ComboGun" instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="FiringCooldown" index="0"]
