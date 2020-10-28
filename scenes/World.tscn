@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://maps/Random.tscn" type="PackedScene" id=2]
+[ext_resource path="res://maps/Start.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/shaders/crt_material.tres" type="Material" id=3]
 [ext_resource path="res://data/images/grid.png" type="Texture" id=4]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=5]
