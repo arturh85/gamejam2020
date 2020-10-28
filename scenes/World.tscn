@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/Level.tscn" type="PackedScene" id=2]
+[ext_resource path="res://maps/Random.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/shaders/crt_material.tres" type="Material" id=3]
 [ext_resource path="res://data/images/grid.png" type="Texture" id=4]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=5]
@@ -101,8 +101,6 @@ tracks/0/keys = {
 }
 
 [node name="World" type="Node2D"]
-
-[node name="Level" parent="." instance=ExtResource( 2 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -231,5 +229,7 @@ script = ExtResource( 25 )
 [node name="Crosshair" parent="." instance=ExtResource( 9 )]
 
 [node name="Players" type="Node2D" parent="."]
+
+[node name="Level" parent="." instance=ExtResource( 2 )]
 [connection signal="pressed" from="CanvasLayer/Winner/ExitGame" to="CanvasLayer/Score" method="_on_exit_game_pressed"]
 [connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]
