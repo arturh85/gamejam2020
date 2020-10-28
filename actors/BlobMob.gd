@@ -55,10 +55,10 @@ master func _on_death(by_who):
 	$"../../../CanvasLayer/Score".rpc("increase_score", by_who, 20)
 	$AnimationPlayer.play("Die")
 
-	yield(get_tree().create_timer(3), "timeout")
-	var SpawnPoints = get_node("../SpawnPoints")
-	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-	rpc("respawn_at", spawn.position)
+	#yield(get_tree().create_timer(3), "timeout")
+	#var SpawnPoints = get_node("../SpawnPoints")
+	#var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+	#rpc("respawn_at", spawn.position)
 	
 func _on_respawn():
 	show()

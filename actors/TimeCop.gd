@@ -67,12 +67,12 @@ master func _on_death(by_who):
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimationPlayer.play("Die")
 
-	yield(get_tree().create_timer(3), "timeout")
-	health = max_health
-	rset("health", health)
-	var SpawnPoints = get_node("../SpawnPoints")
-	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-	rpc("respawn_at", spawn.position)
+	#yield(get_tree().create_timer(3), "timeout")
+	#health = max_health
+	#rset("health", health)
+	#var SpawnPoints = get_node("../SpawnPoints")
+	#var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+	#rpc("respawn_at", spawn.position)
 	
 func _on_respawn():
 	show()
