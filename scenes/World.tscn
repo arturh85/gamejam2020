@@ -262,7 +262,7 @@ position = Vector2( 584.786, -936.817 )
 position = Vector2( -19.1323, -485.331 )
 
 [node name="TimeCopMob1" parent="." instance=ExtResource( 17 )]
-position = Vector2( 73.417, 960.415 )
+position = Vector2( -262.204, 391.058 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

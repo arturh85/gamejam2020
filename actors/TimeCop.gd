@@ -11,10 +11,15 @@ func _ready():
 	rotation = rand_range(0, 2*PI)
 	has_weapons[5] = true
 	switch_weapon(5)
+		
+sync func switch_weapon(index):
+	.switch_weapon(index)
 	var current_weapon_node = get_node("Group/Gun").get_child(0)
-	var blocker = current_weapon_node.get_node("StartBlocker")
-	if blocker:
-		blocker.input_action_trigger = ""
+	current_weapon_node.remove_child(current_weapon_node.get_node("StartBlocker"))
+	current_weapon_node.remove_child(current_weapon_node.get_node("EndBlocker"))
+	var auto_attack = load("res://weapons-mixins/AutoAttack/AutoAttack.tscn").instance()
+	auto_attack.manual_control = true
+	current_weapon_node.add_child(auto_attack)
 			
 func _process(delta):
 	if health <= 0:
@@ -35,7 +40,7 @@ func _physics_process(delta):
 			var result = space_state.intersect_ray(position, chase_player.position)
 			if result and result.collider and result.collider.is_in_group("players"):
 				velocity = position.direction_to(chase_player.position) * speed * 1.5
-				if chase_player.position.distance_to(position) < 40:
+				if chase_player.position.distance_to(position) < 100:
 					velocity = Vector2(0,0)
 				else:
 					var collision = move_and_collide(velocity * delta)
@@ -87,10 +92,14 @@ func _on_health_changed():
 func _on_Detect_body_entered(body):
 	if body.is_in_group("players"):
 		chase_player = body
+		var current_weapon_node = get_node("Group/Gun").get_child(0)
+		current_weapon_node.get_node("AutoAttack").start_auto_attack()
 
 func _on_Detect_body_exited(body):
 	if body.is_in_group("players"):
 		chase_player = null
+		var current_weapon_node = get_node("Group/Gun").get_child(0)
+		current_weapon_node.get_node("AutoAttack").end_auto_attack()
 
 func _on_Harm_body_entered(body):
 	if body.is_in_group("players"):

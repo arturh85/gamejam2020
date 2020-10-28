@@ -24,7 +24,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[node name="ManualFireGun" instance=ExtResource( 1 )]
+[node name="Crossbow" instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="FiringCooldown" index="0"]
 wait_time = 0.5

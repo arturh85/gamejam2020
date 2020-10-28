@@ -12,6 +12,10 @@ signal ended()
 func _ready():
 	weapon.add_action_to_interupt_start(self)
 	_set_can_start(can_start)
+	
+	
+func _exit_tree():	
+	weapon.remove_action_to_interupt_start(self)
 
 func can_start_action():
 	return can_start

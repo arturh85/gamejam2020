@@ -10,9 +10,6 @@
 [ext_resource path="res://bullets/RailgunBullet.tscn" type="PackedScene" id=8]
 [ext_resource path="res://data/images/lights/area.png" type="Texture" id=9]
 
-
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
 length = 0.1
@@ -53,7 +50,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[node name="ManualFireGun" instance=ExtResource( 1 )]
+[node name="Railgun" instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="FiringCooldown" index="0"]
 wait_time = 2.0

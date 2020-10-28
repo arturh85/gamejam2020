@@ -6,12 +6,16 @@ export var input_action_trigger = "" setget _set_input_trigger
 onready var weapon = get_node(GDWeaponsWeapon.WEAPON_PATH_FROM_COMPONENT)
 onready var magazine = weapon.get_node("Magazine") if weapon.has_node("Magazine") else null
 
+var manual_control = false
+
 func _set_input_trigger(val):
 	input_action_trigger = val
 	set_process(input_action_trigger != "") #optimization! may need to remove if adding stuff in process beyond input checking
 
 func _ready():
-	if input_action_trigger == "":
+	if manual_control:
+		set_process(false)
+	elif input_action_trigger == "":
 		call_deferred("start_auto_attack")
 		connect("tree_exited",self,"end_auto_attack")
 	pass

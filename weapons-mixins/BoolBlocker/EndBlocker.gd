@@ -12,6 +12,9 @@ signal ended()
 func _ready():
 	weapon.add_action_to_interupt_end(self)
 	_set_can_end(can_end)
+	
+func _exit_tree():	
+	weapon.remove_action_to_interupt_start(self)
 
 func can_end_action():
 	return can_end
