@@ -74,11 +74,20 @@ sync func take_damage(amount, by_who):
 
 sync func switch_weapon_relative(rel):
 	var found = null
-	var next = current_weapon + rel
+	var i = current_weapon
 	while not found:
-		if has_weapons[next]:
-			return switch_weapon(next)
-		next = clamp(next + rel, 0, 6)
+		i = wmod(i + rel)
+		if has_weapons[i]:
+			return switch_weapon(i)
+			
+func wmod(n):
+	var c = weapon_nodes.size()
+	while n < 0:
+		n += c
+	while n >= c:
+		n -= c
+	return n
+			
 	
 sync func switch_weapon(index):
 	if has_weapons[index]:
