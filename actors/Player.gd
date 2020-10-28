@@ -195,7 +195,7 @@ func _on_death(by_who):
 	yield(get_tree().create_timer(1), "timeout")
 	hide()
 	yield(get_tree().create_timer(5), "timeout")
-	var SpawnPoints = get_node("../../SpawnPoints")
+	var SpawnPoints = get_node("../../Level/SpawnPoints")
 	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 	respawn_at(spawn.position)
 

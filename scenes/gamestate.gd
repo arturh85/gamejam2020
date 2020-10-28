@@ -80,7 +80,7 @@ remote func pre_start_game(spawn_points):
 	var player_scene = load("res://actors/Player.tscn")
 
 	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+		var spawn_pos = world.get_node("Level/SpawnPoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
 
 		player.set_name(str(p_id)) # Use unique ID as node name.
