@@ -2,7 +2,7 @@
 	"map": {
 		"Circular": 1,
 		"BlockSize": 5,
-		"NumberOfBlocks": 10,
+		"NumberOfBlocks": 20,
 		"MapBoundary": 2,
 		"RWIterations": 2000,
 		"RWLoops": 2,
@@ -10,12 +10,11 @@
 
 	},
 	"mobs": {
-		"TimeCop": 5,
-		"BlobMob": 20
+		"TimeCop": 2,
+		"BlobMob": 10
 	},
 	"prefabs": {
-		"table+chairs": 5,
-		"3spints": 5
+		"3spints": 5,
 	},
 	"items": {
 		"weapons": {

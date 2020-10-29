@@ -247,9 +247,12 @@ func getValidRandomPosInBlocksArray(ids):
 		var y = rnd.randi()%(blockSize*blocksXY)
 		
 		var valid = true
-		for xx in range(ids.size()):
-			for yy in range(ids[0].size()):
-				if x + xx >= blockSize*blocksXY or y + yy >= blockSize*blocksXY or (ids[xx][yy] != "-1" and int(tmpMap[x + xx][y + yy]) != TILE.GROUND):
+		for xx in range(ids[0].size()):
+			for yy in range(ids.size()):
+				if x + xx >= blockSize*blocksXY or y + yy >= blockSize*blocksXY:
+					valid = false
+					break
+				elif int(tmpMap[x + xx][y + yy]) != TILE.GROUND:
 					valid = false
 					break
 					
@@ -258,8 +261,9 @@ func getValidRandomPosInBlocksArray(ids):
 		
 func generateMap():
 	
+	var start = Vector2(rnd.randi()%(blockSize*blocksXY), rnd.randi()%(blockSize*blocksXY))
 	for r in range(RWLoops):
-		randomWalk()
+		randomWalk(start)
 
 	for x in range(blockSize * blocksXY):
 		for y in range(blockSize * blocksXY):
@@ -267,17 +271,20 @@ func generateMap():
 				map[x][y] = TILE.GROUND
 
 	
-func randomWalk():
+func randomWalk(start):
 	var itr = 0
 	
-	var walker = Vector2.ZERO
-	walker.x = blockSize * blocksXY / 2
-	walker.y = blockSize * blocksXY / 2
+	var walker = start
 	
+	var last_direction = Vector2(0, 0)
 	# random walk
 	while itr < RWIterations:
 		
 		var random_direction = GetRandomDirection()
+		if random_direction == last_direction:
+			continue
+			
+		last_direction = random_direction
 		
 		var rwx = walker.x + random_direction.x - blockSize * blocksXY / 2
 		var rwy = walker.y + random_direction.y - blockSize * blocksXY / 2

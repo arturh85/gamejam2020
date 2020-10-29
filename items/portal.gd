@@ -1,6 +1,6 @@
 extends Node2D
 
-export (PackedScene) var target_level = preload("res://maps/Random.tscn")
+export (PackedScene) var target_level = load("res://maps/Random.tscn")
 
 func _on_body_entered(body):
 	if body.is_in_group("players"):

@@ -1,1 +1,3 @@
-spint spint spint
+-1 -1 -1 -1 -1
+-1 spint spint spint -1
+-1 -1 -1 -1 -1
