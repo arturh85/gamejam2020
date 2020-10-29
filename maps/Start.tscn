@@ -127,7 +127,8 @@ position = Vector2( -878.165, 2.51996 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 1
+frame = 9
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
+frame = 8

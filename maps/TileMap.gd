@@ -1,28 +1,35 @@
 extends TileMap
 
 var rnd = RandomNumberGenerator.new()
-var blockSize = 5
-var blocksXY = 10
-var safeRadius = 20
-
-var RWIterations = 3000
-var RWLoops = 2
 
 var endpoint = Vector2.ZERO
 var map = Array()
 var tmpMap = Array()
+var prefabs = {}
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 enum TILE {
+	PREFAB = -2
 	NO = -1,
 	WALL = 0,
 	GROUND = 1
 }
 
+var settings
+
+var circular
+var blockSize
+var blocksXY
+var safeRadius
+var RWIterations
+var RWLoops
+var mapBoundary
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	settings = readLevel("level1")
 	
 	rnd.randomize()
 	
@@ -33,29 +40,40 @@ func _ready():
 	createSpawn()
 	
 	createItems()
+	
+	createMobs()
 			
 
 func createPrefabs():
 	
-	var objects = get_node("../Prefabs").getObjects()
+	for prefab in settings["prefabs"]:
+		addObject(prefab)
+		for i in range(settings["prefabs"][prefab]):
+			placeObject(prefabs[prefab])
+
+	#var objects = get_node("../Prefabs").getObjects()
 	
-	for i in range (30):
-		for j in range (objects.size()):
-			placeObject(objects[j])
+	#for i in range (30):
+	#	for j in range (objects.size()):
+	#		placeObject(objects[j])
 	
+func addObject(name):	
+	prefabs[name] = readPrefab(name)
+
+
 func placeObject(o):
 	var pos = getValidRandomPosInBlocksArray(o)
 
-	for x in range(o.size()):
-		for y in range(o[0].size()):
+	for y in range(o.size()):
+		for x in range(o[0].size()):
 			var xx = (- blockSize * blocksXY / 2 + x + pos.x) * self.cell_size.x + self.cell_size.x / 2
 			var yy = (- blockSize * blocksXY / 2 + y + pos.y) * self.cell_size.y + self.cell_size.y / 2
 			
 			
-			if o[x][y] != "-1":
+			if o[y][x] != "-1":
 				var sprite = Sprite.new()
 				var body = StaticBody2D.new() 
-				sprite.texture = load("res://data/images/bricks/interior/" + o[x][y] + ".png")
+				sprite.texture = load("res://data/images/bricks/interior/" + o[y][x] + ".png")
 				sprite.modulate = "333333"
 				sprite.light_mask = 2
 				body.add_child(sprite)
@@ -65,10 +83,18 @@ func placeObject(o):
 				poly.position.x = - self.cell_size.x / 2
 				poly.position.y = - self.cell_size.x / 2
 				body.add_child(poly)
-				tmpMap[pos.x + x][pos.y + y] = -2
+				tmpMap[pos.x + x][pos.y + y] = TILE.PREFAB
 				get_node("../Interior").add_child(body)
 	
 func createMap():
+	
+	blockSize = int(settings["map"]["BlockSize"])
+	blocksXY = int(settings["map"]["NumberOfBlocks"])
+	RWIterations = int(settings["map"]["RWIterations"])
+	RWLoops = int(settings["map"]["RWLoops"])
+	safeRadius = int(settings["map"]["SafeSpawnRadius"])
+	mapBoundary = int(settings["map"]["MapBoundary"])
+	circular = int(settings["map"]["Circular"]) == 1
 	
 	for x in range(blockSize * blocksXY):
 		tmpMap.append([])
@@ -79,10 +105,16 @@ func createMap():
 		map.append([])
 		print(x)
 		for y in range(blockSize * blocksXY):
-			if (x - (blockSize * blocksXY / 2)) * (x - (blockSize * blocksXY / 2)) + (y - (blockSize * blocksXY / 2)) * (y - (blockSize * blocksXY / 2)) < blockSize * blocksXY * blockSize * blocksXY / 4:
-				map[x].append(TILE.WALL)
+			if circular:
+				if (x - (blockSize * blocksXY / 2)) * (x - (blockSize * blocksXY / 2)) + (y - (blockSize * blocksXY / 2)) * (y - (blockSize * blocksXY / 2)) < blockSize * blocksXY * blockSize * blocksXY / 4:
+					map[x].append(TILE.WALL)
+				else:
+					map[x].append(TILE.NO)
 			else:
-				map[x].append(TILE.NO)
+				if x >= 0 and x < blockSize * blocksXY and y >= 0 and y < blockSize * blocksXY:
+					map[x].append(TILE.WALL)
+				else:
+					map[x].append(TILE.NO)
 					
 					
 			
@@ -114,26 +146,51 @@ func createSpawn():
 
 func createItems():
 	
-	addWeapon("Plasmagun", getValidRandomPos())
-	addWeapon("MachineGun", getValidRandomPos())
-	addWeapon("Railgun", getValidRandomPos())
-	addWeapon("Rifle", getValidRandomPos())
-	addWeapon("Crossbow", getValidRandomPos())
+	for weapon in settings["items"]["weapons"]:
+		for i in range(int(settings["items"]["weapons"][weapon])):
+			addWeapon(weapon, getValidRandomPos())
+
+	for ammo in settings["items"]["ammo"]:
+		for i in range(int(settings["items"]["ammo"][ammo])):
+			addAmmo(ammo, getValidRandomPos())
+
+	for powerup in settings["items"]["powerups"]:
+		for i in range(int(settings["items"]["powerups"][powerup])):
+			addPowerup(powerup, getValidRandomPos())
+
+	
+func createMobs():
 	
 	var endpointPos = Vector2((endpoint.x - blockSize * blocksXY / 2) *  self.cell_size.x, (endpoint.y - blockSize * blocksXY / 2) *  self.cell_size.y)
 	
-	for blobs in range(0):
-		addMob("BlobMob", getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
-		
-	for cop in range(0):
-		addMob("TimeCop", getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
-	
+	for mob in settings["mobs"]:
+		for i in range(int(settings["mobs"][mob])):
+			addMob(mob, getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
+			
+
 func addWeapon(name, pos):
 	var item = Position2D.new()
 	var scn = load("res://items/weapons/" + name + ".tscn")
 	var object = scn.instance()
 	object.position = pos
-	get_node("../Weapons").add_child(object)
+	get_node("../Items/Weapons").add_child(object)
+	
+	
+func addPowerup(name, pos):
+	var item = Position2D.new()
+	var scn = load("res://items/powerups/" + name + ".tscn")
+	var object = scn.instance()
+	object.position = pos
+	get_node("../Items/Powerups").add_child(object)
+	
+	
+func addAmmo(name, pos):
+	var item = Position2D.new()
+	var scn = load("res://items/ammo/" + name + ".tscn")
+	var object = scn.instance()
+	object.position = pos
+	get_node("../Items/Ammo").add_child(object)
+	
 	
 	
 func addMob(name, pos):
@@ -224,7 +281,12 @@ func randomWalk():
 		
 		var rwx = walker.x + random_direction.x - blockSize * blocksXY / 2
 		var rwy = walker.y + random_direction.y - blockSize * blocksXY / 2
-		if rwx*rwx + rwy*rwy < blockSize * (blocksXY - 1) * blockSize * (blocksXY - 1) / 4:
+		
+		var swx = walker.x + random_direction.x 
+		var swy = walker.y + random_direction.y 
+		var r = blockSize * blocksXY / 2 - mapBoundary
+		
+		if (circular and (rwx*rwx + rwy*rwy < r*r)) or ((not circular) and swx >= mapBoundary and swx < blockSize * blocksXY - mapBoundary and swy >= mapBoundary and swy < blockSize * blocksXY - mapBoundary):
 				
 			walker += random_direction
 			tmpMap[walker.x][walker.y] = TILE.GROUND
@@ -232,7 +294,7 @@ func randomWalk():
 			
 			endpoint.x = walker.x
 			endpoint.y = walker.y
-	
+
 
 func GetRandomDirection():
 	var directions = [[-1, 0], [1, 0], [0, 1], [0, -1]]
@@ -256,4 +318,32 @@ func _create_collision_polygon(texture):
 	#get_parent().get_node("CollisionPolygon2D")
 	return col_polygon
 
+func readLevel(filename):
+	var file = File.new()
+	if file.open("res://maps/levels/" + filename + ".json", file.READ) != OK:
+		return
+	var text = file.get_as_text()
+	var json = JSON.parse(text)
+	file.close()
+	return json.result
 
+
+func readPrefab(prefab):
+	var csv_array = []
+	var csv_file = File.new()
+	csv_file.open("res://data/prefabs/" + prefab + ".txt", csv_file.READ)
+	while not csv_file.eof_reached():
+		var csv_row = []
+		var csv_line = csv_file.get_line()
+		for element in csv_line.split(" "):
+			csv_row.append(element);
+			# If you know the data will always be floats, use the following instead of the above.
+			#csv_row.append(float(element))
+		csv_array.append(csv_row);
+	# Then you can access the array like this:
+	# (Assuming there is something at that position)
+	# To get the size of the data (assuming every row has the same size), you just do this:
+	var csv_size_column = csv_array.size();
+	var csv_size_row = csv_array[0].size();
+	
+	return csv_array
