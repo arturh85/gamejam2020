@@ -4,7 +4,7 @@ extends Node
 const DEFAULT_PORT = 10567
 
 # Max number of players.
-const MAX_PEERS = 12
+const MAX_PEERS = 4
 
 # Name for my player.
 var player_name = "The Warrior"

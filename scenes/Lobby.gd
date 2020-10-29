@@ -18,6 +18,13 @@ func _ready():
 	
 	$AnimationPlayer.play("Background")
 
+	var roles = $Players/RoleSelect
+	roles.add_item("Random")
+	roles.add_item("Cyborg")
+	roles.add_item("Bum")
+	roles.add_item("Alien")
+	roles.add_item("Marine")
+
 
 func _on_host_pressed():
 	if $Connect/Name.text == "":

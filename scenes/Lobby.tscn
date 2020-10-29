@@ -87,6 +87,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="RoleSelect" type="OptionButton" parent="Players"]
+margin_left = 232.0
+margin_top = 20.0
+margin_right = 376.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 512.493, 123.133 )
 scale = Vector2( 0.3, 0.3 )
