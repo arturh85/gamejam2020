@@ -61,6 +61,9 @@ master func respawn_at(position):
 	health = max_health
 	emit_signal("on_health_changed")	
 	respawn_position = position
+	
+master func spawn_at(position):
+	respawn_position = position
 
 master func take_damage(amount, by_who):
 	if health <= 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://maps/Start.tscn" type="PackedScene" id=2]
@@ -100,6 +100,36 @@ tracks/0/keys = {
 "values": [ Color( 0.0862745, 0.909804, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "Portal"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "PortalOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackLayer:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
 [node name="World" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -129,7 +159,17 @@ margin_left = -10.0
 margin_top = -5.0
 margin_right = 1030.0
 margin_bottom = 605.0
-color = Color( 0.27451, 0.929412, 1, 0 )
+color = Color( 0.0862745, 0.909804, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackLayer" type="ColorRect" parent="CanvasLayer"]
+margin_left = -20.0
+margin_top = -15.0
+margin_right = 1047.0
+margin_bottom = 619.0
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -217,6 +257,10 @@ anims/None = SubResource( 5 )
 [node name="DDAnimation" type="AnimationPlayer" parent="CanvasLayer"]
 anims/DD = SubResource( 6 )
 anims/None = SubResource( 7 )
+
+[node name="Transitions" type="AnimationPlayer" parent="CanvasLayer"]
+anims/Portal = SubResource( 8 )
+anims/PortalOut = SubResource( 9 )
 
 [node name="AmmoHUD" parent="CanvasLayer" instance=ExtResource( 8 )]
 

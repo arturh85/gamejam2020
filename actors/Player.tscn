@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://weapons/Shotgun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/sounds/portal.wav" type="AudioStream" id=5]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
 [ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
@@ -97,6 +98,57 @@ resource_name = "Hit"
 length = 0.3
 
 [sub_resource type="Animation" id=5]
+resource_name = "PortalIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Group/sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.2, 0.2, 0.2, 1 ), Color( 0.2, 0.2, 0.2, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Group/Gun/Default Gun:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Group/Gun:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Group/Camera2D/flashlight:modulate")
 tracks/0/interp = 1
@@ -158,8 +210,7 @@ tracks/4/keys = {
 "values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Hit"
+[sub_resource type="Animation" id=7]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("AudioStreamPlayer2D2:playing")
@@ -174,13 +225,11 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "DD"
+[sub_resource type="Animation" id=8]
 length = 0.5
 loop = true
 
-[sub_resource type="Animation" id=8]
-resource_name = "Default"
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Group/sprite:modulate")
@@ -195,8 +244,7 @@ tracks/0/keys = {
 "values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "Speed"
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Group/sprite:modulate")
@@ -211,8 +259,7 @@ tracks/0/keys = {
 "values": [ Color( 0.619608, 0, 0.686275, 1 ) ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "DD"
+[sub_resource type="Animation" id=11]
 length = 0.04
 loop = true
 tracks/0/type = "value"
@@ -228,8 +275,7 @@ tracks/0/keys = {
 "values": [ 0.0, 4.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "Default"
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("DD:energy")
@@ -266,7 +312,7 @@ region_rect = Rect2( 264, 132, 47, 43 )
 
 [node name="flashlight" type="Light2D" parent="Group/Camera2D"]
 light_mask = 2
-position = Vector2( 9, 2 )
+position = Vector2( 12.1784, 0.940536 )
 scale = Vector2( 4.82131, 4.10324 )
 texture = ExtResource( 7 )
 texture_scale = 0.1
@@ -306,7 +352,8 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Die = SubResource( 3 )
 anims/Hit = SubResource( 4 )
-anims/Spawn = SubResource( 5 )
+anims/PortalIn = SubResource( 5 )
+anims/Spawn = SubResource( 6 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
@@ -316,17 +363,20 @@ bus = "Effects"
 stream = ExtResource( 13 )
 bus = "Effects"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
 [node name="HitPlayer" type="AnimationPlayer" parent="."]
-anims/Hit = SubResource( 6 )
+anims/Hit = SubResource( 7 )
 
 [node name="SpeedAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/DD = SubResource( 7 )
-anims/Default = SubResource( 8 )
-anims/Speed = SubResource( 9 )
+anims/DD = SubResource( 8 )
+anims/Default = SubResource( 9 )
+anims/Speed = SubResource( 10 )
 
 [node name="DDAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/DD = SubResource( 10 )
-anims/Default = SubResource( 11 )
+anims/DD = SubResource( 11 )
+anims/Default = SubResource( 12 )
 
 [node name="DD" type="Light2D" parent="."]
 light_mask = 2

@@ -55,9 +55,15 @@ func addhealth(h):
 	health = min(health + h, max_health)
 	get_node("../../CanvasLayer/HealthAnimations").play("Heal")
 	
+var locked = false
+func lockPlayer():
+	locked = true
+
+func unlockPlayer():
+	locked = false
 	
 func _physics_process(delta):
-	if health <= 0:
+	if health <= 0 or locked:
 		return
 	
 	var motion = Vector2()
@@ -139,9 +145,13 @@ sync func update_flashlight(visible):
 
 
 puppet func stun():
+	if locked:
+		return
 	stunned = true
 
 master func exploded(_by_who):
+	if locked:
+		return
 	if stunned:
 		return
 	rpc("stun") # Stun puppets
@@ -166,16 +176,22 @@ var dying = false
 	
 		
 func on_Ammo_changed(val):
+	if locked:
+		return
 	get_node("/root/World/CanvasLayer/AmmoHUD/AmmoCounter").text = "Ammo: " + str(val)
 	ammo[current_weapon] = val
 
 
 func _on_damage():
+	if locked:
+		return
 	if health > 0:
 		$HitPlayer.play("Hit")
 		get_node("../../CanvasLayer/HealthAnimations").play("Damage")
 
 func _on_heal():
+	if locked:
+		return
 	pass # Replace with function body.
 
 

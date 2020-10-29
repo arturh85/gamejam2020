@@ -3,8 +3,15 @@ extends TileMap
 var rnd = RandomNumberGenerator.new()
 var blockSize = 4
 var blocksXY = 50
+var safeRadius = 20
+
+var RWIterations = 3000
+var RWLoops = 2
+
 var endpoint = Vector2.ZERO
 var map = Array()
+var tmpMap = Array()
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -16,7 +23,10 @@ enum TILE {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generateMap()
+	
+	rnd.randomize()
+	
+	createMap()
 			
 	createSpawn()
 	
@@ -25,7 +35,12 @@ func _ready():
 
 	
 	
-func generateMap():
+func createMap():
+	
+	for x in range(blockSize * blocksXY):
+		tmpMap.append([])
+		for y in range(blockSize * blocksXY):
+			tmpMap[x].append(TILE.Wall)
 	
 	for x in range(blockSize * blocksXY):
 		map.append([])
@@ -38,7 +53,7 @@ func generateMap():
 					
 					
 			
-	create_random_path()
+	generateMap()
 	
 	for bX in range(blocksXY):
 		for bY in range(blocksXY):
@@ -72,11 +87,13 @@ func createItems():
 	addWeapon("Rifle", getValidRandomPos())
 	addWeapon("Crossbow", getValidRandomPos())
 	
+	var endpointPos = Vector2((endpoint.x - blockSize * blocksXY / 2) *  self.cell_size.x, (endpoint.y - blockSize * blocksXY / 2) *  self.cell_size.y)
+	
 	for blobs in range(20):
-		addMob("BlobMob", getValidRandomPos())
+		addMob("BlobMob", getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
 		
 	for cop in range(10):
-		addMob("TimeCop", getValidRandomPos())
+		addMob("TimeCop", getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
 	
 func addWeapon(name, pos):
 	var item = Position2D.new()
@@ -94,6 +111,15 @@ func addMob(name, pos):
 	get_node("../Mobs").add_child(object)
 	
 	
+func getValidRandomPosOutDistance(pos, distance):
+	
+	while true:
+		var p = getValidRandomPos()
+		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) < distance*distance:
+			getValidRandomPos()
+		else:
+			return p
+		
 func getValidRandomPos():
 	
 	while true:
@@ -106,17 +132,18 @@ func getValidRandomPos():
 			
 			return Vector2(xx, yy)
 		
-func create_random_path():
-	rnd.randomize()
+func generateMap():
 	
-	var tmpMap = Array()
+	for r in range(RWLoops):
+		randomWalk()
 
 	for x in range(blockSize * blocksXY):
-		tmpMap.append([])
 		for y in range(blockSize * blocksXY):
-			tmpMap[x].append(TILE.Wall)
+			if tmpMap[x][y] == TILE.AutoTile:
+				map[x][y] = TILE.AutoTile
+
 	
-	var max_iterations = 3000
+func randomWalk():
 	var itr = 0
 	
 	var walker = Vector2.ZERO
@@ -124,7 +151,7 @@ func create_random_path():
 	walker.y = blockSize * blocksXY / 2
 	
 	# random walk
-	while itr < max_iterations:
+	while itr < RWIterations:
 		
 		var random_direction = GetRandomDirection()
 		
@@ -132,42 +159,13 @@ func create_random_path():
 		var rwy = walker.y + random_direction.y - blockSize * blocksXY / 2
 		if rwx*rwx + rwy*rwy < blockSize * blocksXY * blockSize * blocksXY / 4:
 				
-				walker += random_direction
-				tmpMap[walker.x][walker.y] = TILE.AutoTile
-				itr += 1
+			walker += random_direction
+			tmpMap[walker.x][walker.y] = TILE.AutoTile
+			itr += 1
+			
+			endpoint.x = walker.x
+			endpoint.y = walker.y
 	
-	itr = 0
-	walker = Vector2.ZERO
-	walker.x = blockSize * blocksXY / 2
-	walker.y = blockSize * blocksXY / 2
-	
-	# random walk
-	while itr < max_iterations:
-		
-		var random_direction = GetRandomDirection()
-		
-		var rwx = walker.x + random_direction.x - blockSize * blocksXY / 2
-		var rwy = walker.y + random_direction.y - blockSize * blocksXY / 2
-		if rwx*rwx + rwy*rwy < blockSize * blocksXY * blockSize * blocksXY / 4:
-				
-				walker += random_direction
-				tmpMap[walker.x][walker.y] = TILE.AutoTile
-				itr += 1
-				endpoint.x = walker.x
-				endpoint.y = walker.y
-	
-	for x in range(blockSize * blocksXY):
-		for y in range(blockSize * blocksXY):
-			if tmpMap[x][y] == TILE.AutoTile:
-				map[x][y] = TILE.AutoTile
-				#for px in range(2):
-				#	for py in range(2):
-				#		var nx = x - 1 + px
-				#		var ny = y - 1 + py
-				#		if nx >= 0 and nx < blockSize * blocksXY and  ny >= 0 and ny < blockSize * blocksXY:
-				#			map[nx][ny] = TILE.AutoTile
-	
-					
 
 func GetRandomDirection():
 	var directions = [[-1, 0], [1, 0], [0, 1], [0, -1]]
