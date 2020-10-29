@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://maps/TileMap.gd" type="Script" id=1]
 [ext_resource path="res://maps/Prefabs.gd" type="Script" id=2]
-[ext_resource path="res://data/images/sprites/muzzleflash3.png" type="Texture" id=3]
 [ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
 [ext_resource path="res://data/images/background.png" type="Texture" id=22]
 
@@ -16,9 +15,9 @@ motion_scale = Vector2( 0.1, 0.1 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 margin_left = -5200.0
-margin_top = -5704.0
+margin_top = -5704.53
 margin_right = 15328.0
-margin_bottom = 7576.0
+margin_bottom = 7575.47
 rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 1324.22, 4708.32 )
 texture = ExtResource( 22 )
@@ -45,6 +44,3 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Interior" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="Interior"]
-texture = ExtResource( 3 )

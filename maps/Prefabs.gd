@@ -28,7 +28,7 @@ func loadFile(prefab):
 	while not csv_file.eof_reached():
 		var csv_row = []
 		var csv_line = csv_file.get_line()
-		for element in csv_line.split(","):
+		for element in csv_line.split(" "):
 			csv_row.append(element);
 			# If you know the data will always be floats, use the following instead of the above.
 			#csv_row.append(float(element))

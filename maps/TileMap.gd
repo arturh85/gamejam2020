@@ -1,8 +1,8 @@
 extends TileMap
 
 var rnd = RandomNumberGenerator.new()
-var blockSize = 2
-var blocksXY = 2
+var blockSize = 5
+var blocksXY = 10
 var safeRadius = 20
 
 var RWIterations = 3000
@@ -51,14 +51,22 @@ func placeObject(o):
 			var xx = (- blockSize * blocksXY / 2 + x + pos.x) * self.cell_size.x + self.cell_size.x / 2
 			var yy = (- blockSize * blocksXY / 2 + y + pos.y) * self.cell_size.y + self.cell_size.y / 2
 			
-			var sprite = Sprite.new()
-			print(pos.x)
-			print(pos.y)
+			
 			if o[x][y] != "-1":
+				var sprite = Sprite.new()
+				var body = StaticBody2D.new() 
 				sprite.texture = load("res://data/images/bricks/interior/" + o[x][y] + ".png")
-				sprite.position.x = 0#xx
-				sprite.position.y =0 #yy
-				get_node("../Interior").add_child(sprite)
+				sprite.modulate = "333333"
+				sprite.light_mask = 2
+				body.add_child(sprite)
+				body.position.x = xx 
+				body.position.y = yy 
+				var poly = _create_collision_polygon(sprite.texture)
+				poly.position.x = - self.cell_size.x / 2
+				poly.position.y = - self.cell_size.x / 2
+				body.add_child(poly)
+				tmpMap[pos.x + x][pos.y + y] = -2
+				get_node("../Interior").add_child(body)
 	
 func createMap():
 	
@@ -98,11 +106,11 @@ func createMap():
 func createSpawn():
 	
 	var spawn = Position2D.new()
-	spawn.name = "0"
-	spawn.position.x = (- blockSize * blocksXY / 2 + endpoint.x) * self.cell_size.x + self.cell_size.x / 2
-	spawn.position.y = (- blockSize * blocksXY / 2 + endpoint.y) * self.cell_size.y + self.cell_size.y / 2
-		
-	get_node("../SpawnPoints").add_child(spawn)
+	for i in range(4):
+		spawn.name = String(i)
+		var endpointPos = Vector2((endpoint.x - blockSize * blocksXY / 2) *  self.cell_size.x, (endpoint.y - blockSize * blocksXY / 2) *  self.cell_size.y)
+		spawn.position = getValidRandomPosInDistance(endpointPos, 5 * self.cell_size.x)
+		get_node("../SpawnPoints").add_child(spawn)
 
 func createItems():
 	
@@ -145,13 +153,22 @@ func getValidRandomPosOutDistance(pos, distance):
 		else:
 			return p
 		
+func getValidRandomPosInDistance(pos, distance):
+	
+	while true:
+		var p = getValidRandomPos()
+		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) > distance*distance:
+			getValidRandomPos()
+		else:
+			return p
+		
 func getValidRandomPos():
 	
 	while true:
 		var x = rnd.randi()%(blockSize*blocksXY)
 		var y = rnd.randi()%(blockSize*blocksXY)
 		
-		if map[x][y] == TILE.GROUND:
+		if tmpMap[x][y] == TILE.GROUND:
 			var xx = (- blockSize * blocksXY / 2 + x) * self.cell_size.x + self.cell_size.x / 2
 			var yy = (- blockSize * blocksXY / 2 + y) * self.cell_size.y + self.cell_size.y / 2
 			
@@ -163,7 +180,7 @@ func getValidRandomPosInBlocks():
 		var x = rnd.randi()%(blockSize*blocksXY)
 		var y = rnd.randi()%(blockSize*blocksXY)
 		
-		if map[x][y] == TILE.GROUND:
+		if tmpMap[x][y] == TILE.GROUND:
 			return Vector2(x, y)
 			
 func getValidRandomPosInBlocksArray(ids):
@@ -175,7 +192,7 @@ func getValidRandomPosInBlocksArray(ids):
 		var valid = true
 		for xx in range(ids.size()):
 			for yy in range(ids[0].size()):
-				if x + xx >= blockSize*blocksXY or y + yy >= blockSize*blocksXY or (ids[xx][yy] != "-1" and int(map[x + xx][y + yy]) != TILE.GROUND):
+				if x + xx >= blockSize*blocksXY or y + yy >= blockSize*blocksXY or (ids[xx][yy] != "-1" and int(tmpMap[x + xx][y + yy]) != TILE.GROUND):
 					valid = false
 					break
 					
@@ -207,7 +224,7 @@ func randomWalk():
 		
 		var rwx = walker.x + random_direction.x - blockSize * blocksXY / 2
 		var rwy = walker.y + random_direction.y - blockSize * blocksXY / 2
-		if rwx*rwx + rwy*rwy < blockSize * blocksXY * blockSize * blocksXY / 4:
+		if rwx*rwx + rwy*rwy < blockSize * (blocksXY - 1) * blockSize * (blocksXY - 1) / 4:
 				
 			walker += random_direction
 			tmpMap[walker.x][walker.y] = TILE.GROUND
@@ -221,3 +238,22 @@ func GetRandomDirection():
 	var directions = [[-1, 0], [1, 0], [0, 1], [0, -1]]
 	var direction = directions[rnd.randi()%4]
 	return Vector2(direction[0], direction[1])
+
+
+func _create_collision_polygon(texture):
+	var bm = BitMap.new()
+	bm.create_from_image_alpha(texture.get_data())
+	var rect = Rect2(position.x, position.y, texture.get_width(), texture.get_height())
+	var my_array = bm.opaque_to_polygons(rect)
+	
+	var my_polygon = Polygon2D.new()
+	my_polygon.set_polygons(my_array)
+	my_polygon.polygon = my_array
+		
+	var col_polygon = CollisionPolygon2D.new()
+	col_polygon.set_polygon(my_polygon.polygons[0])
+	#get_parent().get_node("Interior").add_child(col_polygon)
+	#get_parent().get_node("CollisionPolygon2D")
+	return col_polygon
+
+
