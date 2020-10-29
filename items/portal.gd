@@ -26,10 +26,13 @@ func _on_body_entered(body):
 		
 		var SpawnPoints = newlevel.get_node("SpawnPoints")
 		
+		var i = 0
 		for player in world.get_node("Players").get_children():
-			var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+			var spawn = SpawnPoints.get_child(i)
 			print("player at", player.position)
 			print("respawn at ", spawn.position)
+			print("spawn name ", spawn.name)
+			i = i+1
 			player.rpc("spawn_at", spawn.position)
 			player.unlockPlayer()
 			

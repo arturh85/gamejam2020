@@ -137,8 +137,8 @@ func createMap():
 			
 func createSpawn():
 	
-	var spawn = Position2D.new()
 	for i in range(4):
+		var spawn = Position2D.new()
 		spawn.name = String(i)
 		var endpointPos = Vector2((endpoint.x - blockSize * blocksXY / 2) *  self.cell_size.x, (endpoint.y - blockSize * blocksXY / 2) *  self.cell_size.y)
 		spawn.position = getValidRandomPosInDistance(endpointPos, 5 * self.cell_size.x)
