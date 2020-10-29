@@ -1,8 +1,8 @@
 extends TileMap
 
 var rnd = RandomNumberGenerator.new()
-var blockSize = 4
-var blocksXY = 50
+var blockSize = 2
+var blocksXY = 2
 var safeRadius = 20
 
 var RWIterations = 3000
@@ -16,9 +16,9 @@ var tmpMap = Array()
 # var a = 2
 # var b = "text"
 enum TILE {
-	No = -1,
-	AutoTile = 1,
-	Wall = 0
+	NO = -1,
+	WALL = 0,
+	GROUND = 1
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -27,29 +27,54 @@ func _ready():
 	rnd.randomize()
 	
 	createMap()
+	
+	createPrefabs()
 			
 	createSpawn()
 	
 	createItems()
 			
 
+func createPrefabs():
 	
+	var objects = get_node("../Prefabs").getObjects()
+	
+	for i in range (30):
+		for j in range (objects.size()):
+			placeObject(objects[j])
+	
+func placeObject(o):
+	var pos = getValidRandomPosInBlocksArray(o)
+
+	for x in range(o.size()):
+		for y in range(o[0].size()):
+			var xx = (- blockSize * blocksXY / 2 + x + pos.x) * self.cell_size.x + self.cell_size.x / 2
+			var yy = (- blockSize * blocksXY / 2 + y + pos.y) * self.cell_size.y + self.cell_size.y / 2
+			
+			var sprite = Sprite.new()
+			print(pos.x)
+			print(pos.y)
+			if o[x][y] != "-1":
+				sprite.texture = load("res://data/images/bricks/interior/" + o[x][y] + ".png")
+				sprite.position.x = 0#xx
+				sprite.position.y =0 #yy
+				get_node("../Interior").add_child(sprite)
 	
 func createMap():
 	
 	for x in range(blockSize * blocksXY):
 		tmpMap.append([])
 		for y in range(blockSize * blocksXY):
-			tmpMap[x].append(TILE.Wall)
+			tmpMap[x].append(TILE.WALL)
 	
 	for x in range(blockSize * blocksXY):
 		map.append([])
 		print(x)
 		for y in range(blockSize * blocksXY):
 			if (x - (blockSize * blocksXY / 2)) * (x - (blockSize * blocksXY / 2)) + (y - (blockSize * blocksXY / 2)) * (y - (blockSize * blocksXY / 2)) < blockSize * blocksXY * blockSize * blocksXY / 4:
-				map[x].append(TILE.Wall)
+				map[x].append(TILE.WALL)
 			else:
-				map[x].append(TILE.No)
+				map[x].append(TILE.NO)
 					
 					
 			
@@ -63,7 +88,7 @@ func createMap():
 					var x = bX * blockSize + cX
 					var y =  bY * blockSize + cY
 			
-					if map[x][y] != TILE.No:
+					if map[x][y] != TILE.NO:
 						self.set_cell(- blockSize * blocksXY / 2 + x, - blockSize * blocksXY / 2  + y, map[x][y]);
 					
 			
@@ -89,10 +114,10 @@ func createItems():
 	
 	var endpointPos = Vector2((endpoint.x - blockSize * blocksXY / 2) *  self.cell_size.x, (endpoint.y - blockSize * blocksXY / 2) *  self.cell_size.y)
 	
-	for blobs in range(20):
+	for blobs in range(0):
 		addMob("BlobMob", getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
 		
-	for cop in range(10):
+	for cop in range(0):
 		addMob("TimeCop", getValidRandomPosOutDistance(endpointPos, safeRadius * self.cell_size.x))
 	
 func addWeapon(name, pos):
@@ -126,11 +151,36 @@ func getValidRandomPos():
 		var x = rnd.randi()%(blockSize*blocksXY)
 		var y = rnd.randi()%(blockSize*blocksXY)
 		
-		if map[x][y] == TILE.AutoTile:
+		if map[x][y] == TILE.GROUND:
 			var xx = (- blockSize * blocksXY / 2 + x) * self.cell_size.x + self.cell_size.x / 2
 			var yy = (- blockSize * blocksXY / 2 + y) * self.cell_size.y + self.cell_size.y / 2
 			
 			return Vector2(xx, yy)
+			
+func getValidRandomPosInBlocks():
+	
+	while true:
+		var x = rnd.randi()%(blockSize*blocksXY)
+		var y = rnd.randi()%(blockSize*blocksXY)
+		
+		if map[x][y] == TILE.GROUND:
+			return Vector2(x, y)
+			
+func getValidRandomPosInBlocksArray(ids):
+	
+	while true:
+		var x = rnd.randi()%(blockSize*blocksXY)
+		var y = rnd.randi()%(blockSize*blocksXY)
+		
+		var valid = true
+		for xx in range(ids.size()):
+			for yy in range(ids[0].size()):
+				if x + xx >= blockSize*blocksXY or y + yy >= blockSize*blocksXY or (ids[xx][yy] != "-1" and int(map[x + xx][y + yy]) != TILE.GROUND):
+					valid = false
+					break
+					
+		if valid:
+			return Vector2(x, y)
 		
 func generateMap():
 	
@@ -139,8 +189,8 @@ func generateMap():
 
 	for x in range(blockSize * blocksXY):
 		for y in range(blockSize * blocksXY):
-			if tmpMap[x][y] == TILE.AutoTile:
-				map[x][y] = TILE.AutoTile
+			if tmpMap[x][y] == TILE.GROUND:
+				map[x][y] = TILE.GROUND
 
 	
 func randomWalk():
@@ -160,7 +210,7 @@ func randomWalk():
 		if rwx*rwx + rwy*rwy < blockSize * blocksXY * blockSize * blocksXY / 4:
 				
 			walker += random_direction
-			tmpMap[walker.x][walker.y] = TILE.AutoTile
+			tmpMap[walker.x][walker.y] = TILE.GROUND
 			itr += 1
 			
 			endpoint.x = walker.x

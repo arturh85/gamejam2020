@@ -1,0 +1,3 @@
+-1 stool -1
+stool table stool
+-1 stool -1
