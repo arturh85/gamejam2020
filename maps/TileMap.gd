@@ -17,8 +17,8 @@ var tmpMap = Array()
 # var b = "text"
 enum TILE {
 	No = -1,
-	AutoTile = 0,
-	Wall = 13
+	AutoTile = 1,
+	Wall = 0
 }
 
 # Called when the node enters the scene tree for the first time.

@@ -1,17 +1,50 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/images/sprites/teleporter.png" type="Texture" id=1]
 [ext_resource path="res://items/portal.gd" type="Script" id=2]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 25.7651
+
+[sub_resource type="Animation" id=2]
+resource_name = "Rotate"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21.8633, 7.62939e-06 ), Vector2( 15.9771, -14.7157 ), Vector2( 0.272062, -20.9729 ), Vector2( -15.3488, -15.2334 ), Vector2( -21.8975, -0.365898 ), Vector2( -13.9863, 15.6843 ), Vector2( -0.122223, 21.5753 ), Vector2( 15.5918, 14.5164 ) ]
+}
 
 [node name="Portal" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 4
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+position = Vector2( 17.0704, 11.0939 )
+texture = ExtResource( 3 )
+color = Color( 0, 0.952941, 1, 1 )
+energy = 2.5
+range_item_cull_mask = 4
+shadow_item_cull_mask = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Rotate"
+anims/Rotate = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
