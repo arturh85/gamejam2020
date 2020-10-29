@@ -21,6 +21,8 @@ func _on_body_entered(body):
 		var newlevel = target_level.instance()
 		world.add_child(newlevel)
 		
+		world.get_node("CanvasLayer/MiniMap").update_map_markers()
+		
 		
 		var SpawnPoints = newlevel.get_node("SpawnPoints")
 		

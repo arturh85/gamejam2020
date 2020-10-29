@@ -21,12 +21,17 @@ func _ready():
 	# Find the scale factor for marker placement.
 	grid_scale = grid.rect_size / (get_viewport_rect().size * zoom)
 	# Create markers for all objects.
+	update_map_markers()
+		
+func update_map_markers():
+	markers = {}
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
 	for item in map_objects:
 		var new_marker = icons[item.minimap_icon].duplicate()
 		grid.add_child(new_marker)
 		new_marker.show()
 		markers[item] = new_marker
+	
 
 func _process(delta):
 	# If no player is assigned, do nothing.
