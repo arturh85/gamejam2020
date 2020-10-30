@@ -14,7 +14,9 @@
 		"BlobMob": 10
 	},
 	"prefabs": {
+		"table+chairs": 3,
 		"3spints": 5,
+		"chest": 5
 	},
 	"items": {
 		"weapons": {
