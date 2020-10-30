@@ -164,16 +164,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BlackLayer" type="ColorRect" parent="CanvasLayer"]
-margin_left = -20.0
-margin_top = -15.0
-margin_right = 1047.0
-margin_bottom = 619.0
-color = Color( 0, 0, 0, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="HealthDisplay" parent="CanvasLayer" instance=ExtResource( 5 )]
 position = Vector2( 276.49, 594.835 )
 scale = Vector2( 1.27, 0.35 )
@@ -263,6 +253,16 @@ anims/Portal = SubResource( 8 )
 anims/PortalOut = SubResource( 9 )
 
 [node name="AmmoHUD" parent="CanvasLayer" instance=ExtResource( 8 )]
+
+[node name="BlackLayer" type="ColorRect" parent="CanvasLayer"]
+margin_left = -20.0
+margin_top = -15.0
+margin_right = 1047.0
+margin_bottom = 619.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )

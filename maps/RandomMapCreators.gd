@@ -31,7 +31,7 @@ static func object(node, size, cell, tmpMap, o, pos):
 static func _create_collision_polygon(position, texture):
 	var bm = BitMap.new()
 	bm.create_from_image_alpha(texture.get_data())
-	var rect = Rect2(0,0, texture.get_width(), texture.get_height())
+	var rect = Rect2(0, 0, texture.get_width(), texture.get_height())
 	var my_array = bm.opaque_to_polygons(rect)
 	
 	var my_polygon = Polygon2D.new()

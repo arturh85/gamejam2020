@@ -32,26 +32,16 @@ var cell
 var safeRadius
 var spawnRadius
 var spawnPoints
-var RWIterations
-var RWLoops
 var mapBoundary
 
 func _ready():
 	
 	settings = IO.readLevel("level1")
-	
 	size = int(settings["map"]["Size"])
-	RWIterations = int(settings["map"]["RWIterations"])
-	RWLoops = int(settings["map"]["RWLoops"])
-	safeRadius = int(settings["map"]["SafeSpawnRadius"])
-	spawnRadius = int(settings["map"]["SpawnRadius"])
-	spawnPoints = int(settings["map"]["SpawnPoints"])
-	mapBoundary = int(settings["map"]["MapBoundary"])
-	circular = int(settings["map"]["Circular"]) == 1
 	cell = $TileMap.cell_size.x
 	
 	RF = rf.new(size, cell, tmpMap)
-	MG = mg.new(size, cell, circular, map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
+	MG = mg.new(size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
 	
 	rnd.randomize()
 	
@@ -68,7 +58,7 @@ func _ready():
 
 func createMap():
 	
-	endpoint = MG.generateMap(RWLoops, RWIterations, mapBoundary)
+	endpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))
 	
 	for x in range(size):
 		for y in range(size):			
@@ -80,8 +70,8 @@ func createMap():
 	
 func createSpawns():
 	
-	for i in range(spawnPoints):
-		ADD.spawn($SpawnPoints, String(i), RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, endpoint, spawnRadius, TILE.SPAWN)))
+	for i in range(int(settings["map"]["SpawnPoints"])):
+		ADD.spawn($SpawnPoints, String(i), RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, endpoint, int(settings["map"]["SpawnRadius"]), TILE.SPAWN)))
 		
 		
 func createPrefabs():
@@ -111,5 +101,5 @@ func createMobs():
 	
 	for mob in settings["mobs"]:
 		for i in range(int(settings["mobs"][mob])):
-			ADD.mob($Mobs, mob, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, endpoint, safeRadius, TILE.MOBSPAWN)))
+			ADD.mob($Mobs, mob, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, endpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN)))
 			
