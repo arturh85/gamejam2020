@@ -27,6 +27,7 @@ var circular
 var size
 var cell
 var safeRadius
+var spawnRadius
 var RWIterations
 var RWLoops
 var mapBoundary
@@ -39,6 +40,7 @@ func _ready():
 	RWIterations = int(settings["map"]["RWIterations"])
 	RWLoops = int(settings["map"]["RWLoops"])
 	safeRadius = int(settings["map"]["SafeSpawnRadius"])
+	spawnRadius = int(settings["map"]["SpawnRadius"])
 	mapBoundary = int(settings["map"]["MapBoundary"])
 	circular = int(settings["map"]["Circular"]) == 1
 	cell = $TileMap.cell_size.x
@@ -71,11 +73,11 @@ func createMap():
 	
 	
 func createSpawns():
-	var endpointPos = Vector2((endpoint.x - size / 2) * cell, (endpoint.y - size / 2) * cell)
+	#var endpointPos = Vector2((endpoint.x - size / 2) * cell, (endpoint.y - size / 2) * cell)
 	
 	for i in range(4):
-		var epos = RF.getValidRandomPosInDistance(TILE.GROUND, endpointPos, 5 * cell)
-		ADD.spawn($SpawnPoints, String(i), epos)
+		var epos = RF.getValidRandomPosInDistance(TILE.GROUND, endpoint, spawnRadius)
+		ADD.spawn($SpawnPoints, String(i), RF.b2p(epos))
 		
 		
 func createPrefabs():
@@ -83,7 +85,7 @@ func createPrefabs():
 	for prefab in settings["prefabs"]:
 		prefabs[prefab] = IO.readPrefab(prefab)
 		for i in range(settings["prefabs"][prefab]):
-			var pos = RF.getValidRandomPosInBlocksArray(TILE.GROUND, prefabs[prefab])
+			var pos = RF.getValidRandomPosInArray(TILE.GROUND, prefabs[prefab])
 			ADD.object($Interior, size, cell, tmpMap, prefabs[prefab], pos, TILE.GROUND, TILE.PREFAB)
 
 
@@ -91,22 +93,22 @@ func createItems():
 	
 	for weapon in settings["items"]["weapons"]:
 		for i in range(int(settings["items"]["weapons"][weapon])):
-			ADD.weapon($Items/Weapons, weapon, RF.getValidRandomPos(TILE.GROUND))
+			ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND)))
 
 	for ammo in settings["items"]["ammo"]:
 		for i in range(int(settings["items"]["ammo"][ammo])):
-			ADD.ammo($Items/Ammo, ammo, RF.getValidRandomPos(TILE.GROUND))
+			ADD.ammo($Items/Ammo, ammo, RF.b2p(RF.getValidRandomPos(TILE.GROUND)))
 
 	for powerup in settings["items"]["powerups"]:
 		for i in range(int(settings["items"]["powerups"][powerup])):
-			ADD.powerup($Items/Powerups, powerup, RF.getValidRandomPos(TILE.GROUND))
+			ADD.powerup($Items/Powerups, powerup, RF.b2p(RF.getValidRandomPos(TILE.GROUND)))
 
 	
 func createMobs():
 	
-	var endpointPos = Vector2((endpoint.x - size / 2) *  cell, (endpoint.y - size / 2) *  cell)
+	#var endpointPos = Vector2((endpoint.x - size / 2) *  cell, (endpoint.y - size / 2) *  cell)
 	
 	for mob in settings["mobs"]:
 		for i in range(int(settings["mobs"][mob])):
-			ADD.mob($Mobs, mob, RF.getValidRandomPosOutDistance(TILE.GROUND, endpointPos, safeRadius * cell))
+			ADD.mob($Mobs, mob, RF.getValidRandomPosOutDistance(TILE.GROUND, endpoint, safeRadius))
 			

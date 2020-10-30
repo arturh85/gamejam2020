@@ -34,21 +34,10 @@ func getValidRandomPos(id):
 		var y = rnd.randi()%(mapSize)
 		
 		if tmpMap[x][y] == id:
-			var xx = (- mapSize / 2 + x) * cellSize + cellSize / 2
-			var yy = (- mapSize / 2 + y) * cellSize + cellSize / 2
-			
-			return Vector2(xx, yy)
-			
-func getValidRandomPosInBlocks(id):
-	
-	while true:
-		var x = rnd.randi()%(mapSize)
-		var y = rnd.randi()%(mapSize)
-		
-		if tmpMap[x][y] == id:
 			return Vector2(x, y)
 			
-func getValidRandomPosInBlocksArray(id, ids):
+
+func getValidRandomPosInArray(id, ids):
 	
 	while true:
 		var x = rnd.randi()%(mapSize)
@@ -67,3 +56,11 @@ func getValidRandomPosInBlocksArray(id, ids):
 		if valid:
 			return Vector2(x, y)
 		
+
+func b2p(v):
+
+	var xx = (- mapSize / 2 + v.x) * cellSize + cellSize / 2
+	var yy = (- mapSize / 2 + v.y) * cellSize + cellSize / 2
+	
+	return Vector2(xx, yy)
+			

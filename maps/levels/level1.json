@@ -5,7 +5,8 @@
 		"MapBoundary": 2,
 		"RWIterations": 5000,
 		"RWLoops": 2,
-		"SafeSpawnRadius": 20
+		"SafeSpawnRadius": 20,
+		"SpawnRadius": 5
 
 	},
 	"mobs": {
