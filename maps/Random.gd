@@ -1,4 +1,4 @@
-extends TileMap
+extends Node2D
 
 const IO = preload("res://maps/RandomMapIO.gd")
 const ADD = preload("res://maps/RandomMapCreators.gd")
@@ -41,10 +41,10 @@ func _ready():
 	safeRadius = int(settings["map"]["SafeSpawnRadius"])
 	mapBoundary = int(settings["map"]["MapBoundary"])
 	circular = int(settings["map"]["Circular"]) == 1
-	cell = self.cell_size.x
+	cell = $TileMap.cell_size.x
 	
-	RF = rf.new(size, self.cell_size.x, tmpMap)
-	MG = mg.new(size, self.cell_size.x, circular, map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
+	RF = rf.new(size, cell, tmpMap)
+	MG = mg.new(size, cell, circular, map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
 	
 	rnd.randomize()
 	
@@ -65,9 +65,9 @@ func createMap():
 	for x in range(size):
 		for y in range(size):			
 			if map[x][y] != TILE.NO:
-				self.set_cell(- size / 2 + x, - size / 2  + y, map[x][y]);
+				$TileMap.set_cell(- size / 2 + x, - size / 2  + y, map[x][y]);
 			
-	self.update_bitmask_region()
+	$TileMap.update_bitmask_region()
 	
 	
 func createSpawns():
@@ -75,36 +75,31 @@ func createSpawns():
 	
 	for i in range(4):
 		var epos = RF.getValidRandomPosInDistance(TILE.GROUND, endpointPos, 5 * cell)
-		ADD.spawn(get_node("../SpawnPoints"), String(i), epos)
+		ADD.spawn($SpawnPoints, String(i), epos)
 		
-
+		
 func createPrefabs():
 	
 	for prefab in settings["prefabs"]:
-		addObject(prefab)
+		prefabs[prefab] = IO.readPrefab(prefab)
 		for i in range(settings["prefabs"][prefab]):
 			var pos = RF.getValidRandomPosInBlocksArray(TILE.GROUND, prefabs[prefab])
-			ADD.object(get_node("../Interior"), size, cell, tmpMap, prefabs[prefab], pos, TILE.GROUND, TILE.PREFAB)
-
-	
-func addObject(name):	
-	prefabs[name] = IO.readPrefab(name)
-
+			ADD.object($Interior, size, cell, tmpMap, prefabs[prefab], pos, TILE.GROUND, TILE.PREFAB)
 
 
 func createItems():
 	
 	for weapon in settings["items"]["weapons"]:
 		for i in range(int(settings["items"]["weapons"][weapon])):
-			ADD.weapon(get_node("../Items/Weapons"), weapon, RF.getValidRandomPos(TILE.GROUND))
+			ADD.weapon($Items/Weapons, weapon, RF.getValidRandomPos(TILE.GROUND))
 
 	for ammo in settings["items"]["ammo"]:
 		for i in range(int(settings["items"]["ammo"][ammo])):
-			ADD.ammo(get_node("../Items/Ammo"), ammo, RF.getValidRandomPos(TILE.GROUND))
+			ADD.ammo($Items/Ammo, ammo, RF.getValidRandomPos(TILE.GROUND))
 
 	for powerup in settings["items"]["powerups"]:
 		for i in range(int(settings["items"]["powerups"][powerup])):
-			ADD.powerup(get_node("../Items/Powerups"), powerup, RF.getValidRandomPos(TILE.GROUND))
+			ADD.powerup($Items/Powerups, powerup, RF.getValidRandomPos(TILE.GROUND))
 
 	
 func createMobs():
@@ -113,5 +108,5 @@ func createMobs():
 	
 	for mob in settings["mobs"]:
 		for i in range(int(settings["mobs"][mob])):
-			ADD.mob(get_node("../Mobs"), mob, RF.getValidRandomPosOutDistance(TILE.GROUND, endpointPos, safeRadius * cell))
+			ADD.mob($Mobs, mob, RF.getValidRandomPosOutDistance(TILE.GROUND, endpointPos, safeRadius * cell))
 			
