@@ -2,7 +2,7 @@ extends Node2D
 
 export (PackedScene) var target_level = load("res://maps/Random.tscn")
 
-remote func dostuff():
+remotesync func dostuff():
 		
 	var world = get_node("/root/World")
 	
@@ -51,7 +51,7 @@ var once = false
 func _on_body_entered(body):
 	if body.is_in_group("players"):
 		if once:
-			print("?????????")
+			print("????????? ", once)
 			return
 		once = true
 		rpc("dostuff")
