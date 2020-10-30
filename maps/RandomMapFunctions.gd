@@ -9,35 +9,41 @@ func _init(size, cell, map):
 	rnd.randomize()
 	tmpMap = map
 
-func getValidRandomPosOutDistance(id, pos, distance):
+func getValidRandomPosOutDistance(id, pos, distance, setID = -1):
 	
 	while true:
 		var p = getValidRandomPos(id)
 		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) < distance*distance:
 			getValidRandomPos(id)
 		else:
+			if setID != -1:
+				tmpMap[p.x][p.y] = setID
 			return p
 		
-func getValidRandomPosInDistance(id, pos, distance):
+func getValidRandomPosInDistance(id, pos, distance, setID = -1):
 	
 	while true:
 		var p = getValidRandomPos(id)
 		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) > distance*distance:
 			getValidRandomPos(id)
 		else:
+			if setID != -1:
+				tmpMap[p.x][p.y] = setID
 			return p
 		
-func getValidRandomPos(id):
+func getValidRandomPos(id, setID = -1):
 	
 	while true:
 		var x = rnd.randi()%(mapSize)
 		var y = rnd.randi()%(mapSize)
 		
 		if tmpMap[x][y] == id:
+			if setID != -1:
+				tmpMap[x][y] = setID
 			return Vector2(x, y)
 			
 
-func getValidRandomPosInArray(id, ids):
+func getValidRandomPosInArray(id, ids, setID = -1):
 	
 	while true:
 		var x = rnd.randi()%(mapSize)
@@ -54,6 +60,11 @@ func getValidRandomPosInArray(id, ids):
 					break
 					
 		if valid:
+			if setID != -1:
+				for xx in range(ids[0].size()):
+					for yy in range(ids.size()):
+						tmpMap[x + xx][y + yy] = setID
+						
 			return Vector2(x, y)
 		
 

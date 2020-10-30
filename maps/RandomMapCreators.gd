@@ -4,7 +4,7 @@ static func spawn(node, name, position):
 	spawn.position = position
 	node.add_child(spawn)
 
-static func object(node, size, cell, tmpMap, o, pos, id, oid):
+static func object(node, size, cell, tmpMap, o, pos, id):
 
 	for y in range(o.size()):
 		for x in range(o[0].size()):
@@ -25,7 +25,6 @@ static func object(node, size, cell, tmpMap, o, pos, id, oid):
 				poly.position.x = - cell / 2
 				poly.position.y = - cell / 2
 				body.add_child(poly)
-				tmpMap[pos.x + x][pos.y + y] = oid
 				node.add_child(body)
 	
 
