@@ -1,8 +1,7 @@
 {
 	"map": {
 		"Circular": 1,
-		"BlockSize": 5,
-		"NumberOfBlocks": 20,
+		"Size": 100,
 		"MapBoundary": 2,
 		"RWIterations": 5000,
 		"RWLoops": 2,

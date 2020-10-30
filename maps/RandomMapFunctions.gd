@@ -1,0 +1,69 @@
+var mapSize
+var cellSize
+var rnd = RandomNumberGenerator.new()
+var tmpMap
+
+func _init(size, cell, map):
+	mapSize = size
+	cellSize = cell
+	rnd.randomize()
+	tmpMap = map
+
+func getValidRandomPosOutDistance(id, pos, distance):
+	
+	while true:
+		var p = getValidRandomPos(id)
+		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) < distance*distance:
+			getValidRandomPos(id)
+		else:
+			return p
+		
+func getValidRandomPosInDistance(id, pos, distance):
+	
+	while true:
+		var p = getValidRandomPos(id)
+		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) > distance*distance:
+			getValidRandomPos(id)
+		else:
+			return p
+		
+func getValidRandomPos(id):
+	
+	while true:
+		var x = rnd.randi()%(mapSize)
+		var y = rnd.randi()%(mapSize)
+		
+		if tmpMap[x][y] == id:
+			var xx = (- mapSize / 2 + x) * cellSize + cellSize / 2
+			var yy = (- mapSize / 2 + y) * cellSize + cellSize / 2
+			
+			return Vector2(xx, yy)
+			
+func getValidRandomPosInBlocks(id):
+	
+	while true:
+		var x = rnd.randi()%(mapSize)
+		var y = rnd.randi()%(mapSize)
+		
+		if tmpMap[x][y] == id:
+			return Vector2(x, y)
+			
+func getValidRandomPosInBlocksArray(id, ids):
+	
+	while true:
+		var x = rnd.randi()%(mapSize)
+		var y = rnd.randi()%(mapSize)
+		
+		var valid = true
+		for xx in range(ids[0].size()):
+			for yy in range(ids.size()):
+				if x + xx >= mapSize or y + yy >= mapSize:
+					valid = false
+					break
+				elif int(tmpMap[x + xx][y + yy]) != id:
+					valid = false
+					break
+					
+		if valid:
+			return Vector2(x, y)
+		
