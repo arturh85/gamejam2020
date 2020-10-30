@@ -2,7 +2,7 @@ extends Node2D
 
 
 export var back = false
-export var levelName = "level1"
+export var levelName = ""
 var level
 
 remotesync func dostuff():

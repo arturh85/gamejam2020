@@ -27,9 +27,9 @@
 	},
 	
 	"prefabs": {
-		"table+chairs": 5,
-		"3spints": 5,
-		"chest": 5
+		"table+chairs": 3,
+		"3spints": 3,
+		"chest": 3
 	},
 	
 	"items": {

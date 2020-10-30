@@ -126,11 +126,12 @@ position = Vector2( -14.4099, 882.766 )
 
 [node name="Portal2" parent="." instance=ExtResource( 1 )]
 position = Vector2( -878.165, 2.51996 )
+levelName = "level1"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 10
+frame = 3
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 9
+frame = 2
