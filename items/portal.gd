@@ -1,6 +1,9 @@
 extends Node2D
 
-export (PackedScene) var target_level = load("res://maps/Random.tscn")
+export (PackedScene) var random_level = load("res://maps/Random.tscn")
+export (PackedScene) var base_level = load("res://maps/Start.tscn")
+
+export var back = false
 
 remotesync func dostuff():
 		
@@ -17,7 +20,11 @@ remotesync func dostuff():
 	yield(get_tree().create_timer(1), "timeout")
 	
 
-	var newlevel = target_level.instance()
+	var newlevel
+	if back:
+		newlevel = base_level.instance()
+	else:
+		newlevel = random_level.instance()
 	
 	
 	for player in world.get_node("Players").get_children():

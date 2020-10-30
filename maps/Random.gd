@@ -9,12 +9,15 @@ var MG # instance
 
 var rnd = RandomNumberGenerator.new()
 
-var endpoint = Vector2.ZERO
+var startpoint = Vector2.ZERO
 var map = Array()
 var tmpMap = Array()
-var prefabs = {}
+var settings
+var size
+var cell
 
 enum TILE {
+	SPECIAL = -6,
 	MOBSPAWN = -5,
 	SPAWN = -4,
 	ITEM = -3,
@@ -24,15 +27,6 @@ enum TILE {
 	GROUND = 1
 }
 
-var settings
-
-var circular
-var size
-var cell
-var safeRadius
-var spawnRadius
-var spawnPoints
-var mapBoundary
 
 func _ready():
 	
@@ -47,18 +41,21 @@ func _ready():
 	
 	createMap()
 	
+	createPortal()
+	
 	createSpawns()
+	
+	createZeroZero()
 	
 	createPrefabs()
 		
 	createItems()
 	
 	createMobs()
-			
 
 func createMap():
 	
-	endpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))
+	startpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))
 	
 	for x in range(size):
 		for y in range(size):			
@@ -71,15 +68,23 @@ func createMap():
 func createSpawns():
 	
 	for i in range(int(settings["map"]["SpawnPoints"])):
-		ADD.spawn($SpawnPoints, String(i), RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, endpoint, int(settings["map"]["SpawnRadius"]), TILE.SPAWN)))
+		var pos =  RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, startpoint, int(settings["map"]["SpawnRadius"]), TILE.SPAWN))
+		#var pos = RF.b2p(Vector2(size / 2 , size / 2))
+		ADD.spawn($SpawnPoints, String(i), pos)
 		
 		
+func createPortal():
+	
+	ADD.portal($Items, RF.b2p(startpoint))
+	tmpMap[startpoint.x][startpoint.y] = TILE.SPECIAL
+
+	
 func createPrefabs():
 	
 	for prefab in settings["prefabs"]:
-		prefabs[prefab] = IO.readPrefab(prefab)
+		var fab = IO.readPrefab(prefab)
 		for i in range(settings["prefabs"][prefab]):
-			ADD.object($Interior, size, cell, tmpMap, prefabs[prefab], RF.getValidRandomPosInArray(TILE.GROUND, prefabs[prefab], TILE.PREFAB))
+			ADD.object($Interior, size, cell, tmpMap, fab, RF.getValidRandomPosInArray(TILE.GROUND, fab, TILE.PREFAB))
 
 
 func createItems():
@@ -101,5 +106,28 @@ func createMobs():
 	
 	for mob in settings["mobs"]:
 		for i in range(int(settings["mobs"][mob])):
-			ADD.mob($Mobs, mob, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, endpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN)))
+			ADD.mob($Mobs, mob, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN)))
 			
+func createZeroZero():
+	
+	var sprite = Sprite.new()
+	sprite.texture = load("res://data/images/bricks/zerozero.png")
+	sprite.modulate = "333333"
+	sprite.light_mask = 2
+	sprite.position = RF.b2p(Vector2(size / 2, size / 2))
+	self.add_child(sprite)
+	
+	var light = Light2D.new()
+	light.texture = load("res://data/images/lights/spot.png")
+	light.light_mask = 2
+	light.shadow_item_cull_mask = 2
+	light.range_item_cull_mask = 2
+	light.shadow_enabled = true
+	light.color = "00ff00"
+	light.energy = 2
+	light.texture_scale = 2.5
+	light.position = RF.b2p(Vector2(size / 2, size / 2))
+	self.add_child(light)
+	
+	tmpMap[size / 2][size / 2] = TILE.SPECIAL
+		

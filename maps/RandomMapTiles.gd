@@ -69,10 +69,11 @@ func generateMap(fl_loops, fl_iterations, fl_directed, r_loops, r_iterations, r_
 func randomWalk(start, iterations, mapBoundary, directed):
 	var itr = 0
 	var endpoint = start
-	
 	var walker = start
-	
 	var last_direction = Vector2(0, 0)
+	
+	tmpMap[walker.x][walker.y] = gID
+		
 	# random walk
 	while itr < iterations:
 		
@@ -84,7 +85,7 @@ func randomWalk(start, iterations, mapBoundary, directed):
 				if rnd.randi()%directed != 0:
 					continue
 			
-		else:
+		elif directed < 0:
 			if random_direction == last_direction:
 				if rnd.randi()%(-directed) != 0:
 					continue

@@ -3,7 +3,14 @@ static func spawn(node, name, position):
 	spawn.name = name
 	spawn.position = position
 	node.add_child(spawn)
-
+	
+static func portal(node, position):
+	var scn = load("res://items/portal.tscn")
+	var object = scn.instance()
+	object.position = position
+	object.back = true
+	node.add_child(object)
+	
 static func object(node, size, cell, tmpMap, o, pos):
 
 	for y in range(o.size()):
@@ -46,7 +53,6 @@ static func _create_collision_polygon(position, texture):
 
 
 static func weapon(node, name, pos):
-	var item = Position2D.new()
 	var scn = load("res://items/weapons/" + name + ".tscn")
 	var object = scn.instance()
 	object.position = pos
@@ -54,7 +60,6 @@ static func weapon(node, name, pos):
 	
 	
 static func powerup(node, name, pos):
-	var item = Position2D.new()
 	var scn = load("res://items/powerups/" + name + ".tscn")
 	var object = scn.instance()
 	object.position = pos
@@ -62,7 +67,6 @@ static func powerup(node, name, pos):
 	
 	
 static func ammo(node, name, pos):
-	var item = Position2D.new()
 	var scn = load("res://items/ammo/" + name + ".tscn")
 	var object = scn.instance()
 	object.position = pos
@@ -71,7 +75,6 @@ static func ammo(node, name, pos):
 	
 	
 static func mob(node, name, pos):
-	var item = Position2D.new()
 	var scn = load("res://actors/" + name + ".tscn")
 	var object = scn.instance()
 	object.position = pos
