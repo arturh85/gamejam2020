@@ -1,11 +1,11 @@
 extends Node2D
 
-const IO = preload("res://maps/RandomMapIO.gd")
-const ADD = preload("res://maps/RandomMapCreators.gd")
+const IO = preload("res://maps/RandomMapIO.gd") # static
+const ADD = preload("res://maps/RandomMapCreators.gd") # static
 const rf = preload("res://maps/RandomMapFunctions.gd")
-var RF
+var RF # instance
 const mg = preload("res://maps/RandomMapTiles.gd")
-var MG
+var MG # instance
 
 var rnd = RandomNumberGenerator.new()
 
@@ -31,6 +31,7 @@ var size
 var cell
 var safeRadius
 var spawnRadius
+var spawnPoints
 var RWIterations
 var RWLoops
 var mapBoundary
@@ -44,6 +45,7 @@ func _ready():
 	RWLoops = int(settings["map"]["RWLoops"])
 	safeRadius = int(settings["map"]["SafeSpawnRadius"])
 	spawnRadius = int(settings["map"]["SpawnRadius"])
+	spawnPoints = int(settings["map"]["SpawnPoints"])
 	mapBoundary = int(settings["map"]["MapBoundary"])
 	circular = int(settings["map"]["Circular"]) == 1
 	cell = $TileMap.cell_size.x
@@ -65,6 +67,7 @@ func _ready():
 			
 
 func createMap():
+	
 	endpoint = MG.generateMap(RWLoops, RWIterations, mapBoundary)
 	
 	for x in range(size):
@@ -76,10 +79,9 @@ func createMap():
 	
 	
 func createSpawns():
-
-	for i in range(4):
-		var epos = RF.getValidRandomPosInDistance(TILE.GROUND, endpoint, spawnRadius, TILE.SPAWN)
-		ADD.spawn($SpawnPoints, String(i), RF.b2p(epos))
+	
+	for i in range(spawnPoints):
+		ADD.spawn($SpawnPoints, String(i), RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, endpoint, spawnRadius, TILE.SPAWN)))
 		
 		
 func createPrefabs():
@@ -87,8 +89,7 @@ func createPrefabs():
 	for prefab in settings["prefabs"]:
 		prefabs[prefab] = IO.readPrefab(prefab)
 		for i in range(settings["prefabs"][prefab]):
-			var pos = RF.getValidRandomPosInArray(TILE.GROUND, prefabs[prefab], TILE.PREFAB)
-			ADD.object($Interior, size, cell, tmpMap, prefabs[prefab], pos, TILE.GROUND)
+			ADD.object($Interior, size, cell, tmpMap, prefabs[prefab], RF.getValidRandomPosInArray(TILE.GROUND, prefabs[prefab], TILE.PREFAB))
 
 
 func createItems():

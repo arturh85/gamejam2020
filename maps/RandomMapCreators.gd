@@ -4,7 +4,7 @@ static func spawn(node, name, position):
 	spawn.position = position
 	node.add_child(spawn)
 
-static func object(node, size, cell, tmpMap, o, pos, id):
+static func object(node, size, cell, tmpMap, o, pos):
 
 	for y in range(o.size()):
 		for x in range(o[0].size()):
