@@ -261,7 +261,9 @@ func getValidRandomPosInBlocksArray(ids):
 		
 func generateMap():
 	
-	var start = Vector2(rnd.randi()%(blockSize*blocksXY), rnd.randi()%(blockSize*blocksXY))
+	#var start = Vector2(rnd.randi()%(blockSize*blocksXY), rnd.randi()%(blockSize*blocksXY))
+	var start = Vector2(blockSize * blocksXY / 2, blockSize * blocksXY / 2)
+
 	for r in range(RWLoops):
 		randomWalk(start)
 

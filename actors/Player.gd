@@ -226,3 +226,22 @@ func _on_respawn():
 	rpc("switch_weapon", 1)		
 	setDefaults()
 
+puppet func setMap(newlevel):
+	var world = get_node("/root/World")
+	var level = world.get_node("Level")
+	world.remove_child(level)
+	world.add_child(newlevel)
+	world.get_node("CanvasLayer/MiniMap").update_map_markers()
+	
+	var SpawnPoints = newlevel.get_node("SpawnPoints")
+	var spawn = SpawnPoints.get_child(0)
+	
+	spawn_at(spawn.position)
+	unlockPlayer()
+	
+	
+	yield(world.get_tree().create_timer(1), "timeout")
+	#newlevel.show()
+	
+	world.get_node("CanvasLayer/Transitions").play("PortalOut")
+	
