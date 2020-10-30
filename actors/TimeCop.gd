@@ -15,8 +15,10 @@ func _ready():
 sync func switch_weapon(index):
 	.switch_weapon(index)
 	var current_weapon_node = get_node("Group/Gun").get_child(0)
-	current_weapon_node.remove_child(current_weapon_node.get_node("StartBlocker"))
-	current_weapon_node.remove_child(current_weapon_node.get_node("EndBlocker"))
+	if current_weapon_node.has_node("StartBlocker"):
+		current_weapon_node.remove_child(current_weapon_node.get_node("StartBlocker"))
+	if current_weapon_node.has_node("EndBlocker"):
+		current_weapon_node.remove_child(current_weapon_node.get_node("EndBlocker"))
 	var auto_attack = load("res://weapons-mixins/AutoAttack/AutoAttack.tscn").instance()
 	auto_attack.manual_control = true
 	current_weapon_node.add_child(auto_attack)
