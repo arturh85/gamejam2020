@@ -4,7 +4,7 @@
 		"BlockSize": 5,
 		"NumberOfBlocks": 20,
 		"MapBoundary": 2,
-		"RWIterations": 2000,
+		"RWIterations": 5000,
 		"RWLoops": 2,
 		"SafeSpawnRadius": 20
 
@@ -14,7 +14,9 @@
 		"BlobMob": 10
 	},
 	"prefabs": {
+		"table+chairs": 3,
 		"3spints": 5,
+		"chest": 5
 	},
 	"items": {
 		"weapons": {
@@ -25,7 +27,6 @@
 			"Rifle": 1
 		},
 		"ammo": {
-			"CrossbowAmmo": 2,
 			"MachineGunAmmo": 4
 		},
 		"powerups": {
