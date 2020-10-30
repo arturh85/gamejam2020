@@ -15,6 +15,7 @@ var tmpMap = Array()
 var settings
 var size
 var cell
+var homeLevel
 
 enum TILE {
 	SPECIAL = -6,
@@ -27,10 +28,13 @@ enum TILE {
 	GROUND = 1
 }
 
-
 func _ready():
+	pass
 	
-	settings = IO.readLevel("level1")
+func init(levelName, lvl):
+	homeLevel = lvl
+	
+	settings = IO.readLevel(levelName)
 	size = int(settings["map"]["Size"])
 	cell = $TileMap.cell_size.x
 	
@@ -52,6 +56,10 @@ func _ready():
 	createItems()
 	
 	createMobs()
+	
+	
+func getHomeLevel():
+	return homeLevel
 
 func createMap():
 	

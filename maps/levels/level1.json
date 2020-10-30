@@ -1,7 +1,7 @@
 {
 	"map": {
 		"Circular": 1,
-		"Size": 150,
+		"Size": 200,
 		"MapBoundary": 2,
 		"SpawnPoints": 4,
 		"SafeSpawnRadius": 20,
