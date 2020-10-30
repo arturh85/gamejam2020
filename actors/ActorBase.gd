@@ -104,8 +104,8 @@ sync func switch_weapon(index):
 		current_weapon_node.call_deferred("free")
 		get_node("Group/Gun").add_child(w, true)
 		var wchiulds = current_weapon_node.get_children()
-		var ammo_node = w.get_node("Ammo")
-		if ammo_node:
+		if w.has_node("Ammo"):
+			var ammo_node = w.get_node("Ammo")
 			ammo_node.current_capacity = ammo[index]
 			get_node("/root/World/CanvasLayer/AmmoHUD").show()
 		else:

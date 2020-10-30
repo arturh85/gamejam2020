@@ -19,9 +19,9 @@
 	},
 	"items": {
 		"weapons": {
-			"PlasmaGun": 2,
+			"Plasmagun": 2,
 			"Crossbow": 2,
-			"MachineGun": 3,
+			"Machinegun": 3,
 			"Railgun": 1,
 			"Rifle": 1
 		},
