@@ -82,6 +82,8 @@ sync func switch_weapon_relative(rel):
 	var i = current_weapon
 	while not found:
 		i = wmod(i + rel)
+		if i == current_weapon: 
+			return
 		if has_weapons[i]:
 			return switch_weapon(i)
 			
