@@ -4,7 +4,7 @@
 		"BlockSize": 5,
 		"NumberOfBlocks": 20,
 		"MapBoundary": 2,
-		"RWIterations": 2000,
+		"RWIterations": 5000,
 		"RWLoops": 2,
 		"SafeSpawnRadius": 20
 
@@ -27,7 +27,6 @@
 			"Rifle": 1
 		},
 		"ammo": {
-			"CrossbowAmmo": 2,
 			"MachineGunAmmo": 4
 		},
 		"powerups": {
