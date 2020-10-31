@@ -25,7 +25,9 @@ enum TILE {
 	PREFAB = -2,
 	NO = -1,
 	WALL = 0,
-	GROUND = 1
+	GROUND = 1,
+	WALL2 = 2,
+	WALL3 = 3,
 }
 
 func _ready():
@@ -69,8 +71,27 @@ func createMap():
 		for y in range(size):			
 			if map[x][y] != TILE.NO:
 				$TileMap.set_cell(- size / 2 + x, - size / 2  + y, map[x][y]);
+			if map[x][y] == TILE.WALL:
+				$TileMap2.set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL2);
+				$TileMap3.set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL3);
 			
 	$TileMap.update_bitmask_region()
+	$TileMap2.update_bitmask_region()
+	$TileMap3.update_bitmask_region()
+	
+	for x in range(size):
+		for y in range(size):			
+			if map[x][y] == TILE.WALL:
+				var r = rnd.randi()%3;
+				if r == 0:
+					$TileMap.set_cell(- size / 2 + x, - size / 2  + y, -1);
+					$TileMap2.set_cell(- size / 2 + x, - size / 2  + y, -1);
+				elif r == 1:
+					$TileMap2.set_cell(- size / 2 + x, - size / 2  + y, -1);
+					$TileMap3.set_cell(- size / 2 + x, - size / 2  + y, -1);
+				else:
+					$TileMap3.set_cell(- size / 2 + x, - size / 2  + y, -1);
+					$TileMap.set_cell(- size / 2 + x, - size / 2  + y, -1);
 	
 	
 func createSpawns():

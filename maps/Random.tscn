@@ -33,6 +33,20 @@ tile_set = ExtResource( 21 )
 occluder_light_mask = -2147483646
 format = 1
 
+[node name="TileMap2" type="TileMap" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+tile_set = ExtResource( 21 )
+occluder_light_mask = -2147483646
+format = 1
+
+[node name="TileMap3" type="TileMap" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+tile_set = ExtResource( 21 )
+occluder_light_mask = -2147483646
+format = 1
+
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="Mobs" type="Node2D" parent="."]
