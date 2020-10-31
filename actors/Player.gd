@@ -226,11 +226,14 @@ func _on_respawn():
 	rpc("switch_weapon", 1)		
 	setDefaults()
 
-puppet func setMap(newlevel):
+func setMap(newlevel):
+	#var newlevel = instance_from_id(newlevel_id)
+	Logger.info("player.setMap (master: " + str(is_network_master()) + ")")
 	var world = get_node("/root/World")
-	var level = world.get_node("Level")
-	world.remove_child(level)
-	world.add_child(newlevel)
+	
+	if not world.get_node("Level"):
+		Logger.error("no level after insert?! (master: " + str(is_network_master()) + ")")
+	
 	world.get_node("CanvasLayer/MiniMap").update_map_markers()
 	
 	var SpawnPoints = newlevel.get_node("SpawnPoints")

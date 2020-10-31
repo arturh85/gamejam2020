@@ -10,7 +10,7 @@ var randomLevel = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	Logger.info("generated random level1")
 	randomLevel["level1"] = random_level.instance()
 	randomLevel["level1"].init("level1", self)
 	

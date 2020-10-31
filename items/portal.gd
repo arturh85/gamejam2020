@@ -7,8 +7,10 @@ export var back = false
 export var levelName = ""
 var level
 
-remotesync func dostuff():
-	Logger.info("portal dostuff: " + str(is_network_master()))
+remotesync func activate():
+	Logger.info("portal activated (master: " + str(is_network_master()) + ")")
+	if not world.get_node("Level"): 
+		Logger.error("NO LEVEL?!")
 	
 	for player in world.get_node("Players").get_children():
 		player.get_node("AnimationPlayer").play("PortalIn")
@@ -20,24 +22,28 @@ remotesync func dostuff():
 	
 	yield(get_tree().create_timer(1), "timeout")
 	
-
+	var level = world.get_node("Level")
+	
 	var newlevel
-	if back:
-		newlevel = get_node("/root/World/Level").getHomeLevel()
+	if level.has_method("getHomeLevel"):
+		newlevel = level.getHomeLevel()
 	else:
-		newlevel = get_node("/root/World/Level").getRandomLevel(levelName)
+		newlevel = level.getRandomLevel(levelName)
+		
+	world.remove_child(level)
+	level.queue_free()
 	
-	once = false
-	
+	world.add_child(newlevel)
+		
 	for player in world.get_node("Players").get_children():
 		player.setMap(newlevel)
-		
 			
+	once = false
+	
 var once = false
 
 func _on_body_entered(body):
-	if body.is_in_group("players"):
-		if once:
-			return
-		once = true
-		rpc("dostuff")
+	if is_network_master() and body.is_in_group("players"):
+		if not once:
+			once = true
+			rpc("activate")
