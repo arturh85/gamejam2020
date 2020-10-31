@@ -31,8 +31,7 @@ remotesync func activate():
 		newlevel = level.getRandomLevel(levelName)
 		
 	world.remove_child(level)
-	level.queue_free()
-	
+		
 	world.add_child(newlevel)
 		
 	for player in world.get_node("Players").get_children():
