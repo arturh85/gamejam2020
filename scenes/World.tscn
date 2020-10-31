@@ -147,8 +147,8 @@ __meta__ = {
 [node name="HealthLayer" type="ColorRect" parent="CanvasLayer"]
 margin_left = -10.0
 margin_top = -5.0
-margin_right = 1030.0
-margin_bottom = 605.0
+margin_right = 1619.0
+margin_bottom = 978.0
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -157,8 +157,8 @@ __meta__ = {
 [node name="DDLayer" type="ColorRect" parent="CanvasLayer"]
 margin_left = -10.0
 margin_top = -5.0
-margin_right = 1030.0
-margin_bottom = 605.0
+margin_right = 1543.0
+margin_bottom = 986.0
 color = Color( 0.0862745, 0.909804, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -257,8 +257,8 @@ anims/PortalOut = SubResource( 9 )
 [node name="BlackLayer" type="ColorRect" parent="CanvasLayer"]
 margin_left = -20.0
 margin_top = -15.0
-margin_right = 1047.0
-margin_bottom = 619.0
+margin_right = 1615.0
+margin_bottom = 1013.0
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false

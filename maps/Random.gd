@@ -14,8 +14,10 @@ var map = Array()
 var tmpMap = Array()
 var settings
 var size
-var cell
 var homeLevel
+
+var cell = 64
+var tileMapsCount = 10
 
 enum TILE {
 	SPECIAL = -6,
@@ -24,10 +26,8 @@ enum TILE {
 	ITEM = -3,
 	PREFAB = -2,
 	NO = -1,
-	WALL = 0,
-	GROUND = 1,
-	WALL2 = 2,
-	WALL3 = 3,
+	GROUND = 0,
+	WALL = 1
 }
 
 func _ready():
@@ -38,7 +38,6 @@ func init(levelName, lvl):
 	
 	settings = IO.readLevel(levelName)
 	size = int(settings["map"]["Size"])
-	cell = $TileMap.cell_size.x
 	
 	RF = rf.new(size, cell, tmpMap)
 	MG = mg.new(size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
@@ -67,31 +66,42 @@ func createMap():
 	
 	startpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))
 	
-	for x in range(size):
-		for y in range(size):			
-			if map[x][y] != TILE.NO:
-				$TileMap.set_cell(- size / 2 + x, - size / 2  + y, map[x][y]);
-			if map[x][y] == TILE.WALL:
-				$TileMap2.set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL2);
-				$TileMap3.set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL3);
-			
-	$TileMap.update_bitmask_region()
-	$TileMap2.update_bitmask_region()
-	$TileMap3.update_bitmask_region()
+	
+	for m in range(tileMapsCount):
+		var tileMap = TileMap.new()
+		tileMap.cell_size.x = cell
+		tileMap.cell_size.y = cell
+		tileMap.modulate = "333333"
+		tileMap.light_mask = 2
+		tileMap.occluder_light_mask = 2
+		tileMap.z_index = -1
+		tileMap.tile_set = load("res://data/auto_tileset_with_coll_nav.tres") 
+		tileMap.name = "TileMap" + String(m + 1)
+		self.add_child(tileMap)
+		
+		for x in range(size):
+			for y in range(size):
+				if m == 0 and map[x][y] != TILE.NO:
+					get_node("TileMap1").set_cell(- size / 2 + x, - size / 2  + y, map[x][y])
+				if map[x][y] == TILE.WALL:
+					 get_node("TileMap" + String(m+1)).set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL + m)
+				
+	for m in range(tileMapsCount):
+		get_node("TileMap" + String(m+1)).update_bitmask_region()
 	
 	for x in range(size):
 		for y in range(size):			
 			if map[x][y] == TILE.WALL:
-				var r = rnd.randi()%3;
+				var r = rnd.randi()%3
 				if r == 0:
-					$TileMap.set_cell(- size / 2 + x, - size / 2  + y, -1);
-					$TileMap2.set_cell(- size / 2 + x, - size / 2  + y, -1);
-				elif r == 1:
-					$TileMap2.set_cell(- size / 2 + x, - size / 2  + y, -1);
-					$TileMap3.set_cell(- size / 2 + x, - size / 2  + y, -1);
+					get_node("TileMap1").set_cell(- size / 2 + x, - size / 2  + y, -1)
+					var r2 = rnd.randi()%(tileMapsCount - 1)
+					for m in range(2, tileMapsCount + 1):
+						if m - 2 != r2:
+							get_node("TileMap" + String(m)).set_cell(- size / 2 + x, - size / 2  + y, -1)
 				else:
-					$TileMap3.set_cell(- size / 2 + x, - size / 2  + y, -1);
-					$TileMap.set_cell(- size / 2 + x, - size / 2  + y, -1);
+					for m in range(2, tileMapsCount + 1):
+						get_node("TileMap" + String(m)).set_cell(- size / 2 + x, - size / 2  + y, -1)
 	
 	
 func createSpawns():
