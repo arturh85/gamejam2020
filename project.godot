@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "Appender",
+"language": "GDScript",
+"path": "res://addons/gs_logger/appender.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "BlobMob",
 "language": "GDScript",
 "path": "res://actors/BlobMob.gd"
+}, {
+"base": "Appender",
+"class": "ConsoleAppender",
+"language": "GDScript",
+"path": "res://addons/gs_logger/appenders/console_appender.gd"
+}, {
+"base": "Appender",
+"class": "FileAppender",
+"language": "GDScript",
+"path": "res://addons/gs_logger/appenders/file_appender.gd"
 }, {
 "base": "GDWeaponsCapacity",
 "class": "GDWeaponsAmmo",
@@ -94,6 +109,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://inventory/Global.gd"
 }, {
+"base": "Layout",
+"class": "HtmlLayout",
+"language": "GDScript",
+"path": "res://addons/gs_logger/layouts/html_layout.gd"
+}, {
+"base": "Reference",
+"class": "Layout",
+"language": "GDScript",
+"path": "res://addons/gs_logger/layout.gd"
+}, {
+"base": "Reference",
+"class": "Message",
+"language": "GDScript",
+"path": "res://addons/gs_logger/message.gd"
+}, {
+"base": "Layout",
+"class": "PatternLayout",
+"language": "GDScript",
+"path": "res://addons/gs_logger/layouts/pattern_layout.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -103,9 +138,17 @@ _global_script_classes=[ {
 "class": "TimeCopMob",
 "language": "GDScript",
 "path": "res://actors/TimeCop.gd"
+}, {
+"base": "Reference",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://addons/gs_logger/utils.gd"
 } ]
 _global_script_class_icons={
+"Appender": "",
 "BlobMob": "",
+"ConsoleAppender": "",
+"FileAppender": "",
 "GDWeaponsAmmo": "",
 "GDWeaponsAutoAttack": "",
 "GDWeaponsBoolBlocker": "",
@@ -122,8 +165,13 @@ _global_script_class_icons={
 "GDWeaponsStartBlocker": "",
 "GDWeaponsWeapon": "",
 "Global": "",
+"HtmlLayout": "",
+"Layout": "",
+"Message": "",
+"PatternLayout": "",
 "Player": "",
-"TimeCopMob": ""
+"TimeCopMob": "",
+"Utils": ""
 }
 
 [application]
@@ -142,6 +190,7 @@ default_bus_layout="res://data/default_bus_layout.tres"
 [autoload]
 
 gamestate="*res://scenes/gamestate.gd"
+Logger="*res://addons/gs_logger/logger.gd"
 
 [debug]
 
@@ -152,6 +201,10 @@ gdscript/warnings/return_value_discarded=false
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gs_logger" )
 
 [gdnative]
 
