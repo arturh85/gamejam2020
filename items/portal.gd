@@ -1,13 +1,14 @@
 extends Node2D
 
+onready var world = $"/root/World"
+
 
 export var back = false
 export var levelName = ""
 var level
 
 remotesync func dostuff():
-		
-	var world = get_node("/root/World")
+	Logger.info("portal dostuff: " + str(is_network_master()))
 	
 	for player in world.get_node("Players").get_children():
 		player.get_node("AnimationPlayer").play("PortalIn")
@@ -37,7 +38,6 @@ var once = false
 func _on_body_entered(body):
 	if body.is_in_group("players"):
 		if once:
-			print("????????? ", once)
 			return
 		once = true
 		rpc("dostuff")

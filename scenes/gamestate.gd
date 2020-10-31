@@ -20,6 +20,7 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
 
+
 # Callback from SceneTree.
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
@@ -179,3 +180,5 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	var _appender2 = Logger.add_appender(ConsoleAppender.new())
+	var _appender1 = Logger.add_appender(FileAppender.new("res://game.log"))
