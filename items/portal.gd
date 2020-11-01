@@ -19,7 +19,7 @@ remotesync func activate(rseed):
 		player.lockPlayer()		
 	yield(get_tree().create_timer(0.5), "timeout")	
 	world.get_node("CanvasLayer/Transitions").play("Portal")	
-	yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(1.1), "timeout")
 	
 	world.load_level(target_scene, levelName, back, rseed)
 	once = false
