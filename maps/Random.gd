@@ -17,7 +17,6 @@ var size
 var homeLevel
 
 var cell = 64
-var tileMapsCount = 10
 
 enum TILE {
 	PORTAL = -7,
@@ -79,41 +78,52 @@ func createMap():
 	
 	createPortals()
 	
-	for m in range(tileMapsCount):
+	var tm0 = ""
+	var m = 0
+	var modVal = 0
+	var maxVal = Array()
+	var minVal = Array()
+	for tm in settings["map"]["TileMaps"]:
+		var v = int(settings["map"]["TileMaps"][tm])
+		minVal.append(modVal)
+		modVal = modVal + v
+		maxVal.append(modVal)
+		
+		if tm0 == "":
+			tm0 = tm
 		var tileMap = TileMap.new()
+		tileMap.name = tm
 		tileMap.cell_size.x = cell
 		tileMap.cell_size.y = cell
-		tileMap.modulate = "333333"
+		tileMap.modulate = settings["map"]["Color"]
 		tileMap.light_mask = 2
 		tileMap.occluder_light_mask = 2
 		tileMap.z_index = -1
-		tileMap.tile_set = load("res://data/auto_tileset_with_coll_nav.tres") 
-		tileMap.name = "TileMap" + String(m + 1)
+		tileMap.tile_set = load("res://" + settings["map"]["Tileset"]) 
 		self.add_child(tileMap)
 		
 		for x in range(size):
 			for y in range(size):
 				if m == 0 and map[x][y] != TILE.NO:
-					get_node("TileMap1").set_cell(- size / 2 + x, - size / 2  + y, map[x][y])
+					get_node(tm0).set_cell(- size / 2 + x, - size / 2  + y, map[x][y])
 				if map[x][y] == TILE.WALL:
-					 get_node("TileMap" + String(m+1)).set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL + m)
+					 get_node(tm).set_cell(- size / 2 + x, - size / 2  + y, TILE.WALL + m)
 				
-	for m in range(tileMapsCount):
-		get_node("TileMap" + String(m+1)).update_bitmask_region()
+		m = m+1
+		
+	for tm in settings["map"]["TileMaps"]:
+		get_node(tm).update_bitmask_region()
 	
 	for x in range(size):
 		for y in range(size):			
 			if map[x][y] == TILE.WALL:
-				var r = rnd.randi()%4
-				if r == 0:
-					get_node("TileMap1").set_cell(- size / 2 + x, - size / 2  + y, -1)
-					var r2 = rnd.randi()%(tileMapsCount - 1)
-					for m in range(2, tileMapsCount + 1):
-						if m - 2 != r2:
-							get_node("TileMap" + String(m)).set_cell(- size / 2 + x, - size / 2  + y, -1)
-				else:
-					for m in range(2, tileMapsCount + 1):
-						get_node("TileMap" + String(m)).set_cell(- size / 2 + x, - size / 2  + y, -1)
+				var r = rnd.randi()%modVal
+				m = 0
+				for tm in settings["map"]["TileMaps"]:
+					if r < minVal[m] or r >= maxVal[m]:
+						get_node(tm).set_cell(- size / 2 + x, - size / 2  + y, -1)
+					m = m + 1
+					
 	
 	
 func createSpawns():
@@ -136,7 +146,7 @@ func createPortals():
 		return
 		
 	for portal in settings["portals"]:
-		var pos = RF.getValidRandomPosInDistance(TILE.GROUND, Vector2(size / 2, size / 2), size / 2 - int(settings["map"]["MapBoundary"]) - 1, TILE.PORTAL)
+		var pos = RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, size / 3, TILE.PORTAL)
 		ADD.portal($Items, RF.b2p(pos), false, portal, settings["portals"][portal])
 		for x in range (-1, 2):
 			for y in range (-1, 2):
@@ -215,3 +225,8 @@ func createZeroZero():
 	
 	tmpMap[size / 2][size / 2] = TILE.SPECIAL
 		
+		
+		
+var colors = [Color(1.0, 0.0, 0.0, 1.0),
+		  Color(0.0, 1.0, 0.0, 1.0),
+		  Color(0.0, 0.0, 1.0, 0.0)]
