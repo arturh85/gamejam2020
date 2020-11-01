@@ -14,8 +14,6 @@ var map = Array()
 var tmpMap = Array()
 var settings
 var size
-var homeLevel
-
 var cell = 64
 var tileMapsCount = 10
 
@@ -40,22 +38,20 @@ func _ready():
 		for portal in settings["portals"]:
 			Logger.info("generated random " + portal)
 			randomLevel[portal] = random_level.instance()
-			randomLevel[portal].init(portal, self)
+			randomLevel[portal].init(portal, randi())
 		
 func getRandomLevel(name):
 	return randomLevel[name]
 	
-func init(levelName, lvl):
+func init(levelName, rseed):
 	Logger.info("random.init (master: " + str(is_network_master()) + ")")
-	homeLevel = lvl
-	
 	settings = IO.readLevel(levelName)
 	size = int(settings["map"]["Size"])
 	
 	RF = rf.new(size, cell, tmpMap)
 	MG = mg.new(size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
 	
-	rnd.randomize()
+	rnd.seed = rseed
 	
 	createMap()
 	
@@ -70,9 +66,6 @@ func init(levelName, lvl):
 	createMobs()
 	
 	
-func getHomeLevel():
-	return homeLevel
-
 func createMap():
 	
 	startpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))

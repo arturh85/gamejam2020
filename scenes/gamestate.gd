@@ -129,6 +129,7 @@ remote func ready_to_start(id):
 func host_game(new_player_name):
 	player_name = new_player_name
 	var host = NetworkedMultiplayerENet.new()
+	host.allow_object_decoding = true
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
 
@@ -136,6 +137,7 @@ func host_game(new_player_name):
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	var client = NetworkedMultiplayerENet.new()
+	client.allow_object_decoding = true
 	client.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(client)
 

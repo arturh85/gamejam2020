@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
+[ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/images/title.png" type="Texture" id=2]
 [ext_resource path="res://actors/BlobMob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://items/powerups/speedup.tscn" type="PackedScene" id=10]
@@ -223,3 +224,7 @@ position = Vector2( 145.645, -138.025 )
 
 [node name="Railgun" parent="Weapons" instance=ExtResource( 16 )]
 position = Vector2( 892.7, -1442.88 )
+
+[node name="Portal" parent="." instance=ExtResource( 1 )]
+position = Vector2( 322.895, 834.836 )
+back = true
