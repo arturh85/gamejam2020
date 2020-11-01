@@ -44,8 +44,8 @@
 	},
 	
 	"mobs": {
-		"TimeCop": 2,
-		"BlobMob": 30
+		"TimeCop": 0,
+		"BlobMob": 0
 	},
 	
 	"prefabs": {
