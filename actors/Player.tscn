@@ -294,7 +294,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=13]
 resource_name = "Down"
 length = 0.1
 tracks/0/type = "value"
@@ -382,7 +382,7 @@ tracks/6/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 resource_name = "Left"
 length = 0.1
 tracks/0/type = "value"
@@ -470,8 +470,7 @@ tracks/6/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "Right"
+[sub_resource type="Animation" id=15]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Group/stand:visible")
@@ -558,8 +557,7 @@ tracks/6/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "Stand"
+[sub_resource type="Animation" id=16]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Group/stand:visible")
@@ -646,8 +644,7 @@ tracks/6/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
-resource_name = "Up"
+[sub_resource type="Animation" id=17]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Group/stand:visible")
@@ -867,11 +864,11 @@ range_item_cull_mask = 2
 shadow_item_cull_mask = 2
 
 [node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Down = SubResource( 17 )
-anims/Left = SubResource( 15 )
-anims/Right = SubResource( 14 )
-anims/Stand = SubResource( 13 )
-anims/Up = SubResource( 16 )
+anims/Down = SubResource( 13 )
+anims/Left = SubResource( 14 )
+anims/Right = SubResource( 15 )
+anims/Stand = SubResource( 16 )
+anims/Up = SubResource( 17 )
 [connection signal="on_damage" from="." to="." method="_on_damage"]
 [connection signal="on_death" from="." to="." method="_on_death"]
 [connection signal="on_heal" from="." to="." method="_on_heal"]

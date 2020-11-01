@@ -11,6 +11,7 @@ var flashlight = true
 var firerate_multiplier = 1
 var speed_multiplier = 1
 var respawn_time = null
+var viewRotation = 0
 
 func setDefaults():
 	$PlayerAnimationPlayer.play("Stand")
@@ -72,7 +73,6 @@ func _physics_process(delta):
 		return
 	
 	var motion = Vector2()
-	var rotation = 0
 
 	if is_network_master():
 		if Input.is_action_pressed("move_left"):
@@ -123,11 +123,11 @@ func _physics_process(delta):
 		#	#var bomb_pos = position
 		#	rpc("setup_bullet", get_tree().get_network_unique_id())
 			
-		rotation = get_angle_to(get_global_mouse_position())
+		viewRotation = get_angle_to(get_global_mouse_position())
 		#if motion != Vector2.ZERO:
 		#	playerRotation = get_angle_to(self.position + motion)
 			
-		var ang = rotation / PI * 180
+		var ang = viewRotation / PI * 180
 		if ang >= -45 and ang < 45:
 			$PlayerAnimationPlayer.play("Right")
 		if ang >= 45 and ang < 135:
@@ -142,12 +142,12 @@ func _physics_process(delta):
 		prev_shooting = shooting
 
 		rset("puppet_motion", motion)
-		rset("puppet_rotation", rotation)
+		rset("puppet_rotation", viewRotation)
 		rset("puppet_pos", position)
 	else:
 		position = puppet_pos
 		motion = puppet_motion
-		rotation = puppet_rotation
+		viewRotation = puppet_rotation
 			
 #	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
 
@@ -155,8 +155,8 @@ func _physics_process(delta):
 	# $Group.look_at(get_global_mouse_position())
 	
 	#$Group.rotation = rotation
-	$Group/Camera2D/flashlight.rotation = rotation
-	$Group/Gun.rotation = rotation + PI / 2
+	$Group/Camera2D/flashlight.rotation = viewRotation
+	$Group/Gun.rotation = viewRotation + PI / 2
 	
 	move_and_slide(motion * speed * speed_multiplier)
 	if not is_network_master():
