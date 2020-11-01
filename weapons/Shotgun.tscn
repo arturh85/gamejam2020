@@ -57,7 +57,7 @@ wait_time = 0.6
 [node name="Sprite" type="Sprite" parent="." index="1"]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 light_mask = 2
-position = Vector2( 0, -0.26487 )
+position = Vector2( 0, -10.5658 )
 texture = ExtResource( 5 )
 
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
@@ -70,21 +70,21 @@ auto_reset = true
 try_start_attack_after_set = true
 
 [node name="Muzzle" type="Node2D" parent="." index="4"]
-position = Vector2( 8.09133e-06, -18.1077 )
+position = Vector2( -3.00338, -30.4109 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 anims/Flash = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="." index="6"]
 visible = false
-position = Vector2( -0.23597, -28.7292 )
+position = Vector2( -3.07251, -39.5748 )
 scale = Vector2( 0.461991, 0.716276 )
 texture = ExtResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="." index="7"]
 visible = false
 light_mask = 2
-position = Vector2( 0.674194, -109.264 )
+position = Vector2( -0.325806, -96.264 )
 scale = Vector2( 1.89065, 2.27782 )
 texture = ExtResource( 7 )
 texture_scale = 2.0
@@ -95,6 +95,7 @@ shadow_enabled = true
 shadow_item_cull_mask = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="8"]
+position = Vector2( 0, -10.301 )
 stream = ExtResource( 8 )
 bus = "Effects"
 [connection signal="began" from="." to="." method="end_attack"]

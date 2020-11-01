@@ -13,6 +13,7 @@ var speed_multiplier = 1
 var respawn_time = null
 
 func setDefaults():
+	$PlayerAnimationPlayer.play("Stand")
 	has_weapons = [true, false, false, false, false, false, false]
 	ammo = [0, 0, 0, 0, 0, 0, 0]
 	switch_weapon(0)
@@ -62,12 +63,15 @@ func lockPlayer():
 func unlockPlayer():
 	locked = false
 	
+var flashRotation = 0
+var gunRotation = 0
+var gunScale = 1
+var gunZ = 0
 func _physics_process(delta):
 	if health <= 0 or locked:
 		return
 	
 	var motion = Vector2()
-	var rotation = 0
 
 	if is_network_master():
 		if Input.is_action_pressed("move_left"):
@@ -118,23 +122,41 @@ func _physics_process(delta):
 		#	#var bomb_pos = position
 		#	rpc("setup_bullet", get_tree().get_network_unique_id())
 			
-		rotation = get_angle_to(get_global_mouse_position())
+		#rotation = get_angle_to(get_global_mouse_position())
+		#if motion != Vector2.ZERO:
+		#	playerRotation = get_angle_to(self.position + motion)
+			
+		var a = get_angle_to(get_global_mouse_position())
+		var ang = a / PI * 180
+		if ang >= -45 and ang < 45:
+			$PlayerAnimationPlayer.play("Right")
+		if ang >= 45 and ang < 135:
+			$PlayerAnimationPlayer.play("Down")
+		if ang >= 135 or ang < -135 :
+			$PlayerAnimationPlayer.play("Left")
+		elif ang < -45 and ang >= -135:
+			$PlayerAnimationPlayer.play("Up")
+				
+		$Group/Camera2D/flashlight.rotation = a
+		get_node("Group/Gun").rotation = a + PI / 2
+		
 
 		prev_shooting = shooting
 
 		rset("puppet_motion", motion)
-		rset("puppet_rotation", rotation)
+		#rset("puppet_rotation", rotation)
 		rset("puppet_pos", position)
 	else:
 		position = puppet_pos
 		motion = puppet_motion
-		rotation = puppet_rotation
+		#rotation = puppet_rotation
 			
 #	get_node("Pointer/Sprite").rotation = get_angle_to(get_global_mouse_position()) + PI/2
 
 	# FIXME: Use move_and_slide
 	# $Group.look_at(get_global_mouse_position())
-	$Group.rotation = rotation
+	
+	#$Group.rotation = rotation
 	
 	move_and_slide(motion * speed * speed_multiplier)
 	if not is_network_master():
