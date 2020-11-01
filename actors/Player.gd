@@ -256,7 +256,6 @@ func setMap(newlevel):
 	if not world.get_node("Level"):
 		Logger.error("no level after insert?! (master: " + str(is_network_master()) + ")")
 	
-	world.get_node("CanvasLayer/MiniMap").update_map_markers()
 	
 	var SpawnPoints = newlevel.get_node("SpawnPoints")
 	var spawn = SpawnPoints.get_child(0)

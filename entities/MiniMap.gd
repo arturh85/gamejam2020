@@ -3,6 +3,8 @@ extends MarginContainer
 export (NodePath) var player  # Link to Player node. If this is null, the map will not function.
 export var zoom = 1.5 setget set_zoom # Scale multiplier.
 
+const max_radius = 400
+
 # Node references.
 onready var grid = $MarginContainer/Grid
 onready var player_marker = $MarginContainer/Grid/PlayerMarker
@@ -24,9 +26,16 @@ func _ready():
 	update_map_markers()
 		
 func update_map_markers():
+	for item in markers:
+		item.hide()
+		item.queue_free()
+		markers.erase(item)
 	markers = {}
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
+	var level = get_node("../../Level")
 	for item in map_objects:
+		if not level.is_a_parent_of(item):
+			continue
 		var new_marker = icons[item.minimap_icon].duplicate()
 		grid.add_child(new_marker)
 		new_marker.show()
@@ -56,9 +65,12 @@ func _process(delta):
 		if obj_distance < grid_radius:
 		#if grid.get_rect().has_point(obj_pos + grid.rect_position):
 			markers[item].scale = Vector2(3, 3)
-#			markers[item].show()
-		else:
+			markers[item].show()
+		elif obj_distance < max_radius:
 			markers[item].scale = Vector2(0.75, 0.75)
+			markers[item].show()
+		else:
+			markers[item].hide()
 #			markers[item].hide()
 		# Don't draw markers outside grid rectangle.
 		
