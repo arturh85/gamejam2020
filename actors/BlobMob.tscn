@@ -6,7 +6,7 @@
 [ext_resource path="res://data/sounds/hit_mob.wav" type="AudioStream" id=4]
 [ext_resource path="res://data/images/sprites/teleporter.png" type="Texture" id=5]
 [ext_resource path="res://data/sounds/death_mob.wav" type="AudioStream" id=6]
-[ext_resource path="res://data/images/sprites/blob.png" type="Texture" id=7]
+[ext_resource path="res://data/images/enemies/blob.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.2508
@@ -223,7 +223,8 @@ texture = ExtResource( 5 )
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 light_mask = 2
-position = Vector2( 3, 0 )
+position = Vector2( -2.48338, -1.31502 )
+scale = Vector2( 0.859894, 0.771406 )
 texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

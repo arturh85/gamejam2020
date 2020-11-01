@@ -6,7 +6,6 @@
 [ext_resource path="res://data/sounds/collect.wav" type="AudioStream" id=4]
 [ext_resource path="res://data/sounds/doubledamage.wav" type="AudioStream" id=5]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.3714, 30.4503 )
 
@@ -180,6 +179,7 @@ tracks/3/keys = {
 }
 
 [node name="DoubleDamage" type="Area2D"]
+scale = Vector2( 1, 0.5 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

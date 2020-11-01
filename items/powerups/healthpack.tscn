@@ -5,9 +5,8 @@
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 [ext_resource path="res://data/sounds/collect.wav" type="AudioStream" id=4]
 
-
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30.3714, 30.4503 )
+extents = Vector2( 28.7915, 16.1013 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Collect"
