@@ -1,21 +1,21 @@
 {
 	"map": {
 		"Circular": 1,
-		"Size": 200,
+		"Size": 150,
 		"MapBoundary": 2,
 		"SpawnPoints": 4,
 		"SafeSpawnRadius": 20,
 		"SpawnRadius": 5,
 		
 		"Floors": {
-			"Iterations": 1000,
-			"Loops": 1,
-			"Directed": 15
+			"Iterations": 500,
+			"Loops": 3,
+			"Directed": 10
 		},
 		
 		"Rooms": {
 			"Iterations": 300,
-			"Loops": 10,
+			"Loops": 0,
 			"Directed": -15
 		}
 
@@ -24,35 +24,31 @@
 	"portals": {
 		"equip": "ffffff",
 		"equip": "ffffff",
-		"level2": "ff0000"
+		"equip": "ffffff",
+		"level3": "ff0000"
 	},
 	
 	"mobs": {
-		"TimeCop": 2,
-		"BlobMob": 30
+		"TimeCop": 10,
+		"BlobMob": 20
 	},
 	
-	"prefabs": {
-		"table+chairs": 1,
-		"3spints": 1,
-		"chest": 1
-	},
 	
 	"items": {
 		"weapons": {
 			"Plasmagun": 1,
 			"Crossbow": 1,
-			"Machinegun": 2,
+			"Machinegun": 1,
 			"Railgun": 0.1,
-			"Rifle": 0
+			"Rifle": 1
 		},
 		"ammo": {
 			"MachineGunAmmo": 4
 		},
 		"powerups": {
-			"healthpack": 6,
-			"speedup": 2,
-			"doubledamage": 1
+			"healthpack": 2,
+			"speedup": 0,
+			"doubledamage": 0
 		}
 	}
 }

@@ -1,0 +1,52 @@
+{
+	"map": {
+		"Circular": 1,
+		"Size": 250,
+		"MapBoundary": 2,
+		"SpawnPoints": 4,
+		"SafeSpawnRadius": 20,
+		"SpawnRadius": 5,
+		
+		"Floors": {
+			"Iterations": 2000,
+			"Loops": 2,
+			"Directed": 10
+		},
+		
+		"Rooms": {
+			"Iterations": 2000,
+			"Loops": 2,
+			"Directed": -15
+		}
+
+	},
+	
+	"portals": {
+		"equipbonus1": "0000ff",
+		"equip": "ffffff"
+	},
+	
+	"mobs": {
+		"TimeCop": 30,
+		"BlobMob": 10
+	},
+	
+	
+	"items": {
+		"weapons": {
+			"Plasmagun": 0,
+			"Crossbow": 0,
+			"Machinegun": 0,
+			"Railgun": 2,
+			"Rifle": 0
+		},
+		"ammo": {
+			"MachineGunAmmo": 10
+		},
+		"powerups": {
+			"healthpack": 0,
+			"speedup": 0,
+			"doubledamage": 1
+		}
+	}
+}

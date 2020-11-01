@@ -1,0 +1,42 @@
+{
+	"map": {
+		"Circular": 1,
+		"Size": 30,
+		"MapBoundary": 2,
+		"SpawnPoints": 4,
+		"SafeSpawnRadius": 20,
+		"SpawnRadius": 5,
+		
+		"Floors": {
+			"Iterations": 1000,
+			"Loops": 0,
+			"Directed": 0
+		},
+		
+		"Rooms": {
+			"Iterations": 2000,
+			"Loops": 1,
+			"Directed": 0
+		}
+
+	},
+	
+	
+	"items": {
+		"weapons": {
+			"Plasmagun": 1,
+			"Crossbow": 1,
+			"Machinegun": 1,
+			"Railgun": 1,
+			"Rifle": 2
+		},
+		"ammo": {
+			"MachineGunAmmo": 10
+		},
+		"powerups": {
+			"healthpack": 6,
+			"speedup": 0,
+			"doubledamage": 0
+		}
+	}
+}

@@ -20,7 +20,7 @@ tracks/0/path = NodePath("Light2D:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 0.554784, 1.62451 ),
@@ -244,13 +244,14 @@ rotation = 1.5708
 [node name="ManualFireGun" parent="Group/Gun" instance=ExtResource( 8 )]
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 light_mask = 2
 position = Vector2( -0.128037, 0.105028 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 texture_scale = 0.75
 color = Color( 0.431373, 1, 0, 1 )
-energy = 0.0
+energy = 2.0
 range_item_cull_mask = 2
 shadow_color = Color( 0.435294, 1, 0.278431, 0 )
 shadow_item_cull_mask = 2

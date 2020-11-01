@@ -133,7 +133,7 @@ func createPortals():
 		return
 		
 	for portal in settings["portals"]:
-		ADD.portal($Items, RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, startpoint, size / 10, TILE.SPECIAL)), false, portal, settings["portals"][portal])
+		ADD.portal($Items, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, size / 3, TILE.SPECIAL)), false, portal, settings["portals"][portal])
 	
 
 	

@@ -20,6 +20,8 @@ func getValidRandomPosOutDistance(id, pos, distance, setID = -1):
 				tmpMap[p.x][p.y] = setID
 			return p
 		
+				
+	
 func getValidRandomPosInDistance(id, pos, distance, setID = -1):
 	
 	while true:
