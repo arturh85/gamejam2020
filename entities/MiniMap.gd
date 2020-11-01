@@ -25,12 +25,15 @@ func _ready():
 	# Create markers for all objects.
 	update_map_markers()
 		
-func update_map_markers():
+func clear_map_markers():
 	for item in markers:
-		item.hide()
-		item.queue_free()
-		markers.erase(item)
+		grid.remove_child(markers[item])
+		markers[item].hide()
+		markers[item].queue_free()
 	markers = {}
+		
+func update_map_markers():
+	clear_map_markers()
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
 	var level = get_node("../../Level")
 	for item in map_objects:
