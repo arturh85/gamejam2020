@@ -47,10 +47,11 @@ func init(levelName, rseed):
 	settings = IO.readLevel(levelName)
 	size = int(settings["map"]["Size"])
 	
-	RF = rf.new(size, cell, tmpMap)
-	MG = mg.new(size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
-	
 	rnd.seed = rseed
+	
+	RF = rf.new(rnd, size, cell, tmpMap)
+	MG = mg.new(rnd, size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
+	
 	
 	createMap()
 	

@@ -1,12 +1,12 @@
 var mapSize
 var cellSize
-var rnd = RandomNumberGenerator.new()
+var rnd
 var tmpMap
 
-func _init(size, cell, map):
+func _init(rand, size, cell, map):
 	mapSize = size
 	cellSize = cell
-	rnd.randomize()
+	rnd = rand
 	tmpMap = map
 
 func getValidRandomPosOutDistance(id, pos, distance, setID = -1):

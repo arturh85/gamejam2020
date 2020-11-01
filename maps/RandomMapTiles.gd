@@ -1,6 +1,6 @@
 var mapSize
 var cellSize
-var rnd = RandomNumberGenerator.new()
+var rnd
 var map
 var tmpMap
 var circ
@@ -9,10 +9,10 @@ var wID
 var nID
 var gThere = false
 
-func _init(size, cell, circular, tilemap, tMap, groundID, wallID, noID):
+func _init(rand, size, cell, circular, tilemap, tMap, groundID, wallID, noID):
+	rnd = rand
 	mapSize = size
 	cellSize = cell
-	rnd.randomize()
 	map = tilemap
 	tmpMap = tMap
 	circ = circular
