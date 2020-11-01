@@ -9,9 +9,6 @@
 [ext_resource path="res://data/sounds/weapons/laser2.wav" type="AudioStream" id=7]
 [ext_resource path="res://data/images/sprites/weapon_plasma_load.png" type="Texture" id=8]
 
-
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
 length = 1.5

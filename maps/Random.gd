@@ -30,8 +30,19 @@ enum TILE {
 	WALL = 1
 }
 
+export (PackedScene) var random_level = load("res://maps/Random.tscn")
+var randomLevel = {}
+
 func _ready():
-	pass
+	
+	if settings.has("portals"):
+		for portal in settings["portals"]:
+			Logger.info("generated random " + portal)
+			randomLevel[portal] = random_level.instance()
+			randomLevel[portal].init(portal, self)
+		
+func getRandomLevel(name):
+	return randomLevel[name]
 	
 func init(levelName, lvl):
 	Logger.info("random.init (master: " + str(is_network_master()) + ")")
@@ -47,7 +58,7 @@ func init(levelName, lvl):
 	
 	createMap()
 	
-	createPortal()
+	createPortals()
 	
 	createSpawns()
 	
@@ -93,7 +104,7 @@ func createMap():
 	for x in range(size):
 		for y in range(size):			
 			if map[x][y] == TILE.WALL:
-				var r = rnd.randi()%3
+				var r = rnd.randi()%4
 				if r == 0:
 					get_node("TileMap1").set_cell(- size / 2 + x, - size / 2  + y, -1)
 					var r2 = rnd.randi()%(tileMapsCount - 1)
@@ -113,14 +124,24 @@ func createSpawns():
 		ADD.spawn($SpawnPoints, String(i), pos)
 		
 		
-func createPortal():
+func createPortals():
 	
 	ADD.portal($Items, RF.b2p(startpoint))
 	tmpMap[startpoint.x][startpoint.y] = TILE.SPECIAL
+	
+	if not settings.has("portals"):
+		return
+		
+	for portal in settings["portals"]:
+		ADD.portal($Items, RF.b2p(RF.getValidRandomPosInDistance(TILE.GROUND, startpoint, size / 10, TILE.SPECIAL)), false, portal, settings["portals"][portal])
+	
 
 	
 func createPrefabs():
 	
+	if not settings.has("prefabs"):
+		return
+		
 	for prefab in settings["prefabs"]:
 		var fab = IO.readPrefab(prefab)
 		for i in range(settings["prefabs"][prefab]):
@@ -129,21 +150,38 @@ func createPrefabs():
 
 func createItems():
 	
-	for weapon in settings["items"]["weapons"]:
-		for i in range(int(settings["items"]["weapons"][weapon])):
-			ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+	if not settings.has("items"):
+		return
+		
+	if settings["items"].has("weapons"):
+		for weapon in settings["items"]["weapons"]:
+			var items = float(settings["items"]["weapons"][weapon])
+			for i in range(int(floor(items))):
+				ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+			
+			if items-int(items) > 0:
+				var num = int(1/(items-int(items)))
+				var r = rnd.randi()%num
+				if r == 0:
+					ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+				
 
-	for ammo in settings["items"]["ammo"]:
-		for i in range(int(settings["items"]["ammo"][ammo])):
-			ADD.ammo($Items/Ammo, ammo, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+	if settings["items"].has("ammo"):
+		for ammo in settings["items"]["ammo"]:
+			for i in range(int(settings["items"]["ammo"][ammo])):
+				ADD.ammo($Items/Ammo, ammo, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
 
-	for powerup in settings["items"]["powerups"]:
-		for i in range(int(settings["items"]["powerups"][powerup])):
-			ADD.powerup($Items/Powerups, powerup, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+	if settings["items"].has("powerups"):
+		for powerup in settings["items"]["powerups"]:
+			for i in range(int(settings["items"]["powerups"][powerup])):
+				ADD.powerup($Items/Powerups, powerup, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
 
 	
 func createMobs():
 	
+	if not settings.has("mobs"):
+		return
+		
 	for mob in settings["mobs"]:
 		for i in range(int(settings["mobs"][mob])):
 			ADD.mob($Mobs, mob, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN)))

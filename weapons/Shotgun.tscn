@@ -52,7 +52,8 @@ tracks/2/keys = {
 [node name="Shotgun" instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="FiringCooldown" index="0"]
-wait_time = 0.6
+wait_time = 0.1
+autostart = true
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 modulate = Color( 0.2, 0.2, 0.2, 1 )

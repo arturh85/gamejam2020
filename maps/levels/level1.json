@@ -21,6 +21,10 @@
 
 	},
 	
+	"portals": {
+		"equip": "ffffff"
+	},
+	
 	"mobs": {
 		"TimeCop": 10,
 		"BlobMob": 50

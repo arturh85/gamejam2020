@@ -5,7 +5,13 @@ onready var world = $"/root/World"
 
 export var back = false
 export var levelName = ""
+export var color = "00f3ff"
 var level
+
+	
+
+func setColor(c):
+	$Light2D.color = c
 
 remotesync func activate():
 	Logger.info("portal activated (master: " + str(is_network_master()) + ")")
@@ -25,7 +31,7 @@ remotesync func activate():
 	var level = world.get_node("Level")
 	
 	var newlevel
-	if level.has_method("getHomeLevel"):
+	if back and level.has_method("getHomeLevel"):
 		newlevel = level.getHomeLevel()
 	else:
 		newlevel = level.getRandomLevel(levelName)
@@ -40,6 +46,8 @@ remotesync func activate():
 	once = false
 	
 var once = false
+
+
 
 func _on_body_entered(body):
 	if is_network_master() and body.is_in_group("players"):

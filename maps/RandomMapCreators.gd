@@ -4,11 +4,16 @@ static func spawn(node, name, position):
 	spawn.position = position
 	node.add_child(spawn)
 	
-static func portal(node, position):
+static func portal(node, position, back = true, levelname = "", color="ff0000"):
 	var scn = load("res://items/portal.tscn")
 	var object = scn.instance()
 	object.position = position
-	object.back = true
+	object.back = back
+	object.levelName = levelname
+	if back:
+		object.setColor("00ff00")
+	else:
+		object.setColor(color)
 	node.add_child(object)
 	
 static func object(node, size, cell, tmpMap, o, pos):
