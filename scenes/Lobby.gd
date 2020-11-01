@@ -1,5 +1,7 @@
 extends Control
 
+onready var cursor = $Cursor
+
 func _ready():
 	# Called every time the node is added to the scene.
 	gamestate.connect("connection_failed", self, "_on_connection_failed")
@@ -67,9 +69,11 @@ func _on_connection_failed():
 	$Connect/Host.disabled = false
 	$Connect/Join.disabled = false
 	$Connect/ErrorLabel.set_text("Connection failed.")
+	cursor.update_cursor()
 
 
 func _on_game_ended():
+	cursor.update_cursor()
 	show()
 	$Connect.show()
 	$Players.hide()

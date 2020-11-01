@@ -34,6 +34,7 @@ func _ready():
 	pass
 	
 func init(levelName, lvl):
+	Logger.info("random.init (master: " + str(is_network_master()) + ")")
 	homeLevel = lvl
 	
 	settings = IO.readLevel(levelName)
