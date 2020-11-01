@@ -116,7 +116,7 @@ position = Vector2( -22.8188, 892.857 )
 
 [node name="Portal3" parent="." instance=ExtResource( 1 )]
 position = Vector2( -561.82, 31.3193 )
-target_scene = "res://maps/Test.tscn"
+target_scene = "res://maps/Ship.tscn"
 color = Color( 0.384314, 0.121569, 0.666667, 1 )
 
 [node name="Items" type="Node" parent="."]
@@ -129,8 +129,8 @@ levelName = "level1"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 2
+frame = 3
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 1
+frame = 2

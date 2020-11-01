@@ -1,0 +1,561 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/GreenLight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/images/ftl/CloakingSymbol.png" type="Texture" id=3]
+[ext_resource path="res://data/images/ftl/MindControlSymbol.png" type="Texture" id=4]
+[ext_resource path="res://data/images/ftl/ShieldsSymbol.png" type="Texture" id=5]
+[ext_resource path="res://data/images/ftl/DoorSystemSymbol.png" type="Texture" id=6]
+[ext_resource path="res://data/images/ftl/MedbaySymbol.png" type="Texture" id=7]
+[ext_resource path="res://data/images/ftl/SensorsSymbol.png" type="Texture" id=8]
+[ext_resource path="res://data/images/ftl/DroneControlSymbol.png" type="Texture" id=9]
+[ext_resource path="res://data/images/ftl/PilotingSymbol.png" type="Texture" id=10]
+[ext_resource path="res://data/images/ftl/WeaponControlSymbol.png" type="Texture" id=11]
+[ext_resource path="res://data/images/ftl/BackupBatterySymbol.png" type="Texture" id=12]
+[ext_resource path="res://data/images/ftl/OxygenSymbol.png" type="Texture" id=13]
+[ext_resource path="res://data/images/ftl/EnginesSymbol.png" type="Texture" id=14]
+[ext_resource path="res://data/images/ftl/CrewTeleporterSymbol.png" type="Texture" id=15]
+[ext_resource path="res://data/images/ftl/HackingSymbol.png" type="Texture" id=16]
+[ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
+[ext_resource path="res://data/images/background.png" type="Texture" id=22]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=23]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 141.547, 150.053 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 155.635, 199.384 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 125.362, 201.066 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 127.63, 96.1781 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 144.146, 91.715 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 90.2152, 172.367 )
+
+[node name="Level" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = -5200.0
+margin_top = -5704.53
+margin_right = 15328.0
+margin_bottom = 7575.47
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 1324.22, 4708.32 )
+texture = ExtResource( 22 )
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Cloaking" type="Area2D" parent="Rooms"]
+position = Vector2( 126.076, 176.93 )
+
+[node name="CloakingSymbol" type="Sprite" parent="Rooms/Cloaking"]
+light_mask = 2
+position = Vector2( -2.32593, 6.94397 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Light" type="Light2D" parent="Rooms/Cloaking"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.188235, 0.980392, 0.121569, 1 )
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Cloaking"]
+visible = false
+position = Vector2( 2.11887, -2.11893 )
+shape = SubResource( 1 )
+
+[node name="WeaponControl" type="Area2D" parent="Rooms"]
+position = Vector2( -184.073, -17.8496 )
+
+[node name="WeaponControlSymbol" type="Sprite" parent="Rooms/WeaponControl"]
+position = Vector2( 5.82132, -14.3281 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 11 )
+
+[node name="Light2D" type="Light2D" parent="Rooms/WeaponControl"]
+position = Vector2( -42.4032, 20.6495 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 2.43
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Light" type="Light2D" parent="Rooms/WeaponControl"]
+position = Vector2( 100.123, 10.3529 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.980392, 0.905882, 0.121569, 1 )
+energy = 1.74
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/WeaponControl"]
+visible = false
+position = Vector2( 2.11887, -2.11893 )
+shape = SubResource( 1 )
+
+[node name="Engines" type="Area2D" parent="Rooms"]
+position = Vector2( -647.05, 10.6182 )
+
+[node name="Light" type="Light2D" parent="Rooms/Engines"]
+position = Vector2( 100.123, 10.3529 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.188235, 0.121569, 0.980392, 1 )
+energy = 3.38
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Engines"]
+visible = false
+position = Vector2( 2.11887, -2.11893 )
+shape = SubResource( 1 )
+
+[node name="EnginesSymbol" type="Sprite" parent="Rooms/Engines"]
+position = Vector2( -15.1548, -12.8295 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 14 )
+
+[node name="MindControl" type="Area2D" parent="Rooms"]
+position = Vector2( 126.076, -147.07 )
+
+[node name="MindControlSymbol" type="Sprite" parent="Rooms/MindControl"]
+light_mask = 2
+position = Vector2( 3.92392, 4.06966 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="Light" type="Light2D" parent="Rooms/MindControl"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.121569, 0.439216, 0.980392, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/MindControl"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 1 )
+
+[node name="Shields" type="Area2D" parent="Rooms"]
+position = Vector2( 446.731, 197.396 )
+
+[node name="ShieldsSymbol" type="Sprite" parent="Rooms/Shields"]
+position = Vector2( 3.11966, -6.21538 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+
+[node name="Light" type="Light2D" parent="Rooms/Shields"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.952941, 0.980392, 0.121569, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Shields"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 1 )
+
+[node name="Medbay" type="Area2D" parent="Rooms"]
+position = Vector2( 449.251, -132.703 )
+
+[node name="MedbaySymbol" type="Sprite" parent="Rooms/Medbay"]
+position = Vector2( 1.29636, -2.27214 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+
+[node name="Light" type="Light2D" parent="Rooms/Medbay"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.980392, 0.423529, 0.121569, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Medbay"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 1 )
+
+[node name="DroneControl" type="Area2D" parent="Rooms"]
+position = Vector2( 1081.6, 28.7491 )
+
+[node name="DroneControlSymbol" type="Sprite" parent="Rooms/DroneControl"]
+position = Vector2( 9.43762, -12.1873 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 9 )
+
+[node name="Light" type="Light2D" parent="Rooms/DroneControl"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.207843, 0.980392, 0.121569, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/DroneControl"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 3 )
+
+[node name="Piloting" type="Area2D" parent="Rooms"]
+position = Vector2( 1350.69, 11.9312 )
+
+[node name="PilotingSymbol" type="Sprite" parent="Rooms/Piloting"]
+position = Vector2( 14.483, -15.551 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 10 )
+
+[node name="Light" type="Light2D" parent="Rooms/Piloting"]
+position = Vector2( -47.7524, -7.19797 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.121569, 0.517647, 0.980392, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Piloting"]
+visible = false
+position = Vector2( 20.3004, 7.24466 )
+shape = SubResource( 4 )
+
+[node name="DoorControl" type="Area2D" parent="Rooms"]
+position = Vector2( 768.251, -68.703 )
+
+[node name="DoorSystemSymbol" type="Sprite" parent="Rooms/DoorControl"]
+position = Vector2( 1.74915, 4.70298 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+
+[node name="Light" type="Light2D" parent="Rooms/DoorControl"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.945098, 0, 1, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/DoorControl"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 2 )
+
+[node name="BackupBattery" type="Area2D" parent="Rooms"]
+position = Vector2( -334.503, -269.476 )
+
+[node name="BackupBatterySymbol" type="Sprite" parent="Rooms/BackupBattery"]
+position = Vector2( 13.9121, 11.0544 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 12 )
+
+[node name="Light" type="Light2D" parent="Rooms/BackupBattery"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.945098, 0, 1, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/BackupBattery"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 5 )
+
+[node name="Oxygen" type="Area2D" parent="Rooms"]
+position = Vector2( -652.144, -272.473 )
+
+[node name="OxygenSymbol" type="Sprite" parent="Rooms/Oxygen"]
+position = Vector2( 19.9054, 2.06448 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 13 )
+
+[node name="Light" type="Light2D" parent="Rooms/Oxygen"]
+position = Vector2( -73.6808, -25.6064 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.713726, 1, 0.145098, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Oxygen"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 5 )
+
+[node name="Airlock1" type="Area2D" parent="Rooms"]
+position = Vector2( 130.354, -396.15 )
+
+[node name="Light" type="Light2D" parent="Rooms/Airlock1"]
+position = Vector2( -73.6808, -25.6064 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.713726, 1, 0.145098, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Airlock1"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 5 )
+
+[node name="Airlock2" type="Area2D" parent="Rooms"]
+position = Vector2( 123.218, 448.187 )
+
+[node name="Light" type="Light2D" parent="Rooms/Airlock2"]
+position = Vector2( -73.6808, -25.6064 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.713726, 1, 0.145098, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Airlock2"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 5 )
+
+[node name="Airlock3" type="Area2D" parent="Rooms"]
+position = Vector2( -892.364, -1.33356 )
+
+[node name="Light" type="Light2D" parent="Rooms/Airlock3"]
+position = Vector2( 2.40497, -25.6064 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.713726, 1, 0.145098, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Airlock3"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 6 )
+
+[node name="CrewTeleporter" type="Area2D" parent="Rooms"]
+position = Vector2( -655.141, 245.942 )
+
+[node name="Light" type="Light2D" parent="Rooms/CrewTeleporter"]
+position = Vector2( -73.6808, -25.6064 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.145098, 1, 0.337255, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/CrewTeleporter"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 5 )
+
+[node name="CrewTeleporterSymbol" type="Sprite" parent="Rooms/CrewTeleporter"]
+position = Vector2( 17.1456, 5.0611 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 15 )
+
+[node name="CrewTeleporter2" type="Area2D" parent="Rooms"]
+position = Vector2( -331.286, 250.184 )
+
+[node name="Light" type="Light2D" parent="Rooms/CrewTeleporter2"]
+position = Vector2( 124.309, 33.7906 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 1, 0.145098, 0.145098, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/CrewTeleporter2"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 5 )
+
+[node name="HackingSymbol" type="Sprite" parent="Rooms/CrewTeleporter2"]
+position = Vector2( 3.53998, 1.92566 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 16 )
+
+[node name="Sensors" type="Area2D" parent="Rooms"]
+position = Vector2( 766.469, 130.858 )
+
+[node name="SensorsSymbol" type="Sprite" parent="Rooms/Sensors"]
+position = Vector2( 10.8955, -4.26082 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
+[node name="Light" type="Light2D" parent="Rooms/Sensors"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 1, 0.282353, 0, 1 )
+energy = 3.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Sensors"]
+visible = false
+position = Vector2( 0.118866, 3.88107 )
+shape = SubResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+tile_set = ExtResource( 21 )
+collision_bounce = 1.0
+occluder_light_mask = -2147483646
+format = 1
+tile_data = PoolIntArray( -1966112, 1, 196614, -458753, 1, 65541, -524288, 0, 0, -524287, 1, 65542, -524286, 1, 5, -524285, 0, 0, -524284, 1, 65541, -393217, 1, 65538, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458749, 0, 0, -458748, 1, 65538, -327693, 1, 0, -327692, 1, 2, -327691, 1, 2, -327690, 1, 2, -327689, 1, 2, -327688, 1, 3, -327687, 1, 2, -327686, 1, 2, -327685, 1, 2, -327684, 1, 2, -327683, 1, 1, -327681, 1, 65538, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 1, 65538, -262157, 1, 65538, -262156, 0, 0, -262155, 0, 0, -262154, 0, 0, -262153, 0, 0, -262152, 1, 6, -262151, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 1, 65538, -262145, 1, 65539, -327680, 1, 2, -327679, 1, 5, -327678, 0, 0, -327677, 1, 65542, -327676, 1, 131079, -327675, 1, 2, -327674, 1, 2, -327673, 1, 2, -327672, 1, 2, -327671, 1, 1, -196621, 1, 65538, -196620, 0, 0, -196619, 0, 0, -196618, 0, 0, -196617, 0, 0, -196616, 0, 0, -196615, 0, 0, -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -196611, 1, 65538, -196609, 1, 65538, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 1, 6, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 1, 65538, -131088, 1, 65542, -131087, 1, 2, -131086, 1, 2, -131085, 1, 4, -131084, 1, 2, -131083, 1, 5, -131082, 0, 0, -131081, 1, 65542, -131080, 1, 3, -131079, 1, 2, -131078, 1, 1, -131077, 0, 0, -131076, 1, 65542, -131075, 1, 4, -131074, 1, 2, -131073, 1, 65537, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 1, 65539, -196598, 1, 2, -196597, 1, 2, -196596, 1, 2, -196595, 1, 2, -196594, 1, 3, -196593, 1, 2, -196592, 1, 2, -196591, 1, 2, -196590, 1, 2, -196589, 1, 3, -196588, 1, 2, -196587, 1, 2, -196586, 1, 1, -65552, 0, 0, -65551, 0, 0, -65550, 0, 0, -65549, 0, 0, -65548, 0, 0, -65547, 0, 0, -65546, 0, 0, -65545, 0, 0, -65544, 1, 65538, -65542, 1, 65538, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 1, 65541, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 1, 6, -131062, 0, 0, -131061, 0, 0, -131060, 0, 0, -131059, 0, 0, -131058, 1, 6, -131057, 0, 0, -131056, 0, 0, -131055, 0, 0, -131054, 0, 0, -131053, 1, 65538, -131052, 0, 0, -131051, 0, 0, -131050, 1, 6, -16, 1, 65541, -15, 0, 0, -14, 0, 0, -13, 1, 65541, -12, 0, 0, -11, 0, 0, -10, 0, 0, -9, 0, 0, -8, 1, 65538, -6, 1, 65538, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 1, 65541, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 1, 65538, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -65519, 0, 0, -65518, 0, 0, -65517, 1, 65538, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 1, 65541, 65520, 1, 6, 65521, 0, 0, 65522, 0, 0, 65523, 1, 6, 65524, 0, 0, 65525, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 1, 65538, 65530, 1, 65538, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 1, 65536, 0, 1, 5, 1, 0, 0, 2, 1, 65542, 3, 1, 2, 4, 1, 131079, 5, 1, 5, 6, 0, 0, 7, 1, 65542, 8, 1, 2, 9, 1, 2, 10, 1, 2, 11, 1, 2, 12, 1, 2, 13, 1, 2, 14, 1, 5, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 1, 6, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 1, 65538, 131056, 0, 0, 131057, 0, 0, 131058, 0, 0, 131059, 0, 0, 131060, 0, 0, 131061, 0, 0, 131062, 0, 0, 131063, 0, 0, 131064, 1, 65538, 131066, 1, 65538, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 1, 65538, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 65555, 0, 0, 65556, 0, 0, 65557, 0, 0, 65558, 0, 0, 65559, 1, 6, 196592, 1, 65542, 196593, 1, 2, 196594, 1, 2, 196595, 1, 3, 196596, 1, 2, 196597, 1, 5, 196598, 0, 0, 196599, 1, 65542, 196600, 1, 4, 196601, 1, 2, 196602, 1, 65537, 196603, 0, 0, 196604, 1, 65542, 196605, 1, 3, 196606, 1, 2, 196607, 1, 1, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 1, 6, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 1, 65541, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 1, 65541, 131087, 0, 0, 131088, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 1, 65541, 131092, 0, 0, 131093, 0, 0, 131094, 1, 65541, 262131, 1, 65538, 262132, 0, 0, 262133, 0, 0, 262134, 0, 0, 262135, 0, 0, 262136, 0, 0, 262137, 0, 0, 262138, 0, 0, 262139, 0, 0, 262140, 0, 0, 262141, 1, 65538, 262143, 1, 65538, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 1, 65539, 196618, 1, 2, 196619, 1, 2, 196620, 1, 2, 196621, 1, 2, 196622, 1, 4, 196623, 1, 2, 196624, 1, 2, 196625, 1, 2, 196626, 1, 2, 196627, 1, 4, 196628, 1, 2, 196629, 1, 2, 196630, 1, 65537, 327667, 1, 65538, 327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 1, 65541, 327673, 0, 0, 327674, 0, 0, 327675, 0, 0, 327676, 0, 0, 327677, 1, 65538, 327679, 1, 65538, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 1, 65541, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 1, 65538, 393203, 1, 65536, 393204, 1, 2, 393205, 1, 2, 393206, 1, 2, 393207, 1, 2, 393208, 1, 4, 393209, 1, 2, 393210, 1, 2, 393211, 1, 2, 393212, 1, 2, 393213, 1, 65537, 393215, 1, 65539, 327680, 1, 2, 327681, 1, 2, 327682, 1, 5, 327683, 0, 0, 327684, 1, 65539, 327685, 1, 2, 327686, 1, 2, 327687, 1, 2, 327688, 1, 2, 327689, 1, 65537, 458751, 1, 65538, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 1, 65538, 524287, 1, 65538, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 1, 65538, 589823, 1, 6, 524288, 0, 0, 524289, 1, 65542, 524290, 1, 5, 524291, 0, 0, 524292, 1, 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 1337.99, 31.2272 )
+
+[node name="1" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 186.767, 135.651 )
+
+[node name="2" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -186.784, 62.2402 )
+
+[node name="3" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 453.228, 132.511 )
+
+[node name="Portal" parent="." instance=ExtResource( 1 )]
+position = Vector2( 227.562, 85.1059 )
+
+[node name="Portal3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 232.41, -28.7485 )
+target_scene = "res://maps/Test.tscn"
+color = Color( 0.384314, 0.121569, 0.666667, 1 )
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Weapons" type="Node" parent="."]
+
+[node name="Portal2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352.176, 98.2285 )
+levelName = "level1"
+
+[node name="GreenLight" parent="." instance=ExtResource( 2 )]
+position = Vector2( 454.021, -264.766 )
+frame = 10
+
+[node name="GreenLight2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -141.922, -138.258 )
+frame = 9
+
+[node name="GreenLight3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 795.304, 52.3939 )
+frame = 9
