@@ -1,6 +1,6 @@
 static func readLevel(filename):
 	var file = File.new()
-	if file.open("res://maps/levels/" + filename + ".json", file.READ) != OK:
+	if file.open("res://maps/levels/" + filename + ".json.tres", file.READ) != OK:
 		return
 	var text = file.get_as_text()
 	var json = JSON.parse(text)
@@ -11,7 +11,7 @@ static func readLevel(filename):
 static func readPrefab(prefab):
 	var csv_array = []
 	var csv_file = File.new()
-	csv_file.open("res://data/prefabs/" + prefab + ".txt", csv_file.READ)
+	csv_file.open("res://data/prefabs/" + prefab + ".tres", csv_file.READ)
 	while not csv_file.eof_reached():
 		var csv_row = []
 		var csv_line = csv_file.get_line()

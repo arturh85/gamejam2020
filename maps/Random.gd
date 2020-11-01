@@ -175,7 +175,7 @@ func createItems():
 			for i in range(int(floor(items))):
 				ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
 			
-			if items-int(items) > 0:
+			if items-int(items) > 0: #muss funktion für alles werden
 				var num = int(1/(items-int(items)))
 				var r = rnd.randi()%num
 				if r == 0:
