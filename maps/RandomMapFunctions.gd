@@ -19,8 +19,28 @@ func getValidRandomPosOutDistance(id, pos, distance, setID = -1):
 			if setID != -1:
 				tmpMap[p.x][p.y] = setID
 			return p
+
+
+func getValidRandomPosOutDistance3x3(id, pos, distance, setID = -1):
+	
+	var ids = Array()
+	for x in range(3):
+		ids.append([])
+		for y in range(3):
+			if x == 1 and y == 1:
+				ids[x].append(setID)
+			else:
+				ids[x].append("-1")
+			
+	while true:
+		var p = getValidRandomPosInArray(id, ids, setID)
+		if (pos.x-p.x)*(pos.x-p.x) + (pos.y-p.y)*(pos.y-p.y) < distance*distance:
+			getValidRandomPosInArray(id, ids, setID)
+		else:
+			if setID != -1:
+				tmpMap[p.x][p.y] = setID
+			return p
 		
-				
 	
 func getValidRandomPosInDistance(id, pos, distance, setID = -1):
 	
@@ -65,7 +85,8 @@ func getValidRandomPosInArray(id, ids, setID = -1):
 			if setID != -1:
 				for xx in range(ids[0].size()):
 					for yy in range(ids.size()):
-						tmpMap[x + xx][y + yy] = setID
+						if int(ids[yy][xx]) != -1:
+							tmpMap[x + xx][y + yy] = setID
 						
 			return Vector2(x, y)
 		

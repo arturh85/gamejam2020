@@ -20,6 +20,7 @@ var cell = 64
 var tileMapsCount = 10
 
 enum TILE {
+	PORTAL = -7,
 	SPECIAL = -6,
 	MOBSPAWN = -5,
 	SPAWN = -4,
@@ -58,8 +59,6 @@ func init(levelName, lvl):
 	
 	createMap()
 	
-	createPortals()
-	
 	createSpawns()
 	
 	createZeroZero()
@@ -78,6 +77,7 @@ func createMap():
 	
 	startpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))
 	
+	createPortals()
 	
 	for m in range(tileMapsCount):
 		var tileMap = TileMap.new()
@@ -127,14 +127,20 @@ func createSpawns():
 func createPortals():
 	
 	ADD.portal($Items, RF.b2p(startpoint))
-	tmpMap[startpoint.x][startpoint.y] = TILE.SPECIAL
+	tmpMap[startpoint.x][startpoint.y] = TILE.PORTAL
+	for x in range (-1, 2):
+		for y in range (-1, 2):
+			map[startpoint.x + x][startpoint.y + y] = TILE.GROUND
 	
 	if not settings.has("portals"):
 		return
 		
 	for portal in settings["portals"]:
-		ADD.portal($Items, RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, size / 3, TILE.SPECIAL)), false, portal, settings["portals"][portal])
-	
+		var pos = RF.getValidRandomPosInDistance(TILE.GROUND, Vector2(size / 2, size / 2), size / 2 - int(settings["map"]["MapBoundary"]) - 1, TILE.PORTAL)
+		ADD.portal($Items, RF.b2p(pos), false, portal, settings["portals"][portal])
+		for x in range (-1, 2):
+			for y in range (-1, 2):
+				map[pos.x + x][pos.y + y] = TILE.GROUND
 
 	
 func createPrefabs():
