@@ -1,5 +1,6 @@
 {
 	"map": {
+		"Color": "444444",
 		"Circular": 1,
 		"Size": 20,
 		"MapBoundary": 2,
@@ -17,6 +18,12 @@
 			"Iterations": 2000,
 			"Loops": 1,
 			"Directed": 0
+		},
+		
+		"Tileset": "data/auto_tileset_with_coll_nav.tres",
+		
+		"TileMaps": {
+			"TileMap1" : 1
 		}
 
 	},
