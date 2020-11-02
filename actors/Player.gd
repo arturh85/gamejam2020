@@ -306,16 +306,16 @@ func set_gui_state(new_gui_state):
 	gui_state = new_gui_state
 	match new_gui_state:
 		GuiState.hidden:
-			InventoryGui.hide()
-			DoorConsoleGui.hide()
+			InventoryGui.close()
+			DoorConsoleGui.close()
 			MouseCrosshair.update_cursor()
 		GuiState.inventory:
-			DoorConsoleGui.hide()
+			DoorConsoleGui.close()
 			InventoryGui.open()
 			MouseCursor.update_cursor()
 		GuiState.door_controls:
 			DoorConsoleGui.open()
-			InventoryGui.hide()
+			InventoryGui.close()
 			MouseCursor.update_cursor()
 	
 func toggle_inventory():
