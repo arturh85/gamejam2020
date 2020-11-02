@@ -33,7 +33,6 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
 puppet var puppet_rotation = 0 
 
-
 var velocity = Vector2()
 var damage_multiplier = 1
 var respawn_position = null
@@ -43,6 +42,7 @@ signal on_heal
 signal on_health_changed
 signal on_death
 signal on_respawn
+signal on_removed
 
 func _process(delta):
 	if respawn_position:

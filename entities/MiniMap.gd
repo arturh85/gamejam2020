@@ -35,16 +35,14 @@ func clear_map_markers():
 func update_map_markers():
 	clear_map_markers()
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
-	var level = get_node("../../Level")
 	for item in map_objects:
-		if not level.is_a_parent_of(item):
-			continue
 		var new_marker = icons[item.minimap_icon].duplicate()
 		grid.add_child(new_marker)
 		new_marker.show()
 		markers[item] = new_marker
-	
-
+		if not item.is_connected("on_removed", self, "_on_object_removed"):
+			item.connect("on_removed", self, "_on_object_removed")
+			
 func _process(delta):
 	# If no player is assigned, do nothing.
 	if !player:
@@ -54,18 +52,13 @@ func _process(delta):
 	player_marker.rotation = player_node.viewRotation + PI/2
 	for item in markers:
 		var obj_pos = (item.position - player_node.position) * grid_scale + grid.rect_size / 2
-
-		#print("grid.rect_position", grid.rect_position)
-		var grid_radius = grid.get_rect().size[0] / 2
-		
+		var grid_radius = grid.get_rect().size[0] / 2		
 		var grid_center = Vector2(grid_radius, grid_radius)
 		var obj_direction = obj_pos - grid_center
 		var obj_distance = obj_direction.length()
-		# If marker is outside grid, hide or shrink it.
 		
-		#print("distance ", obj_distance, " radius ", grid_radius)
+		# If marker is outside grid, hide or shrink it.		
 		if obj_distance < grid_radius:
-		#if grid.get_rect().has_point(obj_pos + grid.rect_position):
 			markers[item].scale = Vector2(3, 3)
 			markers[item].show()
 		elif obj_distance < max_radius:
@@ -73,17 +66,11 @@ func _process(delta):
 			markers[item].show()
 		else:
 			markers[item].hide()
-#			markers[item].hide()
-		# Don't draw markers outside grid rectangle.
-		
+			
+		# Don't draw markers outside grid rectangle.		
 		if obj_distance > grid_radius:
 			obj_pos = grid_center + (obj_direction.normalized() * grid_radius)
-		
-		#obj_pos.x = clamp(obj_pos.x, 0, grid.rect_size.x)
-		#obj_pos.y = clamp(obj_pos.y, 0, grid.rect_size.y)
-		markers[item].position = obj_pos
-		#print("obj_distance", obj_distance)
-	
+		markers[item].position = obj_pos	
 	
 func _on_object_removed(object):
 	# Removes a marker from the map. Connect to object's "removed" signal.

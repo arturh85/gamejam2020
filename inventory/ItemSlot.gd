@@ -8,6 +8,10 @@ var style;
 
 onready var item_root = $"/root/World/CanvasLayer/InventoryGui/Items"
 
+func _ready():
+	if not item_root:
+		item_root = get_tree().get_root()
+
 func _init():
 	mouse_filter = Control.MOUSE_FILTER_PASS;
 	rect_min_size = Vector2(34, 34);

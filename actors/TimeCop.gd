@@ -69,7 +69,9 @@ master func _on_death(by_who):
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimationPlayer.play("Die")
 
-	#yield(get_tree().create_timer(3), "timeout")
+	emit_signal("on_removed", self)
+	yield(get_tree().create_timer(3), "timeout")	
+	queue_free()
 	#health = max_health
 	#rset("health", health)
 	#var SpawnPoints = get_node("../SpawnPoints")

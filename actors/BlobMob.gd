@@ -54,8 +54,9 @@ func _physics_process(delta):
 master func _on_death(by_who):
 	$"../../CanvasLayer/Score".rpc("increase_score", by_who, 20)
 	$AnimationPlayer.play("Die")
-
-	#yield(get_tree().create_timer(3), "timeout")
+	emit_signal("on_removed", self)
+	yield(get_tree().create_timer(3), "timeout")
+	queue_free()
 	#var SpawnPoints = get_node("../SpawnPoints")
 	#var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 	#rpc("respawn_at", spawn.position)
