@@ -23,10 +23,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -279.0
-margin_top = -95.5
-margin_right = -99.0002
-margin_bottom = 81.5
+margin_left = 37.1194
+margin_top = 196.929
+margin_right = 217.119
+margin_bottom = 373.929
 mouse_filter = 1
 script = ExtResource( 3 )
 __meta__ = {
@@ -166,10 +166,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 154.0
-margin_top = -104.0
-margin_right = 343.0
-margin_bottom = 128.0
+margin_left = 272.366
+margin_top = 189.668
+margin_right = 461.366
+margin_bottom = 421.668
 mouse_filter = 1
 script = ExtResource( 5 )
 __meta__ = {
@@ -265,13 +265,15 @@ text = "Value: 0"
 [node name="AddItemButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -46.0
-margin_top = 29.0
-margin_right = 46.0
-margin_bottom = 62.0
+margin_left = 213.039
+margin_top = 80.0554
+margin_right = 305.039
+margin_bottom = 113.055
 text = "Add Item"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Items" type="Node" parent="."]
 [connection signal="pressed" from="Inventory/SortRarityButton" to="Inventory" method="_on_SortRarityButton_pressed"]
 [connection signal="pressed" from="AddItemButton" to="Inventory" method="_on_AddItemButton_pressed"]

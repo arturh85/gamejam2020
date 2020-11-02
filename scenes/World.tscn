@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://maps/Start.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://entities/MiniMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://entities/ammo_hud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://entities/crosshair.tscn" type="PackedScene" id=9]
+[ext_resource path="res://inventory/Inventory.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/cursor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://data/sounds/music/background.wav" type="AudioStream" id=20]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=24]
 [ext_resource path="res://entities/AudioStreamPlayer.gd" type="Script" id=25]
@@ -266,6 +268,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource( 10 )]
+visible = false
+margin_left = 467.698
+margin_top = -26.3326
+margin_right = 467.698
+margin_bottom = -26.3326
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
 autoplay = true
@@ -273,6 +282,9 @@ bus = "Music"
 script = ExtResource( 25 )
 
 [node name="Crosshair" parent="." instance=ExtResource( 9 )]
+
+[node name="Cursor" parent="." instance=ExtResource( 11 )]
+autoset = false
 
 [node name="Players" type="Node2D" parent="."]
 

@@ -15,5 +15,5 @@ func _set_input_trigger(val):
 
 func _process(delta):
 	var player = weapon2.get_parent().get_parent().get_parent()
-	if player.is_network_master() and Input.is_action_just_pressed(input_action_trigger):
+	if player.is_network_master() and player.can_shoot() and Input.is_action_just_pressed(input_action_trigger):
 		flip()

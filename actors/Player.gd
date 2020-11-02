@@ -13,6 +13,18 @@ var speed_multiplier = 1
 var respawn_time = null
 var viewRotation = 0
 
+enum GuiState {
+	hidden,
+	inventory,
+	door_controls
+}
+
+var gui_state = GuiState.hidden setget set_gui_state
+
+onready var InventoryGui = $"../../CanvasLayer/InventoryGui"
+onready var MouseCursor = $"../../Cursor"
+onready var MouseCrosshair = $"../../Crosshair"
+
 func setDefaults():
 	$PlayerAnimationPlayer.play("Stand")
 	has_weapons = [true, false, false, false, false, false, false]
@@ -34,6 +46,9 @@ func setDefaults():
 	setdamagemultiplier(1)
 	setspeedmultiplier(1)
 
+
+func can_shoot():
+	return not stunned and gui_state == GuiState.hidden and health > 0
 
 
 
@@ -92,6 +107,9 @@ func _physics_process(delta):
 			flashlight = not flashlight
 			rpc("update_flashlight", flashlight)
 			
+		if Input.is_action_just_pressed("inventory"):
+			toggle_inventory()
+			
 		if Input.is_action_just_pressed("weapon1"):
 			rpc("switch_weapon", 0)
 		if Input.is_action_just_pressed("weapon2"):
@@ -110,6 +128,9 @@ func _physics_process(delta):
 			rpc("switch_weapon_relative", 1)
 		if Input.is_action_just_released("weapon_prev"):
 			rpc("switch_weapon_relative", -1)
+			
+		if gui_state != GuiState.hidden:
+			return
 
 		motion = motion.normalized()
 
@@ -269,3 +290,19 @@ func setMap(newlevel):
 	
 	world.get_node("CanvasLayer/Transitions").play("PortalOut")
 	
+func set_gui_state(new_gui_state):
+	gui_state = new_gui_state
+	match new_gui_state:
+		GuiState.hidden:
+			InventoryGui.hide()
+			MouseCrosshair.update_cursor()
+		GuiState.inventory:
+			InventoryGui.show()
+			MouseCursor.update_cursor()
+	
+func toggle_inventory():
+	if gui_state == GuiState.inventory:
+		gui_state = GuiState.hidden
+	else:
+		gui_state = GuiState.inventory
+	set_gui_state(gui_state)

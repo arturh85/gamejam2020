@@ -25,9 +25,9 @@ func _process(_delta):
 		
 func _on_animation_finished():
 	if state == State.opening:
-		stop_open()
+		finish_open()
 	elif state == State.closing:
-		stop_close()
+		finish_close()
 
 func set_locked(new_locked):
 	locked = new_locked
@@ -55,14 +55,14 @@ func start_open():
 func start_close():
 	state = State.closing
 	sprite.play("opening", true)
-	shape.disabled = true
+	shape.disabled = false
 		
-func stop_open():
+func finish_open():
 	state = State.open
 	sprite.animation = "open"
 	shape.disabled = true
 		
-func stop_close():
+func finish_close():
 	state = State.closed
 	sprite.animation = "closed"
 	shape.disabled = false

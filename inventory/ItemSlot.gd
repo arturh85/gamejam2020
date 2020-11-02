@@ -6,6 +6,8 @@ var slotIndex;
 var item = null;
 var style;
 
+onready var item_root = $"/root/World/CanvasLayer/InventoryGui/Items"
+
 func _init():
 	mouse_filter = Control.MOUSE_FILTER_PASS;
 	rect_min_size = Vector2(34, 34);
@@ -23,7 +25,7 @@ func setItem(newItem):
 func pickItem():
 	item.pickItem();
 	remove_child(item);
-	get_tree().get_root().add_child(item);
+	item_root.add_child(item);
 	item = null;
 	refreshColors();
 
@@ -31,7 +33,7 @@ func putItem(newItem):
 	item = newItem;
 	item.itemSlot = self;
 	item.putItem();
-	get_tree().get_root().remove_child(item);
+	item_root.remove_child(item);
 	add_child(item);
 	refreshColors();
 
@@ -45,7 +47,7 @@ func equipItem(newItem, rightClick =  true):
 	item.itemSlot = self;
 	item.putItem();
 	if !rightClick:
-		get_tree().get_root().remove_child(item);
+		item_root.remove_child(item);
 	add_child(item);
 	refreshColors();
 
