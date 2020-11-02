@@ -21,7 +21,7 @@ var weapon_nodes = {
 }
 
 export var speed = 200
-export var health = 100
+export puppet var health = 100
 export var max_health = 100
 
 export var current_weapon = 0
