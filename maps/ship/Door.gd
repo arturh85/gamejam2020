@@ -13,39 +13,31 @@ onready var sprite = $Sprite
 onready var shape = $Body/Shape
 
 export var locked = false setget set_locked
+export var opened = false setget set_opened
 
 var players_in_area = 0
+
+func _process(_delta):
+	if players_in_area > 0 and state == State.closed and not locked:
+		start_open()
+	elif players_in_area <= 0 and state == State.open and not opened:
+		start_close()
+		
+func _on_animation_finished():
+	if state == State.opening:
+		stop_open()
+	elif state == State.closing:
+		stop_close()
 
 func set_locked(new_locked):
 	locked = new_locked
 	if locked and state != State.closed and State != State.closing:
-		close()
+		call_deferred("start_close")
 
-func _process(_delta):
-	if players_in_area > 0 and state == State.closed and not locked:
-		open()
-	elif players_in_area <= 0 and state == State.open:
-		close()
-		
-func open():
-	state = State.opening
-	sprite.play("opening")
-	shape.disabled = true
-		
-func close():
-	state = State.closing
-	sprite.play("opening", true)
-	shape.disabled = true
-	
-func _on_animation_finished():
-	if state == State.opening:
-		state = State.open
-		sprite.animation = "open"
-		shape.disabled = true
-	elif state == State.closing:
-		state = State.closed
-		sprite.animation = "closed"
-		shape.disabled = false
+func set_opened(new_opened):
+	opened = new_opened
+	if not locked and opened and state != State.open and state != State.opening:
+		call_deferred("start_open")
 	
 func _on_Detect_body_entered(body):
 	if body.is_in_group("players"):
@@ -55,3 +47,22 @@ func _on_Detect_body_exited(body):
 	if body.is_in_group("players"):
 		players_in_area -= 1
 
+func start_open():
+	state = State.opening
+	sprite.play("opening")
+	shape.disabled = true
+		
+func start_close():
+	state = State.closing
+	sprite.play("opening", true)
+	shape.disabled = true
+		
+func stop_open():
+	state = State.open
+	sprite.animation = "open"
+	shape.disabled = true
+		
+func stop_close():
+	state = State.closed
+	sprite.animation = "closed"
+	shape.disabled = false
