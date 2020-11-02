@@ -230,7 +230,7 @@ func _on_damage():
 		return
 	if health > 0:
 		$HitPlayer.play("Hit")
-		get_node("../../CanvasLayer/HealthAnimations").play("Damage")
+		get_node("/root/World/CanvasLayer/HealthAnimations").play("Damage")
 
 func _on_heal():
 	if locked:
@@ -241,27 +241,27 @@ func _on_heal():
 func _on_health_changed():
 	$HealthDisplay.update_healthbar(health, max_health)
 	if is_network_master():
-		get_node("../../CanvasLayer/HealthDisplay").update_healthbar(health, max_health)
+		get_node("/root/World/CanvasLayer/HealthDisplay").update_healthbar(health, max_health)
 
 
 func _on_death(by_who):
 	$AnimationPlayer.play("Die")
 	$CollisionShape2D.set_deferred("disabled", true)
 	if by_who > 0:
-		$"../../CanvasLayer/Score".rpc("increase_score", by_who, 50)
+		$"/root/World/CanvasLayer/Score".rpc("increase_score", by_who, 50)
 	else:
-		$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
+		$"/root/World/CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
 	yield(get_tree().create_timer(0.5), "timeout")
 	
 	if is_network_master():
-		$"../../CanvasLayer/Transitions".play("Portal")
+		$"/root/World/CanvasLayer/Transitions".play("Portal")
 	yield(get_tree().create_timer(5), "timeout")
-	var SpawnPoints = get_node("../../Level/SpawnPoints")
+	var SpawnPoints = get_node("/root/World/Level/SpawnPoints")
 	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 	respawn_at(spawn.position)
 
 	if is_network_master():
-		$"../../CanvasLayer/Transitions".play("PortalOut")
+		$"/root/World/CanvasLayer/Transitions".play("PortalOut")
 
 func _on_respawn():
 	show()

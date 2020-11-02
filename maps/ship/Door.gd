@@ -49,20 +49,20 @@ func _on_Detect_body_exited(body):
 
 func start_open():
 	state = State.opening
-	sprite.play("opening")
-	shape.disabled = true
+	#sprite.play("opening")
+	#shape.disabled = true
 		
 func start_close():
 	state = State.closing
-	sprite.play("opening", true)
-	shape.disabled = false
+	#sprite.play("opening", true)
+	#shape.disabled = false
 		
 func finish_open():
 	state = State.open
-	sprite.animation = "open"
-	shape.disabled = true
+	#sprite.animation = "open"
+	#shape.disabled = true
 		
 func finish_close():
 	state = State.closed
-	sprite.animation = "closed"
-	shape.disabled = false
+	#sprite.animation = "closed"
+	#shape.disabled = false

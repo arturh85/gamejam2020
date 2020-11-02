@@ -38,6 +38,7 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 light_mask = 2
 position = Vector2( 21.8633, 7.62939e-06 )
 texture = ExtResource( 3 )

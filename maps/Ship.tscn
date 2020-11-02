@@ -648,16 +648,13 @@ color = Color( 0.384314, 0.121569, 0.666667, 1 )
 
 [node name="Portal2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 352.176, 98.2285 )
-levelName = "level1"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 3
+frame = 1
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 2
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 2

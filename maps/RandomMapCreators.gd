@@ -9,7 +9,7 @@ static func portal(node, position, back = true, levelname = "", color="ff0000"):
 	var object = scn.instance()
 	object.position = position
 	object.back = back
-	object.levelName = levelname
+	object.randomLevelTemplate = levelname
 	if back:
 		object.setColor("00ff00")
 	else:
