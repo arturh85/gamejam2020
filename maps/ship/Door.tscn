@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://data/images/ftl/door/door.res" type="SpriteFrames" id=1]
+[ext_resource path="res://maps/ship/Door.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.2298, 47.2666 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 79.2346
+
+[node name="Door" type="Node2D"]
+scale = Vector2( 0.8, 0.8 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+light_mask = 2
+frames = ExtResource( 1 )
+animation = "closed"
+
+[node name="Body" type="RigidBody2D" parent="."]
+mode = 1
+
+[node name="Shape" type="CollisionShape2D" parent="Body"]
+shape = SubResource( 1 )
+
+[node name="Detect" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Detect"]
+shape = SubResource( 2 )
+[connection signal="animation_finished" from="Sprite" to="." method="_on_animation_finished"]
+[connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
+[connection signal="body_exited" from="Detect" to="." method="_on_Detect_body_exited"]

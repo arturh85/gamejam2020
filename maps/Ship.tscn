@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/GreenLight.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://data/images/ftl/EnginesSymbol.png" type="Texture" id=14]
 [ext_resource path="res://data/images/ftl/CrewTeleporterSymbol.png" type="Texture" id=15]
 [ext_resource path="res://data/images/ftl/HackingSymbol.png" type="Texture" id=16]
+[ext_resource path="res://maps/ship/Door.tscn" type="PackedScene" id=17]
 [ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
 [ext_resource path="res://data/images/background.png" type="Texture" id=22]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=23]
@@ -23,13 +24,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 141.547, 150.053 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 155.635, 199.384 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 125.362, 201.066 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 127.63, 96.1781 )
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -259,7 +260,7 @@ shadow_item_cull_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/DroneControl"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Piloting" type="Area2D" parent="Rooms"]
 position = Vector2( 1350.69, 11.9312 )
@@ -285,7 +286,7 @@ shadow_item_cull_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Piloting"]
 visible = false
 position = Vector2( 20.3004, 7.24466 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="DoorControl" type="Area2D" parent="Rooms"]
 position = Vector2( 768.251, -68.703 )
@@ -311,7 +312,7 @@ shadow_item_cull_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/DoorControl"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="BackupBattery" type="Area2D" parent="Rooms"]
 position = Vector2( -334.503, -269.476 )
@@ -504,7 +505,99 @@ shadow_item_cull_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Sensors"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 287.455, -170.671 )
+
+[node name="Door8" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -31.6845, -106.244 )
+
+[node name="Door9" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -33.1828, 87.038 )
+
+[node name="Door10" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -478.18, -233.6 )
+
+[node name="Door11" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -799.567, -101 )
+
+[node name="Door12" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -992.099, -103.996 )
+
+[node name="Door13" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -992.099, 85.5397 )
+
+[node name="Door14" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -801.998, 85.3562 )
+
+[node name="Door15" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -608.591, 171.128 )
+rotation = 1.5708
+
+[node name="Door16" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -284.005, 171.969 )
+rotation = 1.5708
+
+[node name="Door17" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -283.164, -156.822 )
+rotation = 1.5708
+
+[node name="Door18" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( -605.228, -166.913 )
+rotation = 1.5708
+
+[node name="Door19" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 224.983, 357.723 )
+rotation = 1.5708
+
+[node name="Door20" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 223.395, 549.005 )
+rotation = 1.5708
+
+[node name="Door21" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 33.6119, 549.576 )
+rotation = 1.5708
+
+[node name="Door22" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 100.287, 34.1582 )
+rotation = 1.5708
+
+[node name="Door23" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 160.968, -287.978 )
+rotation = 1.5708
+
+[node name="Door24" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 226.894, -482.758 )
+rotation = 1.5708
+
+[node name="Door25" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 26.8696, -485.005 )
+rotation = 1.5708
+
+[node name="Door26" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 415.241, 29.0823 )
+rotation = 1.5708
+
+[node name="Door2" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 606.996, -46.2182 )
+
+[node name="Door3" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 606.202, 84.7424 )
+
+[node name="Door4" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 289.516, 214.116 )
+
+[node name="Door5" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 927.794, 84.512 )
+
+[node name="Door6" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 929.293, -45.8407 )
+
+[node name="Door7" parent="Doors" instance=ExtResource( 17 )]
+position = Vector2( 1249.93, 86.7594 )
 
 [node name="TileMap" type="TileMap" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
@@ -550,12 +643,12 @@ levelName = "level1"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 10
+frame = 8
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 9
+frame = 7
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 9
+frame = 7

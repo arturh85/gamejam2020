@@ -204,7 +204,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "gs_logger" )
+enabled=PoolStringArray( "AsepriteWizard", "gs_logger" )
 
 [gdnative]
 
