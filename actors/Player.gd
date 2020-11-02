@@ -30,7 +30,6 @@ onready var MouseCursor = $"../../Cursor"
 onready var MouseCrosshair = $"../../Crosshair"
 
 func set_door_controls_available(new_value):
-	Logger.info("setget works?!")
 	door_controls_available = new_value
 	if not new_value and gui_state == GuiState.door_controls:
 		toggle_door_controls_gui()
@@ -312,10 +311,10 @@ func set_gui_state(new_gui_state):
 			MouseCrosshair.update_cursor()
 		GuiState.inventory:
 			DoorConsoleGui.hide()
-			InventoryGui.show()
+			InventoryGui.open()
 			MouseCursor.update_cursor()
 		GuiState.door_controls:
-			DoorConsoleGui.show()
+			DoorConsoleGui.open()
 			InventoryGui.hide()
 			MouseCursor.update_cursor()
 	
