@@ -226,6 +226,9 @@ margin_top = 210.26
 margin_right = 96.7395
 margin_bottom = 230.26
 text = "Sort by Rarity"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tooltip" type="NinePatchRect" parent="."]
 visible = false

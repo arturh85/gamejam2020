@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://maps/ship/DoorConsole/DoorConsoleGui.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
+
+[node name="DoorConsoleGui" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 94.7523
+margin_top = 43.8406
+margin_right = 949.752
+margin_bottom = 543.841
+
+[node name="TopBar" type="Panel" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -425.5
+margin_top = 1.0
+margin_right = 427.5
+margin_bottom = 41.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="Panel/TopBar"]
+margin_left = 7.07104
+margin_top = 8.48529
+margin_right = 842.071
+margin_bottom = 36.4853
+text = "Door Controls"
+align = 1
+valign = 1
+
+[node name="Grid" type="TextureRect" parent="Panel"]
+margin_left = 38.1006
+margin_top = 62.4142
+margin_right = 798.101
+margin_bottom = 457.414

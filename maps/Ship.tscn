@@ -17,10 +17,11 @@
 [ext_resource path="res://data/images/ftl/CrewTeleporterSymbol.png" type="Texture" id=15]
 [ext_resource path="res://data/images/ftl/HackingSymbol.png" type="Texture" id=16]
 [ext_resource path="res://maps/ship/Door.tscn" type="PackedScene" id=17]
-[ext_resource path="res://maps/ship/DoorConsole.tscn" type="PackedScene" id=18]
+[ext_resource path="res://maps/ship/DoorConsole/DoorConsole.tscn" type="PackedScene" id=18]
 [ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
 [ext_resource path="res://data/images/background.png" type="Texture" id=22]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=23]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 141.547, 150.053 )

@@ -1,5 +1,6 @@
-extends Node2D
+extends Control
 
+onready var grid = $Panel/Grid
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -14,11 +15,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_Control_body_entered(body):
-	pass # Replace with function body.
-
-
-func _on_Control_body_exited(body):
-	pass # Replace with function body.
