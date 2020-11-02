@@ -112,6 +112,7 @@ remote func pre_start_game(spawn_points):
 
 remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
+	get_node("/root/World").post_start_game()
 
 
 remote func ready_to_start(id):

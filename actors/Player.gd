@@ -3,6 +3,7 @@ class_name Player
 
 puppet var puppet_motion = Vector2()
  
+var minimap_icon = "other_player"
 var stunned = false
 
 var prev_shooting = false

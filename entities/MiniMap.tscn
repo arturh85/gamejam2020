@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/MiniMap.gd" type="Script" id=1]
 [ext_resource path="res://data/images/minimap/frame.png" type="Texture" id=2]
 [ext_resource path="res://data/images/minimap/player.png" type="Texture" id=3]
 [ext_resource path="res://data/images/minimap/enemy.png" type="Texture" id=4]
+[ext_resource path="res://data/images/minimap/minimapIcon_jewelRed.png" type="Texture" id=5]
 [ext_resource path="res://data/images/minimap/minimapIcon_exclamationYellow.png" type="Texture" id=6]
-
-
 
 [node name="MiniMap" type="MarginContainer"]
 margin_right = 200.0
@@ -57,6 +56,12 @@ visible = false
 position = Vector2( 36.6515, 37.5124 )
 scale = Vector2( 0.723786, 0.745883 )
 texture = ExtResource( 4 )
+
+[node name="OtherPlayerMarker" type="Sprite" parent="MarginContainer/Grid"]
+visible = false
+position = Vector2( 100.714, 32.1429 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 5 )
 
 [node name="AlertMarker" type="Sprite" parent="MarginContainer/Grid"]
 visible = false

@@ -8,10 +8,11 @@ const max_radius = 400
 # Node references.
 onready var grid = $MarginContainer/Grid
 onready var player_marker = $MarginContainer/Grid/PlayerMarker
+onready var other_player_marker = $MarginContainer/Grid/OtherPlayerMarker
 onready var mob_marker = $MarginContainer/Grid/MobMarker
 onready var alert_marker = $MarginContainer/Grid/AlertMarker
 # Link object icon setting to Sprite marker.
-onready var icons = {"mob": mob_marker, "alert": alert_marker}
+onready var icons = {"mob": mob_marker, "player": player_marker, "other_player": other_player_marker, "alert": alert_marker}
 
 var grid_scale  # Calculated world to map scale.
 var markers = {}  # Dictionary of object: marker.
@@ -23,7 +24,6 @@ func _ready():
 	# Find the scale factor for marker placement.
 	grid_scale = grid.rect_size / (get_viewport_rect().size * zoom)
 	# Create markers for all objects.
-	update_map_markers()
 		
 func clear_map_markers():
 	for item in markers:
@@ -35,7 +35,10 @@ func clear_map_markers():
 func update_map_markers():
 	clear_map_markers()
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
+	var player_node = get_node(player)
 	for item in map_objects:
+		if item == get_node(player): 
+			continue
 		var new_marker = icons[item.minimap_icon].duplicate()
 		grid.add_child(new_marker)
 		new_marker.show()
@@ -59,7 +62,10 @@ func _process(delta):
 		
 		# If marker is outside grid, hide or shrink it.		
 		if obj_distance < grid_radius:
-			markers[item].scale = Vector2(3, 3)
+			if item.is_in_group("players"):
+				markers[item].scale = Vector2(0.8, 0.8)
+			else:
+				markers[item].scale = Vector2(3, 3)
 			markers[item].show()
 		elif obj_distance < max_radius:
 			markers[item].scale = Vector2(0.75, 0.75)
