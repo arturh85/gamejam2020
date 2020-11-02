@@ -70,10 +70,13 @@ master func take_damage(amount, by_who):
 		return
 	health = max(0, health - amount)
 	rset("health", health)
-	emit_signal("on_damage")	
-	emit_signal("on_health_changed")	
+	rpc("on_took_damage")
 	if health <= 0:
 		rpc("die", by_who)
+		
+remotesync func on_took_damage():
+	emit_signal("on_damage")
+	emit_signal("on_health_changed")
 
 remotesync func die(by_who):
 	emit_signal("on_death", by_who)
