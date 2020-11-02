@@ -65,7 +65,11 @@ func _physics_process(delta):
 
 	
 master func _on_death(by_who):
-	$"../../../CanvasLayer/Score".rpc("increase_score", by_who, 20)
+	var score = $"../../CanvasLayer/Score"
+	if not score:
+		score = $"../../../CanvasLayer/Score"
+	if score:
+		score.rpc("increase_score", by_who, 20)
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimationPlayer.play("Die")
 
