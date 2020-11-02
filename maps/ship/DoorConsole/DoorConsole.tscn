@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/images/ftl/DoorSystemCircle.png" type="Texture" id=1]
-[ext_resource path="res://maps/ship/DoorConsole.gd" type="Script" id=2]
+[ext_resource path="res://maps/ship/DoorConsole/DoorConsole.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.3768, 13.1176 )

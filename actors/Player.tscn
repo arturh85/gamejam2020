@@ -732,6 +732,7 @@ tracks/6/keys = {
 }
 
 [node name="player" type="KinematicBody2D" groups=[
+"minimap_objects",
 "players",
 ]]
 z_index = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://data/shaders/crt_material.tres" type="Material" id=3]
@@ -10,6 +10,7 @@
 [ext_resource path="res://entities/crosshair.tscn" type="PackedScene" id=9]
 [ext_resource path="res://inventory/Inventory.tscn" type="PackedScene" id=10]
 [ext_resource path="res://entities/cursor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://maps/ship/DoorConsole/DoorConsoleGui.tscn" type="PackedScene" id=12]
 [ext_resource path="res://data/sounds/music/background.wav" type="AudioStream" id=20]
 [ext_resource path="res://data/images/healthbar.png" type="Texture" id=24]
 [ext_resource path="res://entities/AudioStreamPlayer.gd" type="Script" id=25]
@@ -273,6 +274,9 @@ margin_left = 467.698
 margin_top = -26.3326
 margin_right = 467.698
 margin_bottom = -26.3326
+
+[node name="DoorConsoleGui" parent="CanvasLayer" instance=ExtResource( 12 )]
+visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )

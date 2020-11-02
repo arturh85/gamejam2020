@@ -71,6 +71,10 @@ var itemOffset = Vector2(0, 0);
 onready var tooltip = get_node("../Tooltip");
 onready var characterPanel = get_node("../CharacterPanel");
 
+func open():
+	show()
+
+
 func _ready():
 	var slots = get_node("SlotsContainer/Slots");
 	for _i in range(MAX_SLOTS):

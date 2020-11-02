@@ -22,6 +22,9 @@ puppet func receive_map(new_level):
 	#old_level.queue_free()
 	minimap.call_deferred("update_map_markers")
 	
+func post_start_game():
+	minimap.call_deferred("update_map_markers")
+	
 func load_level(target_scene, portal_level, back):
 	var old_level = get_node("Level")
 	var new_level

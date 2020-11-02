@@ -3,6 +3,7 @@ class_name Player
 
 puppet var puppet_motion = Vector2()
  
+var minimap_icon = "other_player"
 var stunned = false
 
 var prev_shooting = false
@@ -13,6 +14,8 @@ var speed_multiplier = 1
 var respawn_time = null
 var viewRotation = 0
 
+var door_controls_available = false setget set_door_controls_available
+
 enum GuiState {
 	hidden,
 	inventory,
@@ -22,8 +25,14 @@ enum GuiState {
 var gui_state = GuiState.hidden setget set_gui_state
 
 onready var InventoryGui = $"../../CanvasLayer/InventoryGui"
+onready var DoorConsoleGui = $"../../CanvasLayer/DoorConsoleGui"
 onready var MouseCursor = $"../../Cursor"
 onready var MouseCrosshair = $"../../Crosshair"
+
+func set_door_controls_available(new_value):
+	door_controls_available = new_value
+	if not new_value and gui_state == GuiState.door_controls:
+		toggle_door_controls_gui()
 
 func setDefaults():
 	$PlayerAnimationPlayer.play("Stand")
@@ -109,6 +118,8 @@ func _physics_process(delta):
 			
 		if Input.is_action_just_pressed("inventory"):
 			toggle_inventory()
+		if Input.is_action_just_pressed("ui_accept") and door_controls_available:
+			toggle_door_controls_gui()
 			
 		if Input.is_action_just_pressed("weapon1"):
 			rpc("switch_weapon", 0)
@@ -296,9 +307,15 @@ func set_gui_state(new_gui_state):
 	match new_gui_state:
 		GuiState.hidden:
 			InventoryGui.hide()
+			DoorConsoleGui.hide()
 			MouseCrosshair.update_cursor()
 		GuiState.inventory:
-			InventoryGui.show()
+			DoorConsoleGui.hide()
+			InventoryGui.open()
+			MouseCursor.update_cursor()
+		GuiState.door_controls:
+			DoorConsoleGui.open()
+			InventoryGui.hide()
 			MouseCursor.update_cursor()
 	
 func toggle_inventory():
@@ -306,4 +323,12 @@ func toggle_inventory():
 		gui_state = GuiState.hidden
 	else:
 		gui_state = GuiState.inventory
+	set_gui_state(gui_state)
+
+	
+func toggle_door_controls_gui():
+	if gui_state == GuiState.door_controls:
+		gui_state = GuiState.hidden
+	else:
+		gui_state = GuiState.door_controls
 	set_gui_state(gui_state)
