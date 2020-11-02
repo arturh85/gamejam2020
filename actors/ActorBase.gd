@@ -73,8 +73,11 @@ master func take_damage(amount, by_who):
 	emit_signal("on_damage")	
 	emit_signal("on_health_changed")	
 	if health <= 0:
-		emit_signal("on_death", by_who)	
-		$CollisionShape2D.set_deferred("disabled", true)
+		rpc("die", by_who)
+
+remotesync func die(by_who):
+	emit_signal("on_death", by_who)
+	$CollisionShape2D.set_deferred("disabled", true)
 
 
 sync func switch_weapon_relative(rel):

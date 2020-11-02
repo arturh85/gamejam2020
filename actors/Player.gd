@@ -253,14 +253,15 @@ func _on_death(by_who):
 		$"../../CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
 	yield(get_tree().create_timer(0.5), "timeout")
 	
-	$"../../CanvasLayer/Transitions".play("Portal")
-	
+	if is_network_master():
+		$"../../CanvasLayer/Transitions".play("Portal")
 	yield(get_tree().create_timer(5), "timeout")
 	var SpawnPoints = get_node("../../Level/SpawnPoints")
 	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 	respawn_at(spawn.position)
 
-	$"../../CanvasLayer/Transitions".play("PortalOut")
+	if is_network_master():
+		$"../../CanvasLayer/Transitions".play("PortalOut")
 
 func _on_respawn():
 	show()
