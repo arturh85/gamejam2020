@@ -22,7 +22,7 @@ func _ready():
 	
 func _process(_delta):
 	var player = weapon.get_parent().get_parent().get_parent()
-	if player.is_network_master() and input_action_trigger != "":
+	if player.is_network_master() and player.can_shoot() and input_action_trigger != "":
 		if Input.is_action_just_pressed(input_action_trigger):
 			call_deferred("start_auto_attack")
 		elif Input.is_action_just_released(input_action_trigger):
