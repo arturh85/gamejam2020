@@ -523,6 +523,7 @@ position = Vector2( -478.18, -233.6 )
 
 [node name="Door11" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -799.567, -101 )
+locked = true
 
 [node name="Door12" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -992.099, -103.996 )
@@ -532,6 +533,7 @@ position = Vector2( -992.099, 85.5397 )
 
 [node name="Door14" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -801.998, 85.3562 )
+locked = true
 
 [node name="Door15" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -608.591, 171.128 )
@@ -552,6 +554,7 @@ rotation = 1.5708
 [node name="Door19" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 224.983, 357.723 )
 rotation = 1.5708
+locked = true
 
 [node name="Door20" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 223.395, 549.005 )
@@ -568,6 +571,7 @@ rotation = 1.5708
 [node name="Door23" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 160.968, -287.978 )
 rotation = 1.5708
+locked = true
 
 [node name="Door24" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 226.894, -482.758 )
@@ -643,12 +647,12 @@ levelName = "level1"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 8
+frame = 9
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 7
+frame = 8
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 7
+frame = 8
