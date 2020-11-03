@@ -27,6 +27,8 @@ func _process(delta):
 	if health <= 0:
 		return
 		
+	._process(delta)
+		
 	if harm_player and OS.get_unix_time() - last_harm > 0.3:
 		last_harm = OS.get_unix_time()
 		harm_player.take_damage(30, 0)

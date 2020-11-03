@@ -103,7 +103,14 @@ func _on_start_pressed():
 	gamestate.begin_game()
 
 func _process(_delta):
-	if is_visible_in_tree() and Input.is_action_just_pressed("mute"):
+	if not is_visible_in_tree():
+		return
+	if Input.is_action_just_pressed("mute"):
 		AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
+	if Input.is_action_just_pressed("ui_accept"):
+		if $Connect.visible:
+			_on_host_pressed()
+		elif not $Connect/Host.disabled:
+			_on_start_pressed()
 		
 		

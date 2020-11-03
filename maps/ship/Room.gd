@@ -36,7 +36,7 @@ func _ready():
 	#print("random " + str(self) + " (" + self.name + "): " + str(oxygen))
 
 func _on_body_entered(body):
-	if body.is_in_group("players"):
+	if body.is_in_group("players") or body.is_in_group("mobs"):
 		body.room = self
 		#print("entered " + str(self) + " (" + self.name + "): " + str(oxygen))
 

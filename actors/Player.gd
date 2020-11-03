@@ -92,6 +92,10 @@ var flashRotation = 0
 var gunRotation = 0
 var gunScale = 1
 var gunZ = 0
+
+func _process(delta):
+	._process(delta)
+
 func _physics_process(delta):
 	if health <= 0 or locked:
 		return

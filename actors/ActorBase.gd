@@ -32,6 +32,7 @@ export var health_regeneration = 0
 puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
 puppet var puppet_rotation = 0 
+var last_oxygen_harm = null
 
 var room = null
 
@@ -56,12 +57,21 @@ func _process(delta):
 		return
 	if health_regeneration > 0:
 		health = min(health + health_regeneration * delta, max_health)
-		emit_signal("on_heal")	
-		emit_signal("on_health_changed")	
+		emit_signal("on_heal")
+		emit_signal("on_health_changed")
 		
+	if room and room.oxygen < 30:
+		if last_oxygen_harm and OS.get_unix_time() - last_oxygen_harm > 0.3:
+			take_damage(10, 0)
+			last_oxygen_harm = OS.get_unix_time()
+		elif last_oxygen_harm == null:
+			last_oxygen_harm = OS.get_unix_time()
+	else:
+		last_oxygen_harm = null
+
 master func respawn_at(position):
 	health = max_health
-	emit_signal("on_health_changed")	
+	emit_signal("on_health_changed")
 	respawn_position = position
 	
 master func spawn_at(position):
