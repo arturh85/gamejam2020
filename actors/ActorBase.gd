@@ -62,7 +62,7 @@ func _process(delta):
 		
 	if room and room.oxygen < 30:
 		if last_oxygen_harm and OS.get_unix_time() - last_oxygen_harm > 0.1:
-			take_damage(10, 0)
+			take_damage((30 - room.oxygen) / 3 if room.oxygen > -1 else 30, 0)
 			last_oxygen_harm = OS.get_unix_time()
 		elif last_oxygen_harm == null:
 			last_oxygen_harm = OS.get_unix_time()
