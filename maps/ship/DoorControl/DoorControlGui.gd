@@ -78,7 +78,8 @@ func open():
 func _on_object_removed(object):
 	# Removes a marker from the map. Connect to object's "removed" signal.
 	if object in markers:
-		markers[object].queue_free()
+		if markers[object]:
+			markers[object].queue_free()
 		markers.erase(object)
 	
 func _process(_delta):
