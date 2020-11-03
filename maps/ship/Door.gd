@@ -20,6 +20,7 @@ export (NodePath) var room2
 var players_in_area = 0
 
 signal on_state_changed
+signal on_param_changed
 
 func _process(_delta):
 	if players_in_area > 0 and state == State.closed and not locked:
@@ -36,11 +37,13 @@ func _on_animation_finished():
 
 func set_locked(new_locked):
 	locked = new_locked
+	emit_signal("on_param_changed", self)
 	if locked and state != State.closed and State != State.closing:
 		call_deferred("start_close")
 
 func set_opened(new_opened):
 	opened = new_opened
+	emit_signal("on_param_changed", self)
 	if sprite and not locked and opened and state != State.open and state != State.opening:
 		call_deferred("start_open")
 	
@@ -54,6 +57,9 @@ func _on_Detect_body_exited(body):
 
 remotesync func normal_click():
 	set_opened(not opened)
+	
+remotesync func alt_click():
+	set_locked(not locked)
 
 func start_open():
 	set_state(State.opening)

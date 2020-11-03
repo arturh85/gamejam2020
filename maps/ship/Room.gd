@@ -29,12 +29,12 @@ func _ready():
 		oxygen = -1
 	else:
 		oxygen = 50 + randi() % 50
-	print("random " + str(self) + ": " + str(oxygen))
+	print("random " + str(self) + " (" + self.name + "): " + str(oxygen))
 
 func _on_body_entered(body):
 	if body.is_in_group("players"):
 		body.room = self
-		print("entered " + str(self) + ": " + str(oxygen))
+		print("entered " + str(self) + " (" + self.name + "): " + str(oxygen))
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	pass

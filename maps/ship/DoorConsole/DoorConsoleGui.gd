@@ -5,7 +5,7 @@ onready var grid = $Panel/Grid
 
 export var scale = 0.3
 
-
+var hover_door = null
 var real_door = {}
 
 func open():
@@ -27,15 +27,13 @@ func open():
 		var door = item.duplicate()
 		door.set_process(false)
 		door.set_physics_process(false)
-		if door.locked:
-			door.modulate = "#dd0000"
-		elif door.opened:
-			door.modulate = "#00dd00"
+		modulate_door(door, false)
 		door.position.x = level_tilemap.position.x + (door.position.x * scale)
 		door.position.y = level_tilemap.position.y + (door.position.y * scale)
 		door.scale = Vector2(scale, scale)
 		
 		item.connect("on_state_changed", self, "door_state_changed", [door])		
+		item.connect("on_param_changed", self, "door_param_changed", [door])		
 		real_door[door] = item
 		var detect = door.get_node("Detect")
 		detect.connect("mouse_entered", self, "door_mouse_entered", [door])
@@ -48,30 +46,50 @@ func open():
 func door_mouse_input(viewport, event: InputEvent, shape_idx, door):
 	if event is InputEventMouseButton and event.pressed:
 		var real = real_door[door]
-		real.rpc("normal_click")	
+		if event.button_index == 2:
+			real.rpc("alt_click")
+		else:
+			real.rpc("normal_click")
+			
+		call_deferred("modulate_door", door, door == hover_door)
 	
 func door_state_changed(real, fake):
 	if not real or not fake:
 		return
-	fake.opened = real.opened
 	fake.set_process(false)
 	fake.set_state(real.state)
 	
+func door_param_changed(real, fake):
+	if not real or not fake:
+		return
+	fake.opened = real.opened
+	fake.locked = real.locked
+
 func door_mouse_entered(door):
-	if door.locked:
-		door.modulate = "#ff0000"
-	elif door.opened:
-		door.modulate = "#00ff00"
-	else:
-		door.modulate = "#00ff00"
+	hover_door = door
+	modulate_door(door, true)
 	
 func door_mouse_exited(door):
+	hover_door = null
+	modulate_door(door, false)
+		
+		
+func modulate_door(door, hover = false):
 	if door.locked:
-		door.modulate = "#dd0000"
+		if hover:
+			door.modulate = "#ff0000"
+		else:
+			door.modulate = "#dd0000"
 	elif door.opened:
-		door.modulate = "#00dd00"
+		if hover:
+			door.modulate = "#00ff00"
+		else:
+			door.modulate = "#00dd00"
 	else:
-		door.modulate = "#ffffff"
+		if hover:
+			door.modulate = "#00ff00"
+		else:
+			door.modulate = "#ffffff"
 	
 
 func close():

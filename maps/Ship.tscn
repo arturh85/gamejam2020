@@ -76,35 +76,6 @@ __meta__ = {
 
 [node name="Rooms" type="Node" parent="."]
 
-[node name="Cloaking" type="Area2D" parent="Rooms"]
-position = Vector2( 126.076, 176.93 )
-script = ExtResource( 20 )
-room_type = 1
-
-[node name="Symbol" type="Sprite" parent="Rooms/Cloaking"]
-light_mask = 2
-position = Vector2( -2.32593, 6.94397 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 3 )
-
-[node name="Light" type="Light2D" parent="Rooms/Cloaking"]
-position = Vector2( 71.655, -66.0607 )
-scale = Vector2( 3.36535, 2.66603 )
-texture = ExtResource( 23 )
-offset = Vector2( -14.6973, 0 )
-texture_scale = 1.28
-color = Color( 0.188235, 0.980392, 0.121569, 1 )
-energy = 2.0
-range_item_cull_mask = 2
-shadow_enabled = true
-shadow_gradient_length = 2.0
-shadow_item_cull_mask = 2
-
-[node name="Shape" type="CollisionShape2D" parent="Rooms/Cloaking"]
-visible = false
-position = Vector2( 2.11887, -2.11893 )
-shape = SubResource( 1 )
-
 [node name="WeaponControl" type="Area2D" parent="Rooms"]
 position = Vector2( -184.073, -17.8496 )
 script = ExtResource( 20 )
@@ -141,6 +112,35 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/WeaponControl"]
+visible = false
+position = Vector2( 2.11887, -2.11893 )
+shape = SubResource( 1 )
+
+[node name="Cloaking" type="Area2D" parent="Rooms"]
+position = Vector2( 126.076, 176.93 )
+script = ExtResource( 20 )
+room_type = 1
+
+[node name="Symbol" type="Sprite" parent="Rooms/Cloaking"]
+light_mask = 2
+position = Vector2( -2.32593, 6.94397 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Light" type="Light2D" parent="Rooms/Cloaking"]
+position = Vector2( 71.655, -66.0607 )
+scale = Vector2( 3.36535, 2.66603 )
+texture = ExtResource( 23 )
+offset = Vector2( -14.6973, 0 )
+texture_scale = 1.28
+color = Color( 0.188235, 0.980392, 0.121569, 1 )
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_item_cull_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Cloaking"]
 visible = false
 position = Vector2( 2.11887, -2.11893 )
 shape = SubResource( 1 )
@@ -784,52 +784,52 @@ position = Vector2( 352.176, 98.2285 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 8
+frame = 11
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 7
+frame = 10
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 7
+frame = 10
+[connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_exited"]
 [connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]
 [connection signal="body_exited" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Engines" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Engines" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/MindControl" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/MindControl" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Shields" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Shields" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Medbay" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Medbay" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/DroneControl" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/DroneControl" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Piloting" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Piloting" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/DoorControl" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/DoorControl" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/BackupBattery" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/BackupBattery" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Oxygen" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Oxygen" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Airlock1" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Airlock1" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Airlock2" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Airlock2" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Airlock3" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Airlock3" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Space1" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Space1" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Space2" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Space2" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Space3" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Space3" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/CrewTeleporter" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/CrewTeleporter" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Hacking" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Hacking" to="Rooms/Cloaking" method="_on_body_exited"]
-[connection signal="body_entered" from="Rooms/Sensors" to="Rooms/Cloaking" method="_on_body_entered"]
-[connection signal="body_exited" from="Rooms/Sensors" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Engines" to="Rooms/Engines" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Engines" to="Rooms/Engines" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/MindControl" to="Rooms/MindControl" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/MindControl" to="Rooms/MindControl" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Shields" to="Rooms/Shields" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Shields" to="Rooms/Shields" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Medbay" to="Rooms/Medbay" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Medbay" to="Rooms/Medbay" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/DroneControl" to="Rooms/DroneControl" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/DroneControl" to="Rooms/DroneControl" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Piloting" to="Rooms/Piloting" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Piloting" to="Rooms/Piloting" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/DoorControl" to="Rooms/DoorControl" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/DoorControl" to="Rooms/DoorControl" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/BackupBattery" to="Rooms/BackupBattery" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/BackupBattery" to="Rooms/BackupBattery" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Oxygen" to="Rooms/Oxygen" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Oxygen" to="Rooms/Oxygen" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Airlock1" to="Rooms/Airlock1" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Airlock1" to="Rooms/Airlock1" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Airlock2" to="Rooms/Airlock2" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Airlock2" to="Rooms/Airlock2" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Airlock3" to="Rooms/Airlock3" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Airlock3" to="Rooms/Airlock3" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Space1" to="Rooms/Space1" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Space1" to="Rooms/Space1" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Space2" to="Rooms/Space2" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Space2" to="Rooms/Space2" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Space3" to="Rooms/Space3" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Space3" to="Rooms/Space3" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/CrewTeleporter" to="Rooms/CrewTeleporter" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/CrewTeleporter" to="Rooms/CrewTeleporter" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Hacking" to="Rooms/Hacking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Hacking" to="Rooms/Hacking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Sensors" to="Rooms/Sensors" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Sensors" to="Rooms/Sensors" method="_on_body_exited"]
