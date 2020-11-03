@@ -5,8 +5,8 @@
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 13.7157
-height = 19.0842
+radius = 30.9541
+height = 0.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Rotate"
@@ -45,7 +45,7 @@ light_mask = 2
 position = Vector2( 21.8633, 7.62939e-06 )
 texture = ExtResource( 3 )
 color = Color( 0, 0.952941, 1, 1 )
-energy = 2.5
+energy = 3.0
 range_item_cull_mask = 4
 shadow_item_cull_mask = 2
 
