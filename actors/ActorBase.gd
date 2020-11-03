@@ -61,7 +61,7 @@ func _process(delta):
 		emit_signal("on_health_changed")
 		
 	if room and room.oxygen < 30:
-		if last_oxygen_harm and OS.get_unix_time() - last_oxygen_harm > 0.3:
+		if last_oxygen_harm and OS.get_unix_time() - last_oxygen_harm > 0.1:
 			take_damage(10, 0)
 			last_oxygen_harm = OS.get_unix_time()
 		elif last_oxygen_harm == null:

@@ -126,21 +126,15 @@ func door_mouse_exited(door):
 		
 		
 func modulate_door(door, hover = false):
+	#Logger.info("modulate " + str(door) + " with locked " + str(door.locked) + " and opened " + str(door.opened))
 	if door.locked:
-		if hover:
-			door.modulate = "#ff0000"
-		else:
-			door.modulate = "#dd0000"
+		door.modulate = Color.red
 	elif door.opened:
-		if hover:
-			door.modulate = "#00ff00"
-		else:
-			door.modulate = "#00dd00"
+		door.modulate = Color.green
 	else:
-		if hover:
-			door.modulate = "#00ff00"
-		else:
-			door.modulate = "#ffffff"
+		door.modulate = Color.green if hover else Color.white
+	if not hover: 
+		door.modulate = door.modulate.lightened(0.3)
 	
 
 func close():
