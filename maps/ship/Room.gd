@@ -31,8 +31,8 @@ func set_oxygen(new_oxygen):
 func _ready():
 	if room_type == RoomType.deadly_space:
 		oxygen = -1
-	else:
-		oxygen = 50 + randi() % 50
+	#else:
+		#oxygen = 50 + randi() % 50
 	#print("random " + str(self) + " (" + self.name + "): " + str(oxygen))
 
 func _on_body_entered(body):

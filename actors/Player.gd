@@ -291,7 +291,7 @@ func _on_respawn():
 
 func setMap(newlevel):
 	#var newlevel = instance_from_id(newlevel_id)
-	Logger.info("player.setMap (master: " + str(is_network_master()) + ")")
+	#Logger.info("player.setMap (master: " + str(is_network_master()) + ")")
 	var world = get_node("/root/World")
 	
 	if not world.get_node("Level"):
@@ -319,7 +319,7 @@ func set_gui_state(new_gui_state):
 			MouseCrosshair.update_cursor()
 		GuiState.inventory:
 			DoorConsoleGui.close()
-			InventoryGui.open()
+			InventoryGui.open(self)
 			MouseCursor.update_cursor()
 		GuiState.door_controls:
 			DoorConsoleGui.open()

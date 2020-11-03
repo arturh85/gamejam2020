@@ -18,6 +18,8 @@ const itemImages = [
 	preload("res://inventory/images/Ac_Necklace03.png"),
 ];
 
+var player
+
 const itemDictionary = {
 	0: {
 		"itemName": "Ring",
@@ -81,7 +83,7 @@ func _ready():
 		slotList.append(slot);
 		slots.add_child(slot);
 
-	for i in range(10):
+	for i in range(13):
 		if i == 0:
 			continue;
 		var panelSlot = characterPanel.slots[i];
@@ -139,7 +141,7 @@ func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
 				if slot.item:
 					var itemSlotType = slot.item.slotType;
 					var panelSlot = characterPanel.getSlotByType(slot.item.slotType);
-					if itemSlotType == Global.SlotType.SLOT_RING:
+					if itemSlotType == Global.SlotType.SLOT_RING or itemSlotType == Global.SlotType.SLOT_LHAND:
 						if panelSlot[0].item && panelSlot[1].item:
 							var panelItem = panelSlot[0].item;
 							panelSlot[0].removeItem();
@@ -180,9 +182,16 @@ func getFreeSlot():
 			return slot;
 
 func canEquip(item, slot):
-	var ring = Global.SlotType.SLOT_RING;
-	var ring2 = Global.SlotType.SLOT_RING2;
-	return item.slotType == slot.slotType || item.slotType == ring && (slot.slotType == ring || slot.slotType == ring2);
+	var ring = Global.SlotType.SLOT_RING
+	var ring2 = Global.SlotType.SLOT_RING2
+	var lhand = Global.SlotType.SLOT_LHAND
+	var quick1 = Global.SlotType.SLOT_QUICK1
+	var quick2 = Global.SlotType.SLOT_QUICK2
+	var quick3 = Global.SlotType.SLOT_QUICK3
+	var quick4 = Global.SlotType.SLOT_QUICK4
+	return item.slotType == slot.slotType ||  \
+		(item.slotType == ring && (slot.slotType == ring || slot.slotType == ring2)) ||  \
+		(item.slotType == lhand && (slot.slotType == lhand || slot.slotType == quick1 || slot.slotType == quick2 || slot.slotType == quick3 || slot.slotType == quick4))
 
 func _on_SortRarityButton_pressed():
 	var items = Array();

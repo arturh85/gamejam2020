@@ -643,7 +643,6 @@ room2 = NodePath("../../Rooms/Hacking")
 
 [node name="Door11" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -799.567, -101 )
-locked = true
 room1 = NodePath("../../Rooms/Engines")
 room2 = NodePath("../../Rooms/Airlock3")
 
@@ -659,7 +658,6 @@ room2 = NodePath("../../Rooms/Space1")
 
 [node name="Door14" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -801.998, 85.3562 )
-locked = true
 room1 = NodePath("../../Rooms/Engines")
 room2 = NodePath("../../Rooms/Airlock3")
 
@@ -690,7 +688,6 @@ room2 = NodePath("../../Rooms/Engines")
 [node name="Door19" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 224.983, 357.723 )
 rotation = 1.5708
-locked = true
 room1 = NodePath("../../Rooms/Cloaking")
 room2 = NodePath("../../Rooms/Airlock2")
 
@@ -715,7 +712,6 @@ room2 = NodePath("../../Rooms/MindControl")
 [node name="Door23" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 160.968, -287.978 )
 rotation = 1.5708
-locked = true
 room1 = NodePath("../../Rooms/MindControl")
 room2 = NodePath("../../Rooms/Airlock1")
 
@@ -808,13 +804,15 @@ position = Vector2( -641.447, -1.7818 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 1
+frame = 6
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
+frame = 5
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
+frame = 5
 [connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_entered"]
 [connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_exited"]
 [connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]
