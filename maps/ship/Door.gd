@@ -14,6 +14,8 @@ onready var shape = $Body/Shape
 
 export var locked = false setget set_locked
 export var opened = false setget set_opened
+export (NodePath) var room1
+export (NodePath) var room2
 
 var players_in_area = 0
 

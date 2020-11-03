@@ -17,6 +17,7 @@ enum RoomType {
 	crew_teleporter,
 	hacking,
 	sensors,
+	deadly_space,
 }
 
 export (RoomType) var room_type = RoomType.none
