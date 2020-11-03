@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/GreenLight.tscn" type="PackedScene" id=2]
@@ -27,6 +27,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 141.547, 150.053 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 143.824, 146.052 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 155.635, 199.384 )
@@ -115,7 +118,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/WeaponControl"]
-visible = false
 position = Vector2( 2.11887, -2.11893 )
 shape = SubResource( 1 )
 
@@ -146,7 +148,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Cloaking"]
-visible = false
 position = Vector2( 2.11887, -2.11893 )
 shape = SubResource( 1 )
 
@@ -171,9 +172,8 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Engines"]
-visible = false
 position = Vector2( 2.11887, -2.11893 )
-shape = SubResource( 1 )
+shape = SubResource( 9 )
 
 [node name="Symbol" type="Sprite" parent="Rooms/Engines"]
 position = Vector2( -15.1548, -12.8295 )
@@ -207,7 +207,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/MindControl"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 1 )
 
@@ -237,7 +236,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Shields"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 1 )
 
@@ -267,7 +265,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Medbay"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 1 )
 
@@ -297,7 +294,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/DroneControl"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 2 )
 
@@ -327,7 +323,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Piloting"]
-visible = false
 position = Vector2( 20.3004, 7.24466 )
 shape = SubResource( 3 )
 
@@ -360,7 +355,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/DoorControl"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 4 )
 
@@ -390,7 +384,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/BackupBattery"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
@@ -420,7 +413,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Oxygen"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
@@ -448,7 +440,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Airlock1"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
@@ -476,7 +467,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Airlock2"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
@@ -501,7 +491,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Airlock3"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 6 )
 
@@ -513,7 +502,6 @@ script = ExtResource( 20 )
 room_type = 16
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Space1"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 7 )
 
@@ -525,7 +513,6 @@ script = ExtResource( 20 )
 room_type = 16
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Space2"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 8 )
 
@@ -537,7 +524,6 @@ script = ExtResource( 20 )
 room_type = 16
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Space3"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 8 )
 
@@ -562,7 +548,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/CrewTeleporter"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
@@ -592,7 +577,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Hacking"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
@@ -627,7 +611,6 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="Rooms/Sensors"]
-visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 4 )
 
@@ -660,7 +643,6 @@ room2 = NodePath("../../Rooms/Hacking")
 
 [node name="Door11" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -799.567, -101 )
-locked = true
 room1 = NodePath("../../Rooms/Engines")
 room2 = NodePath("../../Rooms/Airlock3")
 
@@ -676,7 +658,6 @@ room2 = NodePath("../../Rooms/Space1")
 
 [node name="Door14" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( -801.998, 85.3562 )
-locked = true
 room1 = NodePath("../../Rooms/Engines")
 room2 = NodePath("../../Rooms/Airlock3")
 
@@ -707,7 +688,6 @@ room2 = NodePath("../../Rooms/Engines")
 [node name="Door19" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 224.983, 357.723 )
 rotation = 1.5708
-locked = true
 room1 = NodePath("../../Rooms/Cloaking")
 room2 = NodePath("../../Rooms/Airlock2")
 
@@ -732,7 +712,6 @@ room2 = NodePath("../../Rooms/MindControl")
 [node name="Door23" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 160.968, -287.978 )
 rotation = 1.5708
-locked = true
 room1 = NodePath("../../Rooms/MindControl")
 room2 = NodePath("../../Rooms/Airlock1")
 
@@ -825,15 +804,15 @@ position = Vector2( -641.447, -1.7818 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 9
+frame = 6
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 8
+frame = 5
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 8
+frame = 5
 [connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_entered"]
 [connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_exited"]
 [connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]

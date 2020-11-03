@@ -32,7 +32,7 @@ func _process(delta):
 		var room1_node = get_node(room1)
 		var room2_node = get_node(room2)
 		if room1_node and room2_node:
-			var oxydelta = room1_node.oxygen - room2_node.oxygen		
+			var oxydelta = (room1_node.oxygen - room2_node.oxygen) / 2
 			room1_node.oxygen -= oxydelta * delta
 			room2_node.oxygen += oxydelta * delta
 		

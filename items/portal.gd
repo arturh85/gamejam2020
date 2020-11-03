@@ -50,7 +50,7 @@ func unset():
 		
 
 remotesync func activate():
-	Logger.info("portal activated (master: " + str(is_network_master()) + ")")	
+	#Logger.info("portal activated (master: " + str(is_network_master()) + ")")	
 	for player in world.get_node("Players").get_children():
 		player.get_node("AnimationPlayer").play("PortalIn")
 		player.lockPlayer()		
