@@ -9,7 +9,9 @@ extents = Vector2( 16.2298, 47.2666 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 79.2346
 
-[node name="Door" type="Node2D"]
+[node name="Door" type="Node2D" groups=[
+"doors",
+]]
 scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
@@ -28,7 +30,6 @@ shape = SubResource( 1 )
 [node name="Detect" type="Area2D" parent="."]
 
 [node name="Shape" type="CollisionShape2D" parent="Detect"]
-visible = false
 shape = SubResource( 2 )
 [connection signal="animation_finished" from="Sprite" to="." method="_on_animation_finished"]
 [connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
