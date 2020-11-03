@@ -4,6 +4,7 @@ onready var world = $"/root/World"
 var random_level = load("res://maps/Random.tscn")
 
 
+var minimap_icon = "alert"
 export(String, FILE) var target_scene
 export var randomLevelTemplate = ""
 export var createInstance = false

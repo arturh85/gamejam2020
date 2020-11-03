@@ -25,7 +25,9 @@ tracks/0/keys = {
 "values": [ Vector2( 21.8633, 7.62939e-06 ), Vector2( 15.9771, -14.7157 ), Vector2( 0.272062, -20.9729 ), Vector2( -15.3488, -15.2334 ), Vector2( -21.8975, -0.365898 ), Vector2( -13.9863, 15.6843 ), Vector2( -0.122223, 21.5753 ), Vector2( 15.5918, 14.5164 ) ]
 }
 
-[node name="Portal" type="Area2D"]
+[node name="Portal" type="Area2D" groups=[
+"minimap_objects",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

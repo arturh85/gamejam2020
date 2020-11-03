@@ -75,7 +75,9 @@ tracks/1/keys = {
 "values": [ 2.5 ]
 }
 
-[node name="HealthPack" type="Area2D"]
+[node name="HealthPack" type="Area2D" groups=[
+"minimap_objects",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

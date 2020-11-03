@@ -6,9 +6,16 @@ onready var grid = $Panel/Grid
 export var scale = 0.3
 
 var hover_door = null
+var is_open = false
 var real_door = {}
 
 var symbol_by_room = {}
+
+
+onready var other_player_marker = $MarginContainer/Grid/OtherPlayerMarker
+onready var mob_marker = $MarginContainer/Grid/MobMarker
+# Link object icon setting to Sprite marker.
+onready var icons = {"mob": mob_marker, "other_player": other_player_marker}
 
 func open():
 	var tilemap = get_node("../../Level/TileMap")
@@ -54,9 +61,13 @@ func open():
 		detect.connect("input_event", self, "door_mouse_input", [door])		
 		grid.add_child(door)		
 		
+	is_open = true
 	show()
 	
 func _process(_delta):
+	if not is_open:
+		return
+		
 	for room in symbol_by_room:
 		var symbol = symbol_by_room[room]
 		symbol.modulate = Color.red.linear_interpolate(Color.white, room.oxygen / 100)
@@ -111,6 +122,7 @@ func modulate_door(door, hover = false):
 	
 
 func close():
+	is_open = false
 	hide()
 	for item in grid.get_children():
 		if real_door.has(item):

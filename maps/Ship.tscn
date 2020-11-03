@@ -828,15 +828,15 @@ position = Vector2( 352.176, 98.2285 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 10
+frame = 5
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 9
+frame = 4
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 9
+frame = 4
 [connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_entered"]
 [connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_exited"]
 [connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]

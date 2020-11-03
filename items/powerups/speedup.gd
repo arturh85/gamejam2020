@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var minimap_icon = "alert"
 var modified_player
 
 func _on_FireRatePowerUp_body_entered(body):

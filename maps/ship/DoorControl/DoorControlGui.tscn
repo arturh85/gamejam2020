@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://maps/ship/DoorControl/DoorControlGui.gd" type="Script" id=1]
-
-
-
-
+[ext_resource path="res://data/images/minimap/enemy.png" type="Texture" id=2]
+[ext_resource path="res://data/images/minimap/minimapIcon_jewelRed.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
@@ -58,4 +56,22 @@ margin_bottom = 457.414
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
+}
+
+[node name="MobMarker" type="Sprite" parent="Panel"]
+visible = false
+position = Vector2( 104.36, 103.439 )
+scale = Vector2( 0.723786, 0.745883 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="OtherPlayerMarker" type="Sprite" parent="Panel"]
+visible = false
+position = Vector2( 207.622, 105.197 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
 }

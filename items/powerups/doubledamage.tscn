@@ -178,7 +178,9 @@ tracks/3/keys = {
 "values": [ 3.0 ]
 }
 
-[node name="DoubleDamage" type="Area2D"]
+[node name="DoubleDamage" type="Area2D" groups=[
+"minimap_objects",
+]]
 scale = Vector2( 1, 0.5 )
 script = ExtResource( 2 )
 

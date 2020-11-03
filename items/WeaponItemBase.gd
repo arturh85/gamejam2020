@@ -1,5 +1,6 @@
 extends Node2D
 
+var minimap_icon = "alert"
 export var weapon_nr = 0
 export var weapon_ammo = 0
 

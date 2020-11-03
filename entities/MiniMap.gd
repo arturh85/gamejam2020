@@ -65,7 +65,7 @@ func _process(delta):
 			if item.is_in_group("players"):
 				markers[item].scale = Vector2(0.8, 0.8)
 			else:
-				markers[item].scale = Vector2(3, 3)
+				markers[item].scale = Vector2(1.2, 1.2)
 			markers[item].show()
 		elif obj_distance < max_radius:
 			markers[item].scale = Vector2(0.75, 0.75)

@@ -94,7 +94,9 @@ tracks/1/keys = {
 radius = 18.4668
 height = 1.12494
 
-[node name="PlasmagunItem" type="Area2D"]
+[node name="PlasmagunItem" type="Area2D" groups=[
+"minimap_objects",
+]]
 script = ExtResource( 2 )
 weapon_nr = 1
 
