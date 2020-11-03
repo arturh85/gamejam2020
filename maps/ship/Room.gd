@@ -26,19 +26,19 @@ var oxygen = 100 setget set_oxygen
 
 func set_oxygen(new_oxygen):
 	if room_type != RoomType.deadly_space:
-		oxygen = new_oxygen
+		oxygen = clamp(new_oxygen, 0, 100)
 
 func _ready():
 	if room_type == RoomType.deadly_space:
 		oxygen = -1
 	else:
 		oxygen = 50 + randi() % 50
-	print("random " + str(self) + " (" + self.name + "): " + str(oxygen))
+	#print("random " + str(self) + " (" + self.name + "): " + str(oxygen))
 
 func _on_body_entered(body):
 	if body.is_in_group("players"):
 		body.room = self
-		print("entered " + str(self) + " (" + self.name + "): " + str(oxygen))
+		#print("entered " + str(self) + " (" + self.name + "): " + str(oxygen))
 
 func _on_body_exited(_body):
 	pass

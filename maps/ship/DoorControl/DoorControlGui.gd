@@ -8,6 +8,8 @@ export var scale = 0.3
 var hover_door = null
 var real_door = {}
 
+var symbol_by_room = {}
+
 func open():
 	var tilemap = get_node("../../Level/TileMap")
 	var level_tilemap = tilemap.duplicate()
@@ -16,12 +18,23 @@ func open():
 	level_tilemap.scale = Vector2(scale, scale)
 	grid.add_child(level_tilemap)
 	real_door = {}
+	symbol_by_room = {}
 		
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
-	
 	for item in map_objects:
 		pass
-	
+		
+	var room_objects = get_tree().get_nodes_in_group("rooms")
+	for room in room_objects:
+		if room.has_node("Symbol"):
+			var symbol = room.get_node("Symbol").duplicate()
+			symbol.position.x = level_tilemap.position.x + (symbol.position.x * scale) + (room.position.x * scale) 
+			symbol.position.y = level_tilemap.position.y + (symbol.position.y * scale) + (room.position.y * scale)
+			symbol.scale = Vector2(scale * 3, scale * 3)
+			symbol_by_room[room] = symbol
+			grid.add_child(symbol)			
+			
+		
 	var door_objects = get_tree().get_nodes_in_group("doors")
 	for item in door_objects:
 		var door = item.duplicate()
@@ -42,6 +55,11 @@ func open():
 		grid.add_child(door)		
 		
 	show()
+	
+func _process(_delta):
+	for room in symbol_by_room:
+		var symbol = symbol_by_room[room]
+		symbol.modulate = Color.red.linear_interpolate(Color.white, room.oxygen / 100)
 	
 func door_mouse_input(viewport, event: InputEvent, shape_idx, door):
 	if event is InputEventMouseButton and event.pressed:
