@@ -7,7 +7,7 @@ enum State {
 	open
 }
 
-var state = State.closed
+var state = State.closed setget set_state
 
 onready var sprite = $Sprite
 onready var shape = $Body/Shape
@@ -17,6 +17,8 @@ export var opened = false setget set_opened
 
 var players_in_area = 0
 
+signal on_state_changed
+
 func _process(_delta):
 	if players_in_area > 0 and state == State.closed and not locked:
 		start_open()
@@ -24,10 +26,11 @@ func _process(_delta):
 		start_close()
 		
 func _on_animation_finished():
-	if state == State.opening:
-		finish_open()
-	elif state == State.closing:
-		finish_close()
+	if is_processing():
+		if state == State.opening:
+			finish_open()
+		elif state == State.closing:
+			finish_close()
 
 func set_locked(new_locked):
 	locked = new_locked
@@ -47,26 +50,40 @@ func _on_Detect_body_exited(body):
 	if body.is_in_group("players"):
 		players_in_area -= 1
 
+remotesync func normal_click():
+	set_opened(not opened)
+
 func start_open():
-	state = State.opening
-	sprite.play("opening")
+	set_state(State.opening)
 	shape.disabled = true
+	emit_signal("on_state_changed", self)
 		
 func start_close():
-	state = State.closing
-	sprite.play("opening", true)
+	set_state(State.closing)
 	shape.disabled = false
+	emit_signal("on_state_changed", self)
 		
 func finish_open():
-	state = State.open
-	sprite.animation = "open"
+	set_state(State.open)
 	shape.disabled = true
+	emit_signal("on_state_changed", self)
 		
 func finish_close():
-	state = State.closed
-	sprite.animation = "closed"
+	set_state(State.closed)
 	shape.disabled = false
+	emit_signal("on_state_changed", self)
 
-
-func _on_Detect_mouse_entered():
-	print("mouse entered")
+func set_state(new_state):
+	state = new_state
+	match state:
+		State.open:
+			sprite.animation = "open"
+		State.opening:
+			sprite.play("opening")
+		State.closed:
+			sprite.animation = "closed"
+		State.closing:
+			sprite.play("opening", true)
+			
+			
+	
