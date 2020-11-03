@@ -33,6 +33,8 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
 puppet var puppet_rotation = 0 
 
+var room = null
+
 var velocity = Vector2()
 var damage_multiplier = 1
 var respawn_position = null

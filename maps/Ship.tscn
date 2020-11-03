@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/GreenLight.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://maps/ship/Door.tscn" type="PackedScene" id=17]
 [ext_resource path="res://maps/ship/DoorConsole/DoorConsole.tscn" type="PackedScene" id=18]
 [ext_resource path="res://actors/BlobMob.tscn" type="PackedScene" id=19]
+[ext_resource path="res://maps/ship/Room.gd" type="Script" id=20]
 [ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
 [ext_resource path="res://data/images/background.png" type="Texture" id=22]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=23]
@@ -71,8 +72,10 @@ __meta__ = {
 
 [node name="Cloaking" type="Area2D" parent="Rooms"]
 position = Vector2( 126.076, 176.93 )
+script = ExtResource( 20 )
+room_type = 1
 
-[node name="CloakingSymbol" type="Sprite" parent="Rooms/Cloaking"]
+[node name="Symbol" type="Sprite" parent="Rooms/Cloaking"]
 light_mask = 2
 position = Vector2( -2.32593, 6.94397 )
 scale = Vector2( 4, 4 )
@@ -91,15 +94,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Cloaking"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Cloaking"]
 visible = false
 position = Vector2( 2.11887, -2.11893 )
 shape = SubResource( 1 )
 
 [node name="WeaponControl" type="Area2D" parent="Rooms"]
 position = Vector2( -184.073, -17.8496 )
+script = ExtResource( 20 )
+room_type = 2
 
-[node name="WeaponControlSymbol" type="Sprite" parent="Rooms/WeaponControl"]
+[node name="Symbol" type="Sprite" parent="Rooms/WeaponControl"]
 position = Vector2( 5.82132, -14.3281 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 11 )
@@ -129,13 +134,15 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/WeaponControl"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/WeaponControl"]
 visible = false
 position = Vector2( 2.11887, -2.11893 )
 shape = SubResource( 1 )
 
 [node name="Engines" type="Area2D" parent="Rooms"]
 position = Vector2( -647.05, 10.6182 )
+script = ExtResource( 20 )
+room_type = 3
 
 [node name="Light" type="Light2D" parent="Rooms/Engines"]
 position = Vector2( 100.123, 10.3529 )
@@ -150,20 +157,22 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Engines"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Engines"]
 visible = false
 position = Vector2( 2.11887, -2.11893 )
 shape = SubResource( 1 )
 
-[node name="EnginesSymbol" type="Sprite" parent="Rooms/Engines"]
+[node name="Symbol" type="Sprite" parent="Rooms/Engines"]
 position = Vector2( -15.1548, -12.8295 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 14 )
 
 [node name="MindControl" type="Area2D" parent="Rooms"]
 position = Vector2( 126.076, -147.07 )
+script = ExtResource( 20 )
+room_type = 4
 
-[node name="MindControlSymbol" type="Sprite" parent="Rooms/MindControl"]
+[node name="Symbol" type="Sprite" parent="Rooms/MindControl"]
 light_mask = 2
 position = Vector2( 3.92392, 4.06966 )
 scale = Vector2( 4, 4 )
@@ -182,15 +191,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/MindControl"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/MindControl"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 1 )
 
 [node name="Shields" type="Area2D" parent="Rooms"]
 position = Vector2( 446.731, 197.396 )
+script = ExtResource( 20 )
+room_type = 5
 
-[node name="ShieldsSymbol" type="Sprite" parent="Rooms/Shields"]
+[node name="Symbol" type="Sprite" parent="Rooms/Shields"]
 position = Vector2( 3.11966, -6.21538 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
@@ -208,15 +219,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Shields"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Shields"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 1 )
 
 [node name="Medbay" type="Area2D" parent="Rooms"]
 position = Vector2( 449.251, -132.703 )
+script = ExtResource( 20 )
+room_type = 6
 
-[node name="MedbaySymbol" type="Sprite" parent="Rooms/Medbay"]
+[node name="Symbol" type="Sprite" parent="Rooms/Medbay"]
 position = Vector2( 1.29636, -2.27214 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 7 )
@@ -234,15 +247,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Medbay"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Medbay"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 1 )
 
 [node name="DroneControl" type="Area2D" parent="Rooms"]
 position = Vector2( 1081.6, 28.7491 )
+script = ExtResource( 20 )
+room_type = 7
 
-[node name="DroneControlSymbol" type="Sprite" parent="Rooms/DroneControl"]
+[node name="Symbol" type="Sprite" parent="Rooms/DroneControl"]
 position = Vector2( 9.43762, -12.1873 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 9 )
@@ -260,15 +275,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/DroneControl"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/DroneControl"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 2 )
 
 [node name="Piloting" type="Area2D" parent="Rooms"]
 position = Vector2( 1350.69, 11.9312 )
+script = ExtResource( 20 )
+room_type = 8
 
-[node name="PilotingSymbol" type="Sprite" parent="Rooms/Piloting"]
+[node name="Symbol" type="Sprite" parent="Rooms/Piloting"]
 position = Vector2( 14.483, -15.551 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 10 )
@@ -286,18 +303,20 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Piloting"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Piloting"]
 visible = false
 position = Vector2( 20.3004, 7.24466 )
 shape = SubResource( 3 )
 
 [node name="DoorControl" type="Area2D" parent="Rooms"]
 position = Vector2( 768.251, -68.703 )
+script = ExtResource( 20 )
+room_type = 9
 
 [node name="DoorConsole" parent="Rooms/DoorControl" instance=ExtResource( 18 )]
 position = Vector2( 97.821, -37.0607 )
 
-[node name="DoorSystemSymbol" type="Sprite" parent="Rooms/DoorControl"]
+[node name="Symbol" type="Sprite" parent="Rooms/DoorControl"]
 position = Vector2( 1.74915, 4.70298 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
@@ -315,15 +334,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/DoorControl"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/DoorControl"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 4 )
 
 [node name="BackupBattery" type="Area2D" parent="Rooms"]
 position = Vector2( -334.503, -269.476 )
+script = ExtResource( 20 )
+room_type = 10
 
-[node name="BackupBatterySymbol" type="Sprite" parent="Rooms/BackupBattery"]
+[node name="Symbol" type="Sprite" parent="Rooms/BackupBattery"]
 position = Vector2( 13.9121, 11.0544 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 12 )
@@ -341,15 +362,17 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/BackupBattery"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/BackupBattery"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
 [node name="Oxygen" type="Area2D" parent="Rooms"]
 position = Vector2( -652.144, -272.473 )
+script = ExtResource( 20 )
+room_type = 11
 
-[node name="OxygenSymbol" type="Sprite" parent="Rooms/Oxygen"]
+[node name="Symbol" type="Sprite" parent="Rooms/Oxygen"]
 position = Vector2( 19.9054, 2.06448 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 13 )
@@ -367,13 +390,15 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Oxygen"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Oxygen"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
 [node name="Airlock1" type="Area2D" parent="Rooms"]
 position = Vector2( 130.354, -396.15 )
+script = ExtResource( 20 )
+room_type = 12
 
 [node name="Light" type="Light2D" parent="Rooms/Airlock1"]
 position = Vector2( -73.6808, -25.6064 )
@@ -388,13 +413,18 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Airlock1"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Airlock1"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
 [node name="Airlock2" type="Area2D" parent="Rooms"]
 position = Vector2( 123.218, 448.187 )
+script = ExtResource( 20 )
+__meta__ = {
+"_editor_description_": ""
+}
+room_type = 12
 
 [node name="Light" type="Light2D" parent="Rooms/Airlock2"]
 position = Vector2( -73.6808, -25.6064 )
@@ -409,13 +439,15 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Airlock2"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Airlock2"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
 [node name="Airlock3" type="Area2D" parent="Rooms"]
 position = Vector2( -892.364, -1.33356 )
+script = ExtResource( 20 )
+room_type = 12
 
 [node name="Light" type="Light2D" parent="Rooms/Airlock3"]
 position = Vector2( 2.40497, -25.6064 )
@@ -430,13 +462,15 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Airlock3"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Airlock3"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 6 )
 
 [node name="CrewTeleporter" type="Area2D" parent="Rooms"]
 position = Vector2( -655.141, 245.942 )
+script = ExtResource( 20 )
+room_type = 13
 
 [node name="Light" type="Light2D" parent="Rooms/CrewTeleporter"]
 position = Vector2( -73.6808, -25.6064 )
@@ -451,20 +485,22 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/CrewTeleporter"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/CrewTeleporter"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
-[node name="CrewTeleporterSymbol" type="Sprite" parent="Rooms/CrewTeleporter"]
+[node name="Symbol" type="Sprite" parent="Rooms/CrewTeleporter"]
 position = Vector2( 17.1456, 5.0611 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 15 )
 
-[node name="CrewTeleporter2" type="Area2D" parent="Rooms"]
+[node name="Hacking" type="Area2D" parent="Rooms"]
 position = Vector2( -331.286, 250.184 )
+script = ExtResource( 20 )
+room_type = 14
 
-[node name="Light" type="Light2D" parent="Rooms/CrewTeleporter2"]
+[node name="Light" type="Light2D" parent="Rooms/Hacking"]
 position = Vector2( 124.309, 33.7906 )
 scale = Vector2( 3.36535, 2.66603 )
 texture = ExtResource( 23 )
@@ -477,20 +513,22 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/CrewTeleporter2"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Hacking"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 5 )
 
-[node name="HackingSymbol" type="Sprite" parent="Rooms/CrewTeleporter2"]
+[node name="Symbol" type="Sprite" parent="Rooms/Hacking"]
 position = Vector2( 3.53998, 1.92566 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 16 )
 
 [node name="Sensors" type="Area2D" parent="Rooms"]
 position = Vector2( 766.469, 130.858 )
+script = ExtResource( 20 )
+room_type = 15
 
-[node name="SensorsSymbol" type="Sprite" parent="Rooms/Sensors"]
+[node name="Symbol" type="Sprite" parent="Rooms/Sensors"]
 position = Vector2( 10.8955, -4.26082 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 8 )
@@ -508,7 +546,7 @@ shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Sensors"]
+[node name="Shape" type="CollisionShape2D" parent="Rooms/Sensors"]
 visible = false
 position = Vector2( 0.118866, 3.88107 )
 shape = SubResource( 4 )
@@ -653,12 +691,46 @@ position = Vector2( 352.176, 98.2285 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 9
+frame = 2
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 8
+frame = 1
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 8
+frame = 1
+[connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Engines" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Engines" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/MindControl" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/MindControl" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Shields" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Shields" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Medbay" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Medbay" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/DroneControl" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/DroneControl" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Piloting" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Piloting" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/DoorControl" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/DoorControl" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/BackupBattery" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/BackupBattery" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Oxygen" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Oxygen" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Airlock1" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Airlock1" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Airlock2" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Airlock2" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Airlock3" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Airlock3" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/CrewTeleporter" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/CrewTeleporter" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Hacking" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Hacking" to="Rooms/Cloaking" method="_on_body_exited"]
+[connection signal="body_entered" from="Rooms/Sensors" to="Rooms/Cloaking" method="_on_body_entered"]
+[connection signal="body_exited" from="Rooms/Sensors" to="Rooms/Cloaking" method="_on_body_exited"]

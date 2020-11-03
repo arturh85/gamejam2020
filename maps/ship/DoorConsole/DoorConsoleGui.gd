@@ -29,6 +29,8 @@ func open():
 		door.set_physics_process(false)
 		if door.locked:
 			door.modulate = "#dd0000"
+		elif door.opened:
+			door.modulate = "#00dd00"
 		door.position.x = level_tilemap.position.x + (door.position.x * scale)
 		door.position.y = level_tilemap.position.y + (door.position.y * scale)
 		door.scale = Vector2(scale, scale)
@@ -51,18 +53,23 @@ func door_mouse_input(viewport, event: InputEvent, shape_idx, door):
 func door_state_changed(real, fake):
 	if not real or not fake:
 		return
+	fake.opened = real.opened
 	fake.set_process(false)
 	fake.set_state(real.state)
 	
 func door_mouse_entered(door):
 	if door.locked:
 		door.modulate = "#ff0000"
+	elif door.opened:
+		door.modulate = "#00ff00"
 	else:
 		door.modulate = "#00ff00"
 	
 func door_mouse_exited(door):
 	if door.locked:
 		door.modulate = "#dd0000"
+	elif door.opened:
+		door.modulate = "#00dd00"
 	else:
 		door.modulate = "#ffffff"
 	
