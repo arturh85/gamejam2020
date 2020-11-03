@@ -24,7 +24,9 @@ func open():
 		door.position.x = level_tilemap.position.x + (door.position.x * scale)
 		door.position.y = level_tilemap.position.y + (door.position.y * scale)
 		door.scale = Vector2(scale, scale)
+		door.call_deferred("finish_close")
 		
+		# does not work :-(
 		var detect = door.get_node("Body")
 		detect.connect("mouse_entered", self, "door_mouse_entered", [door])
 		detect.connect("mouse_exited", self, "door_mouse_exited", [door])
