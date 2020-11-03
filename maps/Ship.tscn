@@ -320,7 +320,7 @@ script = ExtResource( 20 )
 room_type = 9
 
 [node name="DoorConsole" parent="Rooms/DoorControl" instance=ExtResource( 18 )]
-position = Vector2( 97.821, -37.0607 )
+position = Vector2( 90.7041, -51.6692 )
 
 [node name="Symbol" type="Sprite" parent="Rooms/DoorControl"]
 position = Vector2( 1.74915, 4.70298 )
@@ -570,7 +570,7 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 8 )
 
 [node name="Light" type="Light2D" parent="Rooms/Sensors"]
-position = Vector2( 71.655, -66.0607 )
+position = Vector2( 70.5313, -78.0472 )
 scale = Vector2( 3.36535, 2.66603 )
 texture = ExtResource( 23 )
 offset = Vector2( -14.6973, 0 )
@@ -784,15 +784,15 @@ position = Vector2( 352.176, 98.2285 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 2
+frame = 8
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 1
+frame = 7
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 1
+frame = 7
 [connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]
 [connection signal="body_exited" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_exited"]
 [connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/Cloaking" method="_on_body_entered"]

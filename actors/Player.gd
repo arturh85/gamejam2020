@@ -95,6 +95,10 @@ var gunZ = 0
 func _physics_process(delta):
 	if health <= 0 or locked:
 		return
+		
+	#if room and room.oxygen < 50:
+#		print("room: " + str(room.oxygen))
+#		rpc("take_damage", 10 * delta, 0)
 	
 	var motion = Vector2()
 
