@@ -22,7 +22,11 @@ enum RoomType {
 
 export (RoomType) var room_type = RoomType.none
 
-var oxygen = 100
+var oxygen = 100 setget set_oxygen
+
+func set_oxygen(new_oxygen):
+	if room_type != RoomType.deadly_space:
+		oxygen = new_oxygen
 
 func _ready():
 	if room_type == RoomType.deadly_space:

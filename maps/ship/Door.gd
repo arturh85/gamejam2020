@@ -22,11 +22,19 @@ var players_in_area = 0
 signal on_state_changed
 signal on_param_changed
 
-func _process(_delta):
+func _process(delta):
 	if players_in_area > 0 and state == State.closed and not locked:
 		start_open()
 	elif players_in_area <= 0 and state == State.open and not opened:
 		start_close()
+		
+	if shape.disabled and room1 and room2:
+		var room1_node = get_node(room1)
+		var room2_node = get_node(room2)
+		var oxydelta = room1_node.oxygen - room2_node.oxygen		
+		room1_node.oxygen -= oxydelta * delta
+		room2_node.oxygen += oxydelta * delta
+		
 		
 func _on_animation_finished():
 	if is_processing():
