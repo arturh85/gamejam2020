@@ -11,25 +11,36 @@ var real_door = {}
 
 var symbol_by_room = {}
 
+var level_tilemap = null
 
-onready var other_player_marker = $MarginContainer/Grid/OtherPlayerMarker
-onready var mob_marker = $MarginContainer/Grid/MobMarker
+
+onready var other_player_marker = $Panel/OtherPlayerMarker
+onready var mob_marker = $Panel/MobMarker
 # Link object icon setting to Sprite marker.
 onready var icons = {"mob": mob_marker, "other_player": other_player_marker}
 
+var markers = {}  # Dictionary of object: marker.
+
 func open():
 	var tilemap = get_node("../../Level/TileMap")
-	var level_tilemap = tilemap.duplicate()
+	level_tilemap = tilemap.duplicate()
 	var grid_size = grid.get_rect().size
 	level_tilemap.position = Vector2(grid_size.x / 2 - 50, grid_size.y / 2)
 	level_tilemap.scale = Vector2(scale, scale)
 	grid.add_child(level_tilemap)
 	real_door = {}
 	symbol_by_room = {}
+	markers = {}
 		
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
 	for item in map_objects:
-		pass
+		if item.minimap_icon and icons.has(item.minimap_icon) and icons[item.minimap_icon]:
+			var new_marker = icons[item.minimap_icon].duplicate()
+			grid.add_child(new_marker)
+			new_marker.show()
+			markers[item] = new_marker
+			if not item.is_connected("on_removed", self, "_on_object_removed"):
+				item.connect("on_removed", self, "_on_object_removed")
 		
 	var room_objects = get_tree().get_nodes_in_group("rooms")
 	for room in room_objects:
@@ -64,9 +75,19 @@ func open():
 	is_open = true
 	show()
 	
+func _on_object_removed(object):
+	# Removes a marker from the map. Connect to object's "removed" signal.
+	if object in markers:
+		markers[object].queue_free()
+		markers.erase(object)
+	
 func _process(_delta):
 	if not is_open:
 		return
+		
+	for item in markers:
+		var obj_pos = Vector2(level_tilemap.position.x + (item.position.x * scale), level_tilemap.position.y + (item.position.y * scale))
+		markers[item].position = obj_pos
 		
 	for room in symbol_by_room:
 		var symbol = symbol_by_room[room]
@@ -129,4 +150,4 @@ func close():
 			real_door[item].disconnect("on_state_changed", self, "door_state_changed")
 		grid.remove_child(item)
 		item.queue_free()
-	
+	level_tilemap = null
