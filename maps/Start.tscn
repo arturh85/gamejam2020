@@ -67,8 +67,7 @@ scale = Vector2( 3.36535, 2.66603 )
 texture = ExtResource( 23 )
 offset = Vector2( -14.6973, 0 )
 texture_scale = 2.43
-color = Color( 0.223529, 0.792157, 0.192157, 1 )
-energy = 2.0
+energy = 2.5
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_gradient_length = 2.0
@@ -88,7 +87,7 @@ shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Light2D2" type="Light2D" parent="Lights"]
-position = Vector2( -855.893, -7.43725 )
+position = Vector2( -855.893, -9.11907 )
 scale = Vector2( 4.92211, 1.32798 )
 texture = ExtResource( 23 )
 offset = Vector2( -14.6973, 0 )
@@ -149,10 +148,11 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
+frame = 2
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 11
+frame = 1
 
 [node name="BlobMob" parent="." instance=ExtResource( 3 )]
 

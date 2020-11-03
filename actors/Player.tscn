@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/player/body.png" type="Texture" id=2]
@@ -10,12 +10,17 @@
 [ext_resource path="res://data/images/player/head.png" type="Texture" id=8]
 [ext_resource path="res://data/images/player/leg.png" type="Texture" id=9]
 [ext_resource path="res://data/images/player/arms.png" type="Texture" id=10]
+[ext_resource path="res://data/images/player/hair.png" type="Texture" id=11]
 [ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
 [ext_resource path="res://data/sounds/hit.wav" type="AudioStream" id=13]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=14]
+[ext_resource path="res://data/images/items/armor/body_camouflage.png" type="Texture" id=15]
+[ext_resource path="res://data/images/items/armor/legs_camouflage.png" type="Texture" id=16]
+[ext_resource path="res://data/images/items/armor/shoes_default.png" type="Texture" id=17]
+[ext_resource path="res://data/images/items/armor/helmet_police.png" type="Texture" id=18]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 14.5124
+radius = 15.8595
 
 [sub_resource type="DynamicFont" id=2]
 size = 14
@@ -261,6 +266,54 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -6.15, 0 ), Vector2( 0, 0 ), Vector2( 8.267, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Group/pant:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -6.15, 0 ), Vector2( 0, 0 ), Vector2( 8.267, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Group/pant2:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 8.267, 0 ), Vector2( 0, 0 ), Vector2( -6.15, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Group/shoe2:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 12.067, 0 ), Vector2( 0, 0 ), Vector2( -8.913, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Group/shoe:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -8.91, 0 ), Vector2( 0, 0 ), Vector2( 11.814, 0 ) ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "Idle"
@@ -289,6 +342,54 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Group/pant:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Group/pant2:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Group/shoe:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Group/shoe2:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=15]
 length = 0.1
@@ -305,37 +406,70 @@ health_regeneration = 2
 [node name="Group" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
 
+[node name="shoe" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+position = Vector2( -1.07829, 0.925329 )
+scale = Vector2( 0.337772, 0.358419 )
+texture = ExtResource( 17 )
+
+[node name="shoe2" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+position = Vector2( -1.078, -2.957 )
+scale = Vector2( 0.337772, 0.358419 )
+texture = ExtResource( 17 )
+flip_h = true
+
 [node name="leg" type="Sprite" parent="Group"]
-modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( -3.956, 0.903 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
 
+[node name="pant" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+position = Vector2( -3.956, 0.903 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 16 )
+
 [node name="leg2" type="Sprite" parent="Group"]
-modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( -3.91226, -3.12569 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
 
+[node name="pant2" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+position = Vector2( -3.91226, -2.85169 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 16 )
+
 [node name="body" type="Sprite" parent="Group"]
-modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 region_rect = Rect2( 264, 132, 0, 0 )
 
+[node name="bodyarmor" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+position = Vector2( 0.0210228, -0.164677 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 15 )
+region_rect = Rect2( 264, 132, 0, 0 )
+
 [node name="hands" type="Sprite" parent="Group"]
-modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = -2147483646
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Gun" type="Node2D" parent="Group"]
-position = Vector2( 1, 0 )
+position = Vector2( 3, 0.185 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 
@@ -343,12 +477,26 @@ scale = Vector2( 0.5, 0.5 )
 z_index = 1
 
 [node name="head" type="Sprite" parent="Group"]
-modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 region_rect = Rect2( 264, 132, 0, 0 )
+
+[node name="hair" type="Sprite" parent="Group"]
+modulate = Color( 0.0431373, 0.0235294, 0, 1 )
+light_mask = -2147483646
+position = Vector2( 0.521023, 0.335323 )
+scale = Vector2( 0.570791, 0.585539 )
+texture = ExtResource( 11 )
+
+[node name="helmet" type="Sprite" parent="Group"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = -2147483646
+position = Vector2( -3.10521, -2.16493 )
+scale = Vector2( 0.476403, 0.533101 )
+texture = ExtResource( 18 )
 
 [node name="Camera2D" type="Camera2D" parent="Group"]
 
@@ -364,10 +512,11 @@ shadow_gradient_length = 0.5
 shadow_item_cull_mask = 2
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
-visible = false
+position = Vector2( 0, -18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.166855, -6.16573 )
+visible = false
+position = Vector2( 0.166855, -0.16573 )
 shape = SubResource( 1 )
 
 [node name="label" type="Label" parent="."]
