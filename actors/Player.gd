@@ -167,17 +167,29 @@ func _physics_process(delta):
 		#if motion != Vector2.ZERO:
 		#	playerRotation = get_angle_to(self.position + motion)
 			
-		var ang = viewRotation / PI * 180
-		if ang >= -45 and ang < 45:
-			$PlayerAnimationPlayer.play("Right")
-		if ang >= 45 and ang < 135:
-			$PlayerAnimationPlayer.play("Down")
-		if ang >= 135 or ang < -135 :
-			$PlayerAnimationPlayer.play("Left")
-		elif ang < -45 and ang >= -135:
-			$PlayerAnimationPlayer.play("Up")
+			
+		if motion != Vector2.ZERO:
+			var ang = (viewRotation - atan2(motion.y, motion.x)) / PI * 180
+			while ang < 0:
+				ang = ang + 360
+			while ang > 360:
+				ang = ang - 360
 				
-		
+			if ang >= 315 or ang < 45:
+				$PlayerAnimationPlayer.playback_speed = 1
+				$PlayerAnimationPlayer.play("Forward")
+			if ang >= 45 and ang < 135:
+				$PlayerAnimationPlayer.play("Idle")
+				#motion = motion * 0.5
+			elif ang >= 135 and ang < 225:
+				$PlayerAnimationPlayer.playback_speed = 0.5
+				$PlayerAnimationPlayer.play_backwards("Forward")
+				motion = motion * 0.5
+			elif ang >= 225 and ang < 315:
+				$PlayerAnimationPlayer.play("Idle")
+				#motion = motion * 0.5
+		else:
+			$PlayerAnimationPlayer.play("Idle")
 
 		prev_shooting = shooting
 
@@ -194,9 +206,9 @@ func _physics_process(delta):
 	# FIXME: Use move_and_slide
 	# $Group.look_at(get_global_mouse_position())
 	
-	#$Group.rotation = rotation
-	$Group/Camera2D/flashlight.rotation = viewRotation
-	$Group/Gun.rotation = viewRotation + PI / 2
+	$Group.rotation = viewRotation
+	#$Group/Camera2D/flashlight.rotation = viewRotation
+	#$Group/Gun.rotation = viewRotation + PI / 2
 	
 	move_and_slide(motion * speed * speed_multiplier)
 	if not is_network_master():

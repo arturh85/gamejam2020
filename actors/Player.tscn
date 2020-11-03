@@ -1,16 +1,15 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
-[ext_resource path="res://data/images/player/stand.png" type="Texture" id=2]
+[ext_resource path="res://data/images/player/body.png" type="Texture" id=2]
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://weapons/Shotgun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/sounds/portal.wav" type="AudioStream" id=5]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
-[ext_resource path="res://data/images/player/left.png" type="Texture" id=8]
-[ext_resource path="res://data/images/player/right.png" type="Texture" id=9]
-[ext_resource path="res://data/images/player/down.png" type="Texture" id=10]
-[ext_resource path="res://data/images/player/up.png" type="Texture" id=11]
+[ext_resource path="res://data/images/player/head.png" type="Texture" id=8]
+[ext_resource path="res://data/images/player/leg.png" type="Texture" id=9]
+[ext_resource path="res://data/images/player/arms.png" type="Texture" id=10]
 [ext_resource path="res://data/sounds/death2.wav" type="AudioStream" id=12]
 [ext_resource path="res://data/sounds/hit.wav" type="AudioStream" id=13]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=14]
@@ -37,7 +36,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Group/stand:modulate")
+tracks/1/path = NodePath("Group/Gun:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -46,10 +45,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.2, 0.2, 0.2, 1 ), Color( 0.0352941, 0.0117647, 0.0117647, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Group/Gun:modulate")
+tracks/2/path = NodePath("label:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -61,7 +60,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("label:modulate")
+tracks/3/path = NodePath("Group/Camera2D/flashlight:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -73,24 +72,12 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Group/Camera2D/flashlight:modulate")
+tracks/4/path = NodePath("HealthDisplay:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("HealthDisplay:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -104,7 +91,7 @@ length = 0.3
 [sub_resource type="Animation" id=5]
 resource_name = "PortalIn"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:modulate")
+tracks/0/path = NodePath("Group/Gun/Default Gun:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -113,39 +100,27 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.2, 0.2, 0.2, 1 ), Color( 0.2, 0.2, 0.2, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Group/Gun/Default Gun:modulate")
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AudioStreamPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Group/Gun:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("Group/Gun:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -201,18 +176,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Group/stand:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
-}
 
 [sub_resource type="Animation" id=7]
 length = 0.2
@@ -235,33 +198,9 @@ loop = true
 
 [sub_resource type="Animation" id=9]
 length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.2, 0.2, 0.2, 1 ) ]
-}
 
 [sub_resource type="Animation" id=10]
 length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.619608, 0, 0.686275, 1 ) ]
-}
 
 [sub_resource type="Animation" id=11]
 length = 0.04
@@ -295,98 +234,39 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=13]
-resource_name = "Down"
-length = 0.1
+resource_name = "Forward"
+length = 0.8
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:visible")
+tracks/0/path = NodePath("Group/leg2:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 8.267, 0 ), Vector2( 0, 0 ), Vector2( -6.15, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Group/right:visible")
+tracks/1/path = NodePath("Group/leg:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Group/left:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Group/up:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Group/down:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Group/Gun/Default Gun:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Group/Gun/Default Gun:z_index")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
+"values": [ Vector2( 0, 0 ), Vector2( -6.15, 0 ), Vector2( 0, 0 ), Vector2( 8.267, 0 ) ]
 }
 
 [sub_resource type="Animation" id=14]
-resource_name = "Left"
+resource_name = "Idle"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:visible")
+tracks/0/path = NodePath("Group/leg:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -394,11 +274,11 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Group/right:visible")
+tracks/1/path = NodePath("Group/leg2:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -406,330 +286,12 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Group/left:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Group/up:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Group/down:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Group/Gun/Default Gun:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, -1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Group/Gun/Default Gun:z_index")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=15]
 length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Group/right:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Group/left:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Group/up:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Group/down:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Group/Gun/Default Gun:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Group/Gun/Default Gun:z_index")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=16]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Group/right:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Group/left:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Group/up:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Group/down:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Group/Gun/Default Gun:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Group/Gun/Default Gun:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=17]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Group/stand:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Group/right:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Group/left:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Group/up:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Group/down:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Group/Gun/Default Gun:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ -1 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Group/Gun/Default Gun:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, -1 ) ]
-}
 
 [node name="player" type="KinematicBody2D" groups=[
 "minimap_objects",
@@ -741,55 +303,57 @@ has_weapons = [ true, false, false, false, false, false, false ]
 health_regeneration = 2
 
 [node name="Group" type="Node2D" parent="."]
+scale = Vector2( 2, 2 )
 
-[node name="stand" type="Sprite" parent="Group"]
-visible = false
-modulate = Color( 0.2, 0.2, 0.2, 1 )
+[node name="leg" type="Sprite" parent="Group"]
+modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
 light_mask = 2
-position = Vector2( 0, -17.432 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-region_rect = Rect2( 264, 132, 47, 43 )
-
-[node name="right" type="Sprite" parent="Group"]
-visible = false
-modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
-position = Vector2( 0, -17.432 )
+position = Vector2( -3.956, 0.903 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
+
+[node name="leg2" type="Sprite" parent="Group"]
+modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+light_mask = 2
+position = Vector2( -3.91226, -3.12569 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="body" type="Sprite" parent="Group"]
+modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+light_mask = 2
+position = Vector2( 0.0210228, -0.164677 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
 region_rect = Rect2( 264, 132, 0, 0 )
 
-[node name="left" type="Sprite" parent="Group"]
-visible = false
-modulate = Color( 0.2, 0.2, 0.2, 1 )
+[node name="hands" type="Sprite" parent="Group"]
+modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
 light_mask = -2147483646
-position = Vector2( 0, -17.432 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
-
-[node name="down" type="Sprite" parent="Group"]
-modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
-position = Vector2( 0, -17.432 )
+position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
-[node name="up" type="Sprite" parent="Group"]
-visible = false
-modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
-position = Vector2( 0, -17.432 )
+[node name="Gun" type="Node2D" parent="Group"]
+position = Vector2( 1, 0 )
+rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 11 )
+
+[node name="Default Gun" parent="Group/Gun" instance=ExtResource( 4 )]
+z_index = 1
+
+[node name="head" type="Sprite" parent="Group"]
+modulate = Color( 0.215686, 0.176471, 0.117647, 1 )
+light_mask = 2
+position = Vector2( 0.0210228, -0.164677 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+region_rect = Rect2( 264, 132, 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="Group"]
-position = Vector2( 0, -8 )
 
 [node name="flashlight" type="Light2D" parent="Group/Camera2D"]
 light_mask = 2
-position = Vector2( 0.178401, -0.0594635 )
-rotation = 1.5708
 scale = Vector2( 4.82131, 4.10324 )
 texture = ExtResource( 7 )
 texture_scale = 0.1
@@ -798,13 +362,6 @@ range_item_cull_mask = 2
 shadow_enabled = true
 shadow_gradient_length = 0.5
 shadow_item_cull_mask = 2
-
-[node name="Gun" type="Node2D" parent="Group"]
-position = Vector2( 0, -8 )
-rotation = 1.5708
-
-[node name="Default Gun" parent="Group/Gun" instance=ExtResource( 4 )]
-z_index = 1
 
 [node name="HealthDisplay" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -858,6 +415,7 @@ anims/Default = SubResource( 12 )
 
 [node name="DD" type="Light2D" parent="."]
 light_mask = 2
+position = Vector2( 0.0701523, 0 )
 texture = ExtResource( 14 )
 color = Color( 0, 0.976471, 1, 1 )
 energy = 0.0
@@ -865,11 +423,9 @@ range_item_cull_mask = 2
 shadow_item_cull_mask = 2
 
 [node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Down = SubResource( 13 )
-anims/Left = SubResource( 14 )
-anims/Right = SubResource( 15 )
-anims/Stand = SubResource( 16 )
-anims/Up = SubResource( 17 )
+anims/Forward = SubResource( 13 )
+anims/Idle = SubResource( 14 )
+anims/StrafeLeft = SubResource( 15 )
 [connection signal="on_damage" from="." to="." method="_on_damage"]
 [connection signal="on_death" from="." to="." method="_on_death"]
 [connection signal="on_heal" from="." to="." method="_on_heal"]
