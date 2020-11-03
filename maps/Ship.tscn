@@ -59,6 +59,7 @@ margin_right = 15328.0
 margin_bottom = 7575.47
 rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 1324.22, 4708.32 )
+mouse_filter = 2
 texture = ExtResource( 22 )
 stretch_mode = 2
 __meta__ = {
@@ -652,12 +653,12 @@ position = Vector2( 352.176, 98.2285 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 3
+frame = 9
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 2
+frame = 8
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 2
+frame = 8

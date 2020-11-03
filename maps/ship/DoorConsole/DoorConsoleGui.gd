@@ -27,26 +27,23 @@ func open():
 		door.call_deferred("finish_close")
 		
 		# does not work :-(
-		var detect = door.get_node("Body")
+		var detect = door.get_node("Detect")
 		detect.connect("mouse_entered", self, "door_mouse_entered", [door])
 		detect.connect("mouse_exited", self, "door_mouse_exited", [door])
-		detect.connect("input_event", self, "door_mouse_exited", [door])
-		
-		
-		grid.add_child(door)
+		detect.connect("input_event", self, "door_mouse_input", [door])		
+		grid.add_child(door)		
 		
 	show()
 	
-func door_mouse_input(viewport, event, shape_idx, door):
-	Logger.info("INPUT")	
+func door_mouse_input(viewport, event: InputEvent, shape_idx, door):
+	if event is InputEventMouseButton and event.pressed:
+		Logger.info("clicked on " + str(door))
 	
 func door_mouse_entered(door):
-	Logger.info("ENTERED")
 	door.modulate = "#ff0000"
 	
 func door_mouse_exited(door):
-	Logger.info("EXITED")
-	door.modulate = null
+	door.modulate =  "#ffffff"
 	
 
 func close():

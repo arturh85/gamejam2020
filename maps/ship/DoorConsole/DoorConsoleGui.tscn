@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://maps/ship/DoorConsole/DoorConsoleGui.gd" type="Script" id=1]
+[ext_resource path="res://maps/ship/Door.tscn" type="PackedScene" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
@@ -8,6 +9,7 @@ bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
 [node name="DoorConsoleGui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,6 +20,10 @@ margin_left = 94.7523
 margin_top = 43.8406
 margin_right = 949.752
 margin_bottom = 543.841
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TopBar" type="Panel" parent="Panel"]
 anchor_left = 0.5
@@ -46,6 +52,10 @@ margin_left = 38.1006
 margin_top = 62.4142
 margin_right = 798.101
 margin_bottom = 457.414
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Door" parent="Panel/Grid" instance=ExtResource( 2 )]
+position = Vector2( 699.625, 232.087 )

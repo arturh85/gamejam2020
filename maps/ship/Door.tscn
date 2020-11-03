@@ -30,7 +30,9 @@ shape = SubResource( 1 )
 [node name="Detect" type="Area2D" parent="."]
 
 [node name="Shape" type="CollisionShape2D" parent="Detect"]
+visible = false
 shape = SubResource( 2 )
 [connection signal="animation_finished" from="Sprite" to="." method="_on_animation_finished"]
 [connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
 [connection signal="body_exited" from="Detect" to="." method="_on_Detect_body_exited"]
+[connection signal="mouse_entered" from="Detect" to="." method="_on_Detect_mouse_entered"]

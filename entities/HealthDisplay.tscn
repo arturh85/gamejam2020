@@ -3,8 +3,6 @@
 [ext_resource path="res://entities/HealthDisplay.gd" type="Script" id=1]
 [ext_resource path="res://data/images/healthbar/barHorizontal_green.png" type="Texture" id=2]
 
-
-
 [node name="HealthDisplay" type="Node2D"]
 scale = Vector2( 0.2, 0.35 )
 script = ExtResource( 1 )

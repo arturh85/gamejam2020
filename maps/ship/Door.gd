@@ -66,3 +66,7 @@ func finish_close():
 	state = State.closed
 	sprite.animation = "closed"
 	shape.disabled = false
+
+
+func _on_Detect_mouse_entered():
+	print("mouse entered")

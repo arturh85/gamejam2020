@@ -143,6 +143,7 @@ visible = false
 material = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
@@ -153,6 +154,7 @@ margin_left = -10.0
 margin_top = -5.0
 margin_right = 1619.0
 margin_bottom = 978.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -163,6 +165,7 @@ margin_left = -10.0
 margin_top = -5.0
 margin_right = 1543.0
 margin_bottom = 986.0
+mouse_filter = 2
 color = Color( 0.0862745, 0.909804, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -263,6 +266,7 @@ margin_left = -20.0
 margin_top = -15.0
 margin_right = 1615.0
 margin_bottom = 1013.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -274,6 +278,7 @@ margin_left = 467.698
 margin_top = -26.3326
 margin_right = 467.698
 margin_bottom = -26.3326
+mouse_filter = 2
 
 [node name="DoorConsoleGui" parent="CanvasLayer" instance=ExtResource( 12 )]
 visible = false
