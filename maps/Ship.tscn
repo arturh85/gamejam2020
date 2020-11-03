@@ -604,7 +604,6 @@ position = Vector2( 927.794, 84.512 )
 
 [node name="Door6" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 929.293, -45.8407 )
-opened = true
 
 [node name="Door7" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 1249.93, 86.7594 )
@@ -653,12 +652,12 @@ position = Vector2( 352.176, 98.2285 )
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 454.021, -264.766 )
-frame = 9
+frame = 3
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 8
+frame = 2
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 8
+frame = 2
