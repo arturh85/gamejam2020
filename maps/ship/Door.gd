@@ -31,9 +31,10 @@ func _process(delta):
 	if shape.disabled and room1 and room2:
 		var room1_node = get_node(room1)
 		var room2_node = get_node(room2)
-		var oxydelta = room1_node.oxygen - room2_node.oxygen		
-		room1_node.oxygen -= oxydelta * delta
-		room2_node.oxygen += oxydelta * delta
+		if room1_node and room2_node:
+			var oxydelta = room1_node.oxygen - room2_node.oxygen		
+			room1_node.oxygen -= oxydelta * delta
+			room2_node.oxygen += oxydelta * delta
 		
 		
 func _on_animation_finished():
@@ -46,7 +47,7 @@ func _on_animation_finished():
 func set_locked(new_locked):
 	locked = new_locked
 	emit_signal("on_param_changed", self)
-	if locked and state != State.closed and State != State.closing:
+	if locked and state != State.closed and state != State.closing:
 		call_deferred("start_close")
 
 func set_opened(new_opened):
