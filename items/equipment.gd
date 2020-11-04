@@ -21,9 +21,9 @@ func _ready():
 		$DoubleSprite.offset.y = 4
 		$DoubleSprite.texture = load("res://data/images/items/" + item["Image"])
 	elif item["Type"] == "Pants":
-		$Sprite.offset.y = -7
+		$Sprite.offset.y = -3
 		$Sprite.texture = load("res://data/images/items/" + item["Image"])
-		$DoubleSprite.offset.y = 7
+		$DoubleSprite.offset.y = 3
 		$DoubleSprite.texture = load("res://data/images/items/" + item["Image"])
 	else:
 		$Sprite.texture = load("res://data/images/items/" + item["Image"])
