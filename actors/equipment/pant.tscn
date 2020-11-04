@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/images/items/armor/legs_camouflage.png" type="Texture" id=1]
+
+[node name="pant" type="Sprite"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+position = Vector2( -0.0552127, 0.299851 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )

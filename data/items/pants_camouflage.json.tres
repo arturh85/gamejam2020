@@ -1,0 +1,10 @@
+{
+	"Name": "The amazing camouflage pants",
+	"Image": "armor/pants_camouflage.png",
+	"Type": "Pants",
+	"Color": "00ff00",
+	"Stats": {
+		"Armor": "5"
+		}
+
+}

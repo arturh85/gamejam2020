@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/images/items/armor/helmet_police.png" type="Texture" id=1]
+
+[node name="helmet" type="Sprite"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = -2147483646
+position = Vector2( -3.10521, -2.16493 )
+scale = Vector2( 0.476403, 0.533101 )
+texture = ExtResource( 1 )

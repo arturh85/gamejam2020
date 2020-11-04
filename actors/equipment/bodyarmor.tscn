@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/images/items/armor/body_camouflage.png" type="Texture" id=1]
+
+[node name="bodyarmor" type="Sprite"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+position = Vector2( 0.0210228, -0.164677 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 264, 132, 0, 0 )

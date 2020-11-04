@@ -65,10 +65,10 @@ func setdamagemultiplier(f):
 	damage_multiplier = f
 	if f > 1:
 		$DDAnimationPlayer.play("DD")
-		get_node("../../CanvasLayer/DDAnimation").play("DD")
+		get_node("/root/World//CanvasLayer/DDAnimation").play("DD")
 	else:
 		$DDAnimationPlayer.play("Default")
-		get_node("../../CanvasLayer/DDAnimation").play("None")
+		get_node("/root/World/CanvasLayer/DDAnimation").play("None")
 	
 func setspeedmultiplier(f):
 	speed_multiplier = f
@@ -79,7 +79,7 @@ func setspeedmultiplier(f):
 	
 func addhealth(h):
 	health = min(health + h, max_health)
-	get_node("../../CanvasLayer/HealthAnimations").play("Heal")
+	get_node("/root/World//CanvasLayer/HealthAnimations").play("Heal")
 	
 var locked = false
 func lockPlayer():
@@ -238,9 +238,9 @@ func _ready():
 	setDefaults()
 	stunned = false
 	puppet_pos = position
-	get_node("../../CanvasLayer/HealthDisplay").show_always()
+	get_node("/root/World/CanvasLayer/HealthDisplay").show_always()
 	
-	var colors = get_node("../../CanvasLayer/Score").player_colors;
+	var colors = get_node("/root/World/CanvasLayer/Score").player_colors;
 	$label.add_color_override("font_color", colors[(int(get_name()) - 1) % colors.size()])
 	
 	if is_network_master():
@@ -352,3 +352,19 @@ func toggle_door_controls_gui():
 	else:
 		gui_state = GuiState.door_controls
 	set_gui_state(gui_state)
+
+func add_item(item):
+	
+	if item["Type"] == "Shoes":
+		$Group/shoe.texture = load("res://data/images/items/" + item["Image"])
+		$Group/shoe2.texture = load("res://data/images/items/" + item["Image"])
+	elif item["Type"] == "Pants":
+		$Group/pant.texture = load("res://data/images/items/" + item["Image"])
+		$Group/pant2.texture = load("res://data/images/items/" + item["Image"])
+	elif item["Type"] == "Bodyarmor":
+		$Group/bodyarmor.texture = load("res://data/images/items/" + item["Image"])
+	elif item["Type"] == "Helmet":
+		$Group/helmet.texture = load("res://data/images/items/" + item["Image"])
+	
+	
+	

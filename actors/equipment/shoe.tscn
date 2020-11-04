@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/images/items/armor/shoes_default.png" type="Texture" id=1]
+
+[node name="shoe" type="Sprite"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+position = Vector2( 0.0265646, 0.24032 )
+scale = Vector2( 0.337772, 0.358419 )
+texture = ExtResource( 1 )

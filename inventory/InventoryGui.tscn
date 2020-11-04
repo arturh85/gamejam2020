@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://inventory/DraggableBar.gd" type="Script" id=1]
 [ext_resource path="res://inventory/Tooltip.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://inventory/ItemSlot.gd" type="Script" id=5]
 [ext_resource path="res://inventory/Inventory.gd" type="Script" id=6]
 [ext_resource path="res://inventory/images/tooltip.png" type="Texture" id=7]
+[ext_resource path="res://actors/equipment/helmet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://actors/equipment/pant.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/equipment/shoe.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/equipment/bodyarmor.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
@@ -34,6 +38,51 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ColorRect" type="ColorRect" parent="CharacterPanel"]
+margin_top = 4.0
+margin_right = 180.0
+margin_bottom = 219.0
+color = Color( 0.109804, 0, 0.0941176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shoe" parent="CharacterPanel/ColorRect" instance=ExtResource( 10 )]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 80.2854, 138.451 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+
+[node name="shoe2" parent="CharacterPanel/ColorRect" instance=ExtResource( 10 )]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 100.337, 138.754 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+
+[node name="pant" parent="CharacterPanel/ColorRect" instance=ExtResource( 9 )]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 80.3775, 114.354 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+
+[node name="pant2" parent="CharacterPanel/ColorRect" instance=ExtResource( 9 )]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 100.507, 114.181 )
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+
+[node name="bodyarmor" parent="CharacterPanel/ColorRect" instance=ExtResource( 11 )]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 90.2428, 92.776 )
+rotation = 0.778417
+scale = Vector2( 2, 2 )
+
+[node name="helmet" parent="CharacterPanel/ColorRect" instance=ExtResource( 8 )]
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 88.7406, 44.8245 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
 
 [node name="TopBar" type="Panel" parent="CharacterPanel"]
 anchor_left = 0.5

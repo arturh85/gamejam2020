@@ -1,0 +1,10 @@
+{
+	"Name": "A time police helmet",
+	"Image": "armor/helmet_police.png",
+	"Type": "Helmet",
+	"Color": "ffffff",
+	"Stats": {
+		"Armor": "5"
+		}
+
+}

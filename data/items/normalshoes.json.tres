@@ -1,0 +1,10 @@
+{
+	"Name": "Just some shoes",
+	"Image": "armor/shoes_default.png",
+	"Type": "Shoes",
+	"Color": "ffffff",
+	"Stats": {
+		"Armor": "1"
+		}
+
+}
