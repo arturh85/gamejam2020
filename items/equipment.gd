@@ -12,7 +12,7 @@ var item
 func _ready():
 	
 	item = readItemFile(itemName)
-	var col = load("res://.tscn")
+	
 	$Light2D.color = COLORS.itemColor(item["Rarity"])
 
 	if item["Type"] == "Shoes":
