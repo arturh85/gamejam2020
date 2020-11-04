@@ -2,7 +2,7 @@
 	"Name": "Just some shoes",
 	"Image": "armor/shoes_default.png",
 	"Type": "Shoes",
-	"Color": "ffffff",
+	"Rarity": "Common",
 	"Stats": {
 		"Armor": "1"
 		}
