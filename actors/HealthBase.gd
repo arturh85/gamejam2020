@@ -34,10 +34,11 @@ master func take_damage(amount, by_who):
 	rpc("on_took_damage")
 	if health <= 0:
 		print("sending die()")
-		rpc("die", by_who)
+		#rpc("die", by_who)
+		die(by_who)
 		
 remotesync func die(by_who):
-	print("emitting on_death()")
+	print("emitting on_death() for " + str(self))
 	emit_signal("on_death", by_who)
 	if $CollisionShape2D:
 		$CollisionShape2D.set_deferred("disabled", true)

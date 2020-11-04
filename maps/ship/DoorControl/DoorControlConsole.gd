@@ -1,6 +1,5 @@
 extends HealthBase
 
-
 var current_player = null
 
 func _on_Control_body_entered(body):
@@ -13,8 +12,7 @@ func _on_Control_body_exited(body):
 		body.door_controls_available = false
 		current_player = null
 
-func _on_DoorConsole_on_death():
-	print("DESTORYED")
+func _on_DoorConsole_on_death(by_who):
 	$Destroyed.show()
 	if current_player:
 		current_player.door_controls_available = false
