@@ -11,7 +11,7 @@ func _physics_process(delta):
 	global_position +=  velocity * delta
 
 func _on_body_entered(body):
-	if body.is_in_group("mobs") or body.is_in_group("players"):
+	if body.has_method("take_damage"):
 		body.rpc("take_damage", damage * shooter.damage_multiplier, by_who)
 		if body.has_method("hitsound"):
 			body.hitsound()

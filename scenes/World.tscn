@@ -16,11 +16,6 @@
 [ext_resource path="res://entities/AudioStreamPlayer.gd" type="Script" id=25]
 [ext_resource path="res://entities/score.gd" type="Script" id=26]
 
-
-
-
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 44
 font_data = ExtResource( 1 )

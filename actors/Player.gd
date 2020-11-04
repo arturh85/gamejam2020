@@ -16,6 +16,7 @@ var viewRotation = 0
 
 var door_controls_available = false setget set_door_controls_available
 
+
 enum GuiState {
 	hidden,
 	inventory,
@@ -38,7 +39,7 @@ func setDefaults():
 	$PlayerAnimationPlayer.play("Stand")
 	has_weapons = [true, false, false, false, false, false, false]
 	ammo = [0, 0, 0, 0, 0, 0, 0]
-	switch_weapon(0)
+	switch_quick(0)
 	stunned = false
 	prev_shooting = false
 	shoot_index = 0
@@ -126,27 +127,23 @@ func _physics_process(delta):
 			
 		if Input.is_action_just_pressed("inventory"):
 			toggle_inventory()
-		if Input.is_action_just_pressed("ui_accept") and door_controls_available:
+		if Input.is_action_just_pressed("use") and door_controls_available:
 			toggle_door_controls_gui()
+		if Input.is_action_just_pressed("escape") and gui_state != GuiState.hidden:
+			set_gui_state(GuiState.hidden)
 			
-		if Input.is_action_just_pressed("weapon1"):
-			rpc("switch_weapon", 0)
-		if Input.is_action_just_pressed("weapon2"):
-			rpc("switch_weapon", 1)
-		if Input.is_action_just_pressed("weapon3"):
-			rpc("switch_weapon", 2)
-		if Input.is_action_just_pressed("weapon4"):
-			rpc("switch_weapon", 3)
-		if Input.is_action_just_pressed("weapon5"):
-			rpc("switch_weapon", 4)
-		if Input.is_action_just_pressed("weapon6"):
-			rpc("switch_weapon", 5)
-		if Input.is_action_just_pressed("weapon7"):
-			rpc("switch_weapon", 6)
-		if Input.is_action_just_released("weapon_next"):
-			rpc("switch_weapon_relative", 1)
-		if Input.is_action_just_released("weapon_prev"):
-			rpc("switch_weapon_relative", -1)
+		if Input.is_action_just_pressed("quick1"):
+			rpc("switch_quick", 0)
+		if Input.is_action_just_pressed("quick2"):
+			rpc("switch_quick", 1)
+		if Input.is_action_just_pressed("quick3"):
+			rpc("switch_quick", 2)
+		if Input.is_action_just_pressed("quick4"):
+			rpc("switch_quick", 3)
+		if Input.is_action_just_released("quick_next"):
+			rpc("switch_quick_relative", 1)
+		if Input.is_action_just_released("quick_prev"):
+			rpc("switch_quick_relative", -1)
 			
 		if gui_state != GuiState.hidden:
 			return
@@ -235,6 +232,7 @@ func set_player_name(new_name):
 	get_node("label").set_text(new_name)
 
 func _ready():
+	._ready()
 	setDefaults()
 	stunned = false
 	puppet_pos = position
@@ -270,7 +268,6 @@ func _on_heal():
 
 
 func _on_health_changed():
-	$HealthDisplay.update_healthbar(health, max_health)
 	if is_network_master():
 		get_node("/root/World/CanvasLayer/HealthDisplay").update_healthbar(health, max_health)
 

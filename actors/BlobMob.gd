@@ -8,6 +8,7 @@ var harm_player = null
 var last_harm = null
 
 func _ready():
+	._ready()
 	rotation = rand_range(0, 2*PI)
 			
 func _process(delta):
@@ -78,7 +79,7 @@ func _on_heal():
 	pass
 
 func _on_health_changed():
-	$HealthDisplay.update_healthbar(health, max_health)
+	pass
 		
 
 func _on_Detect_body_entered(body):

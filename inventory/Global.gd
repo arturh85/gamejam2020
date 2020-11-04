@@ -17,6 +17,9 @@ enum SlotType {
 	SLOT_QUICK4,
 }
 
+const CHARACTER_SLOT_COUNT = SlotType.SLOT_QUICK4 + 1
+const INVENTORY_SLOT_COUNT = 45;
+
 enum ItemRarity {
 	NORMAL = 0,
 	MAGIC,

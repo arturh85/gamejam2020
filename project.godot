@@ -9,12 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "HealthBase",
+"class": "ActorBase",
+"language": "GDScript",
+"path": "res://actors/ActorBase.gd"
+}, {
 "base": "Reference",
 "class": "Appender",
 "language": "GDScript",
 "path": "res://addons/gs_logger/appender.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "HealthBase",
 "class": "BlobMob",
 "language": "GDScript",
 "path": "res://actors/BlobMob.gd"
@@ -109,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://inventory/Global.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "HealthBase",
+"language": "GDScript",
+"path": "res://actors/HealthBase.gd"
+}, {
 "base": "Layout",
 "class": "HtmlLayout",
 "language": "GDScript",
@@ -129,12 +139,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/layouts/pattern_layout.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "HealthBase",
 "class": "Player",
 "language": "GDScript",
 "path": "res://actors/Player.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "HealthBase",
 "class": "TimeCopMob",
 "language": "GDScript",
 "path": "res://actors/TimeCop.gd"
@@ -145,6 +155,7 @@ _global_script_classes=[ {
 "path": "res://addons/gs_logger/utils.gd"
 } ]
 _global_script_class_icons={
+"ActorBase": "",
 "Appender": "",
 "BlobMob": "",
 "ConsoleAppender": "",
@@ -165,6 +176,7 @@ _global_script_class_icons={
 "GDWeaponsStartBlocker": "",
 "GDWeaponsWeapon": "",
 "Global": "",
+"HealthBase": "",
 "HtmlLayout": "",
 "Layout": "",
 "Message": "",
@@ -267,47 +279,32 @@ flashlight={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
  ]
 }
-weapon1={
+quick1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"unicode":0,"echo":false,"script":null)
  ]
 }
-weapon2={
+quick2={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"unicode":0,"echo":false,"script":null)
  ]
 }
-weapon3={
+quick3={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
  ]
 }
-weapon4={
+quick4={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"unicode":0,"echo":false,"script":null)
  ]
 }
-weapon5={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"unicode":0,"echo":false,"script":null)
- ]
-}
-weapon6={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":54,"unicode":0,"echo":false,"script":null)
- ]
-}
-weapon7={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":55,"unicode":0,"echo":false,"script":null)
- ]
-}
-weapon_next={
+quick_next={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-weapon_prev={
+quick_prev={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
  ]
@@ -315,5 +312,15 @@ weapon_prev={
 inventory={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
+ ]
+}
+use={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+escape={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }

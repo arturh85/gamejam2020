@@ -8,12 +8,13 @@ var harm_player = null
 var last_harm = null
 
 func _ready():
+	._ready()
 	rotation = rand_range(0, 2*PI)
 	has_weapons[5] = true
-	switch_weapon(5)
+	switch_quick(5)
 		
-sync func switch_weapon(index):
-	.switch_weapon(index)
+sync func switch_quick(index):
+	.switch_quick(index)
 	var current_weapon_node = get_node("Group/Gun").get_child(0)
 	if current_weapon_node.has_node("StartBlocker"):
 		current_weapon_node.remove_child(current_weapon_node.get_node("StartBlocker"))
@@ -97,7 +98,7 @@ func _on_heal():
 	pass
 
 func _on_health_changed():
-	$HealthDisplay.update_healthbar(health, max_health)
+	pass
 
 func _on_Detect_body_entered(body):
 	if body.is_in_group("players"):
