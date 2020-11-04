@@ -2,7 +2,7 @@
 	"Name": "A time police helmet",
 	"Image": "armor/helmet_police.png",
 	"Type": "Helmet",
-	"Color": "ffffff",
+	"Rarity": "Epic",
 	"Stats": {
 		"Armor": "5"
 		}

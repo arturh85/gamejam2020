@@ -2,7 +2,7 @@
 	"Name": "The amazing camouflage jacket",
 	"Image": "armor/body_camouflage.png",
 	"Type": "Bodyarmor",
-	"Color": "ff0000",
+	"Rarity": "Normal",
 	"Stats": {
 		"Armor": "10"
 		}

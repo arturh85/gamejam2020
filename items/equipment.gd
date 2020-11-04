@@ -1,5 +1,6 @@
 extends Node2D
 
+const COLORS = preload("res://items/colors.gd") # static
 export var itemName = ""
 var item
 # Declare member variables here. Examples:
@@ -11,9 +12,8 @@ var item
 func _ready():
 	
 	item = readItemFile(itemName)
-	self.name = item["Name"]
-	$Light2D.color = item["Color"]
-	print( item["Color"])
+	
+	$Light2D.color = COLORS.itemColor(item["Rarity"])
 
 	if item["Type"] == "Shoes":
 		$Sprite.offset.y = -4
@@ -21,9 +21,9 @@ func _ready():
 		$DoubleSprite.offset.y = 4
 		$DoubleSprite.texture = load("res://data/images/items/" + item["Image"])
 	elif item["Type"] == "Pants":
-		$Sprite.offset.y = -7
+		$Sprite.offset.y = -3
 		$Sprite.texture = load("res://data/images/items/" + item["Image"])
-		$DoubleSprite.offset.y = 7
+		$DoubleSprite.offset.y = 3
 		$DoubleSprite.texture = load("res://data/images/items/" + item["Image"])
 	else:
 		$Sprite.texture = load("res://data/images/items/" + item["Image"])
