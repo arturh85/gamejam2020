@@ -14,6 +14,10 @@ static func portal(node, position, back = true, levelname = "", color="ff0000"):
 		object.setColor("00ff00")
 	else:
 		object.setColor(color)
+		
+	if not back:
+		object.create()
+		
 	node.add_child(object)
 	
 static func object(node, size, cell, tmpMap, o, pos):
