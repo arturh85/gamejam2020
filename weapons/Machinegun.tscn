@@ -69,7 +69,6 @@ spread = 0.12
 
 [node name="Burst" parent="." index="3" instance=ExtResource( 11 )]
 attacks_in_burst = 4
-burst_wait_time = 0.1
 
 [node name="AutoAttack" parent="." index="4" instance=ExtResource( 4 )]
 script = ExtResource( 9 )

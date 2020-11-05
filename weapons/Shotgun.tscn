@@ -71,7 +71,7 @@ auto_reset = true
 try_start_attack_after_set = true
 
 [node name="Muzzle" type="Node2D" parent="." index="4"]
-position = Vector2( -0.00338006, -30.4109 )
+position = Vector2( 0, -29.938 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 anims/Flash = SubResource( 1 )
