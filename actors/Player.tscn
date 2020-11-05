@@ -433,6 +433,8 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="gloves" parent="Group" instance=ExtResource( 15 )]
+position = Vector2( 3.74715, 0.696243 )
+scale = Vector2( 0.455622, 0.469556 )
 texture = null
 
 [node name="Gun" type="Node2D" parent="Group"]
@@ -526,7 +528,7 @@ anims/Default = SubResource( 12 )
 
 [node name="DD" type="Light2D" parent="."]
 light_mask = 2
-position = Vector2( 0.0701523, 0 )
+position = Vector2( 0.0701523, -0.10511 )
 texture = ExtResource( 14 )
 color = Color( 0, 0.976471, 1, 1 )
 energy = 0.0
