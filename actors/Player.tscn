@@ -376,8 +376,8 @@ length = 0.1
 ]]
 z_index = 2
 script = ExtResource( 1 )
-has_weapons = [ true, false, false, false, false, false, false ]
 health_regeneration = 2
+has_weapons = [ true, false, false, false, false, false, false ]
 
 [node name="Group" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
@@ -431,6 +431,9 @@ light_mask = -2147483646
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
+
+[node name="gloves" parent="Group" instance=ExtResource( 15 )]
+texture = null
 
 [node name="Gun" type="Node2D" parent="Group"]
 position = Vector2( 3, 0.185 )
