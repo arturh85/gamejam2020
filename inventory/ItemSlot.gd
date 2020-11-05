@@ -1,4 +1,5 @@
 extends Panel
+class_name InventoryItemSlot
 
 export(Global.SlotType) var slotType = Global.SlotType.SLOT_DEFAULT;
 

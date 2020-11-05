@@ -2,9 +2,9 @@ extends Panel
 
 var slots = Array();
 
-var current_player = null
+var current_player: Player = null
 
-func open(player):
+func open(player: Player):
 	current_player = player
 	for i in range(Global.CHARACTER_SLOT_COUNT-1):
 		if player.character_slots[i+1]:

@@ -1,79 +1,16 @@
 extends Panel;
 
-const ItemClass = preload("res://inventory/Item.gd");
-const ItemSlotClass = preload("res://inventory/ItemSlot.gd");
-const TooltipClass = preload("res://inventory/Tooltip.gd");
-
-
-const itemImages = [
-	preload("res://inventory/images/Ac_Ring05.png"),
-	preload("res://inventory/images/A_Armor05.png"),
-	preload("res://inventory/images/A_Armour02.png"),
-	preload("res://inventory/images/A_Shoes03.png"),
-	preload("res://inventory/images/C_Elm03.png"),
-	preload("res://inventory/images/E_Wood02.png"),
-	preload("res://inventory/images/P_Red02.png"),
-	preload("res://inventory/images/W_Sword001.png"),
-	preload("res://inventory/images/Ac_Necklace03.png"),
-];
-
-const itemDictionary = {
-	0: {
-		"itemName": "Ring",
-		"itemValue": 456,
-		"itemIcon": itemImages[0],
-		"slotType": Global.SlotType.SLOT_RING
-	},
-	1: {
-		"itemName": "Sword",
-		"itemValue": 832,
-		"itemIcon": itemImages[7],
-		"slotType": Global.SlotType.SLOT_LHAND
-	},
-	2: {
-		"itemName": "Armor",
-		"itemValue": 623,
-		"itemIcon": itemImages[2],
-		"slotType": Global.SlotType.SLOT_ARMOR
-	},
-	3: {
-		"itemName": "Helmet",
-		"itemValue": 12,
-		"itemIcon": itemImages[4],
-		"slotType": Global.SlotType.SLOT_HELMET
-	},
-	4: {
-		"itemName": "Boots",
-		"itemValue": 654,
-		"itemIcon": itemImages[3],
-		"slotType": Global.SlotType.SLOT_FEET
-	},
-	5: {
-		"itemName": "Shield",
-		"itemValue": 23,
-		"itemIcon": itemImages[5],
-		"slotType": Global.SlotType.SLOT_RHAND
-	},
-	6: {
-		"itemName": "Necklace",
-		"itemValue": 756,
-		"itemIcon": itemImages[8],
-		"slotType": Global.SlotType.SLOT_NECK
-	}
-}
-
 var slotList = Array()
 var holdingItem = null
 var itemOffset = Vector2(0, 0)
-var current_player = null
+var current_player: Player = null
 onready var tooltip = get_node("../Tooltip")
 onready var characterPanel = get_node("../CharacterPanel")
-
 
 func _ready():
 	var slots = get_node("SlotsContainer/Slots");
 	for _i in range(Global.INVENTORY_SLOT_COUNT):
-		var slot = ItemSlotClass.new()
+		var slot = InventoryItemSlot.new()
 		slot.connect("mouse_entered", self, "mouse_enter_slot", [slot])
 		slot.connect("mouse_exited", self, "mouse_exit_slot", [slot])
 		slot.connect("gui_input", self, "slot_gui_input", [slot])
@@ -90,7 +27,7 @@ func _ready():
 			panelSlot.connect("gui_input", self, "slot_gui_input", [panelSlot])
 			
 
-func open(player):
+func open(player: Player):
 	current_player = player
 	for i in range(Global.INVENTORY_SLOT_COUNT):
 		if player.inventory_slots[i]:
@@ -108,15 +45,15 @@ func on_update_slot(item, idx):
 	if current_player:
 		current_player.inventory_slots[idx] = item
 			
-func mouse_enter_slot(_slot : ItemSlotClass):
+func mouse_enter_slot(_slot : InventoryItemSlot):
 	if _slot.item:
 		tooltip.display(_slot.item, get_global_mouse_position())
 
-func mouse_exit_slot(_slot : ItemSlotClass):
+func mouse_exit_slot(_slot : InventoryItemSlot):
 	if tooltip.visible:
 		tooltip.hide()
 
-func slot_gui_input(event : InputEvent, slot : ItemSlotClass):
+func slot_gui_input(event : InputEvent, slot : InventoryItemSlot):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if holdingItem:
@@ -221,15 +158,11 @@ func _on_SortRarityButton_pressed():
 		var slot = slotList[i]
 		slot.setItem(item)
 
-func sortItemsByRarity(itemA : ItemClass, itemB : ItemClass):
+func sortItemsByRarity(itemA : InventoryItem, itemB : InventoryItem):
 	return itemA.rarity > itemB.rarity
 
 func _on_AddItemButton_pressed():
 	var slot = getFreeSlot()
 	if slot:
-		var item = itemDictionary[randi() % itemDictionary.size()]
-		var itemName = item.itemName
-		var itemIcon = item.itemIcon
-		var itemValue = item.itemValue
-		var slotType = item.slotType
-		slot.setItem(ItemClass.new(itemName, itemIcon, null, itemValue, slotType))
+		var item = ItemFactory.generate_random()
+		slot.setItem(item)

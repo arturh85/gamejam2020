@@ -1,11 +1,10 @@
 extends NinePatchRect
-
-const ItemClass = preload("res://inventory/Item.gd");
+class_name InventoryTooltip
 
 onready var itemNameLabel = get_node("Item Name");
 onready var itemValueLabel = get_node("Item Value");
 
-func display(_item : ItemClass, mousePos : Vector2):
+func display(_item : InventoryItem, mousePos : Vector2):
 	visible = true;
 	itemNameLabel.set_text(_item.itemName);
 	itemValueLabel.set_text("Value: %d" % _item.itemValue)
