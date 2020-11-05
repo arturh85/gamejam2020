@@ -19,19 +19,14 @@ func _ready():
 #func _process(delta):
 #	pass
 
-var initTrigger = false
-
 func setColor(c):
 	$Light2D.color = c
 
 func _on_Trigger_body_entered(body):
-	if not initTrigger:
-		initTrigger = true
-		return
-		
-	if not triggered:
-		dotrigger()
-		triggered = true
+	if body.is_in_group("players"):
+		if not triggered:
+			dotrigger()
+			triggered = true
 		
 func dotrigger():
 	$Light2D.visible = true
