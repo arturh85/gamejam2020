@@ -6,6 +6,8 @@ var slotIndex;
 var item = null;
 var style;
 
+signal on_update_slot(item)
+
 onready var item_root = $"/root/World/CanvasLayer/InventoryGui/Items"
 
 func _ready():
@@ -25,6 +27,7 @@ func setItem(newItem):
 	item = newItem;
 	item.itemSlot = self;
 	refreshColors();
+	emit_signal("on_update_slot", item)
 
 func pickItem():
 	item.pickItem();
@@ -32,6 +35,7 @@ func pickItem():
 	item_root.add_child(item);
 	item = null;
 	refreshColors();
+	emit_signal("on_update_slot", null)
 
 func putItem(newItem):
 	item = newItem;
@@ -40,11 +44,13 @@ func putItem(newItem):
 	item_root.remove_child(item);
 	add_child(item);
 	refreshColors();
+	emit_signal("on_update_slot", item)
 
 func removeItem():
 	remove_child(item);
 	item = null;
 	refreshColors();
+	emit_signal("on_update_slot", null)
 
 func equipItem(newItem, rightClick =  true):
 	item = newItem;
@@ -54,6 +60,7 @@ func equipItem(newItem, rightClick =  true):
 		item_root.remove_child(item);
 	add_child(item);
 	refreshColors();
+	emit_signal("on_update_slot", item)
 
 func refreshColors():
 	if item:
