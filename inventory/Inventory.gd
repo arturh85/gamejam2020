@@ -90,7 +90,17 @@ func _ready():
 			panelSlot.connect("mouse_entered", self, "mouse_enter_slot", [panelSlot])
 			panelSlot.connect("mouse_exited", self, "mouse_exit_slot", [panelSlot])
 			panelSlot.connect("gui_input", self, "slot_gui_input", [panelSlot])
+			
 
+func update_slots(player):
+	return
+	for i in range(Global.INVENTORY_SLOT_COUNT):
+		
+		if player.inventory_slots[i]:
+			slotList[i].putItem(player.inventory_slots[i])
+		else:
+			slotList[i].clearItem()
+			
 func mouse_enter_slot(_slot : ItemSlotClass):
 	if _slot.item:
 		tooltip.display(_slot.item, get_global_mouse_position())

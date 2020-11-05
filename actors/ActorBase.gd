@@ -31,6 +31,7 @@ var active_quickslot = Global.SlotType.SLOT_QUICK1
 var inventory_slots = Array()
 var character_slots = Array()
 
+
 puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
 puppet var puppet_rotation = 0 
@@ -45,6 +46,10 @@ var respawn_position = null
 
 func _ready():
 	._ready()
+	for _i in Global.CHARACTER_SLOT_COUNT:
+		character_slots.append(null)
+	for _i in Global.INVENTORY_SLOT_COUNT:
+		inventory_slots.append(null)
 	pass
 
 func _process(delta):

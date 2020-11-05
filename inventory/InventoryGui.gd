@@ -4,8 +4,8 @@ onready var CharacterPanel = $CharacterPanel
 onready var Inventory = $Inventory
 
 func open(player):
-	Inventory.player = player
-	CharacterPanel.player = player
+	Inventory.update_slots(player)
+	CharacterPanel.update_slots(player)
 	show()
 
 func close():

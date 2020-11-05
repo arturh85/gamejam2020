@@ -1,7 +1,14 @@
 extends Panel
 
 var slots = Array();
-var player
+
+func update_slots(player):
+	return
+	for i in range(Global.CHARACTER_SLOT_COUNT-1):
+		if player.character_slots[i+1]:
+			slots[i+1].putItem(player.character_slots[i+1])
+		else:
+			slots[i+1].clearItem()
 
 func _ready():
 	slots.resize(512);
