@@ -16,6 +16,8 @@ var viewRotation = 0
 
 var door_controls_available = false setget set_door_controls_available
 
+var trigger = null
+
 
 enum GuiState {
 	hidden,
@@ -127,8 +129,11 @@ func _physics_process(delta):
 			
 		if Input.is_action_just_pressed("inventory"):
 			toggle_inventory()
-		if Input.is_action_just_pressed("use") and door_controls_available:
-			toggle_door_controls_gui()
+		if Input.is_action_just_pressed("use"):
+			if door_controls_available:
+				toggle_door_controls_gui()
+			elif trigger:
+				trigger.execute()
 		if Input.is_action_just_pressed("escape") and gui_state != GuiState.hidden:
 			set_gui_state(GuiState.hidden)
 			
@@ -363,5 +368,8 @@ func add_item(item):
 	elif item["Type"] == "Helmet":
 		$Group/helmet.texture = load("res://data/images/items/" + item["Image"])
 	
-	
-	
+func set_trigger(t):
+	trigger = t
+
+func unset_trigger():
+	trigger = null

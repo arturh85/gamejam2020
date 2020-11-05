@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/GreenLight.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/BlobMob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://items/trigger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://items/equipment.tscn" type="PackedScene" id=5]
+[ext_resource path="res://items/button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
 [ext_resource path="res://data/images/background.png" type="Texture" id=22]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=23]
@@ -149,40 +150,19 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
+frame = 3
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 11
+frame = 2
 
 [node name="BlobMob" parent="." instance=ExtResource( 3 )]
 
-[node name="Trigger" parent="." instance=ExtResource( 4 )]
-position = Vector2( -97.0631, 756.208 )
-scale = Vector2( 0.5, 0.5 )
-target = "Random1"
-value = "new"
-color = Color( 0, 1, 0.6, 1 )
-
-[node name="Trigger3" parent="." instance=ExtResource( 4 )]
-position = Vector2( -160.689, 755.577 )
-scale = Vector2( 0.5, 0.5 )
-target = "Random2"
-value = "new"
-color = Color( 1, 0.678431, 0, 1 )
-
-[node name="Trigger4" parent="." instance=ExtResource( 4 )]
-position = Vector2( -223.055, 756.207 )
-scale = Vector2( 0.5, 0.5 )
-target = "Random3"
-value = "new"
-color = Color( 0.988235, 0, 0.878431, 1 )
-
 [node name="Trigger2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 224.159, 756.679 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 103.24, 783.111 )
 target = "Random1;Random2;Random3"
 value = "unset"
-color = Color( 1, 0, 0, 1 )
+interaction = 1
 
 [node name="Item" parent="." instance=ExtResource( 5 )]
 position = Vector2( -539, 7 )
@@ -199,3 +179,26 @@ itemName = "helmet_police"
 [node name="Item3" parent="." instance=ExtResource( 5 )]
 position = Vector2( -385, 6 )
 itemName = "pants_camouflage"
+
+[node name="Button3" parent="." instance=ExtResource( 6 )]
+position = Vector2( -346.243, 769.858 )
+target = "Random1"
+value = "new"
+interaction = 2
+color = Color( 0.00392157, 0.25098, 1, 1 )
+
+[node name="Button4" parent="." instance=ExtResource( 6 )]
+position = Vector2( -221.376, 769.858 )
+target = "Random2"
+value = "new"
+interaction = 2
+toggle = true
+toggleValue = "unset"
+color = Color( 0.992157, 0, 1, 1 )
+
+[node name="Button5" parent="." instance=ExtResource( 6 )]
+position = Vector2( -99.4821, 769.858 )
+target = "Random3"
+value = "new"
+interaction = 2
+once = true
