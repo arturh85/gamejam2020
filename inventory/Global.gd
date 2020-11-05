@@ -7,8 +7,8 @@ enum SlotType {
 	SLOT_ARMOR,
 	SLOT_FEET,
 	SLOT_NECK,
-	SLOT_RING,
-	SLOT_RING2,
+	SLOT_PANTS,
+	SLOT_GLOVES,
 	SLOT_LHAND,
 	SLOT_RHAND,
 	SLOT_QUICK1,
@@ -22,8 +22,9 @@ const INVENTORY_SLOT_COUNT = 45;
 
 enum ItemRarity {
 	NORMAL = 0,
-	MAGIC,
+	COMMON,
 	RARE,
+	EPIC,
 	LEGENDARY
 }
 
@@ -32,7 +33,7 @@ const RarityColor = {
 		"background": "#808080",
 		"border": "#cccccc"
 	},
-	ItemRarity.MAGIC: {
+	ItemRarity.COMMON: {
 		"background": "#1b51d1",
 		"border": "#2000ff"
 	},
@@ -40,8 +41,21 @@ const RarityColor = {
 		"background": "#ffdf1d",
 		"border": "#CCB217"
 	},
+	ItemRarity.EPIC: {
+		"background": "#a200ff",
+		"border": "#CCB217"
+	},
 	ItemRarity.LEGENDARY: {
 		"background": "#ec5300",
 		"border": "#BC4200"
 	}
 }
+
+static func canEquip(item, slotType):
+	var lhand = SlotType.SLOT_LHAND
+	var quick1 = SlotType.SLOT_QUICK1
+	var quick2 = SlotType.SLOT_QUICK2
+	var quick3 = SlotType.SLOT_QUICK3
+	var quick4 = SlotType.SLOT_QUICK4
+	return item.slotType == slotType ||  \
+		(item.slotType == lhand && (slotType == lhand || slotType == quick1 || slotType == quick2 || slotType == quick3 || slotType == quick4))

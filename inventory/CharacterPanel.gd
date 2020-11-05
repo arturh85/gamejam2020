@@ -21,7 +21,7 @@ func close():
 	
 func on_update_slot(item, idx):
 	if current_player:
-		current_player.character_slots[idx] = item
+		current_player.set_character_slot(idx, item)
 	
 
 func _ready():
@@ -31,8 +31,8 @@ func _ready():
 	slots.insert(Global.SlotType.SLOT_FEET, get_node("Left/SlotFeet"));
 	slots.insert(Global.SlotType.SLOT_NECK, get_node("Left/SlotNeck"));
 
-	slots.insert(Global.SlotType.SLOT_RING, get_node("Right/SlotRing"));
-	slots.insert(Global.SlotType.SLOT_RING2, get_node("Right/SlotRing2"));
+	slots.insert(Global.SlotType.SLOT_PANTS, get_node("Right/SlotPants"));
+	slots.insert(Global.SlotType.SLOT_GLOVES, get_node("Right/SlotGloves"));
 	slots.insert(Global.SlotType.SLOT_LHAND, get_node("Right/SlotLHand"));
 	slots.insert(Global.SlotType.SLOT_RHAND, get_node("Right/SlotRHand"));
 

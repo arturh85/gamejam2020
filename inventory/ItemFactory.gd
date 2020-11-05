@@ -1,6 +1,7 @@
 extends Node
 class_name ItemFactory
 const itemImages = [
+	preload("res://data/images/items/armor/helmet_police.png"),
 	preload("res://inventory/images/Ac_Ring05.png"),
 	preload("res://inventory/images/A_Armor05.png"),
 	preload("res://inventory/images/A_Armour02.png"),
@@ -13,23 +14,77 @@ const itemImages = [
 ];
 
 const itemDictionary = {
-	0: {
-		"itemName": "A time police helmet",
-		"itemValue": 456,
-		"itemIcon": itemImages[0],
-		"slotType": Global.SlotType.SLOT_RING
-	},
+	"armor_camouflage":
+		{
+			"name": "armor_camouflage",
+			"label": "The amazing camouflage jacket",
+			"value": 456,
+			"icon": preload("res://data/images/items/armor/body_camouflage.png"),
+			"image": "armor/body_camouflage.png",
+			"slotType": Global.SlotType.SLOT_ARMOR,
+			"stats": {
+				"armor": 10
+			}
+		},
+	"normalshoes":
+		{
+			"label": "Just some shoes",
+			"value": 456,
+			"icon": preload("res://data/images/items/armor/shoes_default.png"),
+			"image": "armor/shoes_default.png",
+			"slotType": Global.SlotType.SLOT_FEET,
+			"stats": {
+				"armor": 1
+			}
+		},
+	"pants_camouflage":
+		{
+			"label": "The amazing camouflage pants",
+			"value": 456,
+			"icon": preload("res://data/images/items/armor/pants_camouflage.png"),
+			"image": "armor/pants_camouflage.png",
+			"slotType": Global.SlotType.SLOT_PANTS,
+			"stats": {
+				"armor": 5
+			}
+		},
+	"helmet_police":
+		{
+			"label": "A time police helmet",
+			"value": 456,
+			"icon": preload("res://data/images/items/armor/helmet_police.png"),
+			"image": "armor/helmet_police.png",
+			"slotType": Global.SlotType.SLOT_HELMET,
+			"stats": {
+				"armor": 5
+			}
+		},
+	"leathergloves":
+		{
+			"label": "Nice Leather Gloves",
+			"value": 456,
+			"icon": preload("res://data/images/items/armor/leathergloves.png"),
+			"image": "armor/leathergloves.png",
+			"slotType": Global.SlotType.SLOT_GLOVES,
+			"stats": {
+				"armor": 2
+			}
+		},
 }
 
+static func generate(item_name):
+	var item = itemDictionary[item_name]
+	var itemName = item_name
+	var itemLabel = item.label
+	var itemIcon = item.icon
+	var itemImage = item.image
+	var itemValue = item.value
+	var slotType = item.slotType
+	return InventoryItem.new(itemName, itemIcon, itemImage, null, itemValue, slotType)	
 
 static func generate_random():
-	var item = itemDictionary[randi() % itemDictionary.size()]
-	var itemName = item.itemName
-	var itemIcon = item.itemIcon
-	var itemValue = item.itemValue
-	var slotType = item.slotType
-	return InventoryItem.new(itemName, itemIcon, null, itemValue, slotType)
-
+	return generate(itemDictionary.keys()[randi() % itemDictionary.size()])
+	
 
 #	0: {
 #		"itemName": "Ring",

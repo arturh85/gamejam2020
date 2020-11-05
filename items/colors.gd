@@ -1,12 +1,12 @@
 static func itemColor(rarity):
-	
-	if rarity == "Normal":
-		return "ffffff"
-	elif rarity == "Common":
-		return "00ff00"
-	elif rarity == "Rare":
-		return "0000ff"
-	elif rarity == "Epic":
-		return "a200ff"
-	elif rarity == "Legendary":
-		return "ff7e00"
+	match rarity:
+		Global.ItemRarity.NORMAL:
+			return "ffffff"
+		Global.ItemRarity.COMMON:
+			return "00ff00"
+		Global.ItemRarity.RARE:
+			return "0000ff"
+		Global.ItemRarity.EPIC:
+			return "a200ff"
+		Global.ItemRarity.LEGENDARY:
+			return "ff7e00"

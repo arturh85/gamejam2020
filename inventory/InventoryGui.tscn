@@ -169,7 +169,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SlotRing" type="Panel" parent="CharacterPanel/Right"]
+[node name="SlotPants" type="Panel" parent="CharacterPanel/Right"]
 margin_right = 34.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 34, 34 )
@@ -179,7 +179,7 @@ __meta__ = {
 }
 slotType = 5
 
-[node name="SlotRing2" type="Panel" parent="CharacterPanel/Right"]
+[node name="SlotGloves" type="Panel" parent="CharacterPanel/Right"]
 margin_top = 38.0
 margin_right = 34.0
 margin_bottom = 72.0

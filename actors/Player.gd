@@ -355,19 +355,25 @@ func toggle_door_controls_gui():
 		gui_state = GuiState.door_controls
 	set_gui_state(gui_state)
 
-func add_item(item):
-	
-	if item["Type"] == "Shoes":
-		$Group/shoe.texture = load("res://data/images/items/" + item["Image"])
-		$Group/shoe2.texture = load("res://data/images/items/" + item["Image"])
-	elif item["Type"] == "Pants":
-		$Group/pant.texture = load("res://data/images/items/" + item["Image"])
-		$Group/pant2.texture = load("res://data/images/items/" + item["Image"])
-	elif item["Type"] == "Bodyarmor":
-		$Group/bodyarmor.texture = load("res://data/images/items/" + item["Image"])
-	elif item["Type"] == "Helmet":
-		$Group/helmet.texture = load("res://data/images/items/" + item["Image"])
-	
+
+func pickup_item(item):
+	for i in range(Global.CHARACTER_SLOT_COUNT-1):
+		if not character_slots[i+1] and Global.canEquip(item, i+1):
+			set_character_slot(i+1, item)
+			return
+	for i in range(Global.INVENTORY_SLOT_COUNT):
+		if not inventory_slots[i]:
+			inventory_slots[i] = item
+
+func set_character_slot(idx, item):
+	var old_item = character_slots[idx]
+	if old_item:
+		old_item.unequip(self)
+	if item:
+		item.equip(self)
+	character_slots[idx] = item
+			
+
 func set_trigger(t):
 	trigger = t
 
