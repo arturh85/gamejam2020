@@ -17,8 +17,6 @@ const itemImages = [
 	preload("res://inventory/images/Ac_Necklace03.png"),
 ];
 
-var player
-
 const itemDictionary = {
 	0: {
 		"itemName": "Ring",
@@ -65,12 +63,12 @@ const itemDictionary = {
 }
 
 var slotList = Array()
-
 var holdingItem = null
 var itemOffset = Vector2(0, 0)
-
+var current_player = null
 onready var tooltip = get_node("../Tooltip")
 onready var characterPanel = get_node("../CharacterPanel")
+
 
 func _ready():
 	var slots = get_node("SlotsContainer/Slots");
@@ -92,14 +90,23 @@ func _ready():
 			panelSlot.connect("gui_input", self, "slot_gui_input", [panelSlot])
 			
 
-func update_slots(player):
-	return
+func open(player):
+	current_player = player
 	for i in range(Global.INVENTORY_SLOT_COUNT):
-		
 		if player.inventory_slots[i]:
 			slotList[i].putItem(player.inventory_slots[i])
 		else:
-			slotList[i].clearItem()
+			slotList[i].removeItem()
+		slotList[i].connect("on_update_slot", self, "on_update_slot", [i])
+		
+func close():
+	current_player = null
+	for i in range(Global.INVENTORY_SLOT_COUNT):
+		slotList[i].disconnect("on_update_slot", self, "on_update_slot")	
+	
+func on_update_slot(item, idx):
+	if current_player:
+		current_player.inventory_slots[idx] = item
 			
 func mouse_enter_slot(_slot : ItemSlotClass):
 	if _slot.item:

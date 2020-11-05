@@ -2,13 +2,27 @@ extends Panel
 
 var slots = Array();
 
-func update_slots(player):
-	return
+var current_player = null
+
+func open(player):
+	current_player = player
 	for i in range(Global.CHARACTER_SLOT_COUNT-1):
 		if player.character_slots[i+1]:
 			slots[i+1].putItem(player.character_slots[i+1])
 		else:
-			slots[i+1].clearItem()
+			slots[i+1].removeItem()
+		slots[i+1].connect("on_update_slot", self, "on_update_slot", [i+1])
+			
+func close():
+	current_player = null
+	for i in range(Global.CHARACTER_SLOT_COUNT-1):
+		slots[i+1].disconnect("on_update_slot", self, "on_update_slot")
+	
+	
+func on_update_slot(item, idx):
+	if current_player:
+		current_player.character_slots[idx] = item
+	
 
 func _ready():
 	slots.resize(512);

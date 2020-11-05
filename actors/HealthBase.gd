@@ -8,7 +8,7 @@ export var health_regeneration = 0
 signal on_damage
 signal on_heal
 signal on_health_changed
-signal on_death
+signal on_death(by_who)
 signal on_respawn
 signal on_removed
 
