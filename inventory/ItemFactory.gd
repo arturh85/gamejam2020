@@ -92,6 +92,39 @@ const itemDictionary = {
 			"stats": {
 			}
 		},
+	"machinegun":
+		{
+			"label": "Machinegun",
+			"value": 456,
+			"icon": preload("res://data/images/items/weapons/weapon_machinegun.png"),
+			"handNode": "res://weapons/Machinegun.tscn",
+			"image": "weapons/weapon_machinegun.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+			}
+		},
+	"plasmagun":
+		{
+			"label": "Plasmagun",
+			"value": 456,
+			"icon": preload("res://data/images/items/weapons/weapon_plasma.png"),
+			"handNode": "res://weapons/Plasmagun.tscn",
+			"image": "weapons/weapon_plasma.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+			}
+		},
+	"railgun":
+		{
+			"label": "Railgun",
+			"value": 456,
+			"icon": preload("res://data/images/items/weapons/waepon_rifle.png"),
+			"handNode": "res://weapons/Railgun.tscn",
+			"image": "weapons/waepon_rifle.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+			}
+		},
 }
 
 static func generate(item_name):

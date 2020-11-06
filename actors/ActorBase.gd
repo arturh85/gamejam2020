@@ -78,6 +78,7 @@ func pickup_item(item):
 	for i in range(Global.INVENTORY_SLOT_COUNT):
 		if not inventory_slots[i]:
 			inventory_slots[i] = item
+			return
 
 
 func equip_item(item: InventoryItem):
