@@ -38,7 +38,7 @@ func set_door_controls_available(new_value):
 		toggle_door_controls_gui()
 
 func setDefaults():
-	$PlayerAnimationPlayer.play("Stand")
+	#$PlayerAnimationPlayer.play("Stand")
 	has_weapons = [true, false, false, false, false, false, false]
 	ammo = [0, 0, 0, 0, 0, 0, 0]
 	switch_quick(0)
@@ -311,21 +311,12 @@ func setMap(newlevel):
 	#var newlevel = instance_from_id(newlevel_id)
 	#Logger.info("player.setMap (master: " + str(is_network_master()) + ")")
 	var world = get_node("/root/World")
-	
-	if not world.get_node("Level"):
-		Logger.error("no level after insert?! (master: " + str(is_network_master()) + ")")
-	
-	
 	var SpawnPoints = newlevel.get_node("SpawnPoints")
 	var spawn = SpawnPoints.get_child(0)
-	
 	spawn_at(spawn.position)
 	unlockPlayer()
-	
-	
 	yield(world.get_tree().create_timer(1), "timeout")
 	#newlevel.show()
-	
 	world.get_node("CanvasLayer/Transitions").play("PortalOut")
 	
 func set_gui_state(new_gui_state):

@@ -3,6 +3,7 @@ extends Node2D
 onready var world = $"/root/World"
 var random_level = load("res://maps/Random.tscn")
 
+signal on_removed(what)
 
 var minimap_icon = "alert"
 export(String, FILE) var target_scene

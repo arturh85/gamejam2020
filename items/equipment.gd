@@ -3,6 +3,10 @@ extends Node2D
 const COLORS = preload("res://items/colors.gd") # static
 export var itemName = ""
 var item: InventoryItem
+
+signal on_removed(what)
+
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -43,4 +47,5 @@ func _on_Item_body_entered(body):
 		$CollectPlayer.play("Collect")
 		yield(get_tree().create_timer(1), "timeout")
 		hide()
+		emit_signal("on_removed", self)
 		queue_free()

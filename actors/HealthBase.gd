@@ -10,13 +10,13 @@ signal on_heal
 signal on_health_changed
 signal on_death(by_who)
 signal on_respawn
-signal on_removed
+signal on_removed(what)
 
 onready var HealthDisplay = $HealthDisplay
 
 func _ready():
-	connect("on_health_changed", self, "on_health_changed")
-	pass
+	if not is_connected("on_health_changed", self, "on_health_changed"):
+		connect("on_health_changed", self, "on_health_changed")
 
 func _process(delta):
 	if health <= 0:
