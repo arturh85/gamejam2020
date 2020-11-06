@@ -1,4 +1,4 @@
-extends "res://actors/ActorBase.gd"
+extends ActorBase
 class_name TimeCopMob
 
 var minimap_icon = "mob"
@@ -10,8 +10,9 @@ var last_harm = null
 func _ready():
 	._ready()
 	rotation = rand_range(0, 2*PI)
-	has_weapons[5] = true
-	switch_quick(5)
+	
+	pickup_item(ItemFactory.generate("shotgun"))
+	switch_quick(0)
 		
 sync func switch_quick(index):
 	.switch_quick(index)

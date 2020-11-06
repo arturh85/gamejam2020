@@ -70,6 +70,87 @@ func _process(delta):
 	else:
 		last_oxygen_harm = null
 
+func pickup_item(item):
+	for i in range(Global.CHARACTER_SLOT_COUNT-1):
+		if not character_slots[i+1] and Global.canEquip(item, i+1):
+			set_character_slot(i+1, item)
+			return
+	for i in range(Global.INVENTORY_SLOT_COUNT):
+		if not inventory_slots[i]:
+			inventory_slots[i] = item
+
+
+func equip_item(item: InventoryItem):
+	match item.slotType:
+		Global.SlotType.SLOT_HELMET:
+			if $Group/helmet:
+				$Group/helmet.texture = load("res://data/images/items/" + item.itemImage)
+		Global.SlotType.SLOT_FEET:
+			if $Group/shoe:
+				$Group/shoe.texture = load("res://data/images/items/" + item.itemImage)
+			if $Group/shoe2:
+				$Group/shoe2.texture = load("res://data/images/items/" + item.itemImage)
+		Global.SlotType.SLOT_GLOVES:
+			if $Group/gloves:
+				$Group/gloves.texture = load("res://data/images/items/" + item.itemImage)
+		Global.SlotType.SLOT_PANTS:
+			if $Group/pant:
+				$Group/pant.texture = load("res://data/images/items/" + item.itemImage)
+			if $Group/pant2:
+				$Group/pant2.texture = load("res://data/images/items/" + item.itemImage)
+		Global.SlotType.SLOT_ARMOR:
+			if $Group/bodyarmor:
+				$Group/bodyarmor.texture = load("res://data/images/items/" + item.itemImage)
+		Global.SlotType.SLOT_QUICK1:
+			switch_quick(0)
+		Global.SlotType.SLOT_QUICK2:
+			switch_quick(1)
+		Global.SlotType.SLOT_QUICK3:
+			switch_quick(2)
+		Global.SlotType.SLOT_QUICK4:
+			switch_quick(3)
+
+func unequip_item(item: InventoryItem):
+	match item.slotType:
+		Global.SlotType.SLOT_HELMET:
+			if $Group/helmet:
+				$Group/helmet.texture = null
+		Global.SlotType.SLOT_FEET:
+			if $Group/shoe:
+				$Group/shoe.texture = null
+			if $Group/shoe2:
+				$Group/shoe2.texture = null
+		Global.SlotType.SLOT_GLOVES:
+			if $Group/gloves:
+				$Group/gloves.texture = null
+		Global.SlotType.SLOT_PANTS:
+			if $Group/pant:
+				$Group/pant.texture = null
+			if $Group/pant2:
+				$Group/pant2.texture = null
+		Global.SlotType.SLOT_ARMOR:
+			if $Group/bodyarmor:
+				$Group/bodyarmor.texture = null
+		Global.SlotType.SLOT_QUICK1:
+			switch_quick(0)
+		Global.SlotType.SLOT_QUICK2:
+			switch_quick(1)
+		Global.SlotType.SLOT_QUICK3:
+			switch_quick(2)
+		Global.SlotType.SLOT_QUICK4:
+			switch_quick(3)
+
+func set_character_slot(idx, item):
+	var old_item = character_slots[idx]
+	if old_item:
+		character_slots[idx] = null
+		unequip_item(old_item)
+	character_slots[idx] = item
+	if item:
+		equip_item(item)
+			
+
+
 master func respawn_at(position):
 	health = max_health
 	emit_signal("on_health_changed")

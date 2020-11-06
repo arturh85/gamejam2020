@@ -159,12 +159,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gs_logger/layouts/pattern_layout.gd"
 }, {
-"base": "HealthBase",
+"base": "ActorBase",
 "class": "Player",
 "language": "GDScript",
 "path": "res://actors/Player.gd"
 }, {
-"base": "HealthBase",
+"base": "ActorBase",
 "class": "TimeCopMob",
 "language": "GDScript",
 "path": "res://actors/TimeCop.gd"
