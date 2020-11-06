@@ -1,9 +1,8 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/player/body.png" type="Texture" id=2]
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://weapons/Shotgun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/sounds/portal.wav" type="AudioStream" id=5]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
@@ -96,36 +95,24 @@ length = 0.3
 [sub_resource type="Animation" id=5]
 resource_name = "PortalIn"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Group/Gun/Default Gun:modulate")
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Group/Gun:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Group/Gun:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -441,9 +428,6 @@ texture = null
 position = Vector2( 3, 0.185 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
-
-[node name="Default Gun" parent="Group/Gun" instance=ExtResource( 4 )]
-z_index = 1
 
 [node name="head" type="Sprite" parent="Group"]
 modulate = Color( 0.376471, 0.313726, 0.223529, 1 )

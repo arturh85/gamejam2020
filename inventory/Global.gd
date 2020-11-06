@@ -9,7 +9,6 @@ enum SlotType {
 	SLOT_NECK,
 	SLOT_PANTS,
 	SLOT_GLOVES,
-	SLOT_LHAND,
 	SLOT_RHAND,
 	SLOT_QUICK1,
 	SLOT_QUICK2,
@@ -52,10 +51,9 @@ const RarityColor = {
 }
 
 static func canEquip(item, slotType):
-	var lhand = SlotType.SLOT_LHAND
 	var quick1 = SlotType.SLOT_QUICK1
 	var quick2 = SlotType.SLOT_QUICK2
 	var quick3 = SlotType.SLOT_QUICK3
 	var quick4 = SlotType.SLOT_QUICK4
 	return item.slotType == slotType ||  \
-		(item.slotType == lhand && (slotType == lhand || slotType == quick1 || slotType == quick2 || slotType == quick3 || slotType == quick4))
+		(item.slotType == quick1 && (slotType == quick1 || slotType == quick2 || slotType == quick3 || slotType == quick4))

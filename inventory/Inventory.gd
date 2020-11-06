@@ -94,7 +94,7 @@ func slot_gui_input(event : InputEvent, slot : InventoryItemSlot):
 				if slot.item:
 					var itemSlotType = slot.item.slotType
 					var panelSlot = characterPanel.getSlotByType(slot.item.slotType)
-					if itemSlotType == Global.SlotType.SLOT_LHAND:
+					if itemSlotType == Global.SlotType.SLOT_QUICK1:
 						if panelSlot[0].item && panelSlot[1].item:
 							var panelItem = panelSlot[0].item
 							panelSlot[0].removeItem()
@@ -126,7 +126,7 @@ func slot_gui_input(event : InputEvent, slot : InventoryItemSlot):
 							panelSlot.equipItem(tempItem)
 
 func _input(event : InputEvent):
-	if holdingItem && holdingItem.picked:
+	if holdingItem && holdingItem.picked && event is InputEventMouse:
 		holdingItem.rect_global_position = event.global_position - itemOffset
 
 func getFreeSlot():

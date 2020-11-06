@@ -149,17 +149,21 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 9
+frame = 7
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 8
+frame = 6
 
 [node name="BlobMob" parent="." instance=ExtResource( 3 )]
 
 [node name="Item" parent="." instance=ExtResource( 5 )]
 position = Vector2( -539, 7 )
 itemName = "normalshoes"
+
+[node name="Item6" parent="." instance=ExtResource( 5 )]
+position = Vector2( -616.782, 3.46445 )
+itemName = "shotgun"
 
 [node name="Item2" parent="." instance=ExtResource( 5 )]
 position = Vector2( -233, 7 )

@@ -27,7 +27,7 @@ export var current_weapon = 0
 export var has_weapons = [false, false, false, false, false, false, false]
 export var ammo = [0, 0, 0, 0, 0, 0, 0]
 
-var active_quickslot = Global.SlotType.SLOT_QUICK1
+var active_quickslot = 0
 var inventory_slots = Array()
 var character_slots = Array()
 
@@ -99,20 +99,24 @@ func wmod(n):
 			
 	
 sync func switch_quick(index):
-	if has_weapons[index]:
-		var w = weapon_nodes[index].instance()
+	index = Global.SlotType.SLOT_QUICK1 + index
+	var gun_node = get_node("Group/Gun")
+	if gun_node.get_child_count() > 0:
 		var current_weapon_node = get_node("Group/Gun").get_child(0)
-		get_node("Group/Gun").remove_child(current_weapon_node)
+		gun_node.remove_child(current_weapon_node)
 		current_weapon_node.call_deferred("free")
-		get_node("Group/Gun").add_child(w, true)
-		var wchiulds = current_weapon_node.get_children()
-		if w.has_node("Ammo"):
-			var ammo_node = w.get_node("Ammo")
-			ammo_node.current_capacity = ammo[index]
-			get_node("/root/World/CanvasLayer/AmmoHUD").show()
-		else:
-			get_node("/root/World/CanvasLayer/AmmoHUD").hide()
-		current_weapon = index
+	if character_slots[index]:
+		var item = character_slots[index]		
+		if item.handNode:
+			var w = load(item.handNode).instance()
+			gun_node.add_child(w, true)
+			if w.has_node("Ammo"):
+				var ammo_node = w.get_node("Ammo")
+				ammo_node.current_capacity = ammo[index]
+				get_node("/root/World/CanvasLayer/AmmoHUD").show()
+			else:
+				get_node("/root/World/CanvasLayer/AmmoHUD").hide()
+			active_quickslot = index
 
 sync func add_weapon(nr, ammo_amount=0):
 	has_weapons[nr] = true
