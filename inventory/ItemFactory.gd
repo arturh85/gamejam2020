@@ -81,6 +81,17 @@ const itemDictionary = {
 			"stats": {
 			}
 		},
+	"crossbow":
+		{
+			"label": "Crossbow",
+			"value": 456,
+			"icon": preload("res://data/images/items/weapons/weapon_crossbow.png"),
+			"handNode": "res://weapons/Crossbow.tscn",
+			"image": "weapons/weapon_crossbow.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+			}
+		},
 }
 
 static func generate(item_name):
@@ -92,7 +103,7 @@ static func generate(item_name):
 	var itemValue = item.value
 	var handNode = item.handNode if item.has("handNode") else null
 	var slotType = item.slotType
-	return InventoryItem.new(itemName, itemIcon, itemImage, null, itemValue, slotType, handNode)
+	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, null, itemValue, slotType, handNode)
 
 static func generate_random():
 	return generate(itemDictionary.keys()[randi() % itemDictionary.size()])

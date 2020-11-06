@@ -4,6 +4,7 @@ class_name InventoryItem
 var itemIcon
 var itemImage
 var itemName
+var itemLabel
 var itemValue
 var itemSlot
 var handNode
@@ -14,9 +15,10 @@ var texture2rect
 
 var rng = RandomNumberGenerator.new()
 
-func _init(_itemName, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode):
+func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode):
 	rng.randomize();
 	self.itemName = _itemName
+	self.itemLabel = _itemLabel
 	self.itemValue = _itemValue
 	self.itemSlot = _itemSlot
 	self.handNode = _handNode

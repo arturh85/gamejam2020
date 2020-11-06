@@ -171,7 +171,7 @@ sync func switch_quick_relative(rel):
 			return switch_quick(i)
 			
 func wmod(n):
-	var c = weapon_nodes.size()
+	var c = 4
 	while n < 0:
 		n += c
 	while n >= c:
