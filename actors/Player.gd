@@ -248,6 +248,10 @@ func _ready():
 	
 	if is_network_master():
 		$Group/Camera2D.make_current()
+		
+	switch_quick(0)
+	
+		
 	
 var dying = false	
 	

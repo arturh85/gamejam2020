@@ -190,7 +190,7 @@ __meta__ = {
 }
 slotType = 6
 
-[node name="SlotLHand" type="Panel" parent="CharacterPanel/Right"]
+[node name="SlotRHand" type="Panel" parent="CharacterPanel/Right"]
 margin_top = 76.0
 margin_right = 34.0
 margin_bottom = 110.0
@@ -200,17 +200,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 slotType = 7
-
-[node name="SlotRHand" type="Panel" parent="CharacterPanel/Right"]
-margin_top = 114.0
-margin_right = 34.0
-margin_bottom = 148.0
-rect_min_size = Vector2( 34, 34 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-slotType = 8
 
 [node name="Quick" type="GridContainer" parent="CharacterPanel"]
 margin_left = 15.3126
@@ -231,7 +220,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-slotType = 9
+slotType = 8
 
 [node name="SlotQuick2" type="Panel" parent="CharacterPanel/Quick"]
 margin_left = 38.0
@@ -242,7 +231,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-slotType = 10
+slotType = 9
 
 [node name="SlotQuick3" type="Panel" parent="CharacterPanel/Quick"]
 margin_left = 76.0
@@ -253,7 +242,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-slotType = 11
+slotType = 10
 
 [node name="SlotQuick4" type="Panel" parent="CharacterPanel/Quick"]
 margin_left = 114.0
@@ -264,7 +253,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-slotType = 12
+slotType = 11
 
 [node name="Inventory" type="Panel" parent="."]
 anchor_left = 0.5

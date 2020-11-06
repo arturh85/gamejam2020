@@ -5,6 +5,7 @@ class_name GDWeaponsBulletSpawner
 onready var weapon = get_node(GDWeaponsWeapon.WEAPON_PATH_FROM_COMPONENT)
 
 export(PackedScene) var bullet_scene_path = load("res://bullets/ShotgunBullet.tscn")
+export(int) var ammo_index = 0
 
 export var spread = 0.3
 

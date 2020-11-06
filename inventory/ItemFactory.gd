@@ -127,7 +127,7 @@ const itemDictionary = {
 		},
 }
 
-static func generate(item_name):
+static func generate(item_name, slot = null):
 	var item = itemDictionary[item_name]
 	var itemName = item_name
 	var itemLabel = item.label
@@ -136,10 +136,10 @@ static func generate(item_name):
 	var itemValue = item.value
 	var handNode = item.handNode if item.has("handNode") else null
 	var slotType = item.slotType
-	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, null, itemValue, slotType, handNode)
+	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, slot, itemValue, slotType, handNode)
 
-static func generate_random():
-	return generate(itemDictionary.keys()[randi() % itemDictionary.size()])
+static func generate_random(slot):
+	return generate(itemDictionary.keys()[randi() % itemDictionary.size()], slot)
 	
 
 #	0: {
