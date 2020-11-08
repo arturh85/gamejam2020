@@ -147,7 +147,7 @@ static func generate(item_name, slot = null):
 	var itemValue = item.value
 	var handNode = item.handNode if item.has("handNode") else null
 	var slotType = item.slotType
-	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, slot, itemValue, slotType, handNode)
+	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, slot, itemValue, slotType, handNode, 10)
 
 static func generate_random(slot):
 	return generate(itemDictionary.keys()[randi() % itemDictionary.size()], slot)

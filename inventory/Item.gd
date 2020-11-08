@@ -15,7 +15,7 @@ var texture2rect
 
 var rng = RandomNumberGenerator.new()
 
-func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode):
+func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode, _luck):
 	rng.randomize();
 	self.itemName = _itemName
 	self.itemLabel = _itemLabel
@@ -24,7 +24,19 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValu
 	self.handNode = _handNode
 	self.itemImage = _itemImage
 	self.slotType = _slotType
-	self.rarity = rng.randi_range(Global.ItemRarity.NORMAL, Global.ItemRarity.LEGENDARY)
+	
+	var r = rng.randi_range(0, 1000/_luck - 1)
+	if r == 0:
+		self.rarity = Global.ItemRarity.LEGENDARY # 1% bei luck = 10 | 100% bei luck = 1000 | 0.1% bei luck = 1
+	elif r > 0 and r <= 3:
+		self.rarity = Global.ItemRarity.EPIC # 3% epic
+	elif r > 3 and r <= 13:
+		self.rarity = Global.ItemRarity.RARE # 10% rare
+	elif r > 13 and r <= 38:
+		self.rarity = Global.ItemRarity.COMMON # 25% common
+	else:
+		self.rarity = Global.ItemRarity.NORMAL # 61% normal
+		
 	texture = _itemTexture
 	self.set_size(texture.get_size())
 	
