@@ -118,13 +118,24 @@ const itemDictionary = {
 		{
 			"label": "Railgun",
 			"value": 456,
-			"icon": preload("res://data/images/items/weapons/waepon_rifle.png"),
+			"icon": preload("res://data/images/items/weapons/waepon_railgun.png"),
 			"handNode": "res://weapons/Railgun.tscn",
-			"image": "weapons/waepon_rifle.png",
+			"image": "weapons/waepon_railgun.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
 			}
 		},
+	"rifle":
+		{
+			"label": "Rifle",
+			"value": 456,
+			"icon": preload("res://data/images/items/weapons/waepon_rifle.png"),
+			"handNode": "res://weapons/Rifle.tscn",
+			"image": "weapons/waepon_rifle.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+			}
+		}
 }
 
 static func generate(item_name, slot = null):

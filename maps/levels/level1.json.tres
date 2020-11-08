@@ -47,11 +47,11 @@
 	
 	"items": {
 		"weapons": {
-			"Plasmagun": 1,
-			"Crossbow": 1,
-			"Machinegun": 2,
-			"Railgun": 0.1,
-			"Rifle": 0
+			"plasmagun": 1,
+			"crossbow": 1,
+			"machinegun": 2,
+			"railgun": 0.1,
+			"rifle": 0
 		},
 		"ammo": {
 			"MachineGunAmmo": 4
