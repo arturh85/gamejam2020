@@ -50,25 +50,25 @@ __meta__ = {
 
 [node name="shoe" parent="CharacterPanel/ColorRect" instance=ExtResource( 10 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 80.2854, 138.451 )
+position = Vector2( 80.2854, 76.951 )
 rotation = -1.5708
 scale = Vector2( 2, 2 )
 
 [node name="shoe2" parent="CharacterPanel/ColorRect" instance=ExtResource( 10 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 100.337, 138.754 )
+position = Vector2( 97.337, 101.754 )
 rotation = -1.5708
 scale = Vector2( 2, 2 )
 
 [node name="pant" parent="CharacterPanel/ColorRect" instance=ExtResource( 9 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 80.3775, 114.354 )
+position = Vector2( 80.8775, 72.854 )
 rotation = -1.5708
 scale = Vector2( 2, 2 )
 
 [node name="pant2" parent="CharacterPanel/ColorRect" instance=ExtResource( 9 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 100.507, 114.181 )
+position = Vector2( 97.007, 85.181 )
 rotation = -1.5708
 scale = Vector2( 2, 2 )
 
@@ -80,7 +80,7 @@ scale = Vector2( 2, 2 )
 
 [node name="helmet" parent="CharacterPanel/ColorRect" instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 88.7406, 44.8245 )
+position = Vector2( 88.2406, 77.3245 )
 rotation = 1.5708
 scale = Vector2( 2, 2 )
 
