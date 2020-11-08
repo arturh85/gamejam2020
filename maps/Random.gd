@@ -167,13 +167,13 @@ func createItems():
 		for weapon in settings["items"]["weapons"]:
 			var items = float(settings["items"]["weapons"][weapon])
 			for i in range(int(floor(items))):
-				ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+				ADD.weapon($Items/Weapons, weapon, 10, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
 			
 			if items-int(items) > 0: #muss funktion für alles werden
 				var num = int(1/(items-int(items)))
 				var r = rnd.randi()%num
 				if r == 0:
-					ADD.weapon($Items/Weapons, weapon, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
+					ADD.weapon($Items/Weapons, weapon, 10, RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM)))
 				
 
 	if settings["items"].has("ammo"):

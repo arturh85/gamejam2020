@@ -61,9 +61,10 @@ static func _create_collision_polygon(position, texture):
 
 
 
-static func weapon(node, name, pos):
+static func weapon(node, name, luck, pos):
 	var scn = load("res://items/equipment.tscn")
 	var object = scn.instance()
+	object.luck = luck
 	object.itemName = name
 	object.position = pos
 	node.add_child(object)

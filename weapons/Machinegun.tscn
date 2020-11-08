@@ -66,6 +66,8 @@ texture = ExtResource( 8 )
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
 bullet_scene_path = ExtResource( 2 )
 spread = 0.12
+bulletDamage = 10
+bulletSpeed = 1500
 
 [node name="Burst" parent="." index="3" instance=ExtResource( 11 )]
 attacks_in_burst = 4

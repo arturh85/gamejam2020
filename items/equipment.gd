@@ -2,6 +2,8 @@ extends Node2D
 
 const COLORS = preload("res://items/colors.gd") # static
 export var itemName = ""
+export var luck = 1
+export var level = 1
 var item: InventoryItem
 
 signal on_removed(what)
@@ -11,11 +13,10 @@ signal on_removed(what)
 # var a = 2
 # var b = "text"
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	item = ItemFactory.generate(itemName)
+	item = ItemFactory.generate(itemName, luck, level)
 	
 	$Light2D.color = COLORS.itemColor(item.rarity)
 	

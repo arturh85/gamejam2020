@@ -18,7 +18,7 @@ const itemDictionary = {
 		{
 			"name": "armor_camouflage",
 			"label": "The amazing camouflage jacket",
-			"value": 456,
+			"value": 450,
 			"icon": preload("res://data/images/items/armor/body_camouflage.png"),
 			"image": "armor/body_camouflage.png",
 			"slotType": Global.SlotType.SLOT_ARMOR,
@@ -29,7 +29,7 @@ const itemDictionary = {
 	"normalshoes":
 		{
 			"label": "Just some shoes",
-			"value": 456,
+			"value": 10,
 			"icon": preload("res://data/images/items/armor/shoes_default.png"),
 			"image": "armor/shoes_default.png",
 			"slotType": Global.SlotType.SLOT_FEET,
@@ -40,7 +40,7 @@ const itemDictionary = {
 	"pants_camouflage":
 		{
 			"label": "The amazing camouflage pants",
-			"value": 456,
+			"value": 160,
 			"icon": preload("res://data/images/items/armor/pants_camouflage.png"),
 			"image": "armor/pants_camouflage.png",
 			"slotType": Global.SlotType.SLOT_PANTS,
@@ -51,7 +51,7 @@ const itemDictionary = {
 	"helmet_police":
 		{
 			"label": "A time police helmet",
-			"value": 456,
+			"value": 70,
 			"icon": preload("res://data/images/items/armor/helmet_police.png"),
 			"image": "armor/helmet_police.png",
 			"slotType": Global.SlotType.SLOT_HELMET,
@@ -62,7 +62,7 @@ const itemDictionary = {
 	"leathergloves":
 		{
 			"label": "Nice Leather Gloves",
-			"value": 456,
+			"value": 50,
 			"icon": preload("res://data/images/items/armor/leathergloves.png"),
 			"image": "armor/leathergloves.png",
 			"slotType": Global.SlotType.SLOT_GLOVES,
@@ -73,72 +73,96 @@ const itemDictionary = {
 	"shotgun":
 		{
 			"label": "Shotgun",
-			"value": 456,
+			"value": 100,
 			"icon": preload("res://data/images/items/weapons/weapon_shotgun.png"),
 			"handNode": "res://weapons/Shotgun.tscn",
 			"image": "weapons/weapon_shotgun.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
+				"waittime" : 0.1,
+				"spread" : 0.1,
+				"damage": 29,
+				"speed": 700
 			}
 		},
 	"crossbow":
 		{
 			"label": "Crossbow",
-			"value": 456,
+			"value": 400,
 			"icon": preload("res://data/images/items/weapons/weapon_crossbow.png"),
 			"handNode": "res://weapons/Crossbow.tscn",
 			"image": "weapons/weapon_crossbow.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
+				"waittime" : 0.5,
+				"spread" : 0.05,
+				"damage": 49,
+				"speed": 800
 			}
 		},
 	"machinegun":
 		{
 			"label": "Machinegun",
-			"value": 456,
+			"value": 500,
 			"icon": preload("res://data/images/items/weapons/weapon_machinegun.png"),
 			"handNode": "res://weapons/Machinegun.tscn",
 			"image": "weapons/weapon_machinegun.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
+				"waittime" : 0.01,
+				"spread" : 0.12,
+				"damage": 10,
+				"speed": 1500
 			}
 		},
 	"plasmagun":
 		{
 			"label": "Plasmagun",
-			"value": 456,
+			"value": 800,
 			"icon": preload("res://data/images/items/weapons/weapon_plasma.png"),
 			"handNode": "res://weapons/Plasmagun.tscn",
 			"image": "weapons/weapon_plasma.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
-			}
-		},
-	"railgun":
-		{
-			"label": "Railgun",
-			"value": 456,
-			"icon": preload("res://data/images/items/weapons/waepon_railgun.png"),
-			"handNode": "res://weapons/Railgun.tscn",
-			"image": "weapons/waepon_railgun.png",
-			"slotType": Global.SlotType.SLOT_QUICK1,
-			"stats": {
+				"waittime" : 1.5,
+				"spread" : 0.1,
+				"damage": 42,
+				"speed": 1000
 			}
 		},
 	"rifle":
 		{
 			"label": "Rifle",
-			"value": 456,
+			"value": 1000,
 			"icon": preload("res://data/images/items/weapons/waepon_rifle.png"),
 			"handNode": "res://weapons/Rifle.tscn",
 			"image": "weapons/waepon_rifle.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
+				"waittime" : 1.2,
+				"spread" : 0,
+				"damage": 70,
+				"speed": 2000
+			}
+		},
+	"railgun":
+		{
+			"label": "Railgun",
+			"value": 1300,
+			"icon": preload("res://data/images/items/weapons/waepon_railgun.png"),
+			"handNode": "res://weapons/Railgun.tscn",
+			"image": "weapons/waepon_railgun.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+				"waittime" : 2,
+				"spread" : 0,
+				"damage": 110,
+				"speed": 3000
 			}
 		}
 }
 
-static func generate(item_name, slot = null):
+static func generate(item_name, luck, level, slot = null):
 	var item = itemDictionary[item_name]
 	var itemName = item_name
 	var itemLabel = item.label
@@ -147,10 +171,10 @@ static func generate(item_name, slot = null):
 	var itemValue = item.value
 	var handNode = item.handNode if item.has("handNode") else null
 	var slotType = item.slotType
-	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, slot, itemValue, slotType, handNode, 10)
+	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, slot, itemValue, slotType, handNode, luck, item.stats, level)
 
 static func generate_random(slot):
-	return generate(itemDictionary.keys()[randi() % itemDictionary.size()], slot)
+	return generate(itemDictionary.keys()[randi() % itemDictionary.size()], 10, 1, slot)
 	
 
 #	0: {

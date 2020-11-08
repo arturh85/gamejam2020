@@ -340,15 +340,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Item Name" type="Label" parent="Tooltip"]
+[node name="Item Name" type="RichTextLabel" parent="Tooltip"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -59.0
 margin_top = 8.0
 margin_right = 59.0
 margin_bottom = 23.0
-text = "Item Name"
-align = 1
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Item Value" type="Label" parent="Tooltip"]
 anchor_left = 0.5
@@ -357,7 +359,9 @@ margin_left = -59.0
 margin_top = 31.5323
 margin_right = 59.0
 margin_bottom = 46.5323
-text = "Value: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AddItemButton" type="Button" parent="."]
 anchor_left = 0.5

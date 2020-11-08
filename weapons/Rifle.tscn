@@ -9,9 +9,6 @@
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=7]
 [ext_resource path="res://bullets/RifleBullet.tscn" type="PackedScene" id=8]
 
-
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
 length = 0.1
@@ -66,6 +63,8 @@ texture = ExtResource( 2 )
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
 bullet_scene_path = ExtResource( 8 )
 spread = 0.0
+bulletDamage = 70
+bulletSpeed = 2000
 
 [node name="StartBlocker" parent="." index="3" instance=ExtResource( 4 )]
 input_action_trigger = "shoot"

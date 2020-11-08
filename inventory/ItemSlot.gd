@@ -63,10 +63,11 @@ func equipItem(newItem, rightClick =  true):
 	refreshColors();
 	emit_signal("on_update_slot", item)
 
+var colors = preload("res://items/colors.gd")
 func refreshColors():
 	if item:
-		style.bg_color = Color(Global.RarityColor[item.rarity].background);
-		style.border_color = Color(Global.RarityColor[item.rarity].border);
+		#style.bg_color = Global.itemColor(item.rarity)
+		style.border_color = colors.itemColor(item.rarity);
 	else:
-		style.bg_color = Color("#8B7258");
+		#style.bg_color = Color("#8B7258");
 		style.border_color = Color("#534434");

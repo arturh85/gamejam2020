@@ -11,7 +11,7 @@ func _ready():
 	._ready()
 	rotation = rand_range(0, 2*PI)
 	
-	pickup_item(ItemFactory.generate("shotgun"))
+	pickup_item(ItemFactory.generate("shotgun", 0.00001, 1))
 	switch_quick(0)
 		
 sync func switch_quick(index):

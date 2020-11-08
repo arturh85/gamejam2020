@@ -89,6 +89,7 @@ range_item_cull_mask = 2
 [node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
 bullet_scene_path = ExtResource( 5 )
 spread = 0.1
+bulletDamage = 35
 
 [node name="StartBlocker" parent="." index="3" instance=ExtResource( 4 )]
 input_action_trigger = "shoot"

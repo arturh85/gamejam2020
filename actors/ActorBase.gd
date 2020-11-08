@@ -190,6 +190,10 @@ sync func switch_quick(index):
 		var item = character_slots[Global.SlotType.SLOT_QUICK1 + index]		
 		if item.handNode:
 			var w = load(item.handNode).instance()
+			w.get_node("BulletSpawner2D").bulletDamage = item.stats["damage"]
+			w.get_node("BulletSpawner2D").bulletSpeed = item.stats["speed"]
+			w.get_node("BulletSpawner2D").spread = item.stats["spread"]
+			w.get_node("FiringCooldown/Timer").wait_time = item.stats["waittime"]
 			gun_node.add_child(w, true)
 			if w.has_node("Ammo") and w.has_node("BulletSpawner2D"):
 				var ammo_node = w.get_node("Ammo")

@@ -8,6 +8,8 @@ export(PackedScene) var bullet_scene_path = load("res://bullets/ShotgunBullet.ts
 export(int) var ammo_index = 0
 
 export var spread = 0.3
+export var bulletDamage = 50
+export var bulletSpeed = 1000
 
 #MUST CONNECT spawn METHOD TO START/END ATTACK IN EDITOR!
 
@@ -21,6 +23,8 @@ sync func spawn2():
 	
 	#create bullet
 	var b = bullet_scene_path.instance()
+	b.damage = bulletDamage
+	b.speed = bulletSpeed
 	b.by_who = get_tree().get_network_unique_id()
 	b.shooter = shooter
 	get_tree().get_root().add_child(b)

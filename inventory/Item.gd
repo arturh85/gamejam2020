@@ -9,13 +9,15 @@ var itemValue
 var itemSlot
 var handNode
 var slotType
+var level
+var stats
 var picked = false
 var rarity = 0
 var texture2rect
 
 var rng = RandomNumberGenerator.new()
 
-func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode, _luck):
+func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode, _luck, _stats, _level):
 	rng.randomize();
 	self.itemName = _itemName
 	self.itemLabel = _itemLabel
@@ -24,6 +26,8 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValu
 	self.handNode = _handNode
 	self.itemImage = _itemImage
 	self.slotType = _slotType
+	self.level = _level
+	self.stats = deep_copy(_stats)
 	
 	var r = rng.randi_range(0, 1000/_luck - 1)
 	if r == 0:
@@ -36,6 +40,69 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValu
 		self.rarity = Global.ItemRarity.COMMON # 25% common
 	else:
 		self.rarity = Global.ItemRarity.NORMAL # 61% normal
+	
+	var damageFactor = 1
+	var speedFactor = 1
+	var spreadFactor = 1
+	var waitFactor = 1
+	
+	var armorFactor = 1
+	
+	var valueFactor = 1
+	
+	match rarity:
+		Global.ItemRarity.COMMON:
+			damageFactor = 1.2
+			speedFactor = 1.1
+			spreadFactor = 0.9
+			waitFactor = 0.95
+			
+			armorFactor = 1.2
+			
+			valueFactor = 1.9
+			
+		Global.ItemRarity.RARE:
+			damageFactor = 1.5
+			speedFactor = 1.2
+			spreadFactor = 0.8
+			waitFactor = 0.9
+			
+			armorFactor = 1.4
+			
+			valueFactor = 2.4
+			
+		Global.ItemRarity.EPIC:
+			damageFactor = 1.8
+			speedFactor = 1.3
+			spreadFactor = 0.7
+			waitFactor = 0.8
+			
+			armorFactor = 1.7
+			
+			valueFactor = 6
+			
+		Global.ItemRarity.LEGENDARY:
+			damageFactor = 2.2
+			speedFactor = 1.5
+			spreadFactor = 0.5
+			waitFactor = 0.7
+			
+			armorFactor = 2
+			
+			valueFactor = 12
+
+	if stats.has("damage"):
+		stats["damage"] = float(stats["damage"]) * damageFactor * (1 + level / 10)
+	if stats.has("speed"):
+		stats["speed"] = float(stats["speed"]) * speedFactor
+	if stats.has("spread"):
+		stats["spread"] = float(stats["spread"]) * spreadFactor
+	if stats.has("waittime"):
+		stats["waittime"] = float(stats["waittime"]) * waitFactor
+	if stats.has("armor"):
+		stats["armor"] = float(stats["armor"]) * armorFactor * (1 + level / 10)
+	
+	itemValue = itemValue * valueFactor
 		
 	texture = _itemTexture
 	self.set_size(texture.get_size())
@@ -54,12 +121,14 @@ func pickItem():
 	picked = true
 
 func putItem():
-	if texture.get_size().x > 34:
-		rect_scale.x =34 / texture.get_size().x
-		rect_scale.y = 34 / texture.get_size().x
+	var maxSize = 30
+	var fieldSize = 34
+	if texture.get_size().x > maxSize or texture.get_size().y > maxSize:
+		rect_scale.x = maxSize / max(texture.get_size().x, texture.get_size().y)
+		rect_scale.y = maxSize / max(texture.get_size().x, texture.get_size().y)
 	
-	rect_position.x = (34 - texture.get_size().x * rect_scale.x) / 2
-	rect_position.y = (34 - texture.get_size().y * rect_scale.y) / 2
+	rect_position.x = (fieldSize - texture.get_size().x * rect_scale.x) / 2
+	rect_position.y = (fieldSize - texture.get_size().y * rect_scale.y) / 2
 	if texture2rect:
 		
 		#texture2rect.rect_position = rect_position
@@ -76,3 +145,35 @@ func putItem():
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	picked = false
 	
+	
+	
+	
+
+static func deep_copy(v):
+	var t = typeof(v)
+
+	if t == TYPE_DICTIONARY:
+		var d = {}
+		for k in v:
+			d[k] = deep_copy(v[k])
+		return d
+
+	elif t == TYPE_ARRAY:
+		var d = []
+		d.resize(len(v))
+		for i in range(len(v)):
+			d[i] = deep_copy(v[i])
+		return d
+
+	elif t == TYPE_OBJECT:
+		if v.has_method("duplicate"):
+			return v.duplicate()
+		else:
+			print("Found an object, but I don't know how to copy it!")
+			return v
+
+	else:
+		# Other types should be fine,
+		# they are value types (except poolarrays maybe)
+		return v
+		
