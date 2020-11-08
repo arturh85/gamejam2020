@@ -16,7 +16,6 @@ var rarity = 0
 var texture2rect
 
 var randomness = 0.1
-var digits = 3
 
 var rng = RandomNumberGenerator.new()
 
@@ -102,17 +101,17 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValu
 	valueFactor = valueFactor * (1 + rng.randf_range(-randomness, randomness))
 	
 	if stats.has("damage"):
-		stats["damage"] = round_to_dec(float(stats["damage"]) * damageFactor * (1 + level / 10), digits)
+		stats["damage"] = round_to_dec(float(stats["damage"]) * damageFactor * (1 + level / 10), 0)
 	if stats.has("speed"):
-		stats["speed"] = round_to_dec(float(stats["speed"]) * speedFactor, digits)
+		stats["speed"] = round_to_dec(float(stats["speed"]) * speedFactor, 0)
 	if stats.has("spread"):
-		stats["spread"] = round_to_dec(float(stats["spread"]) * spreadFactor, digits)
+		stats["spread"] = round_to_dec(float(stats["spread"]) * spreadFactor, 3)
 	if stats.has("waittime"):
-		stats["waittime"] = round_to_dec(float(stats["waittime"]) * waitFactor, digits)
+		stats["waittime"] = round_to_dec(float(stats["waittime"]) * waitFactor, 3)
 	if stats.has("armor"):
-		stats["armor"] = round_to_dec(float(stats["armor"]) * armorFactor * (1 + level / 10), digits)
+		stats["armor"] = round_to_dec(float(stats["armor"]) * armorFactor * (1 + level / 10), 1)
 	
-	itemValue = itemValue * valueFactor
+	itemValue = round_to_dec(itemValue * valueFactor, 0)
 		
 	texture = _itemTexture
 	self.set_size(texture.get_size())

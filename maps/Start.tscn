@@ -119,12 +119,6 @@ target_scene = "res://maps/Ship.tscn"
 createInstance = true
 color = Color( 0.384314, 0.121569, 0.666667, 1 )
 
-[node name="Portal6" parent="." instance=ExtResource( 1 )]
-position = Vector2( -0.124573, -881.44 )
-target_scene = "res://maps/Test.tscn"
-createInstance = true
-color = Color( 0.0627451, 0.862745, 0.619608, 1 )
-
 [node name="Items" type="Node" parent="."]
 
 [node name="Weapons" type="Node" parent="."]
@@ -149,52 +143,52 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 7
+frame = 5
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 6
+frame = 4
 
 [node name="BlobMob" parent="." instance=ExtResource( 3 )]
 
 [node name="Item" parent="." instance=ExtResource( 5 )]
-position = Vector2( -539, 7 )
+position = Vector2( -677.593, 163.978 )
 itemName = "normalshoes"
 
 [node name="Item6" parent="." instance=ExtResource( 5 )]
-position = Vector2( -616.782, 3.46445 )
+position = Vector2( -994.377, 248.123 )
 itemName = "shotgun"
 
 [node name="Item7" parent="." instance=ExtResource( 5 )]
-position = Vector2( -675.515, 160.308 )
+position = Vector2( -928.659, 337.085 )
 itemName = "crossbow"
 
 [node name="Item8" parent="." instance=ExtResource( 5 )]
-position = Vector2( -799.655, 160.975 )
+position = Vector2( -1059.87, 334.923 )
 itemName = "railgun"
 
 [node name="Item9" parent="." instance=ExtResource( 5 )]
-position = Vector2( -929.134, 158.973 )
+position = Vector2( -931.962, 168.872 )
 itemName = "machinegun"
 
 [node name="Item10" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1055.94, 156.303 )
+position = Vector2( -1051.7, 166.203 )
 itemName = "plasmagun"
 
 [node name="Item2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -233, 7 )
+position = Vector2( -793.028, 162.564 )
 itemName = "armor_camouflage"
 
 [node name="Item4" parent="." instance=ExtResource( 5 )]
-position = Vector2( -100, 6 )
+position = Vector2( -794.379, 336.926 )
 itemName = "helmet_police"
 
 [node name="Item5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 100.818, 5.29291 )
+position = Vector2( -679.828, 334.805 )
 itemName = "leathergloves"
 
 [node name="Item3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -385, 6 )
+position = Vector2( -737.139, 246.416 )
 itemName = "pants_camouflage"
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
