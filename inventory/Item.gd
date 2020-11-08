@@ -94,14 +94,12 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValu
 			
 			valueFactor = 12
 
-	r = 1 + rng.randf_range(-randomness, randomness)
-
-	damageFactor = damageFactor * r
-	speedFactor = damageFactor * r
-	spreadFactor = spreadFactor * r
-	waitFactor = waitFactor * r
-	armorFactor = armorFactor * r
-	valueFactor = valueFactor * r
+	damageFactor = damageFactor * (1 + rng.randf_range(-randomness, randomness))
+	speedFactor = damageFactor * (1 + rng.randf_range(-randomness, randomness))
+	spreadFactor = spreadFactor * (1 + rng.randf_range(-randomness, randomness))
+	waitFactor = waitFactor * (1 + rng.randf_range(-randomness, randomness))
+	armorFactor = armorFactor * (1 + rng.randf_range(-randomness, randomness))
+	valueFactor = valueFactor * (1 + rng.randf_range(-randomness, randomness))
 	
 	if stats.has("damage"):
 		stats["damage"] = round_to_dec(float(stats["damage"]) * damageFactor * (1 + level / 10), digits)
