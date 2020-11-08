@@ -15,6 +15,9 @@ var picked = false
 var rarity = 0
 var texture2rect
 
+var randomness = 0.1
+var digits = 3
+
 var rng = RandomNumberGenerator.new()
 
 func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValue, _slotType, _handNode, _luck, _stats, _level):
@@ -91,16 +94,25 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemSlot, _itemValu
 			
 			valueFactor = 12
 
+	r = 1 + rng.randf_range(-randomness, randomness)
+
+	damageFactor = damageFactor * r
+	speedFactor = damageFactor * r
+	spreadFactor = spreadFactor * r
+	waitFactor = waitFactor * r
+	armorFactor = armorFactor * r
+	valueFactor = valueFactor * r
+	
 	if stats.has("damage"):
-		stats["damage"] = float(stats["damage"]) * damageFactor * (1 + level / 10)
+		stats["damage"] = round_to_dec(float(stats["damage"]) * damageFactor * (1 + level / 10), digits)
 	if stats.has("speed"):
-		stats["speed"] = float(stats["speed"]) * speedFactor
+		stats["speed"] = round_to_dec(float(stats["speed"]) * speedFactor, digits)
 	if stats.has("spread"):
-		stats["spread"] = float(stats["spread"]) * spreadFactor
+		stats["spread"] = round_to_dec(float(stats["spread"]) * spreadFactor, digits)
 	if stats.has("waittime"):
-		stats["waittime"] = float(stats["waittime"]) * waitFactor
+		stats["waittime"] = round_to_dec(float(stats["waittime"]) * waitFactor, digits)
 	if stats.has("armor"):
-		stats["armor"] = float(stats["armor"]) * armorFactor * (1 + level / 10)
+		stats["armor"] = round_to_dec(float(stats["armor"]) * armorFactor * (1 + level / 10), digits)
 	
 	itemValue = itemValue * valueFactor
 		
@@ -177,3 +189,5 @@ static func deep_copy(v):
 		# they are value types (except poolarrays maybe)
 		return v
 		
+func round_to_dec(num, digit):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
