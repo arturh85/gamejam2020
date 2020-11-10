@@ -24,7 +24,8 @@ signal game_error(what)
 # Callback from SceneTree.
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
-	rpc_id(id, "register_player", player_name)
+	if id == 1:
+		rpc_id(id, "register_player_server", player_name)
 
 
 # Callback from SceneTree.
@@ -58,10 +59,13 @@ func _connected_fail():
 
 # Lobby management functions.
 
-remote func register_player(new_player_name):
-	var id = get_tree().get_rpc_sender_id()
-	#print("register player with id", id, " as ", new_player_name)
+remote func register_player(id, new_player_name):		
+	print("register player with id", id, " as ", new_player_name)
 	players[id] = new_player_name
+	
+	var spawn_pos = get_node("/root/World/Level/SpawnPoints/" + str(0)).position
+	add_player_to_scene(id, spawn_pos, new_player_name)
+	
 	emit_signal("player_list_changed")
 
 
@@ -70,44 +74,22 @@ func unregister_player(id):
 	emit_signal("player_list_changed")
 
 
-remote func pre_start_game(spawn_points):
+remote func pre_start_game():
 	# Change scene.
+	print("pre start game")
 	var world = load("res://scenes/World.tscn").instance()
 	get_tree().get_root().add_child(world)
 	var lobby = get_tree().get_root().get_node("Lobby")
 	lobby.hide()
 	lobby.get_node("Music").stopMusic()
 
-	var player_scene = load("res://actors/Player.tscn")
 
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("Level/SpawnPoints/" + str(spawn_points[p_id])).position
-		var player = player_scene.instance()
-
-		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.position=spawn_pos
-		player.set_network_master(p_id) #set unique id as master.
-
-		if p_id == get_tree().get_network_unique_id():
-			# If node for this peer id, set name.
-			player.set_player_name(player_name)
-			world.get_node("CanvasLayer/MiniMap").player = "/root/World/Players/" + str(p_id)
-		else:
-			# Otherwise set name from peer.
-			player.set_player_name(players[p_id])
-
-		world.get_node("Players").add_child(player)
-
-	# Set up score.
-	world.get_node("CanvasLayer/Score").add_player(get_tree().get_network_unique_id(), player_name)
-	for pn in players:
-		world.get_node("CanvasLayer/Score").add_player(pn, players[pn])
-
-	if not get_tree().is_network_server():
-		# Tell server we are ready to start.
-		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
-	elif players.size() == 0:
-		post_start_game()
+	var spawn_pos = world.get_node("Level/SpawnPoints/" + str(0)).position
+	var id = get_tree().get_network_unique_id()
+	
+	add_player_to_scene(id, spawn_pos, player_name)
+	
+	post_start_game()
 
 
 remote func post_start_game():
@@ -127,13 +109,6 @@ remote func ready_to_start(id):
 		post_start_game()
 
 
-func host_game(new_player_name):
-	player_name = new_player_name
-	var host = NetworkedMultiplayerENet.new()
-	host.create_server(DEFAULT_PORT, MAX_PEERS)
-	get_tree().set_network_peer(host)
-
-
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	var client = NetworkedMultiplayerENet.new()
@@ -149,22 +124,6 @@ func get_player_name():
 	return player_name
 
 
-func begin_game():
-	assert(get_tree().is_network_server())
-
-	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
-	var spawn_points = {}
-	spawn_points[1] = 0 # Server in spawn point 0.
-	var spawn_point_idx = 1
-	for p in players:
-		spawn_points[p] = spawn_point_idx
-		spawn_point_idx += 1
-	# Call to pre-start game with the spawn points.
-	for p in players:
-		rpc_id(p, "pre_start_game", spawn_points)
-
-	pre_start_game(spawn_points)
-
 
 func end_game():
 	if has_node("/root/World"): # Game is in progress.
@@ -174,8 +133,36 @@ func end_game():
 	emit_signal("game_ended")
 	players.clear()
 
+func add_player_to_scene(id, spawnpos, pname):
+	
+	var player_scene = load("res://actors/Player.tscn")
+	var player = player_scene.instance()
+	
+	player.set_name(str(id)) # Use unique ID as node name.
+	player.position=spawnpos
+	player.set_network_master(id) 
+	player.set_player_name(pname)
+	get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)
+	#else:
+		# Otherwise set name from peer.
+	#	player.set_player_name(players[p_id])
+
+	get_node("/root/World/Players").add_child(player)
+
+	# Set up score.
+	get_node("/root/World/CanvasLayer/Score").add_player(id, pname)
+	#for pn in players:
+#		get_node("/root/World/CanvasLayer/Score").add_player(pn, players[pn])
+
+
 
 func _ready():
+
+	var output = []
+	#OS.execute('build.cmd', PoolStringArray(Array()), false, output)
+	print(output)
+	
+	
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -183,3 +170,4 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	var _appender2 = Logger.add_appender(ConsoleAppender.new())
 	var _appender1 = Logger.add_appender(FileAppender.new("res://game.log"))
+	
