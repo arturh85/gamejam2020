@@ -1,63 +1,40 @@
 extends Node
 
-# Default game port. Can be any number between 1024 and 49151.
 const DEFAULT_PORT = 10567
 
-# Max number of players.
-const MAX_PEERS = 4
-
-# Name for my player.
 var player_name = "The Warrior"
 
-# Names for remote players in id:name format.
 var players = {}
-var players_ready = []
+var playerScenes = {}
 
-# Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
-signal game_ended()
 signal game_error(what)
 
 
-# Callback from SceneTree.
 func _player_connected(id):
-	# Registration of a client beings here, tell the connected player that we are here.
 	if id == 1:
 		rpc_id(id, "register_player_server", player_name)
 
 
-# Callback from SceneTree.
 func _player_disconnected(id):
-	if has_node("/root/World"): # Game is in progress.
-		if get_tree().is_network_server():
-			emit_signal("game_error", "Player " + players[id] + " disconnected")
-			end_game()
-	else: # Game is not in progress.
-		# Unregister this player.
-		unregister_player(id)
+	unregister_player(id)
 
 
-# Callback from SceneTree, only for clients (not server).
 func _connected_ok():
-	# We just connected to a server
 	emit_signal("connection_succeeded")
 
 
-# Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 
 
-# Callback from SceneTree, only for clients (not server).
 func _connected_fail():
 	get_tree().set_network_peer(null) # Remove peer
 	emit_signal("connection_failed")
 
-
-# Lobby management functions.
 
 remote func register_player(id, new_player_name):		
 	print("register player with id", id, " as ", new_player_name)
@@ -71,6 +48,7 @@ remote func register_player(id, new_player_name):
 
 func unregister_player(id):
 	players.erase(id)
+	remove_player_from_scene(id)
 	emit_signal("player_list_changed")
 
 
@@ -89,24 +67,9 @@ remote func pre_start_game():
 	
 	add_player_to_scene(id, spawn_pos, player_name)
 	
-	post_start_game()
-
-
-remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_node("/root/World").post_start_game()
 
-
-remote func ready_to_start(id):
-	assert(get_tree().is_network_server())
-
-	if not id in players_ready:
-		players_ready.append(id)
-
-	if players_ready.size() == players.size():
-		for p in players:
-			rpc_id(p, "post_start_game")
-		post_start_game()
 
 
 func join_game(ip, new_player_name):
@@ -126,34 +89,35 @@ func get_player_name():
 
 
 func end_game():
-	if has_node("/root/World"): # Game is in progress.
-		# End it
+	if has_node("/root/World"):
 		get_node("/root/World").queue_free()
 
-	emit_signal("game_ended")
 	players.clear()
+	playerScenes.clear()
+
+
+func remove_player_from_scene(id):
+	
+	get_node("/root/World/Players").remove_child(playerScenes[id])
+	get_node("/root/World/CanvasLayer/Score").remove_player(id)
+
 
 func add_player_to_scene(id, spawnpos, pname):
 	
 	var player_scene = load("res://actors/Player.tscn")
 	var player = player_scene.instance()
 	
+	playerScenes[id] = player
+	
 	player.set_name(str(id)) # Use unique ID as node name.
 	player.position=spawnpos
 	player.set_network_master(id) 
 	player.set_player_name(pname)
-	get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)
-	#else:
-		# Otherwise set name from peer.
-	#	player.set_player_name(players[p_id])
-
 	get_node("/root/World/Players").add_child(player)
-
-	# Set up score.
 	get_node("/root/World/CanvasLayer/Score").add_player(id, pname)
-	#for pn in players:
-#		get_node("/root/World/CanvasLayer/Score").add_player(pn, players[pn])
-
+	
+	if id == get_tree().get_network_unique_id():
+		get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)
 
 
 func _ready():

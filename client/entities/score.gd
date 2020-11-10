@@ -29,6 +29,9 @@ func add_player(id, new_player_name):
 
 	player_labels[id] = { name = new_player_name, label = l, score = 0 }
 
+func remove_player(id):
+	
+	remove_child(player_labels[id].label)
 
 func _ready():
 	$"../Winner".hide()
