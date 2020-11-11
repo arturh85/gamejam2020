@@ -147,19 +147,6 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "IP:"
 
-[node name="Host2" type="Label" parent="Connect"]
-margin_left = 27.0
-margin_top = 220.0
-margin_right = 103.0
-margin_bottom = 234.0
-rect_pivot_offset = Vector2( 21, 14 )
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Host Game:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="IPAddress" type="LineEdit" parent="Connect"]
 margin_left = 22.5
 margin_top = 145.5
@@ -171,15 +158,6 @@ text = "127.0.0.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Host" type="Button" parent="Connect"]
-margin_left = 27.5
-margin_top = 242.5
-margin_right = 92.5
-margin_bottom = 262.5
-size_flags_horizontal = 2
-size_flags_vertical = 2
-text = "Host"
 
 [node name="Join" type="Button" parent="Connect"]
 margin_left = 187.5
@@ -218,6 +196,5 @@ script = ExtResource( 3 )
 
 [node name="Cursor" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
 [connection signal="finished" from="Music" to="Music" method="_on_AudioStreamPlayer_finished"]

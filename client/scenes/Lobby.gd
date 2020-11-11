@@ -28,18 +28,6 @@ func _ready():
 	roles.add_item("Marine")
 
 
-func _on_host_pressed():
-	if $Connect/Name.text == "":
-		$Connect/ErrorLabel.text = "Invalid name!"
-		return
-
-	$Connect.hide()
-	$Players.show()
-	$Connect/ErrorLabel.text = ""
-
-	var player_name = $Connect/Name.text
-	gamestate.host_game(player_name)
-	refresh_lobby()
 
 
 func _on_join_pressed():
@@ -53,8 +41,6 @@ func _on_join_pressed():
 		return
 
 	$Connect/ErrorLabel.text = ""
-	$Connect/Host.disabled = true
-	$Connect/Join.disabled = true
 
 	var player_name = $Connect/Name.text
 	gamestate.join_game(ip, player_name)
@@ -66,8 +52,6 @@ func _on_connection_success():
 
 
 func _on_connection_failed():
-	$Connect/Host.disabled = false
-	$Connect/Join.disabled = false
 	$Connect/ErrorLabel.set_text("Connection failed.")
 	cursor.update_cursor()
 
@@ -77,15 +61,11 @@ func _on_game_ended():
 	show()
 	$Connect.show()
 	$Players.hide()
-	$Connect/Host.disabled = false
-	$Connect/Join.disabled = false
 
 
 func _on_game_error(errtxt):
 	$ErrorDialog.dialog_text = errtxt
 	$ErrorDialog.popup_centered_minsize()
-	$Connect/Host.disabled = false
-	$Connect/Join.disabled = false
 
 
 func refresh_lobby():

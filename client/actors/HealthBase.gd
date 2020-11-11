@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name HealthBase
 
-export puppet var health = 100
+puppet var health = 100
 export var max_health = 100
 export var health_regeneration = 0
 
@@ -26,11 +26,12 @@ func _process(delta):
 		emit_signal("on_heal")
 		emit_signal("on_health_changed")
 		
-master func take_damage(amount, by_who):
+remotesync func take_damage(amount, by_who):
+	print("dmg" + str(amount))
 	if health <= 0:
 		return
 	health = max(0, health - amount)
-	rset("health", health)
+	rset_id(1, "health", health)
 	rpc("on_took_damage")
 	if health <= 0:
 		print("sending die()")

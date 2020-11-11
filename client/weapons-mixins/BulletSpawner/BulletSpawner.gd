@@ -14,7 +14,11 @@ export var bulletSpeed = 1000
 #MUST CONNECT spawn METHOD TO START/END ATTACK IN EDITOR!
 
 func spawn():
-	rpc("spawn2")
+	var players = get_node("/root/gamestate").getPlayers()
+	for player in players:
+		rpc_id(player, "spawn2")
+	spawn2()
+	pass
 
 sync func spawn2():
 	var shooter = weapon.get_parent().get_parent().get_parent()

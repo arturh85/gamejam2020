@@ -53,12 +53,19 @@ sync func add_ammo(nr, ammo):
 	
 	pass
 
+sync func take_damage(damage, by_who):
+	print(name + " taking " + str(damage) + " damage ")
+	pass
+
 
 sync func on_took_damage():
 	print(name + " took damage")
+	print("health: " + str(health))
 	pass
 
 sync func pickup_item(item):
 	print(name + " picked up ")
 	print(item)
 	pass
+	
+	

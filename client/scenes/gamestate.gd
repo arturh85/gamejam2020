@@ -14,6 +14,9 @@ signal game_ended()
 signal game_error(what)
 
 
+func getPlayers():
+	return players
+
 func _player_connected(id):
 	if id == 1:
 		rpc_id(id, "register_player_server", player_name)
@@ -136,3 +139,8 @@ func _ready():
 	var _appender2 = Logger.add_appender(ConsoleAppender.new())
 	var _appender1 = Logger.add_appender(FileAppender.new("res://game.log"))
 	
+
+
+
+
+
