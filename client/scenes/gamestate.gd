@@ -10,6 +10,7 @@ var playerScenes = {}
 signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
+signal game_ended()
 signal game_error(what)
 
 
@@ -41,7 +42,7 @@ remote func register_player(id, new_player_name):
 	players[id] = new_player_name
 	
 	var spawn_pos = get_node("/root/World/Level/SpawnPoints/" + str(0)).position
-	add_player_to_scene(id, spawn_pos, new_player_name)
+	add_player_to_scene(id, Vector2.ZERO, new_player_name)
 	
 	emit_signal("player_list_changed")
 
@@ -65,7 +66,7 @@ remote func pre_start_game():
 	var spawn_pos = world.get_node("Level/SpawnPoints/" + str(0)).position
 	var id = get_tree().get_network_unique_id()
 	
-	add_player_to_scene(id, spawn_pos, player_name)
+	add_player_to_scene(id, Vector2.ZERO, player_name)
 	
 	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_node("/root/World").post_start_game()

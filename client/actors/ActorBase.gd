@@ -11,15 +11,6 @@ enum Weapon {
 	Lasergun,
 }
 
-var weapon_nodes = {
-	Weapon.Shotgun: preload("res://weapons/Shotgun.tscn"),
-	Weapon.Plasmagun: preload("res://weapons/Plasmagun.tscn"),
-	Weapon.Machinegun: preload("res://weapons/Machinegun.tscn"),
-	Weapon.Crossbow: preload("res://weapons/Crossbow.tscn"),
-	Weapon.Rifle: preload("res://weapons/Rifle.tscn"),
-	Weapon.Railgun: preload("res://weapons/Railgun.tscn"),
-	Weapon.Lasergun: preload("res://weapons/Lasergun.tscn"),
-}
 
 export var speed = 200
 

@@ -166,6 +166,7 @@ func _physics_process(delta):
 		#	rpc("setup_bullet", get_tree().get_network_unique_id())
 			
 		viewRotation = get_angle_to(get_global_mouse_position())
+		viewRotation = get_angle_to(get_global_mouse_position())
 		#if motion != Vector2.ZERO:
 		#	playerRotation = get_angle_to(self.position + motion)
 			
@@ -284,10 +285,7 @@ func _on_health_changed():
 func _on_death(by_who):
 	$AnimationPlayer.play("Die")
 	$CollisionShape2D.set_deferred("disabled", true)
-	if by_who > 0:
-		$"/root/World/CanvasLayer/Score".rpc("increase_score", by_who, 50)
-	else:
-		$"/root/World/CanvasLayer/Score".rpc("increase_score", get_tree().get_network_unique_id(), -50)
+	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
 	if is_network_master():

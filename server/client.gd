@@ -11,6 +11,7 @@ master var puppet_pos = Vector2()
 master var puppet_velocity = Vector2()
 master var puppet_rotation = 0 
 master var puppet_motion = Vector2()
+master var health = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,9 +23,42 @@ func set_player_name(player_name, id):
 	$Name.rect_position.x = 10
 	$Name.rect_position.y = (id-1) * 20 + 10
 
-master func update_flashlight(visible):
+sync func update_flashlight(visible):
+	print(name + " switched flashlight")
 	
 	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+sync func switch_quick(wp):
+	print(name + " switched weapon")
+	
+	pass
+	
+sync func switch_weapon(wp):
+	print(name + " switched weapon")
+	
+	pass
+
+sync func switch_quick_relative(rel):
+	print(name + " switched weapon rel")
+	
+	pass
+
+sync func add_weapon(nr, ammo):
+	print(name + " added weapon")
+	
+	pass
+
+sync func add_ammo(nr, ammo):
+	print(name + " added ammo")
+	
+	pass
+
+
+sync func on_took_damage():
+	print(name + " took damage")
+	pass
+
+sync func pickup_item(item):
+	print(name + " picked up ")
+	print(item)
+	pass
