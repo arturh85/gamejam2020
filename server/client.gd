@@ -44,7 +44,7 @@ sync func switch_quick_relative(rel):
 	pass
 
 sync func add_weapon(nr, ammo):
-	print(name + " added weapon")
+	print(nr + " added weapon")
 	
 	pass
 

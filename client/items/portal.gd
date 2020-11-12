@@ -65,7 +65,7 @@ remotesync func activate():
 var once = false
 
 func _on_body_entered(body):
-	if is_network_master() and body.is_in_group("players"):
+	if body.is_in_group("players"):
 		if not level and not back:
 			Logger.error("invalid portal without instance nor back")
 			return

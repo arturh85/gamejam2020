@@ -44,9 +44,10 @@ func _ready():
 func _on_Item_body_entered(body):
 	if body.is_in_group("players"):
 		body.pickup_item(item)
-		body.rpc('pickup_item', item)
+		body.rpc_id(1, 'pickup_item', (item.stats))
 		$CollectPlayer.play("Collect")
 		yield(get_tree().create_timer(1), "timeout")
 		hide()
 		emit_signal("on_removed", self)
 		queue_free()
+		

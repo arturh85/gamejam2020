@@ -124,6 +124,8 @@ func add_player_to_scene(id, spawnpos, pname):
 		get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)
 
 
+	
+	
 func _ready():
 
 	var output = []
@@ -136,11 +138,10 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	
+	
 	var _appender2 = Logger.add_appender(ConsoleAppender.new())
 	var _appender1 = Logger.add_appender(FileAppender.new("res://game.log"))
 	
-
-
-
 
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://items/portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/GreenLight.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/BlobMob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://items/equipment.tscn" type="PackedScene" id=5]
 [ext_resource path="res://items/button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/auto_tileset_with_coll_nav.tres" type="TileSet" id=21]
@@ -143,12 +142,11 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 1
+frame = 7
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-
-[node name="BlobMob" parent="." instance=ExtResource( 3 )]
+frame = 6
 
 [node name="Item" parent="." instance=ExtResource( 5 )]
 position = Vector2( -677.593, 163.978 )

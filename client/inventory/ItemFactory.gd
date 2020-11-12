@@ -173,6 +173,7 @@ static func generate(item_name, luck, level, slot = null):
 	var slotType = item.slotType
 	return InventoryItem.new(itemName, itemLabel, itemIcon, itemImage, slot, itemValue, slotType, handNode, luck, item.stats, level)
 
+
 static func generate_random(slot):
 	return generate(itemDictionary.keys()[randi() % itemDictionary.size()], 10, 1, slot)
 	
