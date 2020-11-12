@@ -40,6 +40,25 @@ func _connected_fail():
 	emit_signal("connection_failed")
 
 
+remote func init_player(playerInfo):
+	
+	var id = get_tree().get_network_unique_id()
+	
+	playerScenes[id].position.x = playerInfo.x
+	playerScenes[id].position.y = playerInfo.y
+	
+	for it in playerInfo.items:
+		var hn = null
+		var i = playerInfo.items[it]
+		if i.has("handNode"):
+			hn = i.handNode
+		var item = InventoryItem.new(i.id, i.name, i.label, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
+		playerScenes[id].pickup_item(item)
+		print(i.name)
+
+	pass		
+	
+	
 remote func register_player(id, new_player_name, mapName, spawn_pos):		
 	print("register player with id", id, " as ", new_player_name)
 	players[id] = new_player_name

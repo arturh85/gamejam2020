@@ -14,6 +14,8 @@ master var puppet_motion = Vector2()
 master var health = 0
 master var current_map = ""
 
+var items = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -66,10 +68,11 @@ sync func on_took_damage():
 
 sync func pickup_item(itemID):
 	var itemsNode = get_node("/root/World/Maps/" + current_map + "/Items")
-	var items = itemsNode.get_children()
-	for item in items:
+	var itn = itemsNode.get_children()
+	for item in itn:
 		if item.stats.id == itemID:
+			items[item.stats.id] = item.stats
 			itemsNode.remove_child(item)
-			print(item.name + " picked up ")
+			
 	
 	

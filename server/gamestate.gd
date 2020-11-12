@@ -57,8 +57,20 @@ func _player_connected(id):
 	players[id] = id
 	playerScenes[id] = player
 	
+	
+
+var playerState = {}
 
 func _player_disconnected(id):
+	
+	var player = get_node("/root/World/Players/" + str(id))
+	
+	var playerName = players[id]
+	playerState[playerName] = {}
+	playerState[playerName]["x"] = player.puppet_pos.x
+	playerState[playerName]["y"] = player.puppet_pos.y
+	playerState[playerName]["items"] = player.items
+	
 	print("player " + str(id) + " (" + str(players[id]) + ") disonnected")
 	get_node("/root/World/Players").remove_child(playerScenes[id])
 	players.erase(id)
@@ -74,10 +86,19 @@ remote func register_player_server(new_player_name):
 	for p in players:
 		if p != id:
 			rpc_id(p, "register_player", id, new_player_name)
+		else:
+			if playerState.has(new_player_name):
+				rpc_id(p, "init_player", playerState[new_player_name])
 	
+			
 	players[id] = new_player_name
 	playerScenes[id].set_player_name(new_player_name, players.size())
 	
+	if playerState.has(new_player_name):
+		playerScenes[id].puppet_pos.x = playerState[new_player_name]["x"] 
+		playerScenes[id].puppet_pos.y = playerState[new_player_name]["y"] 
+		playerScenes[id].items = playerState[new_player_name]["items"] 
+		
 	_refresh_playerlist()
 
 
