@@ -26,7 +26,7 @@ func display(_item : InventoryItem, mousePos : Vector2):
 	#itemImage.texture = load(p)
 	
 	itemNameLabel.bbcode_enabled = true
-	itemNameLabel.bbcode_text = _item.itemLabel
+	itemNameLabel.bbcode_text = _item.label
 	itemNameLabel.modulate = colors.itemColor(_item.rarity)
 	
 	var lines = 6
@@ -35,7 +35,7 @@ func display(_item : InventoryItem, mousePos : Vector2):
 		text = text + stat.capitalize() + ": " + String(_item.stats[stat]) + "\r\n"
 		lines = lines + 1
 	
-	text = text + "\r\nItem level: " + String(_item.level) + "\r\nValue: " + String(_item.itemValue)
+	text = text + "\r\nItem level: " + String(_item.level) + "\r\nValue: " + String(_item.value)
 	
 	itemValueLabel.set_text(text)
 	

@@ -12,6 +12,7 @@ master var puppet_velocity = Vector2()
 master var puppet_rotation = 0 
 master var puppet_motion = Vector2()
 master var health = 0
+master var current_map = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

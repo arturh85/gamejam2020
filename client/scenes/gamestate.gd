@@ -40,12 +40,11 @@ func _connected_fail():
 	emit_signal("connection_failed")
 
 
-remote func register_player(id, new_player_name):		
+remote func register_player(id, new_player_name, mapName, spawn_pos):		
 	print("register player with id", id, " as ", new_player_name)
 	players[id] = new_player_name
 	
-	var spawn_pos = get_node("/root/World/Level/SpawnPoints/" + str(0)).position
-	add_player_to_scene(id, Vector2.ZERO, new_player_name)
+	add_player_to_scene(id, spawn_pos, new_player_name, mapName)
 	
 	emit_signal("player_list_changed")
 
@@ -56,20 +55,20 @@ func unregister_player(id):
 	emit_signal("player_list_changed")
 
 
-remote func pre_start_game():
+remote func pre_start_game(mapName, spawn_pos):
 	# Change scene.
 	print("pre start game")
 	var world = load("res://scenes/World.tscn").instance()
+	world.initStartMap(mapName)
 	get_tree().get_root().add_child(world)
 	var lobby = get_tree().get_root().get_node("Lobby")
 	lobby.hide()
 	lobby.get_node("Music").stopMusic()
 
 
-	var spawn_pos = world.get_node("Level/SpawnPoints/" + str(0)).position
 	var id = get_tree().get_network_unique_id()
 	
-	add_player_to_scene(id, Vector2.ZERO, player_name)
+	add_player_to_scene(id, spawn_pos, player_name, mapName)
 	
 	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_node("/root/World").post_start_game()
@@ -106,14 +105,14 @@ func remove_player_from_scene(id):
 	get_node("/root/World/CanvasLayer/Score").remove_player(id)
 
 
-func add_player_to_scene(id, spawnpos, pname):
+func add_player_to_scene(id, spawnpos, pname, mapName):
 	
 	var player_scene = load("res://actors/Player.tscn")
 	var player = player_scene.instance()
 	
 	playerScenes[id] = player
-	
 	player.set_name(str(id)) # Use unique ID as node name.
+	player.current_map = mapName
 	player.position=spawnpos
 	player.set_network_master(id) 
 	player.set_player_name(pname)
@@ -123,7 +122,16 @@ func add_player_to_scene(id, spawnpos, pname):
 	if id == get_tree().get_network_unique_id():
 		get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)
 
-
+remote func create_items(itemDict):
+	
+	print("creating items")
+	
+	
+	for item in itemDict:
+		var stats = itemDict[item]
+		var newItem = load("res://items/equipment.tscn").instance()
+		newItem.set_item_properties(stats)
+		get_node("/root/World/Level/Items").add_child(newItem)
 	
 	
 func _ready():

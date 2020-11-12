@@ -6,11 +6,17 @@ var playerScenes = {}
 
 
 func _ready():
+	rng.randomize();
+	
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
 	
 	
+
+var rng = RandomNumberGenerator.new()
+
 func _player_connected(id):
+	
 	print("player with ID " + str(id) + " connected")
 		
 	var player = load("res://client.tscn").instance()
@@ -18,10 +24,33 @@ func _player_connected(id):
 	
 	get_node("/root/World/Players").add_child(player)
 	
-	rpc_id(id, "pre_start_game")
+	
+	var startLevel = "Start"
+	var spawnPoints = get_node("/root/World/Maps/" + startLevel + "/SpawnPoints").get_children()
+	var s = rng.randi_range(0, spawnPoints.size() - 1)
+	var i = 0
+	var startPosition = Vector2.ZERO
+	for spawn in spawnPoints:
+		if i == s:
+			startPosition = spawn.get_position()
+		i = i + 1
+		
+	var items = get_node("/root/World/Maps/" + startLevel + "/Items").get_children()
+	
+	var itemDict = {}
+	for item in items:
+		#var stats = item.get_property_list()["stats"]
+		itemDict[item.itemName] = item.stats
+	
+#	var d = inst2dict(items)
+	
+	rpc_id(id, "pre_start_game", startLevel, startPosition)
+	
+	rpc_id(id, "create_items", itemDict)
 
 	for pl in players:
-		rpc_id(id, "register_player", pl, players[pl])
+		# IF PLAYER IN SAME LEVEL
+		rpc_id(id, "register_player", pl, players[pl], startLevel, startPosition) 
 	
 	players[id] = id
 	playerScenes[id] = player
@@ -55,3 +84,6 @@ func _refresh_playerlist():
 	for player in gamestate.players:
 		print(str(player) + ": " + str(gamestate.players[player]))
 		
+
+
+

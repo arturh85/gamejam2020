@@ -26,6 +26,7 @@ var character_slots = Array()
 puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
 puppet var puppet_rotation = 0 
+master var current_map = ""
 var last_oxygen_harm = null
 
 var room = null
@@ -71,27 +72,27 @@ func pickup_item(item):
 			return
 
 
-func equip_item(item: InventoryItem):
+func equip_item(item):
 	match item.slotType:
 		Global.SlotType.SLOT_HELMET:
 			if $Group/helmet:
-				$Group/helmet.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/helmet.texture = load("res://data/images/items/" + item.image)
 		Global.SlotType.SLOT_FEET:
 			if $Group/shoe:
-				$Group/shoe.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/shoe.texture = load("res://data/images/items/" + item.image)
 			if $Group/shoe2:
-				$Group/shoe2.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/shoe2.texture = load("res://data/images/items/" + item.image)
 		Global.SlotType.SLOT_GLOVES:
 			if $Group/gloves:
-				$Group/gloves.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/gloves.texture = load("res://data/images/items/" + item.image)
 		Global.SlotType.SLOT_PANTS:
 			if $Group/pant:
-				$Group/pant.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/pant.texture = load("res://data/images/items/" + item.image)
 			if $Group/pant2:
-				$Group/pant2.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/pant2.texture = load("res://data/images/items/" + item.image)
 		Global.SlotType.SLOT_ARMOR:
 			if $Group/bodyarmor:
-				$Group/bodyarmor.texture = load("res://data/images/items/" + item.itemImage)
+				$Group/bodyarmor.texture = load("res://data/images/items/" + item.image)
 		Global.SlotType.SLOT_QUICK1:
 			switch_quick(0)
 		Global.SlotType.SLOT_QUICK2:
@@ -149,7 +150,8 @@ master func respawn_at(position):
 	
 master func spawn_at(position):
 	respawn_position = position
-
+	#var vv =  get_node("/root/World/Level/").get_children()[0].get_name()
+	pass
 
 sync func switch_quick_relative(rel):
 	var found = null

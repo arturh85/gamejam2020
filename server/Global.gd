@@ -1,0 +1,26 @@
+extends Node
+class_name Global
+
+enum SlotType {
+	SLOT_DEFAULT = 0,
+	SLOT_HELMET,
+	SLOT_ARMOR,
+	SLOT_FEET,
+	SLOT_NECK,
+	SLOT_PANTS,
+	SLOT_GLOVES,
+	SLOT_RHAND,
+	SLOT_QUICK1,
+	SLOT_QUICK2,
+	SLOT_QUICK3,
+	SLOT_QUICK4,
+}
+
+
+enum ItemRarity {
+	NORMAL = 0,
+	COMMON,
+	RARE,
+	EPIC,
+	LEGENDARY
+}

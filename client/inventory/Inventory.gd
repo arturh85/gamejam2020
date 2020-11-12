@@ -151,7 +151,4 @@ func sortItemsByRarity(itemA : InventoryItem, itemB : InventoryItem):
 	return itemA.rarity > itemB.rarity
 
 func _on_AddItemButton_pressed():
-	var slot = getFreeSlot()
-	if slot:
-		var item = ItemFactory.generate_random(slot)
-		slot.setItem(item)
+	pass

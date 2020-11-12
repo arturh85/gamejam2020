@@ -139,11 +139,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://inventory/Tooltip.gd"
 }, {
-"base": "Node",
-"class": "ItemFactory",
-"language": "GDScript",
-"path": "res://inventory/ItemFactory.gd"
-}, {
 "base": "Reference",
 "class": "Layout",
 "language": "GDScript",
@@ -201,7 +196,6 @@ _global_script_class_icons={
 "InventoryItem": "",
 "InventoryItemSlot": "",
 "InventoryTooltip": "",
-"ItemFactory": "",
 "Layout": "",
 "Message": "",
 "PatternLayout": "",

@@ -1,10 +1,7 @@
 extends Node2D
 
 const COLORS = preload("res://items/colors.gd") # static
-export var itemName = ""
-export var luck = 1
-export var level = 1
-var item: InventoryItem
+var item
 
 signal on_removed(what)
 
@@ -15,24 +12,34 @@ signal on_removed(what)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
 	
-	item = ItemFactory.generate(itemName, luck, level)
+	
+func set_item_properties(i):
+	print(i.value)
+	var hn = null
+	if i.has("handNode"):
+		hn = i.handNode
+	item = InventoryItem.new(i.name, i.label, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
+	
+	position.x = i.x
+	position.y = i.y
 	
 	$Light2D.color = COLORS.itemColor(item.rarity)
 	
 	match item.slotType:
 		Global.SlotType.SLOT_FEET:
 			$Sprite.offset.y = -4
-			$Sprite.texture = load("res://data/images/items/" + item.itemImage)
+			$Sprite.texture = load("res://data/images/items/" + item.image)
 			$DoubleSprite.offset.y = 4
-			$DoubleSprite.texture = load("res://data/images/items/" + item.itemImage)
+			$DoubleSprite.texture = load("res://data/images/items/" + item.image)
 		Global.SlotType.SLOT_PANTS:
 			$Sprite.offset.y = -3
-			$Sprite.texture = load("res://data/images/items/" + item.itemImage)
+			$Sprite.texture = load("res://data/images/items/" + item.image)
 			$DoubleSprite.offset.y = 3
-			$DoubleSprite.texture = load("res://data/images/items/" + item.itemImage)
+			$DoubleSprite.texture = load("res://data/images/items/" + item.image)
 		_:
-			$Sprite.texture = load("res://data/images/items/" + item.itemImage)
+			$Sprite.texture = load("res://data/images/items/" + item.image)
 	
 	
 
