@@ -15,17 +15,19 @@ func _ready():
 
 var rng = RandomNumberGenerator.new()
 
+var startLevel = "Start"
+
 func _player_connected(id):
 	
 	print("player with ID " + str(id) + " connected")
 		
 	var player = load("res://client.tscn").instance()
 	player.set_name(str(id))
+	player.current_map = startLevel
 	
 	get_node("/root/World/Players").add_child(player)
 	
 	
-	var startLevel = "Start"
 	var spawnPoints = get_node("/root/World/Maps/" + startLevel + "/SpawnPoints").get_children()
 	var s = rng.randi_range(0, spawnPoints.size() - 1)
 	var i = 0
@@ -40,7 +42,7 @@ func _player_connected(id):
 	var itemDict = {}
 	for item in items:
 		#var stats = item.get_property_list()["stats"]
-		itemDict[item.itemName] = item.stats
+		itemDict[item.stats.id] = item.stats
 	
 #	var d = inst2dict(items)
 	

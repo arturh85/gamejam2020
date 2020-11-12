@@ -11,11 +11,12 @@ var slotType
 var level
 var rarity
 var stats
+var ID
 var texture2rect
 var itemSlot
 var picked = false
 
-func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemValue, _slotType, _handNode, _level, _rarity, _stats):
+func _init(_id, _itemName, _itemLabel, _itemTexture, _itemImage, _itemValue, _slotType, _handNode, _level, _rarity, _stats):
 	
 	itemName = _itemName
 	label = _itemLabel
@@ -26,6 +27,7 @@ func _init(_itemName, _itemLabel, _itemTexture, _itemImage, _itemValue, _slotTyp
 	level = _level
 	rarity = _rarity
 	stats = _stats
+	ID = _id
 		
 	texture = load("res://data/images/items/" + _itemTexture)
 	self.set_size(texture.get_size())

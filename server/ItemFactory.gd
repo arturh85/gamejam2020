@@ -165,6 +165,7 @@ func generate(item_name, luck, level, position):
 	itemDict["name"] = item_name
 	itemDict["x"] = position.x
 	itemDict["y"] = position.y
+	itemDict["id"] = self.get_instance_id()
 	
 	create(luck)
 	

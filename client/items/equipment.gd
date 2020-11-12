@@ -16,12 +16,12 @@ func _ready():
 	
 	
 func set_item_properties(i):
-	print(i.value)
+	
 	var hn = null
 	if i.has("handNode"):
 		hn = i.handNode
-	item = InventoryItem.new(i.name, i.label, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
-	
+	item = InventoryItem.new(i.id, i.name, i.label, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
+
 	position.x = i.x
 	position.y = i.y
 	
@@ -51,7 +51,7 @@ func set_item_properties(i):
 func _on_Item_body_entered(body):
 	if body.is_in_group("players"):
 		body.pickup_item(item)
-		body.rpc_id(1, 'pickup_item', (item.stats))
+		body.rpc_id(1, 'pickup_item', (item.ID))
 		$CollectPlayer.play("Collect")
 		yield(get_tree().create_timer(1), "timeout")
 		hide()

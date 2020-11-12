@@ -64,9 +64,12 @@ sync func on_took_damage():
 	print("health: " + str(health))
 	pass
 
-sync func pickup_item(item):
-	print(name + " picked up ")
-	print(item)
-	pass
+sync func pickup_item(itemID):
+	var itemsNode = get_node("/root/World/Maps/" + current_map + "/Items")
+	var items = itemsNode.get_children()
+	for item in items:
+		if item.stats.id == itemID:
+			itemsNode.remove_child(item)
+			print(item.name + " picked up ")
 	
 	
