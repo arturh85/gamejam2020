@@ -44,6 +44,8 @@ remote func init_player(playerInfo):
 	
 	var id = get_tree().get_network_unique_id()
 	
+	playerScenes[id].puppet_pos.x = playerInfo.x
+	playerScenes[id].puppet_pos.y = playerInfo.y
 	playerScenes[id].position.x = playerInfo.x
 	playerScenes[id].position.y = playerInfo.y
 	

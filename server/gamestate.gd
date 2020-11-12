@@ -16,6 +16,7 @@ func _ready():
 var rng = RandomNumberGenerator.new()
 
 var startLevel = "Start"
+var startPosition = Vector2.ZERO
 
 func _player_connected(id):
 	
@@ -31,7 +32,6 @@ func _player_connected(id):
 	var spawnPoints = get_node("/root/World/Maps/" + startLevel + "/SpawnPoints").get_children()
 	var s = rng.randi_range(0, spawnPoints.size() - 1)
 	var i = 0
-	var startPosition = Vector2.ZERO
 	for spawn in spawnPoints:
 		if i == s:
 			startPosition = spawn.get_position()
@@ -50,9 +50,9 @@ func _player_connected(id):
 	
 	rpc_id(id, "create_items", itemDict)
 
-	for pl in players:
+	#for pl in players:
 		# IF PLAYER IN SAME LEVEL
-		rpc_id(id, "register_player", pl, players[pl], startLevel, startPosition) 
+	#	rpc_id(id, "register_player", pl, players[pl], startLevel, startPosition) 
 	
 	players[id] = id
 	playerScenes[id] = player
@@ -69,6 +69,7 @@ func _player_disconnected(id):
 	playerState[playerName] = {}
 	playerState[playerName]["x"] = player.puppet_pos.x
 	playerState[playerName]["y"] = player.puppet_pos.y
+	print("pp" + str(player.puppet_pos.x))
 	playerState[playerName]["items"] = player.items
 	
 	print("player " + str(id) + " (" + str(players[id]) + ") disonnected")
@@ -83,10 +84,15 @@ remote func register_player_server(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	print("register player with id ", id, " as ", new_player_name)
 	
+	var pos = startPosition
+	if playerState.has(new_player_name):
+		pos.x = playerState[new_player_name]["x"] 
+		pos.y = playerState[new_player_name]["y"] 
+	
 	for p in players:
 		if p != id:
-			rpc_id(p, "register_player", id, new_player_name)
-		else:
+			rpc_id(p, "register_player", id, new_player_name, startLevel, pos)
+		if p == id:
 			if playerState.has(new_player_name):
 				rpc_id(p, "init_player", playerState[new_player_name])
 	
@@ -95,8 +101,7 @@ remote func register_player_server(new_player_name):
 	playerScenes[id].set_player_name(new_player_name, players.size())
 	
 	if playerState.has(new_player_name):
-		playerScenes[id].puppet_pos.x = playerState[new_player_name]["x"] 
-		playerScenes[id].puppet_pos.y = playerState[new_player_name]["y"] 
+		#playerScenes[id].puppet_pos = pos
 		playerScenes[id].items = playerState[new_player_name]["items"] 
 		
 	_refresh_playerlist()
