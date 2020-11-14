@@ -5,6 +5,7 @@ var icon
 var image
 var itemName
 var label
+var description
 var value
 var handNode
 var slotType
@@ -16,10 +17,11 @@ var texture2rect
 var itemSlot
 var picked = false
 
-func _init(_id, _itemName, _itemLabel, _itemTexture, _itemImage, _itemValue, _slotType, _handNode, _level, _rarity, _stats):
+func _init(_id, _itemName, _itemLabel, _itemDescription, _itemTexture, _itemImage, _itemValue, _slotType, _handNode, _level, _rarity, _stats):
 	
 	itemName = _itemName
 	label = _itemLabel
+	description = _itemDescription
 	image = _itemImage
 	value = _itemValue
 	slotType = _slotType

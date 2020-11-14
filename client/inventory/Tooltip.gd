@@ -29,8 +29,8 @@ func display(_item : InventoryItem, mousePos : Vector2):
 	itemNameLabel.bbcode_text = _item.label
 	itemNameLabel.modulate = colors.itemColor(_item.rarity)
 	
-	var lines = 6
-	var text = ""
+	var lines = 8
+	var text = _item.description + "\r\n\r\n"
 	for stat in _item.stats:
 		text = text + stat.capitalize() + ": " + String(_item.stats[stat]) + "\r\n"
 		lines = lines + 1

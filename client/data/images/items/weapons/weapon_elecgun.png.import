@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/waepon_rocketlauncher.png-23c6c677c47a0ffc5045b00c72b6858a.stex"
+path="res://.import/weapon_elecgun.png-e6f58eaa2bad26c7fa08f6f3a12907cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/images/items/weapons/waepon_rocketlauncher.png"
-dest_files=[ "res://.import/waepon_rocketlauncher.png-23c6c677c47a0ffc5045b00c72b6858a.stex" ]
+source_file="res://data/images/items/weapons/weapon_elecgun.png"
+dest_files=[ "res://.import/weapon_elecgun.png-e6f58eaa2bad26c7fa08f6f3a12907cc.stex" ]
 
 [params]
 

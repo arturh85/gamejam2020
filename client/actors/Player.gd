@@ -40,7 +40,7 @@ func set_door_controls_available(new_value):
 func setDefaults():
 	#$PlayerAnimationPlayer.play("Stand")
 	has_weapons = [true, false, false, false, false, false, false]
-	ammo = [0, 0, 0, 0, 0, 0, 0]
+	ammo = [990, 990, 990, 990, 990, 990, 990]
 	switch_quick(0)
 	stunned = false
 	prev_shooting = false

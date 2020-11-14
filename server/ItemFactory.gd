@@ -2,10 +2,13 @@ extends Node
 class_name ItemStats
 
 const itemDictionary = {
+	# LEVEL 1 ITEMS
+	
 	"armor_camouflage":
 		{
-			"name": "armor_camouflage",
-			"label": "The amazing camouflage jacket",
+			"label": "Camouflage Jacket",
+			"description": "A camouflage jacket",
+			"itemLevel": 1,
 			"value": 450,
 			"icon": "armor/body_camouflage.png",
 			"image": "armor/body_camouflage.png",
@@ -16,18 +19,23 @@ const itemDictionary = {
 		},
 	"normalshoes":
 		{
-			"label": "Just some shoes",
+			"label": "Normal shoes",
+			"description": "Just a pair shoes",
+			"itemLevel": 1,
 			"value": 10,
 			"icon": "armor/shoes_default.png",
 			"image": "armor/shoes_default.png",
 			"slotType": Global.SlotType.SLOT_FEET,
 			"stats": {
-				"armor": 1
+				"armor": 1,
+				"speed": 3
 			}
 		},
 	"pants_camouflage":
 		{
-			"label": "The amazing camouflage pants",
+			"label": "Camouflage Pants",
+			"description": "Some camouflage pants",
+			"itemLevel": 1,
 			"value": 160,
 			"icon": "armor/pants_camouflage.png",
 			"image": "armor/pants_camouflage.png",
@@ -38,7 +46,9 @@ const itemDictionary = {
 		},
 	"helmet_police":
 		{
-			"label": "A time police helmet",
+			"label": "Police helmet",
+			"description": "A time police helmet",
+			"itemLevel": 1,
 			"value": 70,
 			"icon": "armor/helmet_police.png",
 			"image": "armor/helmet_police.png",
@@ -49,7 +59,9 @@ const itemDictionary = {
 		},
 	"leathergloves":
 		{
-			"label": "Nice Leather Gloves",
+			"label": "Leather Gloves",
+			"description": "Nice Leather Gloves",
+			"itemLevel": 1,
 			"value": 50,
 			"icon": "armor/leathergloves.png",
 			"image": "armor/leathergloves.png",
@@ -61,6 +73,8 @@ const itemDictionary = {
 	"shotgun":
 		{
 			"label": "Shotgun",
+			"description": "Better than nothing...",
+			"itemLevel": 1,
 			"value": 100,
 			"icon": "weapons/weapon_shotgun.png",
 			"handNode": "res://weapons/Shotgun.tscn",
@@ -76,6 +90,8 @@ const itemDictionary = {
 	"crossbow":
 		{
 			"label": "Crossbow",
+			"description": "It's not firing usual bolts...",
+			"itemLevel": 1,
 			"value": 400,
 			"icon": "weapons/weapon_crossbow.png",
 			"handNode": "res://weapons/Crossbow.tscn",
@@ -91,6 +107,8 @@ const itemDictionary = {
 	"machinegun":
 		{
 			"label": "Machinegun",
+			"description": "Conventional but effective",
+			"itemLevel": 1,
 			"value": 500,
 			"icon": "weapons/weapon_machinegun.png",
 			"handNode": "res://weapons/Machinegun.tscn",
@@ -106,6 +124,8 @@ const itemDictionary = {
 	"plasmagun":
 		{
 			"label": "Plasmagun",
+			"description": "Be careful. It's very hot",
+			"itemLevel": 1,
 			"value": 800,
 			"icon": "weapons/weapon_plasma.png",
 			"handNode": "res://weapons/Plasmagun.tscn",
@@ -118,13 +138,32 @@ const itemDictionary = {
 				"speed": 1000
 			}
 		},
+	"uzis":
+		{
+			"label": "Uzis",
+			"description": "Not really good, but 2 of em",
+			"itemLevel": 1,
+			"value": 800,
+			"icon": "weapons/weapon_uzis.png",
+			"handNode": "res://weapons/Uzis.tscn",
+			"image": "weapons/weapon_uzis.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+				"waittime" : 1.5,
+				"spread" : 0.1,
+				"damage": 21,
+				"speed": 1500
+			}
+		},
 	"rifle":
 		{
 			"label": "Rifle",
+			"description": "Extreme precise!",
+			"itemLevel": 1,
 			"value": 1000,
-			"icon": "weapons/waepon_rifle.png",
+			"icon": "weapons/weapon_rifle.png",
 			"handNode": "res://weapons/Rifle.tscn",
-			"image": "weapons/waepon_rifle.png",
+			"image": "weapons/weapon_rifle.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
 				"waittime" : 1.2,
@@ -136,10 +175,12 @@ const itemDictionary = {
 	"railgun":
 		{
 			"label": "Railgun",
+			"description": "Pew pew pew",
+			"itemLevel": 1,
 			"value": 1300,
-			"icon": "weapons/waepon_railgun.png",
+			"icon": "weapons/weapon_railgun.png",
 			"handNode": "res://weapons/Railgun.tscn",
-			"image": "weapons/waepon_railgun.png",
+			"image": "weapons/weapon_railgun.png",
 			"slotType": Global.SlotType.SLOT_QUICK1,
 			"stats": {
 				"waittime" : 2,
@@ -147,7 +188,144 @@ const itemDictionary = {
 				"damage": 110,
 				"speed": 3000
 			}
-		}
+		},
+	# LEVEL 2 ITEMS
+	"armor_camouflage2":
+		{
+			"label": "White camouflage jacket",
+			"description": "The amazing white camouflage jacket",
+			"itemLevel": 2,
+			"value": 1010,
+			"icon": "armor/body_camouflage2.png",
+			"image": "armor/body_camouflage2.png",
+			"slotType": Global.SlotType.SLOT_ARMOR,
+			"stats": {
+				"armor": 20
+			}
+		},
+	"helmet_black":
+		{
+			"label": "Black helmet",
+			"description": "The good old black helmet",
+			"itemLevel": 2,
+			"value": 700,
+			"icon": "armor/helmet_black.png",
+			"image": "armor/helmet_black.png",
+			"slotType": Global.SlotType.SLOT_HELMET,
+			"stats": {
+				"armor": 10
+			}
+		},
+	"convenient_gloves":
+		{
+			"label": "Convenient Gloves",
+			"description": "Ahhh. It feels like kitties...",
+			"itemLevel": 2,
+			"value": 500,
+			"icon": "armor/convenient_gloves.png",
+			"image": "armor/convenient_gloves.png",
+			"slotType": Global.SlotType.SLOT_GLOVES,
+			"stats": {
+				"armor": 3
+			}
+		},
+	"shoes_greensneaker":
+		{
+			"label": "Green Sneakers",
+			"description": "It's convenient and it's green",
+			"itemLevel": 2,
+			"value": 420,
+			"icon": "armor/shoes_greensneaker.png",
+			"image": "armor/shoes_greensneaker.png",
+			"slotType": Global.SlotType.SLOT_FEET,
+			"stats": {
+				"armor": 0,
+				"speed": 10
+			}
+		},
+	"pants_blueshorts":
+		{
+			"label": "Blue shorts",
+			"description": "Good shorts!",
+			"itemLevel": 2,
+			"value": 800,
+			"icon": "armor/pants_blueshorts.png",
+			"image": "armor/pants_blueshorts.png",
+			"slotType": Global.SlotType.SLOT_PANTS,
+			"stats": {
+				"armor": 8
+			}
+		},
+	"laser":
+		{
+			"label": "Laser",
+			"description": "Basically, it's light",
+			"itemLevel": 2,
+			"value": 3000,
+			"icon": "weapons/weapon_laser.png",
+			"handNode": "res://weapons/Laser.tscn",
+			"image": "weapons/weapon_laser.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+				"waittime" : 0.35,
+				"spread" : 0.05,
+				"damage": 120,
+				"speed": 4000
+			}
+		},
+	"elecgun":
+		{
+			"label": "Elec Gun",
+			"description": "Very special. Invented by Elec Baldwin",
+			"itemLevel": 2,
+			"value": 9000,
+			"icon": "weapons/weapon_elecgun.png",
+			"handNode": "res://weapons/ElecGun.tscn",
+			"image": "weapons/weapon_elecgun.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+				"waittime" : 2,
+				"spread" : 0.02,
+				"damage": 580,
+				"speed": 300
+			}
+		},
+	"flamethrower":
+		{
+			"label": "Flamethrower",
+			"description": "Gas in. Fire out.",
+			"itemLevel": 2,
+			"value": 2600,
+			"icon": "weapons/weapon_flamethrower.png",
+			"handNode": "res://weapons/Flamethrower.tscn",
+			"image": "weapons/weapon_flamethrower.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+				"waittime" : 0.5,# MISSING IMPLEMENTATION?
+				"autofire" : 0.5, # MISSING IMPLEMENTATION?
+				"spread" : 0.3,
+				"damage": 20,
+				"speed": 250 # NAME DIFFERENT
+			}
+		},
+	"flamethrower2":
+		{
+			"label": "Advanced Flamethrower",
+			"description": "Carefully, please...",
+			"itemLevel": 3,
+			"value": 8300,
+			"icon": "weapons/weapon_flamethrower2.png",
+			"handNode": "res://weapons/Flamethrower2.tscn",
+			"image": "weapons/weapon_flamethrower2.png",
+			"slotType": Global.SlotType.SLOT_QUICK1,
+			"stats": {
+				"waittime" : 0.5,
+				"autofire" : 0.3, 
+				"spread" : 0.25,
+				"damage": 32,
+				"speed": 300 
+			}
+		},
 }
 
 var rarity

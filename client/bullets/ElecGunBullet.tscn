@@ -1,0 +1,86 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://data/images/lights/area.png" type="Texture" id=1]
+[ext_resource path="res://bullets/Bullet.gd" type="Script" id=2]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=4]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet7.png" type="Texture" id=5]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet10.png" type="Texture" id=6]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet8.png" type="Texture" id=7]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet9.png" type="Texture" id=8]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet6.png" type="Texture" id=9]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet3.png" type="Texture" id=10]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet4.png" type="Texture" id=11]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet5.png" type="Texture" id=12]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet1.png" type="Texture" id=13]
+[ext_resource path="res://data/images/sprites/weapon_elecgun_bullet2.png" type="Texture" id=14]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.21918
+height = 0.0
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Flicker"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.65, 0.75, 0.8, 0.85, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false ]
+}
+
+[node name="CrossbowBullet" type="Area2D"]
+script = ExtResource( 2 )
+speed = 800
+damage = 49
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+position = Vector2( 0.383781, -0.237218 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 4
+position = Vector2( 0.500568, 7.42505 )
+frames = SubResource( 2 )
+frame = 3
+playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+position = Vector2( 0.222027, -0.474342 )
+scale = Vector2( 0.653122, 0.697428 )
+texture = ExtResource( 4 )
+color = Color( 0.709804, 0.992157, 0.980392, 1 )
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+
+[node name="Light2D2" type="Light2D" parent="."]
+light_mask = 4
+position = Vector2( 0.451015, 0.0201607 )
+scale = Vector2( 0.143509, 0.490452 )
+texture = ExtResource( 1 )
+color = Color( 0.615686, 1, 0.992157, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+autoplay = "Flicker"
+anims/Flicker = SubResource( 3 )
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

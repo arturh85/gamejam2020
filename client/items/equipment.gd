@@ -20,7 +20,7 @@ func set_item_properties(i):
 	var hn = null
 	if i.has("handNode"):
 		hn = i.handNode
-	item = InventoryItem.new(i.id, i.name, i.label, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
+	item = InventoryItem.new(i.id, i.name, i.label, i.description, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
 
 	position.x = i.x
 	position.y = i.y

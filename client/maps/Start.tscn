@@ -119,10 +119,11 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 1
+frame = 8
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
+frame = 7
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -118.691, 1077.03 )

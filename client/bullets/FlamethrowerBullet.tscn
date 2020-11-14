@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://data/images/sprites/waepon_flamethrower_bullet2.png" type="Texture" id=1]
+[ext_resource path="res://bullets/Bullet.gd" type="Script" id=2]
+[ext_resource path="res://data/images/sprites/waepon_flamethrower_bullet.png" type="Texture" id=3]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=4]
+[ext_resource path="res://bullets/FlamethowerBullet.gd" type="Script" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.3668
+height = 73.5946
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Fde"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 2.14355 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25, 0.5 ),
+"transitions": PoolRealArray( 1.93187, 1.7411 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="FlamethrowerBullet" type="Area2D"]
+script = ExtResource( 2 )
+speed = 800
+damage = 49
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+position = Vector2( -0.616787, -49.5859 )
+shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+position = Vector2( -0.0444623, -61.973 )
+scale = Vector2( 0.382327, 0.781902 )
+texture = ExtResource( 4 )
+color = Color( 1, 0.709804, 0.0235294, 1 )
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.250006, -52.481 )
+scale = Vector2( 1.7005, 2.0478 )
+frames = SubResource( 2 )
+
+[node name="Script" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Fde"
+anims/Fde = SubResource( 3 )
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

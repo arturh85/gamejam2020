@@ -10,7 +10,6 @@ script = ExtResource( 1 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Maps" type="Node2D" parent="."]
-visible = false
 
 [node name="Start" type="Node2D" parent="Maps"]
 
@@ -49,6 +48,30 @@ position = Vector2( -1044.74, 204.721 )
 itemName = "machinegun"
 luck = 10
 
+[node name="MachineGun2" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -1041.38, -400.724 )
+itemName = "laser"
+luck = 10
+
+[node name="MachineGun4" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -999.332, -311.589 )
+itemName = "flamethrower"
+luck = 10
+
+[node name="MachineGun6" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -938.787, -242.636 )
+itemName = "uzis"
+
+[node name="MachineGun5" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -1048.1, -240.954 )
+itemName = "flamethrower2"
+luck = 10
+
+[node name="MachineGun3" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -957.287, -402.406 )
+itemName = "elecgun"
+luck = 100
+
 [node name="Railgun" parent="Maps/Start/Items" instance=ExtResource( 4 )]
 position = Vector2( -1044.74, 334.828 )
 itemName = "railgun"
@@ -69,6 +92,26 @@ itemName = "plasmagun"
 [node name="Armor" parent="Maps/Start/Items" instance=ExtResource( 4 )]
 position = Vector2( -784.521, 196.236 )
 itemName = "armor_camouflage"
+
+[node name="Armor3" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -692.417, -404.442 )
+itemName = "helmet_black"
+
+[node name="Armor2" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -789.86, -405.777 )
+itemName = "armor_camouflage2"
+
+[node name="Armor4" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -744.476, -325.686 )
+itemName = "shoes_greensneaker"
+
+[node name="Armor5" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -789.86, -250.935 )
+itemName = "convenient_gloves"
+
+[node name="Armor6" parent="Maps/Start/Items" instance=ExtResource( 4 )]
+position = Vector2( -688.412, -249.6 )
+itemName = "pants_blueshorts"
 
 [node name="Pants" parent="Maps/Start/Items" instance=ExtResource( 4 )]
 position = Vector2( -739.266, 261.29 )

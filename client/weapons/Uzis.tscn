@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://weapons-mixins/Weapon2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://bullets/MachinegunBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons-mixins/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons-mixins/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/sounds/weapons/shot2.wav" type="AudioStream" id=5]
+[ext_resource path="res://data/images/sprites/muzzleflash3.png" type="Texture" id=6]
+[ext_resource path="res://data/images/lights/spot.png" type="Texture" id=7]
+[ext_resource path="res://data/images/items/weapons/weapon_uzis.png" type="Texture" id=8]
+[ext_resource path="res://weapons-mixins/AutoAttack/AutoAttack.gd" type="Script" id=9]
+[ext_resource path="res://weapons-mixins/Ammo/Ammo.tscn" type="PackedScene" id=10]
+[ext_resource path="res://weapons-mixins/Burst/Burst.tscn" type="PackedScene" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Flash"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[node name="Uzis" instance=ExtResource( 1 )]
+
+[node name="Timer" type="Timer" parent="FiringCooldown" index="0"]
+wait_time = 0.01
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+light_mask = 2
+position = Vector2( -0.18877, -6.01487 )
+rotation = -1.5708
+texture = ExtResource( 8 )
+
+[node name="BulletSpawner2D" parent="." index="2" instance=ExtResource( 3 )]
+bullet_scene_path = ExtResource( 2 )
+spread = 0.12
+bulletDamage = 10
+bulletSpeed = 1500
+
+[node name="Burst" parent="." index="3" instance=ExtResource( 11 )]
+attacks_in_burst = 4
+
+[node name="AutoAttack" parent="." index="4" instance=ExtResource( 4 )]
+script = ExtResource( 9 )
+input_action_trigger = "shoot"
+
+[node name="Muzzle" type="Node2D" parent="." index="5"]
+position = Vector2( 7.62939e-06, -34.3577 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+anims/Flash = SubResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="." index="7"]
+visible = false
+position = Vector2( -4.15436, -28.9729 )
+scale = Vector2( 0.121853, 0.42649 )
+texture = ExtResource( 6 )
+
+[node name="Sprite3" type="Sprite" parent="." index="8"]
+visible = false
+position = Vector2( 3.84564, -18.4729 )
+scale = Vector2( 0.121853, 0.42649 )
+texture = ExtResource( 6 )
+
+[node name="Light2D" type="Light2D" parent="." index="9"]
+visible = false
+light_mask = 2
+position = Vector2( 0.674194, -109.514 )
+scale = Vector2( 1.89065, 2.27782 )
+texture = ExtResource( 7 )
+texture_scale = 2.0
+color = Color( 1, 0.996078, 0.87451, 1 )
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="10"]
+stream = ExtResource( 5 )
+bus = "Effects"
+
+[node name="Ammo" parent="." index="11" instance=ExtResource( 10 )]
+max_capacity = 500
+[connection signal="began" from="." to="." method="end_attack"]
+[connection signal="ended" from="." to="BulletSpawner2D" method="spawn"]
+[connection signal="began" from="FiringCooldown" to="FiringCooldown/Timer" method="start"]
+[connection signal="timeout" from="FiringCooldown/Timer" to="FiringCooldown" method="end_action"]
+[connection signal="changed" from="Ammo" to="Ammo" method="_on_Ammo_changed"]

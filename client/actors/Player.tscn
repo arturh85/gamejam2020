@@ -370,10 +370,12 @@ has_weapons = [ true, false, false, false, false, false, false ]
 scale = Vector2( 2, 2 )
 
 [node name="shoe" parent="Group" instance=ExtResource( 16 )]
+light_mask = 2
 position = Vector2( -0.473, 0.998 )
 texture = null
 
 [node name="shoe2" parent="Group" instance=ExtResource( 16 )]
+light_mask = 2
 position = Vector2( 0.0265646, -2.75968 )
 texture = null
 offset = Vector2( -1.327, 0 )
@@ -420,8 +422,8 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="gloves" parent="Group" instance=ExtResource( 15 )]
-position = Vector2( 3.74715, 0.696243 )
-scale = Vector2( 0.455622, 0.469556 )
+position = Vector2( 3.52593, 0.607755 )
+scale = Vector2( 0.474057, 0.48317 )
 texture = null
 
 [node name="Gun" type="Node2D" parent="Group"]

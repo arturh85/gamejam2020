@@ -54,7 +54,7 @@ remote func init_player(playerInfo):
 		var i = playerInfo.items[it]
 		if i.has("handNode"):
 			hn = i.handNode
-		var item = InventoryItem.new(i.id, i.name, i.label, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
+		var item = InventoryItem.new(i.id, i.name, i.label, i.description, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
 		playerScenes[id].pickup_item(item)
 		print(i.name)
 
