@@ -12,7 +12,12 @@ signal on_removed(what)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var r = str(rng.randi_range(1, 3))
+	$AudioStreamPlayer.stream = load("res://data/sounds/player/pickup" + r + ".wav")
+	
 	
 	
 func set_item_properties(i):

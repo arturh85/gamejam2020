@@ -61,7 +61,13 @@ func _process(delta):
 	else:
 		last_oxygen_harm = null
 
+var lastPickItem = 0
+var pickSounds = 3
 func pickup_item(item):
+	if item.ID == lastPickItem:
+		return
+	lastPickItem = item.ID
+	
 	for i in range(Global.CHARACTER_SLOT_COUNT-1):
 		if not character_slots[i+1] and Global.canEquip(item, i+1):
 			set_character_slot(i+1, item)
