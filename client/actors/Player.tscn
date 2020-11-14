@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://data/images/player/body.png" type="Texture" id=2]
 [ext_resource path="res://data/montserrat.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://data/sounds/player/step2.wav" type="AudioStream" id=4]
 [ext_resource path="res://data/sounds/portal.wav" type="AudioStream" id=5]
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/images/lights/flashlight.png" type="Texture" id=7]
@@ -17,6 +18,8 @@
 [ext_resource path="res://actors/equipment/shoe.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/equipment/helmet.tscn" type="PackedScene" id=17]
 [ext_resource path="res://actors/equipment/pant.tscn" type="PackedScene" id=18]
+[ext_resource path="res://data/sounds/player/step1.wav" type="AudioStream" id=19]
+[ext_resource path="res://data/sounds/flashlight.wav" type="AudioStream" id=20]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.8595
@@ -301,6 +304,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 8.412, 0 ), Vector2( 0, 0 ), Vector2( -6.184, 0 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayerStep1:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AudioStreamPlayerStep2:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "Idle"
@@ -356,6 +383,22 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=15]
 length = 0.1
+
+[sub_resource type="Animation" id=16]
+resource_name = "Flashlight"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer2DFlash:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="player" type="KinematicBody2D" groups=[
 "minimap_objects",
@@ -497,6 +540,16 @@ bus = "Effects"
 stream = ExtResource( 13 )
 bus = "Effects"
 
+[node name="AudioStreamPlayerStep1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
+volume_db = 10.0
+bus = "Effects"
+
+[node name="AudioStreamPlayerStep2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 10.0
+bus = "Effects"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 
@@ -525,6 +578,13 @@ shadow_item_cull_mask = 2
 anims/Forward = SubResource( 13 )
 anims/Idle = SubResource( 14 )
 anims/StrafeLeft = SubResource( 15 )
+
+[node name="AnimationPlayerFlash" type="AnimationPlayer" parent="."]
+anims/Flashlight = SubResource( 16 )
+
+[node name="AudioStreamPlayer2DFlash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+volume_db = 5.0
 [connection signal="on_damage" from="." to="." method="_on_damage"]
 [connection signal="on_death" from="." to="." method="_on_death"]
 [connection signal="on_heal" from="." to="." method="_on_heal"]

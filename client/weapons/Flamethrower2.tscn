@@ -4,14 +4,14 @@
 [ext_resource path="res://bullets/FlamethrowerBullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons-mixins/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://weapons-mixins/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/sounds/weapons/shot2.wav" type="AudioStream" id=5]
+[ext_resource path="res://data/sounds/weapons/flamethrower2_gas.wav" type="AudioStream" id=5]
 [ext_resource path="res://data/images/items/weapons/weapon_flamethrower2.png" type="Texture" id=8]
 [ext_resource path="res://weapons-mixins/AutoAttack/AutoAttack.gd" type="Script" id=9]
 [ext_resource path="res://weapons-mixins/Burst/Burst.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
-length = 0.05
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
 tracks/0/interp = 1

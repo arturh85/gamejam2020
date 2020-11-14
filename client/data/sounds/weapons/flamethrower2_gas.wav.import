@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/flamethrower2_gas.wav-8c08fd66818e6dc0ff7a9a943b8faaee.sample"
+
+[deps]
+
+source_file="res://data/sounds/weapons/flamethrower2_gas.wav"
+dest_files=[ "res://.import/flamethrower2_gas.wav-8c08fd66818e6dc0ff7a9a943b8faaee.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

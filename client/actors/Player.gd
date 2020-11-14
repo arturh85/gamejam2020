@@ -219,6 +219,7 @@ func _physics_process(delta):
 
 sync func update_flashlight(visible):
 	$Group/Camera2D/flashlight.visible = visible
+	$AnimationPlayerFlash.play("Flashlight")
 
 
 puppet func stun():

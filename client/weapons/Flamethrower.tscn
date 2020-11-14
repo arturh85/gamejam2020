@@ -4,14 +4,14 @@
 [ext_resource path="res://bullets/FlamethrowerBullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons-mixins/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://weapons-mixins/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/sounds/weapons/shot2.wav" type="AudioStream" id=5]
+[ext_resource path="res://data/sounds/weapons/flamethrower_gas.wav" type="AudioStream" id=5]
 [ext_resource path="res://data/images/items/weapons/weapon_flamethrower.png" type="Texture" id=8]
 [ext_resource path="res://weapons-mixins/AutoAttack/AutoAttack.gd" type="Script" id=9]
 [ext_resource path="res://weapons-mixins/Burst/Burst.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
-length = 0.05
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
 tracks/0/interp = 1
@@ -44,7 +44,6 @@ bulletSpeed = 1500
 
 [node name="Burst" parent="." index="3" instance=ExtResource( 11 )]
 attacks_in_burst = 0
-burst_wait_time = 0.1
 
 [node name="AutoAttack" parent="." index="4" instance=ExtResource( 4 )]
 script = ExtResource( 9 )
@@ -58,6 +57,7 @@ anims/Flash = SubResource( 1 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 5 )
+attenuation = 7.45079e-09
 bus = "Effects"
 [connection signal="began" from="." to="." method="end_attack"]
 [connection signal="ended" from="." to="BulletSpawner2D" method="spawn"]
