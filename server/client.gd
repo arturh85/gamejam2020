@@ -15,6 +15,14 @@ func _ready():
 	._ready()
 	pass # Replace with function body.
 
+func saveNOTHERE():
+	if .has_method("save"):
+		var saveDict = .save()
+		saveDict["items"] = items
+		var sd = {}
+		sd["onlinePlayer"] = saveDict
+		return sd
+		
 func set_player_name(player_name, id):
 	
 	$Name.text = str(id) + ": " + name + " - " + player_name

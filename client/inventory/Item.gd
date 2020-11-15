@@ -2,7 +2,6 @@ extends TextureRect
 class_name InventoryItem
 
 var icon
-var image
 var itemName
 var label
 var description
@@ -22,12 +21,12 @@ func _init(_id, _itemName, _itemLabel, _itemDescription, _itemTexture, _itemImag
 	itemName = _itemName
 	label = _itemLabel
 	description = _itemDescription
-	image = _itemImage
+	icon = _itemImage
 	value = _itemValue
 	slotType = _slotType
 	handNode = _handNode
 	level = _level
-	rarity = _rarity
+	rarity = int(_rarity)
 	stats = _stats
 	id = _id
 		

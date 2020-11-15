@@ -1,7 +1,7 @@
 extends Node
 
 const DEFAULT_PORT = 10567
-const MAX_PEERS = 4
+const MAX_PEERS = 99
 
 func _ready():	
 	

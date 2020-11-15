@@ -8,6 +8,8 @@ var playerScenes = {}
 func _ready():
 	rng.randomize();
 	
+	load_all()
+		
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
 	
@@ -66,7 +68,8 @@ func init_map(id, mapName):
 	for mob in mobs:
 		var mobID = mob.get_instance_id()
 		mobDict[mobID] = {}
-		mobDict[mobID]["name"] = mob.mobName
+		mobDict[mobID]["name"] = mob.name
+		mobDict[mobID]["mobname"] = mob.mobName
 		mobDict[mobID]["x"] = mob.position.x
 		mobDict[mobID]["y"] = mob.position.y
 		if mob.has_node("Weapon"):
@@ -153,5 +156,112 @@ func _refresh_playerlist():
 		print(str(player) + ": " + str(gamestate.players[player]))
 		
 
+func _notification(event):
+	if event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+	
+		for p in players:
+			_player_disconnected(p)
+			
+		save()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+		
+var save_game
+
+func save():
+	for map in get_node("/root/World/Maps").get_children():
+		save_game = File.new()
+		save_game.open("user://" + map.name + ".save", File.WRITE)
+		var nodes = map.get_children()
+		save_all_nodes(nodes)
+		save_player_states(map.name)
+		save_game.close()
+	
+func save_all_nodes(nodes):
+	for n in nodes:
+		print("Saving " + n.get_name())
+		save_node(n)	
+		if n.get_child_count() > 0:
+			save_all_nodes(n.get_children())
+
+func save_player_states(mapName):
+	
+	var dict = {}
+	dict["players"] = {}
+	
+	for state in playerState:
+		if playerState[state].map == mapName:
+			dict["players"][state] = playerState[state]
+	
+	save_game.store_line(to_json(dict))
+
+
+func save_node(node):
+	if !node.has_method("save"):
+		print("No save function for %s" % node.name)
+		return
+
+	var node_data = node.call("save")
+
+	save_game.store_line(to_json(node_data))
+
+
+
+func load_all():
+	return
+	for map in get_node("/root/World/Maps").get_children():
+		var save_game = File.new()
+		if not save_game.file_exists("user://" + map.name + ".save"):
+			return
+			
+		for mob in map.get_node("Mobs").get_children():
+			mob.queue_free()
+		for item in map.get_node("Items").get_children():
+			item.queue_free()
+
+		save_game.open("user://" + map.name + ".save", File.READ)
+		
+		while save_game.get_position() < save_game.get_len():
+			var node_data = parse_json(save_game.get_line())
+
+			for i in node_data.keys():
+				if i == "players":
+					if node_data[i]:
+						for p in node_data[i]:
+							playerState[p] = node_data[i][p]
+					continue
+				if i == "mob":
+					if node_data[i]:
+						var mob = load("res://mob.tscn").instance()
+						mob.name = node_data[i]["name"]
+						mob.mobName = node_data[i]["mobname"]
+						mob.position.x = node_data[i]["x"]
+						mob.position.y = node_data[i]["y"]
+						mob.puppet_pos.x = node_data[i]["x"]
+						mob.puppet_pos.y = node_data[i]["y"]
+						print(mob.name)
+						if node_data[i].has("items"):
+							mob.items = node_data[i]["items"]
+						map.get_node("Mobs").add_child(mob)
+				if i == "item":
+					if node_data[i]:
+						var item = load("res://Item.tscn").instance()
+						item.stats = node_data[i]
+						item.id = node_data[i]["id"]
+						item.position.x = node_data[i]["x"]
+						item.position.y = node_data[i]["y"]
+						map.get_node("Items").add_child(item)
+
+		save_game.close()

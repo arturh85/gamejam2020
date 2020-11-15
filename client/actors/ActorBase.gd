@@ -43,10 +43,6 @@ func _init():
 
 func _ready():
 	._ready()
-	self.position.x = -99999
-	self.position.y = -99999
-	self.puppet_pos.x = position.x
-	self.puppet_pos.y = position.y
 
 func _process(delta):
 	._process(delta)
@@ -87,23 +83,23 @@ func equip_item(item):
 	match item.slotType:
 		Global.SlotType.SLOT_HELMET:
 			if $Group/helmet:
-				$Group/helmet.texture = load("res://data/images/items/" + item.image)
+				$Group/helmet.texture = item.texture
 		Global.SlotType.SLOT_FEET:
 			if $Group/shoe:
-				$Group/shoe.texture = load("res://data/images/items/" + item.image)
+				$Group/shoe.texture = item.texture
 			if $Group/shoe2:
-				$Group/shoe2.texture = load("res://data/images/items/" + item.image)
+				$Group/shoe2.texture = item.texture
 		Global.SlotType.SLOT_GLOVES:
 			if $Group/gloves:
-				$Group/gloves.texture = load("res://data/images/items/" + item.image)
+				$Group/gloves.texture = item.texture
 		Global.SlotType.SLOT_PANTS:
 			if $Group/pant:
-				$Group/pant.texture = load("res://data/images/items/" + item.image)
+				$Group/pant.texture = item.texture
 			if $Group/pant2:
-				$Group/pant2.texture = load("res://data/images/items/" + item.image)
+				$Group/pant2.texture = item.texture
 		Global.SlotType.SLOT_ARMOR:
 			if $Group/bodyarmor:
-				$Group/bodyarmor.texture = load("res://data/images/items/" + item.image)
+				$Group/bodyarmor.texture = item.texture
 		Global.SlotType.SLOT_QUICK1:
 			switch_quick(0)
 		Global.SlotType.SLOT_QUICK2:
@@ -229,10 +225,12 @@ sync func add_ammo(nr, ammo_amount=0):
 
 func set_mob_properties(mobProperties):
 	
+	
 	self.position.x = mobProperties.x
 	self.position.y = mobProperties.y
 	self.puppet_pos.x = mobProperties.x
 	self.puppet_pos.y = mobProperties.y
+	
 	
 	if mobProperties.has("weapon"):
 		pickup_item(mobProperties.weapon)

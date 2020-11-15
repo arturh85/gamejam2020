@@ -240,6 +240,10 @@ func set_player_name(new_name):
 
 func _ready():
 	._ready()
+	self.position.x = -99999
+	self.position.y = -99999
+	self.puppet_pos.x = position.x
+	self.puppet_pos.y = position.y
 	setDefaults()
 	stunned = false
 	puppet_pos = position

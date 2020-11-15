@@ -11,7 +11,7 @@ var last_harm = null
 func _ready():
 	._ready()
 	rotation = rand_range(0, 2*PI)
-	switch_quick(0)
+	#switch_quick(0)
 		
 sync func switch_quick(index):
 	.switch_quick(index)
@@ -101,23 +101,27 @@ func _on_health_changed():
 	pass
 
 func _on_Detect_body_entered(body):
+	return
 	if body.is_in_group("players"):
 		chase_player = body
 		var current_weapon_node = get_node("Group/Gun").get_child(0)
 		current_weapon_node.get_node("AutoAttack").start_auto_attack()
 
 func _on_Detect_body_exited(body):
+	return
 	if body.is_in_group("players"):
 		chase_player = null
 		var current_weapon_node = get_node("Group/Gun").get_child(0)
 		current_weapon_node.get_node("AutoAttack").end_auto_attack()
 
 func _on_Harm_body_entered(body):
+	return
 	if body.is_in_group("players"):
 		harm_player = body
 		last_harm = OS.get_unix_time()
 
 func _on_Harm_body_exited(body):
+	return
 	if body.is_in_group("players"):
 		harm_player = null
 

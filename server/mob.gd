@@ -4,13 +4,23 @@ extends "res://ActorBase.gd"
 # var a = 2
 # var b = "text"
 export var mobName = ""
-
+var items = Array()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	._ready()
-	pass # Replace with function body.
+	current_map = get_node("../../").name
+	for w in get_children():
+		items.append(w.id)
 
-
+func save():
+	if .has_method("save"):
+		var saveDict = .save()
+		saveDict["name"] = self.name
+		saveDict["mobname"] = mobName
+		saveDict["items"] = items
+		var sd = {}
+		sd["mob"] = saveDict
+		return sd
 
 sync func switch_quick(wp):
 	print(name + " switched weapon")

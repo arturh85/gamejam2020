@@ -67,7 +67,7 @@ var colors = preload("res://items/colors.gd")
 func refreshColors():
 	if item:
 		#style.bg_color = Global.itemColor(item.rarity)
-		style.border_color = colors.itemColor(item.rarity);
+		style.border_color = colors.itemColor(int(item.rarity));
 	else:
 		#style.bg_color = Color("#8B7258");
 		style.border_color = Color("#534434");

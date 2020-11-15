@@ -30,21 +30,21 @@ func set_item_properties(i):
 	position.x = i.x
 	position.y = i.y
 	
-	$Light2D.color = COLORS.itemColor(item.rarity)
+	$Light2D.color = COLORS.itemColor(int(item.rarity))
 	
 	match item.slotType:
 		Global.SlotType.SLOT_FEET:
 			$Sprite.offset.y = -4
-			$Sprite.texture = load("res://data/images/items/" + item.image)
+			$Sprite.texture = load("res://data/images/items/" + item.icon)
 			$DoubleSprite.offset.y = 4
-			$DoubleSprite.texture = load("res://data/images/items/" + item.image)
+			$DoubleSprite.texture = load("res://data/images/items/" + item.icon)
 		Global.SlotType.SLOT_PANTS:
 			$Sprite.offset.y = -3
-			$Sprite.texture = load("res://data/images/items/" + item.image)
+			$Sprite.texture = load("res://data/images/items/" + item.icon)
 			$DoubleSprite.offset.y = 3
-			$DoubleSprite.texture = load("res://data/images/items/" + item.image)
+			$DoubleSprite.texture = load("res://data/images/items/" + item.icon)
 		_:
-			$Sprite.texture = load("res://data/images/items/" + item.image)
+			$Sprite.texture = load("res://data/images/items/" + item.icon)
 	
 	
 

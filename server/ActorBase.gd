@@ -16,6 +16,15 @@ master var current_map = ""
 func _ready():
 	pass # Replace with function body.
 
+var saveData = {}
+func save():
+	saveData["x"] = position.x
+	saveData["y"] = position.y
+	saveData["rotation"] = rotation
+	saveData["health"] = health
+	saveData["current_map"] = current_map
+	
+	return saveData
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

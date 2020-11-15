@@ -178,9 +178,10 @@ remote func create_mobs(mobDict):
 	
 	for mob in mobDict:
 		
-		var newMob = load("res://actors/" + mobDict[mob].name + ".tscn").instance()
+		var newMob = load("res://actors/" + mobDict[mob].mobname + ".tscn").instance()
 		newMob.set_mob_properties(mobDict[mob])
 		get_node("/root/World/Maps/" + map + "/Mobs").add_child(newMob)
+		newMob.name = mobDict[mob].name
 	
 	
 remote func create_portals(portalDict):
