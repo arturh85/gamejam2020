@@ -95,29 +95,20 @@ shadow_item_cull_mask = 2
 
 [node name="Portal2" parent="." instance=ExtResource( 1 )]
 position = Vector2( -119.811, 946.541 )
-randomLevelTemplate = "level1"
-color = Color( 0.313726, 1, 0, 1 )
-trigger_name = "Random1"
 
 [node name="Portal4" parent="." instance=ExtResource( 1 )]
 position = Vector2( 127.56, 947.19 )
-randomLevelTemplate = "level3"
-color = Color( 1, 0, 0.772549, 1 )
-trigger_name = "Random3"
 
 [node name="Portal5" parent="." instance=ExtResource( 1 )]
 position = Vector2( 7.24158, 946.582 )
-randomLevelTemplate = "level2"
-color = Color( 1, 0.513726, 0, 1 )
-trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 3
+frame = 8
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 2
+frame = 7
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -118.691, 1077.03 )

@@ -24,12 +24,23 @@ func _player_connected(id):
 		
 	var player = load("res://client.tscn").instance()
 	player.set_name(str(id))
-	player.current_map = startLevel
 	
 	get_node("/root/World/Players").add_child(player)
 	
+	players[id] = id
+	playerScenes[id] = player
 	
-	var spawnPoints = get_node("/root/World/Maps/" + startLevel + "/SpawnPoints").get_children()
+	rpc_id(id, "pre_start_game", startLevel)
+	
+	init_map(id, startLevel)
+
+
+func init_map(id, mapName):
+	
+	var player = playerScenes[id]
+	player.current_map = mapName
+	
+	var spawnPoints = get_node("/root/World/Maps/" + mapName + "/SpawnPoints").get_children()
 	var s = rng.randi_range(0, spawnPoints.size() - 1)
 	var i = 0
 	for spawn in spawnPoints:
@@ -40,9 +51,9 @@ func _player_connected(id):
 	
 #	var d = inst2dict(items)
 	
-	rpc_id(id, "pre_start_game", startLevel, startPosition)
+	rpc_id(id, "init_map", mapName, startPosition)
 	
-	var items = get_node("/root/World/Maps/" + startLevel + "/Items").get_children()
+	var items = get_node("/root/World/Maps/" + mapName + "/Items").get_children()
 	
 	var itemDict = {}
 	for item in items:
@@ -51,7 +62,7 @@ func _player_connected(id):
 		
 	rpc_id(id, "create_items", itemDict)
 	
-	var mobs = get_node("/root/World/Maps/" + startLevel + "/Mobs").get_children()
+	var mobs = get_node("/root/World/Maps/" + mapName + "/Mobs").get_children()
 	
 	var mobDict = {}
 	for mob in mobs:
@@ -67,29 +78,22 @@ func _player_connected(id):
 	rpc_id(id, "create_mobs", mobDict)
 
 
-	var portals = get_node("/root/World/Maps/" + startLevel + "/Portals").get_children()
+	var portals = get_node("/root/World/Maps/" + mapName + "/Portals").get_children()
 	
 	var portalDict = {}
 	for portal in portals:
 		var portalID = portal.get_instance_id()
 		portalDict[portalID] = {}
+		portalDict[portalID]["name"] = portal.get_name()
+		portalDict[portalID]["id"] = portalID
 		portalDict[portalID]["x"] = portal.position.x
 		portalDict[portalID]["y"] = portal.position.y
 		portalDict[portalID]["targetScene"] = portal.targetSceneName
-		portalDict[portalID]["randomLevel"] = portal.randomLevelTemplate
-		portalDict[portalID]["createInstance"] = portal.createInstance 
-		portalDict[portalID]["back"] = portal.back
-		portalDict[portalID]["color"] = portal.color
 		portalDict[portalID]["triggerName"] = portal.triggerName
+		portalDict[portalID]["color"] = portal.color
 		
 	rpc_id(id, "create_portals", portalDict)
 
-	#for pl in players:
-		# IF PLAYER IN SAME LEVEL
-	#	rpc_id(id, "register_player", pl, players[pl], startLevel, startPosition) 
-	
-	players[id] = id
-	playerScenes[id] = player
 	
 	
 

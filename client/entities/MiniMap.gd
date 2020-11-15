@@ -52,7 +52,8 @@ func _process(delta):
 		return
 	# Arrow texture points upwards, so add 90 degrees.
 	var player_node = get_node(player)
-	player_marker.rotation = player_node.viewRotation + PI/2
+	# DUNNO
+	#player_marker.rotation = player_node.viewRotation + PI/2
 	for item in markers:
 		var obj_pos = (item.position - player_node.position) * grid_scale + grid.rect_size / 2
 		var grid_radius = grid.get_rect().size[0] / 2		
