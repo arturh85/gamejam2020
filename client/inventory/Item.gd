@@ -12,7 +12,7 @@ var slotType
 var level
 var rarity
 var stats
-var ID
+var id
 var texture2rect
 var itemSlot
 var picked = false
@@ -29,7 +29,7 @@ func _init(_id, _itemName, _itemLabel, _itemDescription, _itemTexture, _itemImag
 	level = _level
 	rarity = _rarity
 	stats = _stats
-	ID = _id
+	id = _id
 		
 	texture = load("res://data/images/items/" + _itemTexture)
 	self.set_size(texture.get_size())

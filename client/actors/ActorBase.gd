@@ -43,6 +43,10 @@ func _init():
 
 func _ready():
 	._ready()
+	self.position.x = -99999
+	self.position.y = -99999
+	self.puppet_pos.x = position.x
+	self.puppet_pos.y = position.y
 
 func _process(delta):
 	._process(delta)

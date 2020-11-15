@@ -253,7 +253,6 @@ func _ready():
 		
 	switch_quick(0)
 	
-		
 	
 var dying = false	
 	
@@ -306,18 +305,6 @@ func _on_respawn():
 	rpc("switch_weapon", 1)		
 	setDefaults()
 
-func setMap(newlevel):
-	#var newlevel = instance_from_id(newlevel_id)
-	#Logger.info("player.setMap (master: " + str(is_network_master()) + ")")
-	var world = get_node("/root/World")
-	var SpawnPoints = newlevel.get_node("SpawnPoints")
-	var spawn = SpawnPoints.get_child(0)
-	spawn_at(spawn.position)
-	unlockPlayer()
-	yield(world.get_tree().create_timer(1), "timeout")
-	#newlevel.show()
-	world.get_node("CanvasLayer/Transitions").play("PortalOut")
-	
 func set_gui_state(new_gui_state):
 	gui_state = new_gui_state
 	match new_gui_state:

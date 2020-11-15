@@ -31,8 +31,6 @@ func _player_connected(id):
 	playerScenes[id] = player
 	
 	rpc_id(id, "pre_start_game", startLevel)
-	
-	init_map(id, startLevel)
 
 
 func init_map(id, mapName):
@@ -107,6 +105,7 @@ func _player_disconnected(id):
 	playerState[playerName] = {}
 	playerState[playerName]["x"] = player.puppet_pos.x
 	playerState[playerName]["y"] = player.puppet_pos.y
+	playerState[playerName]["map"] = player.current_map
 	print("pp" + str(player.puppet_pos.x))
 	playerState[playerName]["items"] = player.items
 	
@@ -124,8 +123,11 @@ remote func register_player_server(new_player_name):
 	
 	var pos = startPosition
 	if playerState.has(new_player_name):
+		init_map(id, playerState[new_player_name]["map"]) 
 		pos.x = playerState[new_player_name]["x"] 
 		pos.y = playerState[new_player_name]["y"] 
+	else:
+		init_map(id, startLevel)
 	
 	for p in players:
 		if p != id:
@@ -140,7 +142,7 @@ remote func register_player_server(new_player_name):
 	
 	if playerState.has(new_player_name):
 		#playerScenes[id].puppet_pos = pos
-		playerScenes[id].items = playerState[new_player_name]["items"] 
+		playerScenes[id].items = playerState[new_player_name]["items"] # load items
 		
 	_refresh_playerlist()
 

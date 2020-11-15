@@ -104,6 +104,7 @@ remote func init_map(mapName, spawn_pos):
 
 	world.get_node("CanvasLayer/Transitions").play("PortalOut")
 
+	playerScenes[get_tree().get_network_unique_id()].get_node("AnimationPlayer").play("Spawn")
 
 func join_game(ip, new_player_name):
 	player_name = new_player_name
@@ -131,7 +132,7 @@ func end_game():
 
 func remove_player_from_scene(id):
 	
-	get_node("/root/World/Players").remove_child(playerScenes[id])
+	get_node("/root/Wpickup_itemorld/Players").remove_child(playerScenes[id])
 	get_node("/root/World/CanvasLayer/Score").remove_player(id)
 
 
