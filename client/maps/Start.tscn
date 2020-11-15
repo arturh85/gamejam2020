@@ -119,11 +119,11 @@ trigger_name = "Random2"
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 8
+frame = 9
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 7
+frame = 8
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -118.691, 1077.03 )
@@ -151,3 +151,5 @@ interaction = 2
 toggle = true
 toggleValue = "unset"
 color = Color( 1, 0, 0.772549, 1 )
+
+[node name="Mobs" type="Node2D" parent="."]

@@ -1,30 +1,16 @@
 extends "res://ActorBase.gd"
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
-
-
-
-var items = {}
+export var mobName = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	._ready()
 	pass # Replace with function body.
 
-func set_player_name(player_name, id):
-	
-	$Name.text = str(id) + ": " + name + " - " + player_name
-	$Name.rect_position.x = 10
-	$Name.rect_position.y = (id-1) * 20 + 10
 
-sync func update_flashlight(visible):
-	print(name + " switched flashlight")
-	
-	pass
 
 sync func switch_quick(wp):
 	print(name + " switched weapon")
@@ -62,12 +48,6 @@ sync func on_took_damage():
 	pass
 
 sync func pickup_item(itemID):
-	var itemsNode = get_node("/root/World/Maps/" + current_map + "/Items")
-	var itn = itemsNode.get_children()
-	for item in itn:
-		if item.stats.id == itemID:
-			items[item.stats.id] = item.stats
-			itemsNode.remove_child(item)
-			
+	pass
 	
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Start_TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mob.gd" type="Script" id=3]
 [ext_resource path="res://Item.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Node2D"]
@@ -129,3 +130,19 @@ itemName = "helmet_police"
 position = Vector2( -691.182, 193.407 )
 itemName = "leathergloves"
 luck = 100
+
+[node name="Mobs" type="Node2D" parent="Maps/Start"]
+
+[node name="BlobMob" type="Node2D" parent="Maps/Start/Mobs"]
+position = Vector2( -3.73199, -897.962 )
+script = ExtResource( 3 )
+mobName = "BlobMob"
+
+[node name="Sorgon" type="Node2D" parent="Maps/Start/Mobs"]
+position = Vector2( 941.741, 143.005 )
+script = ExtResource( 3 )
+mobName = "Sorgon"
+
+[node name="Weapon" parent="Maps/Start/Mobs/Sorgon" instance=ExtResource( 4 )]
+position = Vector2( -1815.04, 172.775 )
+itemName = "railgun"

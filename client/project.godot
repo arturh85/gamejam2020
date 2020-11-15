@@ -160,6 +160,11 @@ _global_script_classes=[ {
 "path": "res://actors/Player.gd"
 }, {
 "base": "ActorBase",
+"class": "SorgonBoss",
+"language": "GDScript",
+"path": "res://actors/Sorgon.gd"
+}, {
+"base": "ActorBase",
 "class": "TimeCopMob",
 "language": "GDScript",
 "path": "res://actors/TimeCop.gd"
@@ -200,6 +205,7 @@ _global_script_class_icons={
 "Message": "",
 "PatternLayout": "",
 "Player": "",
+"SorgonBoss": "",
 "TimeCopMob": "",
 "Utils": ""
 }

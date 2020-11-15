@@ -35,13 +35,14 @@ var velocity = Vector2()
 var damage_multiplier = 1
 var respawn_position = null
 
-
-func _ready():
-	._ready()
+func _init():
 	for _i in Global.CHARACTER_SLOT_COUNT:
 		character_slots.append(null)
 	for _i in Global.INVENTORY_SLOT_COUNT:
 		inventory_slots.append(null)
+
+func _ready():
+	._ready()
 
 func _process(delta):
 	._process(delta)
@@ -64,9 +65,9 @@ func _process(delta):
 var lastPickItem = 0
 var pickSounds = 3
 func pickup_item(item):
-	if item.ID == lastPickItem:
+	if item.id == lastPickItem: # sometimes gets called twice (but only 1 item is picked up)
 		return
-	lastPickItem = item.ID
+	lastPickItem = item.id
 	
 	for i in range(Global.CHARACTER_SLOT_COUNT-1):
 		if not character_slots[i+1] and Global.canEquip(item, i+1):
@@ -194,17 +195,21 @@ sync func switch_quick(index):
 			w.get_node("BulletSpawner2D").spread = item.stats["spread"]
 			w.get_node("FiringCooldown/Timer").wait_time = item.stats["waittime"]
 			gun_node.add_child(w, true)
-			if w.has_node("Ammo") and w.has_node("BulletSpawner2D"):
-				var ammo_node = w.get_node("Ammo")
-				var bullet_spawner = w.get_node("BulletSpawner2D")
-				ammo_node.current_capacity = ammo[bullet_spawner.ammo_index]
-				get_node("/root/World/CanvasLayer/AmmoHUD").show()
-			else:
-				get_node("/root/World/CanvasLayer/AmmoHUD").hide()
-		else:
-			get_node("/root/World/CanvasLayer/AmmoHUD").hide()
-	else:
-		get_node("/root/World/CanvasLayer/AmmoHUD").hide()
+			
+
+			# DUNNO
+			
+			#if w.has_node("Ammo") and w.has_node("BulletSpawner2D"):
+			#	var ammo_node = w.get_node("Ammo")
+			#	var bullet_spawner = w.get_node("BulletSpawner2D")
+			#	ammo_node.current_capacity = ammo[bullet_spawner.ammo_index]
+				#get_node("/root/World/CanvasLayer/AmmoHUD").show()
+			#else:
+				#get_node("/root/World/CanvasLayer/AmmoHUD").hide()
+		#else:
+			#get_node("/root/World/CanvasLayer/AmmoHUD").hide()
+	#else:
+		#get_node("/root/World/CanvasLayer/AmmoHUD").hide()
 	active_quickslot = index
 
 sync func add_weapon(nr, ammo_amount=0):
@@ -218,3 +223,13 @@ sync func add_ammo(nr, ammo_amount=0):
 	if has_weapons[nr]:
 		switch_quick(nr)
 	
+
+func set_mob_properties(mobProperties):
+	
+	self.position.x = mobProperties.x
+	self.position.y = mobProperties.y
+	self.puppet_pos.x = mobProperties.x
+	self.puppet_pos.y = mobProperties.y
+	
+	if mobProperties.has("weapon"):
+		pickup_item(mobProperties.weapon)

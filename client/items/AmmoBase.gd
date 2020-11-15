@@ -3,7 +3,7 @@ extends Node2D
 signal on_removed(what)
 var minimap_icon = "alert"
 export var weapon_nr = 0
-export var weapon_ammo = 100
+export var weapon_ammo = 0
 
 func _ready():
 	$AnimationPlayer.play("Rotate")

@@ -155,6 +155,18 @@ remote func create_items(itemDict):
 		get_node("/root/World/Level/Items").add_child(newItem)
 	
 	
+remote func create_mobs(mobDict):
+	
+	print("creating mobs")
+	
+	
+	for mob in mobDict:
+		
+		var newMob = load("res://actors/" + mobDict[mob].name + ".tscn").instance()
+		newMob.set_mob_properties(mobDict[mob])
+		get_node("/root/World/Level/Mobs").add_child(newMob)
+	
+	
 func _ready():
 
 	var output = []

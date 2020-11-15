@@ -37,18 +37,35 @@ func _player_connected(id):
 			startPosition = spawn.get_position()
 		i = i + 1
 		
-	var items = get_node("/root/World/Maps/" + startLevel + "/Items").get_children()
-	
-	var itemDict = {}
-	for item in items:
-		#var stats = item.get_property_list()["stats"]
-		itemDict[item.stats.id] = item.stats
 	
 #	var d = inst2dict(items)
 	
 	rpc_id(id, "pre_start_game", startLevel, startPosition)
 	
+	var items = get_node("/root/World/Maps/" + startLevel + "/Items").get_children()
+	
+	var itemDict = {}
+	for item in items:
+		itemDict[item.stats.id] = item.stats
+		
+		
 	rpc_id(id, "create_items", itemDict)
+	
+	var mobs = get_node("/root/World/Maps/" + startLevel + "/Mobs").get_children()
+	
+	var mobDict = {}
+	for mob in mobs:
+		var mobID = mob.get_instance_id()
+		mobDict[mobID] = {}
+		mobDict[mobID]["name"] = mob.mobName
+		mobDict[mobID]["x"] = mob.position.x
+		mobDict[mobID]["y"] = mob.position.y
+		if mob.has_node("Weapon"):
+			var weapon = mob.get_node("Weapon")["stats"]
+			mobDict[mobID]["weapon"] = weapon
+		
+		
+	rpc_id(id, "create_mobs", mobDict)
 
 	#for pl in players:
 		# IF PLAYER IN SAME LEVEL
