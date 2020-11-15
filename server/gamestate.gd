@@ -64,8 +64,25 @@ func _player_connected(id):
 			var weapon = mob.get_node("Weapon")["stats"]
 			mobDict[mobID]["weapon"] = weapon
 		
-		
 	rpc_id(id, "create_mobs", mobDict)
+
+
+	var portals = get_node("/root/World/Maps/" + startLevel + "/Portals").get_children()
+	
+	var portalDict = {}
+	for portal in portals:
+		var portalID = portal.get_instance_id()
+		portalDict[portalID] = {}
+		portalDict[portalID]["x"] = portal.position.x
+		portalDict[portalID]["y"] = portal.position.y
+		portalDict[portalID]["targetScene"] = portal.targetSceneName
+		portalDict[portalID]["randomLevel"] = portal.randomLevelTemplate
+		portalDict[portalID]["createInstance"] = portal.createInstance 
+		portalDict[portalID]["back"] = portal.back
+		portalDict[portalID]["color"] = portal.color
+		portalDict[portalID]["triggerName"] = portal.triggerName
+		
+	rpc_id(id, "create_portals", portalDict)
 
 	#for pl in players:
 		# IF PLAYER IN SAME LEVEL

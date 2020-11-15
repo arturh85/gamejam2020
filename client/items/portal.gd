@@ -36,7 +36,7 @@ func _ready():
 		
 func create():
 	if target_scene:
-		level = load(target_scene).instance()
+		level = load("res://maps/" + target_scene + ".tscn").instance()
 	else:
 		level = random_level.instance()
 		level.init(randomLevelTemplate, randi())
@@ -73,3 +73,16 @@ func _on_body_entered(body):
 		if not once:
 			once = true
 			rpc("activate")
+			
+			
+func set_portal_properties(portal):
+	
+	self.position.x = portal.x
+	self.position.y = portal.y
+	
+	target_scene = portal.targetScene
+	randomLevelTemplate = portal.randomLevel
+	createInstance = portal.createInstance
+	back = portal.back
+	color = portal.color
+	trigger_name = portal.triggerName

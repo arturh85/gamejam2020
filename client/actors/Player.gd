@@ -292,7 +292,7 @@ func _on_death(by_who):
 	if is_network_master():
 		$"/root/World/CanvasLayer/Transitions".play("Portal")
 	yield(get_tree().create_timer(5), "timeout")
-	var SpawnPoints = get_node("/root/World/Level/SpawnPoints")
+	var SpawnPoints = get_node("/root/World/Maps/" + current_map + "/SpawnPoints")
 	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
 	respawn_at(spawn.position)
 

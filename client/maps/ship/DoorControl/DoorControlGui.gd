@@ -22,7 +22,7 @@ onready var icons = {"mob": mob_marker, "other_player": other_player_marker}
 var markers = {}  # Dictionary of object: marker.
 
 func open():
-	var tilemap = get_node("../../Level/TileMap")
+	var tilemap = get_node("/root/World/Maps/TileMap") # WE NEED TO KNOW THE MAP NAME THE DOOR IS IN
 	level_tilemap = tilemap.duplicate()
 	var grid_size = grid.get_rect().size
 	level_tilemap.position = Vector2(grid_size.x / 2 - 50, grid_size.y / 2)

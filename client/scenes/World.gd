@@ -12,10 +12,11 @@ func initStartMap(mapName):
 	load_level(null, null, true)
 	
 puppet func receive_map(new_level):
-	if has_node("Level"):
-		remove_child(get_node("Level"))
-	add_child(new_level)
-	new_level.set_name("Level") # enforce
+	for i in range(0, get_node("Maps").get_child_count()):
+		get_child(i).queue_free()
+	
+	get_node("Maps").add_child(new_level)
+	#new_level.set_name("Level") # enforce
 	#for player in players.get_children():
 	#	player.setMap(new_level)
 	#old_level.queue_free()
@@ -28,7 +29,7 @@ func post_start_game():
 func load_level(target_scene, portal_level, back):
 	var new_level
 	if target_scene:
-		new_level = load(target_scene).instance()
+		new_level = load("res://maps/" + target_scene + ".tscn").instance()
 	elif portal_level:
 		new_level = portal_level
 	elif back:

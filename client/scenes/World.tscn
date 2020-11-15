@@ -295,5 +295,7 @@ script = ExtResource( 25 )
 autoset = false
 
 [node name="Players" type="Node2D" parent="."]
+
+[node name="Maps" type="Node2D" parent="."]
 [connection signal="pressed" from="CanvasLayer/Winner/ExitGame" to="CanvasLayer/Score" method="_on_exit_game_pressed"]
 [connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]

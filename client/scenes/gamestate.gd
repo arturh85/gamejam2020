@@ -148,23 +148,39 @@ remote func create_items(itemDict):
 	print("creating items")
 	
 	
+	var map = playerScenes[get_tree().get_network_unique_id()].current_map
+	
 	for item in itemDict:
 		var stats = itemDict[item]
 		var newItem = load("res://items/equipment.tscn").instance()
 		newItem.set_item_properties(stats)
-		get_node("/root/World/Level/Items").add_child(newItem)
+		get_node("/root/World/Maps/" + map + "/Items").add_child(newItem)
 	
 	
 remote func create_mobs(mobDict):
 	
 	print("creating mobs")
 	
+	var map = playerScenes[get_tree().get_network_unique_id()].current_map
 	
 	for mob in mobDict:
 		
 		var newMob = load("res://actors/" + mobDict[mob].name + ".tscn").instance()
 		newMob.set_mob_properties(mobDict[mob])
-		get_node("/root/World/Level/Mobs").add_child(newMob)
+		get_node("/root/World/Maps/" + map + "/Mobs").add_child(newMob)
+	
+	
+remote func create_portals(portalDict):
+	
+	print("creating portals")
+		
+	var map = playerScenes[get_tree().get_network_unique_id()].current_map
+	
+	for portal in portalDict:
+		
+		var newPortal = load("res://items/portal.tscn").instance()
+		newPortal.set_portal_properties(portalDict[portal])
+		get_node("/root/World/Maps/" + map + "/Portals").add_child(newPortal)
 	
 	
 func _ready():

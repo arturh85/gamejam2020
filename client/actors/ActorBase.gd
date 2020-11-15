@@ -157,7 +157,6 @@ master func respawn_at(position):
 	
 master func spawn_at(position):
 	respawn_position = position
-	#var vv =  get_node("/root/World/Level/").get_children()[0].get_name()
 	pass
 
 sync func switch_quick_relative(rel):
