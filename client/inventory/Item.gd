@@ -22,13 +22,13 @@ func _init(_id, _itemName, _itemLabel, _itemDescription, _itemTexture, _itemImag
 	label = _itemLabel
 	description = _itemDescription
 	icon = _itemImage
-	value = _itemValue
-	slotType = _slotType
+	value = float(_itemValue)
+	slotType = int(_slotType)
 	handNode = _handNode
-	level = _level
+	level = int(_level)
 	rarity = int(_rarity)
 	stats = _stats
-	id = _id
+	id = int(_id)
 		
 	texture = load("res://data/images/items/" + _itemTexture)
 	self.set_size(texture.get_size())
