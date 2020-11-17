@@ -7,7 +7,7 @@ extends "res://ActorBase.gd"
 
 
 
-
+var player_name
 var items = {}
 
 # Called when the node enters the scene tree for the first time.
@@ -23,8 +23,8 @@ func saveNOTHERE():
 		sd["onlinePlayer"] = saveDict
 		return sd
 		
-func set_player_name(player_name, id):
-	
+func set_player_name(p_name, id):
+	player_name = p_name
 	$Name.text = str(id) + ": " + name + " - " + player_name
 	$Name.rect_position.x = 10
 	$Name.rect_position.y = (id-1) * 20 + 10
