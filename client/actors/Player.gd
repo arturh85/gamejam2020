@@ -87,6 +87,7 @@ func addhealth(h):
 var locked = false
 func lockPlayer():
 	locked = true
+	puppet_motion = Vector2.ZERO
 
 func unlockPlayer():
 	locked = false
@@ -240,8 +241,8 @@ func set_player_name(new_name):
 
 func _ready():
 	._ready()
-	self.position.x = -99999
-	self.position.y = -99999
+	self.position.x = 0
+	self.position.y = 0
 	self.puppet_pos.x = position.x
 	self.puppet_pos.y = position.y
 	setDefaults()
@@ -302,7 +303,16 @@ func _on_death(by_who):
 	if is_network_master():
 		$"/root/World/CanvasLayer/Transitions".play("PortalOut")
 
+sync func spawn():
+	show()
+	$AnimationPlayer.play("Spawn")
+
+func spawn_self():
+	rset("current_map", current_map)
+	spawn()
+
 func _on_respawn():
+	rset("current_map", current_map)
 	show()
 	$CollisionShape2D.set_deferred("disabled", false)
 	$AnimationPlayer.play("Spawn")

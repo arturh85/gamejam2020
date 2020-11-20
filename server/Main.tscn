@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Start_TileMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://mob.gd" type="Script" id=3]
 [ext_resource path="res://Item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://portal.gd" type="Script" id=5]
 [ext_resource path="res://Ship_TileMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://mob.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,6 +14,7 @@ script = ExtResource( 1 )
 [node name="Maps" type="Node2D" parent="."]
 
 [node name="Ship" type="Node2D" parent="Maps"]
+visible = false
 
 [node name="TileMap" parent="Maps/Ship" instance=ExtResource( 6 )]
 visible = false
@@ -180,22 +179,10 @@ luck = 100
 
 [node name="Mobs" type="Node2D" parent="Maps/Start"]
 
-[node name="BlobMob2" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
-position = Vector2( 1.04352, -892.299 )
-
-[node name="Sorgon2" type="Node2D" parent="Maps/Start/Mobs"]
-position = Vector2( 824.701, 48.6176 )
-script = ExtResource( 3 )
-mobName = "Sorgon"
-
-[node name="Weapon" parent="Maps/Start/Mobs/Sorgon2" instance=ExtResource( 4 )]
-position = Vector2( -1815.04, 172.775 )
-itemName = "railgun"
-
 [node name="Portals" type="Node2D" parent="Maps/Start"]
 
 [node name="ToShip" type="Node2D" parent="Maps/Start/Portals"]
-position = Vector2( -0.20813, 3.50313 )
+position = Vector2( -77.0454, -81.3958 )
 script = ExtResource( 5 )
 targetSceneName = "Ship"
 color = "00ff00"

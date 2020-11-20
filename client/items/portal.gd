@@ -36,23 +36,21 @@ func _on_body_entered(body):
 	if body.is_in_group("players"):
 		if not once:
 			once = true
-			activate()
+			body.get_node("AnimationPlayer").play("PortalIn")
+			if body.get_name() == str(get_tree().get_network_unique_id()):
+				body.lockPlayer()	
+				world.get_node("CanvasLayer/Transitions").play("Portal")
+				yield(get_tree().create_timer(1.0), "timeout")
+				rpc_id(1, "activate_portal", get_tree().get_network_unique_id())
+			else: 
+				if body.current_map == get_node("/root/World/Players/" + str(get_tree().get_network_unique_id())).current_map:
+					body.hide()
+				elif target_scene == get_node("/root/World/Players/" + str(get_tree().get_network_unique_id())).current_map:
+					body.show()
+							
+			once = false
 			
 
-func activate():
-	#Logger.info("portal activated (master: " + str(is_network_master()) + ")")	
-	for player in world.get_node("Players").get_children():
-		if player.get_name() == str(get_tree().get_network_unique_id()):
-			player.get_node("AnimationPlayer").play("PortalIn")
-			player.lockPlayer()	
-			
-			
-	world.get_node("CanvasLayer/Transitions").play("Portal")
-	yield(get_tree().create_timer(1.0), "timeout")
-	rpc_id(1, "activate_portal", get_tree().get_network_unique_id())
-				
-	once = false
-	
 remotesync func changeMap():
 	pass
 	

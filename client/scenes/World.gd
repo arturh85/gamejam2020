@@ -13,4 +13,5 @@ func load_level(target_scene):
 		get_node("Maps").get_child(i).queue_free()
 	
 	var new_level = load("res://maps/" + target_scene + ".tscn").instance()
+	#new_level.z_index = -1
 	get_node("Maps").add_child(new_level)

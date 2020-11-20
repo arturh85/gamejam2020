@@ -26,7 +26,7 @@ var character_slots = Array()
 puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
 puppet var puppet_rotation = 0 
-master var current_map = ""
+puppet var current_map = ""
 var last_oxygen_harm = null
 
 var room = null

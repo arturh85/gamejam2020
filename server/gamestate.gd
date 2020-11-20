@@ -18,7 +18,6 @@ func _ready():
 var rng = RandomNumberGenerator.new()
 
 var startLevel = "Start"
-var startPosition = Vector2.ZERO
 
 func _player_connected(id):
 	
@@ -32,26 +31,12 @@ func _player_connected(id):
 	players[id] = id
 	playerScenes[id] = player
 	
-	rpc_id(id, "pre_start_game", startLevel)
+	rpc_id(id, "pre_start_game")
 
 
 func init_map(id, mapName):
 	
 	var player = playerScenes[id]
-	player.current_map = mapName
-	
-	var spawnPoints = get_node("/root/World/Maps/" + mapName + "/SpawnPoints").get_children()
-	var s = rng.randi_range(0, spawnPoints.size() - 1)
-	var i = 0
-	for spawn in spawnPoints:
-		if i == s:
-			startPosition = spawn.get_position()
-		i = i + 1
-		
-	
-#	var d = inst2dict(items)
-	
-	rpc_id(id, "init_map", mapName, startPosition)
 	
 	var items = get_node("/root/World/Maps/" + mapName + "/Items").get_children()
 	
@@ -59,9 +44,6 @@ func init_map(id, mapName):
 	for item in items:
 		itemDict[item.stats.id] = item.stats
 		
-		
-	rpc_id(id, "create_items", itemDict)
-	
 	var mobs = get_node("/root/World/Maps/" + mapName + "/Mobs").get_children()
 	
 	var mobDict = {}
@@ -76,7 +58,6 @@ func init_map(id, mapName):
 			var weapon = mob.get_node("Weapon")["stats"]
 			mobDict[mobID]["weapon"] = weapon
 		
-	rpc_id(id, "create_mobs", mobDict)
 
 
 	var portals = get_node("/root/World/Maps/" + mapName + "/Portals").get_children()
@@ -93,10 +74,23 @@ func init_map(id, mapName):
 		portalDict[portalID]["triggerName"] = portal.triggerName
 		portalDict[portalID]["color"] = portal.color
 		
-	rpc_id(id, "create_portals", portalDict)
-
+	
+	var startPosition = get_random_start(mapName)
+		
+	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict)
 	
 	
+func get_random_start(mapName):
+	var startPosition = Vector2.ZERO
+	var spawnPoints = get_node("/root/World/Maps/" + mapName + "/SpawnPoints").get_children()
+	var s = rng.randi_range(0, spawnPoints.size() - 1)
+	var i = 0
+	for spawn in spawnPoints:
+		if i == s:
+			startPosition = spawn.get_position()
+		i = i + 1
+		
+	return startPosition
 
 var playerState = {}
 
@@ -124,17 +118,21 @@ remote func register_player_server(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	print("register player with id ", id, " as ", new_player_name)
 	
-	var pos = startPosition
+	var map = startLevel
+	var pos = Vector2.ZERO
 	if playerState.has(new_player_name):
+		map = playerState[new_player_name]["map"]
 		init_map(id, playerState[new_player_name]["map"]) 
 		pos.x = playerState[new_player_name]["x"] 
 		pos.y = playerState[new_player_name]["y"] 
 	else:
-		init_map(id, startLevel)
+		pos = get_random_start(map)
+		init_map(id, map)
 	
 	for p in players:
 		if p != id:
-			rpc_id(p, "register_player", id, new_player_name, startLevel, pos)
+			#if playerScenes[p].current_map == map:
+			rpc_id(p, "register_player", id, new_player_name, map, pos)
 			rpc_id(id, "register_player", p, playerScenes[p].player_name, playerScenes[p].current_map, playerScenes[p].position)
 		if p == id:
 			if playerState.has(new_player_name):
