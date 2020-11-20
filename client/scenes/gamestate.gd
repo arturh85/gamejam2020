@@ -44,7 +44,7 @@ remote func init_player(playerInfo):
 	
 	var id = get_tree().get_network_unique_id()
 	
-	playerScenes[id].puppet_pos.x = playerInfo.x
+	playerScenes[id].puppet_pos.x = playerInfo.x # rset?
 	playerScenes[id].puppet_pos.y = playerInfo.y
 	playerScenes[id].position.x = playerInfo.x
 	playerScenes[id].position.y = playerInfo.y
@@ -56,17 +56,24 @@ remote func init_player(playerInfo):
 			hn = i.handNode
 		var item = InventoryItem.new(i.id, i.name, i.label, i.description, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
 		playerScenes[id].pickup_item(item)
-		print(i.name)
 
 	pass		
 	
 	
-remote func register_player(id, new_player_name, mapName, spawn_pos):		
+remote func register_player(id, new_player_name, mapName, spawn_pos, items):		
 	print("register player with id", id, " as ", new_player_name)
 	players[id] = new_player_name
 	
 	add_player_to_scene(id, new_player_name, mapName, spawn_pos)
 	
+	for it in items:
+		var hn = null
+		var i = items[it]
+		if i.has("handNode"):
+			hn = i.handNode
+		var item = InventoryItem.new(i.id, i.name, i.label, i.description, i.image, i.icon, i.value, i.slotType, hn, i.level, i.rarity, i.stats)
+		playerScenes[id].pickup_item(item)
+		
 	emit_signal("player_list_changed")
 
 

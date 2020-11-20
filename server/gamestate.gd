@@ -131,9 +131,11 @@ remote func register_player_server(new_player_name):
 	
 	for p in players:
 		if p != id:
-			#if playerScenes[p].current_map == map:
-			rpc_id(p, "register_player", id, new_player_name, map, pos)
-			rpc_id(id, "register_player", p, playerScenes[p].player_name, playerScenes[p].current_map, playerScenes[p].position)
+			var items = {}
+			if playerState.has(new_player_name):
+				items = playerState[new_player_name].items
+			rpc_id(p, "register_player", id, new_player_name, map, pos, items)
+			rpc_id(id, "register_player", p, playerScenes[p].player_name, playerScenes[p].current_map, playerScenes[p].position, playerScenes[p].items)
 		if p == id:
 			if playerState.has(new_player_name):
 				rpc_id(p, "init_player", playerState[new_player_name])
