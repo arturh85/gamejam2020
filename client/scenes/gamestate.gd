@@ -44,10 +44,7 @@ remote func init_player(playerInfo):
 	
 	var id = get_tree().get_network_unique_id()
 	
-	playerScenes[id].puppet_pos.x = playerInfo.x # rset?
-	playerScenes[id].puppet_pos.y = playerInfo.y
-	playerScenes[id].position.x = playerInfo.x
-	playerScenes[id].position.y = playerInfo.y
+	playerScenes[id].set_position(Vector2(playerInfo.x, playerInfo.y))
 	
 	for it in playerInfo.items:
 		var hn = null
@@ -133,21 +130,18 @@ func add_player_to_scene(id,  pname, mapName, spawn_pos):
 	var player_scene = load("res://actors/Player.tscn")
 	var player = player_scene.instance()
 	player.set_name(str(id)) # Use unique ID as node name.	
-	player.current_map = mapName
+	player.set_map(mapName)
 	player.set_network_master(id) 
-	player.position = spawn_pos
-	player.puppet_pos = spawn_pos
 	player.set_player_name(pname)
+	player.set_position(spawn_pos)
+	player.hide_deac()
 	get_node("/root/World/Players").add_child(player)
-	player.position = spawn_pos
-	player.puppet_pos = spawn_pos
-	player.set_player_name(pname)
 	get_node("/root/World/CanvasLayer/Score").add_player(id, pname)
 	
 	if id == get_tree().get_network_unique_id():
 		get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)
-	elif playerScenes[get_tree().get_network_unique_id()].current_map != mapName:
-		player.hide()
+	#elif playerScenes[get_tree().get_network_unique_id()].current_map != mapName:
+	#	player.hide()
 		
 	player.locked = false
 	playerScenes[id] = player
@@ -188,26 +182,26 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict):
 		get_node("/root/World/Maps/" + mapName + "/Portals").add_child(newPortal)
 		
 	if playerScenes.has(get_tree().get_network_unique_id()):
-		playerScenes[get_tree().get_network_unique_id()].current_map = mapName
-		playerScenes[get_tree().get_network_unique_id()].position = spawn_pos
-		playerScenes[get_tree().get_network_unique_id()].puppet_pos = spawn_pos
+		playerScenes[get_tree().get_network_unique_id()].set_map(mapName)
+		playerScenes[get_tree().get_network_unique_id()].set_position(spawn_pos)
 		playerScenes[get_tree().get_network_unique_id()].locked = false
 	else:
 		print("creating player")
 		add_player_to_scene(get_tree().get_network_unique_id(), player_name, mapName, spawn_pos)
 
-	world.get_node("CanvasLayer/Transitions").play("PortalOut")
-	
+	yield(get_tree().create_timer(1), "timeout")
 	
 	for player in playerScenes:
 		if player == get_tree().get_network_unique_id():
-			playerScenes[get_tree().get_network_unique_id()].spawn_self()
+			playerScenes[get_tree().get_network_unique_id()].spawn()
 		elif playerScenes[player].current_map == mapName:
 			playerScenes[get_tree().get_network_unique_id()].rpc_id(player, "spawn")
 			playerScenes[player].spawn()
 		else:
-			playerScenes[player].hide()
+			playerScenes[player].hide_deac()
 
+	world.get_node("CanvasLayer/Transitions").play("PortalOut")
+	
 	
 	
 func _ready():

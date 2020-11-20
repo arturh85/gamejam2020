@@ -37,6 +37,7 @@ func _player_connected(id):
 func init_map(id, mapName):
 	
 	var player = playerScenes[id]
+	player.current_map = mapName
 	
 	var items = get_node("/root/World/Maps/" + mapName + "/Items").get_children()
 	
@@ -79,15 +80,24 @@ func init_map(id, mapName):
 		
 	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict)
 	
-	
+var spawnsUsed = Array()
 func get_random_start(mapName):
 	var startPosition = Vector2.ZERO
 	var spawnPoints = get_node("/root/World/Maps/" + mapName + "/SpawnPoints").get_children()
+	
+	if spawnsUsed.size() == spawnPoints.size():
+		spawnsUsed = Array()
+	
 	var s = rng.randi_range(0, spawnPoints.size() - 1)
+	while spawnsUsed.has(s):
+		s = rng.randi_range(0, spawnPoints.size() - 1)
+		
 	var i = 0
 	for spawn in spawnPoints:
 		if i == s:
 			startPosition = spawn.get_position()
+			spawnsUsed.append(i)
+			break
 		i = i + 1
 		
 	return startPosition

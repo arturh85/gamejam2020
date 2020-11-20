@@ -43,10 +43,11 @@ func _on_body_entered(body):
 				yield(get_tree().create_timer(1.0), "timeout")
 				rpc_id(1, "activate_portal", get_tree().get_network_unique_id())
 			else: 
+				yield(get_tree().create_timer(1), "timeout")
 				if body.current_map == get_node("/root/World/Players/" + str(get_tree().get_network_unique_id())).current_map:
-					body.hide()
+					body.hide_deac()
 				elif target_scene == get_node("/root/World/Players/" + str(get_tree().get_network_unique_id())).current_map:
-					body.show()
+					body.show_act()
 							
 			once = false
 			

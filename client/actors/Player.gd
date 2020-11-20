@@ -88,7 +88,16 @@ var locked = false
 func lockPlayer():
 	locked = true
 	puppet_motion = Vector2.ZERO
+	rset("puppet_motion", Vector2.ZERO)
+	
+func hide_deac():
+	$CollisionShape2D.disabled = true
+	hide()
 
+func show_act():
+	$CollisionShape2D.disabled = false
+	show()
+	
 func unlockPlayer():
 	locked = false
 	
@@ -103,7 +112,6 @@ func _process(delta):
 func _physics_process(delta):
 	if health <= 0 or locked:
 		return
-		
 	#if room and room.oxygen < 50:
 #		print("room: " + str(room.oxygen))
 #		rpc("take_damage", 10 * delta, 0)
@@ -239,15 +247,21 @@ master func exploded(_by_who):
 func set_player_name(new_name):
 	get_node("label").set_text(new_name)
 
+
+func set_map(map):
+	current_map = map
+	rset("current_map", map)
+
+func set_position(p):
+	position = p
+	rset("puppet_pos", p)
+
 func _ready():
 	._ready()
-	self.position.x = 0
-	self.position.y = 0
-	self.puppet_pos.x = position.x
-	self.puppet_pos.y = position.y
 	setDefaults()
 	stunned = false
-	puppet_pos = position
+	#puppet_pos = position
+	#rset("puppet_pos", position)
 	get_node("/root/World/CanvasLayer/HealthDisplay").show_always()
 	
 	var colors = get_node("/root/World/CanvasLayer/Score").player_colors;
@@ -304,16 +318,12 @@ func _on_death(by_who):
 		$"/root/World/CanvasLayer/Transitions".play("PortalOut")
 
 sync func spawn():
-	show()
+	show_act()
 	$AnimationPlayer.play("Spawn")
 
-func spawn_self():
-	rset("current_map", current_map)
-	spawn()
 
 func _on_respawn():
-	rset("current_map", current_map)
-	show()
+	show_act()
 	$CollisionShape2D.set_deferred("disabled", false)
 	$AnimationPlayer.play("Spawn")
 	rpc("switch_weapon", 1)		
