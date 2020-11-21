@@ -34,12 +34,6 @@ func _player_connected(id):
 	rpc_id(id, "pre_start_game")
 
 
-func init_random_map(id, mapInstance):
-	
-	mapInstance.name = "Random" + str(mapInstance.get_instance_id())
-	get_node("/root/World/Maps/").add_child(mapInstance)
-	
-	init_map(id, mapInstance.name, mapInstance.mapDict)
 		
 func init_map(id, mapName, tileMap = null):
 	
