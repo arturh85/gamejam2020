@@ -85,6 +85,10 @@ func init_map(id, mapName, tileMap = null):
 	
 	var startPosition = get_random_start(mapName)
 		
+	if mapName.substr(0, 6) == "Random":
+		var n = get_node("/root/World/Maps/" + mapName)
+		tileMap = n.mapDict
+		
 	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict, tileMap)
 	
 	
