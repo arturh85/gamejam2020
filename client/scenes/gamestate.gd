@@ -153,6 +153,7 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap)
 		
 	world.load_level(mapName, tileMap)
 
+		
 	print("creating items")
 		
 	for item in itemDict:
@@ -202,7 +203,7 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap)
 
 	world.get_node("CanvasLayer/Transitions").play("PortalOut")
 	
-	
+	print(get_node("/root/World/Maps/" + mapName + "/Portals").get_children())
 	
 	
 func _ready():

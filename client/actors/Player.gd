@@ -114,7 +114,7 @@ func _physics_process(delta):
 		return
 	#if room and room.oxygen < 50:
 #		print("room: " + str(room.oxygen))
-#		rpc("take_damage", 10 * delta, 0)
+#		rpc("take_damage", 30 * delta, 0)
 	
 	var motion = Vector2()
 
@@ -303,9 +303,17 @@ func _on_health_changed():
 
 func _on_death(by_who):
 	$AnimationPlayer.play("Die")
-	$CollisionShape2D.set_deferred("disabled", true)
+	lockPlayer()
+	if is_network_master():
+		$"/root/World/CanvasLayer/Transitions".play("Portal")
+	yield(get_tree().create_timer(1), "timeout")
+	hide_deac()
+	health = max_health
+	#$CollisionShape2D.set_deferred("disabled", true)
 	
-	rpc_id(1, "request_respawn")
+	if is_network_master():
+		rpc_id(1, "request_respawn")
+		
 	#yield(get_tree().create_timer(0.5), "timeout")
 	
 	#if is_network_master():
@@ -320,8 +328,9 @@ func _on_death(by_who):
 
 sync func spawn():
 	show_act()
-	$CollisionShape2D.set_deferred("disabled", false)
+	#$CollisionShape2D.set_deferred("disabled", false)
 	$AnimationPlayer.play("Spawn")
+	unlockPlayer()
 
 
 func _on_respawn():

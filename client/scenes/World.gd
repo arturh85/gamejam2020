@@ -9,8 +9,9 @@ func post_start_game():
 	
 func load_level(target_scene, tileMap):
 	
-	for i in range(0, get_node("Maps").get_child_count()):
-		get_node("Maps").get_child(i).queue_free()
+	for map in get_node("Maps").get_children():
+		get_node("Maps").remove_child(map)
+		map.queue_free()
 	
 	var new_level
 	if target_scene.substr(0, 6) == "Random":
@@ -21,3 +22,4 @@ func load_level(target_scene, tileMap):
 	
 	
 	get_node("Maps").add_child(new_level)
+	new_level.name = target_scene
