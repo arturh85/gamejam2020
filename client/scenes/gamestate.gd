@@ -204,6 +204,7 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict):
 	
 	
 	
+	
 func _ready():
 
 	var output = []

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Start_TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://portal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://portal.gd" type="Script" id=5]
 [ext_resource path="res://Ship_TileMap.tscn" type="PackedScene" id=6]
@@ -181,8 +182,10 @@ luck = 100
 
 [node name="Portals" type="Node2D" parent="Maps/Start"]
 
-[node name="ToShip" type="Node2D" parent="Maps/Start/Portals"]
-position = Vector2( -77.0454, -81.3958 )
-script = ExtResource( 5 )
+[node name="RandomLvl1" parent="Maps/Start/Portals" instance=ExtResource( 3 )]
+
+[node name="ToShip" parent="Maps/Start/Portals" instance=ExtResource( 3 )]
+position = Vector2( -85.8648, -73.8363 )
 targetSceneName = "Ship"
+randomLevelTemplate = ""
 color = "00ff00"

@@ -15,14 +15,11 @@ func _ready():
 	._ready()
 	pass # Replace with function body.
 
-func saveNOTHERE():
-	if .has_method("save"):
-		var saveDict = .save()
-		saveDict["items"] = items
-		var sd = {}
-		sd["onlinePlayer"] = saveDict
-		return sd
-		
+
+remote func request_respawn():
+	var id = get_tree().get_rpc_sender_id()
+	get_node("/root/gamestate").init_map(id, get_node("/root/gamestate").startLevel)
+	
 func set_player_name(p_name, id):
 	player_name = p_name
 	$Name.text = str(id) + ": " + name + " - " + player_name

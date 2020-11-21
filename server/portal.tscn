@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://portal.gd" type="Script" id=1]
+
+[node name="Portal" type="Node2D"]
+position = Vector2( -79.5652, 79.874 )
+script = ExtResource( 1 )
+randomLevelTemplate = "level1"
+color = "ff0000"

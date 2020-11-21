@@ -305,29 +305,27 @@ func _on_death(by_who):
 	$AnimationPlayer.play("Die")
 	$CollisionShape2D.set_deferred("disabled", true)
 	
-	yield(get_tree().create_timer(0.5), "timeout")
+	rpc_id(1, "request_respawn")
+	#yield(get_tree().create_timer(0.5), "timeout")
 	
-	if is_network_master():
-		$"/root/World/CanvasLayer/Transitions".play("Portal")
-	yield(get_tree().create_timer(5), "timeout")
-	var SpawnPoints = get_node("/root/World/Maps/" + current_map + "/SpawnPoints")
-	var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-	respawn_at(spawn.position)
+	#if is_network_master():
+	#	$"/root/World/CanvasLayer/Transitions".play("Portal")
+	#yield(get_tree().create_timer(5), "timeout")
+	#var SpawnPoints = get_node("/root/World/Maps/" + current_map + "/SpawnPoints")
+	#var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
+	#respawn_at(spawn.position)
 
-	if is_network_master():
-		$"/root/World/CanvasLayer/Transitions".play("PortalOut")
+	#if is_network_master():
+	#	$"/root/World/CanvasLayer/Transitions".play("PortalOut")
 
 sync func spawn():
 	show_act()
+	$CollisionShape2D.set_deferred("disabled", false)
 	$AnimationPlayer.play("Spawn")
 
 
 func _on_respawn():
-	show_act()
-	$CollisionShape2D.set_deferred("disabled", false)
-	$AnimationPlayer.play("Spawn")
-	rpc("switch_weapon", 1)		
-	setDefaults()
+	spawn()
 
 func set_gui_state(new_gui_state):
 	gui_state = new_gui_state

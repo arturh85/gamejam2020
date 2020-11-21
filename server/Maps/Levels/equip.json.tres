@@ -30,20 +30,32 @@
 	
 	
 	"items": {
-		"weapons": {
-			"plasmagun": 1,
-			"crossbow": 0.7,
-			"machinegun": 2,
-			"railgun": 0.1,
-			"rifle": 0.3
-		},
-		"ammo": {
-			"MachineGunAmmo": 5
-		},
-		"powerups": {
-			"healthpack": 5,
-			"speedup": 0,
-			"doubledamage": 0
+		"equipment": {
+			"plasmagun": {
+				"quantity": 1,
+				"luck": 10,
+				"level": 1
+			},
+			"crossbow": {
+				"quantity": 1,
+				"luck": 10,
+				"level": 1
+			},
+			"machinegun": {
+				"quantity": 2,
+				"luck": 10,
+				"level": 1
+			},
+			"railgun": {
+				"quantity": 0.1,
+				"luck": 10,
+				"level": 1
+			},
+			"rifle": {
+				"quantity": 0,
+				"luck": 10,
+				"level": 1
+			},
 		}
 	}
 }
