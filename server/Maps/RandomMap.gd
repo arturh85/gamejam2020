@@ -31,6 +31,7 @@ enum TILE {
 	WALL = 1
 }
 
+var mapDict = {}
 	
 func init(levelName, rseed):
 		
@@ -126,3 +127,7 @@ func init(levelName, rseed):
 	#			var pos = RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN))
 	#			mapObject["mobs"][i]["name"] = mob
 				
+	mapDict["map"] = map
+	mapDict["cell"] = cell
+	mapDict["color"] = settings["map"]["Color"]
+	mapDict["tileset"] = settings["map"]["Tileset"]

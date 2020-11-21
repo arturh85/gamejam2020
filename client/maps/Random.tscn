@@ -29,14 +29,6 @@ __meta__ = {
 
 [node name="Mobs" type="Node2D" parent="."]
 
-[node name="Interior" type="Node2D" parent="."]
-
-[node name="Prefabs" type="Node2D" parent="."]
+[node name="Portals" type="Node2D" parent="."]
 
 [node name="Items" type="Node2D" parent="."]
-
-[node name="Weapons" type="Node2D" parent="Items"]
-
-[node name="Powerups" type="Node2D" parent="Items"]
-
-[node name="Ammo" type="Node2D" parent="Items"]

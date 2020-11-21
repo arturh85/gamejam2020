@@ -147,11 +147,11 @@ func add_player_to_scene(id,  pname, mapName, spawn_pos):
 	playerScenes[id] = player
 
 
-remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict):
+remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap):
 	
 	print("creating world")
 		
-	world.load_level(mapName)
+	world.load_level(mapName, tileMap)
 
 	print("creating items")
 		

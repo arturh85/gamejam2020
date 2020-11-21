@@ -39,9 +39,9 @@ func init_random_map(id, mapInstance):
 	mapInstance.name = "Random" + str(mapInstance.get_instance_id())
 	get_node("/root/World/Maps/").add_child(mapInstance)
 	
-	init_map(id, mapInstance.name)
+	init_map(id, mapInstance.name, mapInstance.mapDict)
 		
-func init_map(id, mapName):
+func init_map(id, mapName, tileMap = null):
 	
 	var player = playerScenes[id]
 	player.current_map = mapName
@@ -85,7 +85,7 @@ func init_map(id, mapName):
 	
 	var startPosition = get_random_start(mapName)
 		
-	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict)
+	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict, tileMap)
 	
 	
 var spawnsUsed = Array()

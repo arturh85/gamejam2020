@@ -20,11 +20,7 @@
 			"Directed": 0
 		},
 		
-		"Tileset": "data/auto_tileset_with_coll_nav.tres",
-		
-		"TileMaps": {
-			"TileMap1" : 1
-		}
+		"Tileset": "auto_tileset_with_coll_nav.tres",
 
 	},
 	
