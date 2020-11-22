@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Lobby.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/menu.wav" type="AudioStream" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://data/images/background.png" type="Texture" id=5]
 [ext_resource path="res://data/images/menubg.png" type="Texture" id=6]
 [ext_resource path="res://data/images/title.png" type="Texture" id=7]
+[ext_resource path="res://data/images/player/body.png" type="Texture" id=8]
+[ext_resource path="res://data/images/player/head.png" type="Texture" id=9]
+[ext_resource path="res://data/images/player/arms.png" type="Texture" id=10]
+[ext_resource path="res://data/images/player/leg.png" type="Texture" id=11]
+[ext_resource path="res://data/images/player/hair.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Background"
@@ -42,12 +47,12 @@ texture = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Background = SubResource( 1 )
 
-[node name="Players" type="TextureRect" parent="."]
+[node name="CreatePlayer" type="TextureRect" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.823529 )
-margin_left = 330.0
+margin_left = 299.0
 margin_top = 215.0
-margin_right = 730.0
+margin_right = 759.0
 margin_bottom = 530.0
 texture = ExtResource( 6 )
 stretch_mode = 2
@@ -55,43 +60,139 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Players"]
-margin_left = 22.0
-margin_top = 24.5
-margin_right = 138.0
-margin_bottom = 38.5
+[node name="Label" type="Label" parent="CreatePlayer"]
+margin_left = 20.3367
+margin_top = 17.0567
+margin_right = 99.3367
+margin_bottom = 31.0567
+rect_pivot_offset = Vector2( 261.148, 15.0452 )
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Awaiting Players..."
-
-[node name="Start" type="Button" parent="Players"]
-margin_left = 142.172
-margin_top = 267.375
-margin_right = 267.172
-margin_bottom = 296.375
-size_flags_horizontal = 2
-size_flags_vertical = 2
-text = "START!"
+text = "Race:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="List" type="ItemList" parent="Players"]
-margin_left = 18.0
-margin_top = 49.0
-margin_right = 378.0
-margin_bottom = 252.0
+[node name="Start" type="Button" parent="CreatePlayer"]
+margin_left = 337.296
+margin_top = 269.225
+margin_right = 437.296
+margin_bottom = 296.225
 size_flags_horizontal = 2
 size_flags_vertical = 2
+text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RoleSelect" type="OptionButton" parent="Players"]
-margin_left = 232.0
-margin_top = 20.0
-margin_right = 376.0
-margin_bottom = 40.0
+[node name="RaceSelect" type="OptionButton" parent="CreatePlayer"]
+margin_left = 71.373
+margin_top = 13.3928
+margin_right = 215.373
+margin_bottom = 33.3928
+rect_pivot_offset = Vector2( 51.3724, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CreatePlayer"]
+margin_left = 17.1798
+margin_top = 54.7024
+margin_right = 83.1798
+margin_bottom = 68.7024
+rect_pivot_offset = Vector2( 261.148, 15.0452 )
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Class:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CreatePlayer"]
+margin_left = 17.3389
+margin_top = 96.861
+margin_right = 84.3389
+margin_bottom = 110.861
+rect_pivot_offset = Vector2( 261.148, 15.0452 )
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Skin Color:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CreatePlayer"]
+margin_left = 17.3389
+margin_top = 134.451
+margin_right = 84.3389
+margin_bottom = 148.451
+rect_pivot_offset = Vector2( 261.148, 15.0452 )
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Hair Color:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClassSelect" type="OptionButton" parent="CreatePlayer"]
+margin_left = 70.8232
+margin_top = 51.1863
+margin_right = 214.823
+margin_bottom = 71.1863
+rect_pivot_offset = Vector2( 51.3724, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Node2D" parent="CreatePlayer"]
+position = Vector2( 344.923, 73.822 )
+rotation = 1.5708
+scale = Vector2( 3, 3 )
+
+[node name="Body" type="Node2D" parent="CreatePlayer/Player"]
+
+[node name="Sprite" type="Sprite" parent="CreatePlayer/Player/Body"]
+position = Vector2( -1.38718, -4.0867 )
+texture = ExtResource( 11 )
+
+[node name="Sprite2" type="Sprite" parent="CreatePlayer/Player/Body"]
+position = Vector2( -4.346, 1.40147 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3" type="Sprite" parent="CreatePlayer/Player/Body"]
+position = Vector2( 3.31732, 1.94777 )
+texture = ExtResource( 8 )
+
+[node name="Sprite4" type="Sprite" parent="CreatePlayer/Player/Body"]
+position = Vector2( 3.31732, 1.94777 )
+texture = ExtResource( 10 )
+
+[node name="Sprite5" type="Sprite" parent="CreatePlayer/Player/Body"]
+position = Vector2( 2.31732, 1.28111 )
+texture = ExtResource( 9 )
+
+[node name="Hair" type="Sprite" parent="CreatePlayer/Player"]
+position = Vector2( 2.63098, 1.29115 )
+texture = ExtResource( 12 )
+
+[node name="SkinColorButton" type="ColorPickerButton" parent="CreatePlayer"]
+margin_left = 132.339
+margin_top = 92.8173
+margin_right = 213.339
+margin_bottom = 112.817
+text = "Body Color"
+color = Color( 0.839216, 0.737255, 0.592157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HairColorButton" type="ColorPickerButton" parent="CreatePlayer"]
+margin_left = 132.498
+margin_top = 132.93
+margin_right = 213.498
+margin_bottom = 152.93
+text = "Body Color"
+color = Color( 0.0705882, 0.027451, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -195,6 +296,8 @@ bus = "Music"
 script = ExtResource( 3 )
 
 [node name="Cursor" parent="." instance=ExtResource( 4 )]
-[connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CreatePlayer/Start" to="." method="_on_Start_pressed"]
+[connection signal="color_changed" from="CreatePlayer/SkinColorButton" to="." method="_on_SkinColorButton_color_changed"]
+[connection signal="color_changed" from="CreatePlayer/HairColorButton" to="." method="_on_HairColorButton_color_changed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
 [connection signal="finished" from="Music" to="Music" method="_on_AudioStreamPlayer_finished"]

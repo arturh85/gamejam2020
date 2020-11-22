@@ -81,7 +81,7 @@ func init(levelName, rseed):
 	if hollow:
 		for x in range(size):
 			for y in range(size):
-				if tmpMap[x][y] == TILE.GROUND:
+				if map[x][y] == TILE.GROUND:
 					for i in range(-1, 2):
 						for j in range(-1, 2):
 							if x+i >= 0 and y+j >= 0 and x+i < size and y+j < size:

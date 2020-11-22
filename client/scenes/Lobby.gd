@@ -1,5 +1,7 @@
 extends Control
 
+const DEFAULT_PORT = 10567
+
 onready var cursor = $Cursor
 
 func _ready():
@@ -20,15 +22,23 @@ func _ready():
 	
 	$AnimationPlayer.play("Background")
 
-	var roles = $Players/RoleSelect
-	roles.add_item("Random")
+	var roles = $CreatePlayer/RaceSelect
 	roles.add_item("Cyborg")
-	roles.add_item("Bum")
+	roles.add_item("Human")
 	roles.add_item("Alien")
-	roles.add_item("Marine")
+	
+	var classes = $CreatePlayer/ClassSelect
+	classes.add_item("Soldier")
+	classes.add_item("Engineer")
+	classes.add_item("Scientist")
+	
+	$CreatePlayer/Player/Hair.modulate = $CreatePlayer/HairColorButton.color
+	$CreatePlayer/Player/Body.modulate = $CreatePlayer/SkinColorButton.color
 
 
-
+func new_profile():
+	$Connect.hide()
+	$CreatePlayer.show()
 
 func _on_join_pressed():
 	if $Connect/Name.text == "":
@@ -42,14 +52,17 @@ func _on_join_pressed():
 
 	$Connect/ErrorLabel.text = ""
 
-	var player_name = $Connect/Name.text
-	gamestate.join_game(ip, player_name)
+		
+	gamestate.player_name = $Connect/Name.text
+	var client = NetworkedMultiplayerENet.new()
+	client.create_client(ip, DEFAULT_PORT)
+	get_tree().set_network_peer(client)
+
+	
 
 
 func _on_connection_success():
-	$Connect.hide()
-	$Players.show()
-
+	pass
 
 func _on_connection_failed():
 	$Connect/ErrorLabel.set_text("Connection failed.")
@@ -69,6 +82,7 @@ func _on_game_error(errtxt):
 
 
 func refresh_lobby():
+	return
 	var players = gamestate.get_player_list()
 	players.sort()
 	$Players/List.clear()
@@ -87,3 +101,18 @@ func _process(_delta):
 		AudioServer.set_bus_mute(1, not AudioServer.is_bus_mute(1))
 		
 		
+
+
+
+func _on_HairColorButton_color_changed(color):
+	$CreatePlayer/Player/Hair.modulate = color
+
+
+func _on_SkinColorButton_color_changed(color):
+	$CreatePlayer/Player/Body.modulate = color
+
+
+func _on_Start_pressed():
+	gamestate.create_character($CreatePlayer/Player/Body.modulate, $CreatePlayer/Player/Hair.modulate)
+	
+	

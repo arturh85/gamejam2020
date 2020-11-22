@@ -20,18 +20,53 @@ var rng = RandomNumberGenerator.new()
 var startLevel = "Start"
 
 func _player_connected(id):
-	
 	print("player with ID " + str(id) + " connected")
+	
+	
+remote func join_game(id, colors):
+	
+	print("player with ID " + str(id) + " joining")
+	var playerName = players[id]
 		
+	rpc_id(id, "pre_start_game")
+
 	var player = load("res://client.tscn").instance()
 	player.set_name(str(id))
+	playerScenes[id] = player
+	playerScenes[id].colors = colors
+	playerScenes[id].set_player_name(playerName, players.size())
 	
+	var map = startLevel
+	var pos = Vector2.ZERO
+	if playerState.has(playerName):
+		map = playerState[playerName]["map"]
+		init_map(id, playerState[playerName]["map"]) 
+		pos.x = playerState[playerName]["x"] 
+		pos.y = playerState[playerName]["y"] 
+	else:
+		pos = get_random_start(map)
+		init_map(id, map)
+	
+	for p in players:
+		if p != id:
+			var items = {}
+			if playerState.has(playerName):
+				items = playerState[playerName].items
+			rpc_id(p, "register_player", id, playerName, map, pos, items, colors)
+			rpc_id(id, "register_player", p, playerScenes[p].player_name, playerScenes[p].current_map, playerScenes[p].position, playerScenes[p].items, playerScenes[p].colors)
+		if p == id:
+			if playerState.has(playerName):
+				rpc_id(p, "init_player", playerState[playerName])
+	
+			
+	if playerState.has(playerName):
+		#playerScenes[id].puppet_pos = pos
+		playerScenes[id].items = playerState[playerName]["items"] # load items
+		
+	_refresh_playerlist()
+
 	get_node("/root/World/Players").add_child(player)
 	
-	players[id] = id
-	playerScenes[id] = player
-	
-	rpc_id(id, "pre_start_game")
 
 
 		
@@ -83,7 +118,7 @@ func init_map(id, mapName, tileMap = null):
 		var n = get_node("/root/World/Maps/" + mapName)
 		tileMap = n.mapDict
 		
-	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict, tileMap)
+	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict, tileMap, player.colors)
 	
 	
 var spawnsUsed = Array()
@@ -118,6 +153,7 @@ func _player_disconnected(id):
 	playerState[playerName] = {}
 	playerState[playerName]["x"] = player.puppet_pos.x
 	playerState[playerName]["y"] = player.puppet_pos.y
+	playerState[playerName]["colors"] = player.colors
 	playerState[playerName]["map"] = player.current_map
 	print("pp" + str(player.puppet_pos.x))
 	playerState[playerName]["items"] = player.items
@@ -134,38 +170,13 @@ remote func register_player_server(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	print("register player with id ", id, " as ", new_player_name)
 	
-	var map = startLevel
-	var pos = Vector2.ZERO
-	if playerState.has(new_player_name):
-		map = playerState[new_player_name]["map"]
-		init_map(id, playerState[new_player_name]["map"]) 
-		pos.x = playerState[new_player_name]["x"] 
-		pos.y = playerState[new_player_name]["y"] 
-	else:
-		pos = get_random_start(map)
-		init_map(id, map)
-	
-	for p in players:
-		if p != id:
-			var items = {}
-			if playerState.has(new_player_name):
-				items = playerState[new_player_name].items
-			rpc_id(p, "register_player", id, new_player_name, map, pos, items)
-			rpc_id(id, "register_player", p, playerScenes[p].player_name, playerScenes[p].current_map, playerScenes[p].position, playerScenes[p].items)
-		if p == id:
-			if playerState.has(new_player_name):
-				rpc_id(p, "init_player", playerState[new_player_name])
-	
-			
 	players[id] = new_player_name
-	playerScenes[id].set_player_name(new_player_name, players.size())
 	
 	if playerState.has(new_player_name):
-		#playerScenes[id].puppet_pos = pos
-		playerScenes[id].items = playerState[new_player_name]["items"] # load items
-		
-	_refresh_playerlist()
-
+		join_game(id, playerState[new_player_name].colors)
+	else:
+		rpc_id(id, "new_profile")
+	
 
 func _refresh_playerlist():
 	print("updating player list:")

@@ -82,7 +82,7 @@ func setspeedmultiplier(f):
 	
 func addhealth(h):
 	health = min(health + h, max_health)
-	get_node("/root/World//CanvasLayer/HealthAnimations").play("Heal")
+	get_node("/root/World/CanvasLayer/HealthAnimations").play("Heal")
 	
 var locked = false
 func lockPlayer():
@@ -205,9 +205,13 @@ func _physics_process(delta):
 
 		prev_shooting = shooting
 
-		rset("puppet_motion", motion)
-		rset("puppet_rotation", viewRotation)
-		rset("puppet_pos", position)
+
+		for player in get_node("/root/World/Players").get_children():
+			if player.name != self.name and player.current_map == current_map:
+				rset_id(int(player.name), "puppet_motion", motion)
+				rset_id(int(player.name), "puppet_rotation", viewRotation)
+				rset_id(int(player.name), "puppet_pos", position)
+			
 	else:
 		position = puppet_pos
 		motion = puppet_motion
@@ -247,6 +251,26 @@ master func exploded(_by_who):
 func set_player_name(new_name):
 	get_node("label").set_text(new_name)
 
+func set_colors(body, hair):
+	
+	var b = body.rsplit(",")
+	var h = hair.rsplit(",")
+	var bcol = Color(b[0], b[1], b[2])
+	var hcol = Color(h[0], h[1], h[2])
+		
+	$Group/leg.modulate = bcol * 0.3
+	$Group/leg2.modulate = bcol * 0.3
+	$Group/body.modulate = bcol * 0.3
+	$Group/hands.modulate = bcol * 0.3
+	$Group/head.modulate = bcol * 0.3
+	$Group/hair.modulate = hcol * 0.3
+	
+	$Group/leg.modulate.a = 1
+	$Group/leg2.modulate.a = 1
+	$Group/body.modulate.a = 1
+	$Group/hands.modulate.a = 1
+	$Group/head.modulate.a = 1
+	$Group/hair.modulate.a = 1
 
 func set_map(map):
 	current_map = map

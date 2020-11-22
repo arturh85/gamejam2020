@@ -8,6 +8,7 @@ extends "res://ActorBase.gd"
 
 
 var player_name
+var colors
 var items = {}
 
 # Called when the node enters the scene tree for the first time.

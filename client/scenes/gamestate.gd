@@ -1,7 +1,5 @@
 extends Node
 
-const DEFAULT_PORT = 10567
-
 var player_name = "The Warrior"
 
 var players = {}
@@ -57,11 +55,13 @@ remote func init_player(playerInfo):
 	pass		
 	
 	
-remote func register_player(id, new_player_name, mapName, spawn_pos, items):		
+remote func register_player(id, new_player_name, mapName, spawn_pos, items, colors):		
 	print("register player with id", id, " as ", new_player_name)
 	players[id] = new_player_name
 	
 	add_player_to_scene(id, new_player_name, mapName, spawn_pos)
+	
+	playerScenes[id].set_colors(colors.body, colors.hair)
 	
 	for it in items:
 		var hn = null
@@ -94,12 +94,6 @@ remote func pre_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_node("/root/World").post_start_game()
 	
-
-func join_game(ip, new_player_name):
-	player_name = new_player_name
-	var client = NetworkedMultiplayerENet.new()
-	client.create_client(ip, DEFAULT_PORT)
-	get_tree().set_network_peer(client)
 
 
 func get_player_list():
@@ -146,8 +140,18 @@ func add_player_to_scene(id,  pname, mapName, spawn_pos):
 	player.locked = false
 	playerScenes[id] = player
 
+remote func new_profile():
+	var lobby = get_tree().get_root().get_node("Lobby")
+	lobby.new_profile()
 
-remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap):
+func create_character(bColor, hColor):
+	var pColors = {}
+	pColors["body"] = str(bColor.r) + "," + str(bColor.g) + "," + str(bColor.b) + "," + str(bColor.a) 
+	pColors["hair"] = str(hColor.r) + "," + str(hColor.g) + "," + str(hColor.b) + "," + str(hColor.a) 
+	rpc_id(1, "join_game", get_tree().get_network_unique_id(), pColors)
+	
+	
+remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap, colors):
 	
 	print("creating world")
 		
@@ -190,6 +194,8 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap)
 		print("creating player")
 		add_player_to_scene(get_tree().get_network_unique_id(), player_name, mapName, spawn_pos)
 
+	playerScenes[get_tree().get_network_unique_id()].set_colors(colors.body, colors.hair)
+	
 	yield(get_tree().create_timer(1), "timeout")
 	
 	for player in playerScenes:
@@ -202,9 +208,6 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap)
 			playerScenes[player].hide_deac()
 
 	world.get_node("CanvasLayer/Transitions").play("PortalOut")
-	
-	print(get_node("/root/World/Maps/" + mapName + "/Portals").get_children())
-	
 	
 func _ready():
 

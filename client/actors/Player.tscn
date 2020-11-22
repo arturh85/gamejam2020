@@ -424,14 +424,12 @@ texture = null
 offset = Vector2( -1.327, 0 )
 
 [node name="leg" type="Sprite" parent="Group"]
-modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( -3.956, 0.903 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
 
 [node name="leg2" type="Sprite" parent="Group"]
-modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( -3.91226, -3.12569 )
 scale = Vector2( 0.5, 0.5 )
@@ -447,7 +445,6 @@ position = Vector2( -3.956, -2.755 )
 texture = null
 
 [node name="body" type="Sprite" parent="Group"]
-modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
@@ -458,7 +455,6 @@ region_rect = Rect2( 264, 132, 0, 0 )
 texture = null
 
 [node name="hands" type="Sprite" parent="Group"]
-modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = -2147483646
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
@@ -475,7 +471,6 @@ rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 
 [node name="head" type="Sprite" parent="Group"]
-modulate = Color( 0.376471, 0.313726, 0.223529, 1 )
 light_mask = 2
 position = Vector2( 0.0210228, -0.164677 )
 scale = Vector2( 0.5, 0.5 )
@@ -483,7 +478,6 @@ texture = ExtResource( 8 )
 region_rect = Rect2( 264, 132, 0, 0 )
 
 [node name="hair" type="Sprite" parent="Group"]
-modulate = Color( 0.0431373, 0.0235294, 0, 1 )
 light_mask = -2147483646
 position = Vector2( 0.521023, 0.335323 )
 scale = Vector2( 0.570791, 0.585539 )
