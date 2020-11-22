@@ -147,6 +147,9 @@ var playerState = {}
 
 func _player_disconnected(id):
 	
+	if not players.has(id):
+		return
+	
 	var player = get_node("/root/World/Players/" + str(id))
 	
 	var playerName = players[id]
@@ -170,8 +173,8 @@ remote func register_player_server(new_player_name):
 	
 	var id = get_tree().get_rpc_sender_id()
 	
-	for player in playerScenes:
-		if playerScenes[player].player_name == new_player_name:
+	for player in gamestate.players:
+		if gamestate.players[player] == new_player_name:
 			rpc_id(id, "already_logged_in")
 			print("Player " + new_player_name + " already logged in")
 			return
