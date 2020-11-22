@@ -2,6 +2,7 @@
 	"map": {
 		"Color": "334444",
 		"Circular": 1,
+		"Hollow": 0,
 		"Size": 30,
 		"MapBoundary": 2,
 		"SpawnPoints": 4,

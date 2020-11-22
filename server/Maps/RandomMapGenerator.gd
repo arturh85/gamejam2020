@@ -8,8 +8,9 @@ var gID
 var wID
 var nID
 var gThere = false
+var hollow
 
-func _init(rand, size, cell, circular, tilemap, tMap, groundID, wallID, noID):
+func _init(rand, size, cell, circular, tilemap, tMap, groundID, wallID, noID, how):
 	rnd = rand
 	mapSize = size
 	cellSize = cell
@@ -19,6 +20,7 @@ func _init(rand, size, cell, circular, tilemap, tMap, groundID, wallID, noID):
 	gID = groundID
 	wID = wallID
 	nID = noID
+	hollow = how
 	
 	
 	for x in range(mapSize):
@@ -30,12 +32,12 @@ func _init(rand, size, cell, circular, tilemap, tMap, groundID, wallID, noID):
 		map.append([])
 		for y in range(mapSize):
 			if circular:
-				if (x - (mapSize / 2)) * (x - (mapSize / 2)) + (y - (mapSize / 2)) * (y - (mapSize / 2)) < mapSize * mapSize / 4:
+				if not hollow and (x - (mapSize / 2)) * (x - (mapSize / 2)) + (y - (mapSize / 2)) * (y - (mapSize / 2)) < mapSize * mapSize / 4:
 					map[x].append(wID)
 				else:
 					map[x].append(nID)
 			else:
-				if x >= 0 and x < mapSize and y >= 0 and y < mapSize:
+				if not hollow and x >= 0 and x < mapSize and y >= 0 and y < mapSize:
 					map[x].append(wID)
 				else:
 					map[x].append(nID)
@@ -62,7 +64,6 @@ func generateMap(fl_loops, fl_iterations, fl_directed, r_loops, r_iterations, r_
 		for y in range(mapSize):
 			if tmpMap[x][y] == gID:
 				map[x][y] = gID
-				
 	return end
 
 	

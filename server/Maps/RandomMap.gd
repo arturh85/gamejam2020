@@ -18,6 +18,7 @@ var settings
 var size
 var cell = 64
 var rndseed
+var hollow
 
 enum TILE {
 	PORTAL = -7,
@@ -37,12 +38,13 @@ func init(levelName, rseed):
 		
 	settings = IO.readLevel(levelName)
 	size = int(settings["map"]["Size"])
+	hollow = int(settings["map"]["Hollow"]) == 1
 	
 	rndseed = rseed
 	rnd.seed = rseed
 	
 	RF = rf.new(rnd, size, cell, tmpMap)
-	MG = mg.new(rnd, size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO)
+	MG = mg.new(rnd, size, cell, int(settings["map"]["Circular"]), map, tmpMap, TILE.GROUND, TILE.WALL, TILE.NO, hollow)
 	
 	startpoint = MG.generateMap(int(settings["map"]["Floors"]["Loops"]), int(settings["map"]["Floors"]["Iterations"]), int(settings["map"]["Floors"]["Directed"]), int(settings["map"]["Rooms"]["Loops"]), int(settings["map"]["Rooms"]["Iterations"]), int(settings["map"]["Rooms"]["Directed"]), int(settings["map"]["MapBoundary"]))
 	
@@ -76,7 +78,16 @@ func init(levelName, rseed):
 					map[pos.x + x][pos.y + y] = TILE.GROUND
 			pid = pid +1
 	
-	
+	if hollow:
+		for x in range(size):
+			for y in range(size):
+				if tmpMap[x][y] == TILE.GROUND:
+					for i in range(-1, 2):
+						for j in range(-1, 2):
+							if x+i >= 0 and y+j >= 0 and x+i < size and y+j < size:
+								if map[x+i][y+j] != TILE.GROUND:
+									map[x+i][y+j] = TILE.WALL
+						
 	for i in range(int(settings["map"]["SpawnPoints"])):
 		var node = Node2D.new()
 		node.name = str(i)
