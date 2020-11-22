@@ -72,6 +72,7 @@ func init(levelName, rseed):
 			p.back = false
 			p.color = settings["portals"][portal]
 			p.position = RF.b2p(pos)
+			p.name = "Portal" + str(pid)
 			$Portals.add_child(p)
 			for x in range (-1, 2):
 				for y in range (-1, 2):
@@ -111,15 +112,18 @@ func init(levelName, rseed):
 	
 	if settings.has("items"):
 		if settings["items"].has("equipment"):
+			var iid = 0
 			for item in settings["items"]["equipment"]:
 				var items = float(settings["items"]["equipment"][item]["quantity"])
 				for i in range(int(floor(items))):
 					var itm = item_scene.instance()
 					itm.itemName = item
+					itm.name = "Item" + str(iid)
 					itm.luck = settings["items"]["equipment"][item]["luck"]
 					itm.level = settings["items"]["equipment"][item]["level"]
 					itm.position = RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM))
 					$Items.add_child(itm)
+					iid = iid + 1
 					
 				if items-int(items) > 0:
 					var num = int(1/(items-int(items)))
@@ -127,6 +131,7 @@ func init(levelName, rseed):
 					if r == 0:
 						var itm = item_scene.instance()
 						itm.itemName = item
+						itm.name = "Item" + str(iid)
 						itm.luck = settings["items"]["equipment"][item]["luck"]
 						itm.level = settings["items"]["equipment"][item]["level"]
 						itm.position = RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM))
