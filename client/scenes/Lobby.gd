@@ -40,6 +40,10 @@ func new_profile():
 	$Connect.hide()
 	$CreatePlayer.show()
 
+func already_logged_in():
+	$ErrorDialog.dialog_text = "Player " + $Connect/Name.text + " already logged in."
+	$ErrorDialog.popup_centered_minsize()
+
 func _on_join_pressed():
 	if $Connect/Name.text == "":
 		$Connect/ErrorLabel.text = "Invalid name!"
@@ -83,14 +87,6 @@ func _on_game_error(errtxt):
 
 func refresh_lobby():
 	return
-	var players = gamestate.get_player_list()
-	players.sort()
-	$Players/List.clear()
-	$Players/List.add_item(gamestate.get_player_name() + " (You)")
-	for p in players:
-		$Players/List.add_item(p)
-
-	$Players/Start.disabled = not get_tree().is_network_server()
 
 
 

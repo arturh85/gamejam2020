@@ -167,7 +167,15 @@ func _player_disconnected(id):
 
 
 remote func register_player_server(new_player_name):
+	
 	var id = get_tree().get_rpc_sender_id()
+	
+	for player in playerScenes:
+		if playerScenes[player].player_name == new_player_name:
+			rpc_id(id, "already_logged_in")
+			print("Player " + new_player_name + " already logged in")
+			return
+	
 	print("register player with id ", id, " as ", new_player_name)
 	
 	players[id] = new_player_name

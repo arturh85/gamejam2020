@@ -144,6 +144,11 @@ remote func new_profile():
 	var lobby = get_tree().get_root().get_node("Lobby")
 	lobby.new_profile()
 
+remote func already_logged_in():
+	var lobby = get_tree().get_root().get_node("Lobby")
+	lobby.already_logged_in()
+	
+
 func create_character(bColor, hColor):
 	var pColors = {}
 	pColors["body"] = str(bColor.r) + "," + str(bColor.g) + "," + str(bColor.b) + "," + str(bColor.a) 
