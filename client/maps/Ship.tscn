@@ -763,14 +763,16 @@ room2 = NodePath("../../../Ship/Rooms/DroneControl")
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 315.116, -233.6 )
-frame = 1
+frame = 11
 offset = Vector2( 325.383, -71.1333 )
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
+frame = 10
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
+frame = 10
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]
 

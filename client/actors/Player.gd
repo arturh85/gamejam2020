@@ -211,6 +211,10 @@ func _physics_process(delta):
 				rset_id(int(player.name), "puppet_motion", motion)
 				rset_id(int(player.name), "puppet_rotation", viewRotation)
 				rset_id(int(player.name), "puppet_pos", position)
+		
+		rset_id(1, "puppet_motion", motion)
+		rset_id(1, "puppet_rotation", viewRotation)
+		rset_id(1, "puppet_pos", position)
 			
 	else:
 		position = puppet_pos

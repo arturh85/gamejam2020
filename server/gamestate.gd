@@ -158,7 +158,7 @@ func _player_disconnected(id):
 	playerState[playerName]["y"] = player.puppet_pos.y
 	playerState[playerName]["colors"] = player.colors
 	playerState[playerName]["map"] = player.current_map
-	print("pp" + str(player.puppet_pos.x))
+	print("px: " + str(player.puppet_pos.x) + " py: " + str(player.puppet_pos.y))
 	playerState[playerName]["items"] = player.items
 	
 	print("player " + str(id) + " (" + str(players[id]) + ") disonnected")

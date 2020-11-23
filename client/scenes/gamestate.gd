@@ -123,14 +123,15 @@ func add_player_to_scene(id,  pname, mapName, spawn_pos):
 	
 	var player_scene = load("res://actors/Player.tscn")
 	var player = player_scene.instance()
+	player.set_position(spawn_pos)
 	player.set_name(str(id)) # Use unique ID as node name.	
 	player.set_map(mapName)
 	player.set_network_master(id) 
 	player.set_player_name(pname)
-	player.set_position(spawn_pos)
 	player.hide_deac()
 	get_node("/root/World/Players").add_child(player)
 	get_node("/root/World/CanvasLayer/Score").add_player(id, pname)
+	player.set_position(spawn_pos)
 	
 	if id == get_tree().get_network_unique_id():
 		get_node("/root/World/CanvasLayer/MiniMap").player = "/root/World/Players/" + str(id)

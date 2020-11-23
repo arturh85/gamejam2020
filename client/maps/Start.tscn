@@ -38,14 +38,13 @@ __meta__ = {
 [node name="Lights" type="Node" parent="."]
 
 [node name="Light2D" type="Light2D" parent="Lights"]
-position = Vector2( -3.91909, -40.4547 )
+position = Vector2( 0.843117, 2.40513 )
 scale = Vector2( 3.36535, 2.66603 )
 texture = ExtResource( 23 )
 offset = Vector2( -14.6973, 0 )
 texture_scale = 2.43
 energy = 2.5
 range_item_cull_mask = 2
-shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
@@ -58,12 +57,11 @@ texture_scale = 1.28
 color = Color( 0.121569, 0.439216, 0.980392, 1 )
 energy = 2.0
 range_item_cull_mask = 2
-shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
 [node name="Light2D2" type="Light2D" parent="Lights"]
-position = Vector2( -855.893, -9.11907 )
+position = Vector2( -859.068, 5.16755 )
 scale = Vector2( 4.92211, 1.32798 )
 texture = ExtResource( 23 )
 offset = Vector2( -14.6973, 0 )
@@ -71,7 +69,6 @@ texture_scale = 2.0
 color = Color( 0.631373, 0.913725, 0.968627, 1 )
 energy = 1.53
 range_item_cull_mask = 2
-shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
@@ -84,7 +81,6 @@ texture_scale = 2.0
 color = Color( 0.760784, 0.211765, 0.482353, 1 )
 energy = 2.0
 range_item_cull_mask = 2
-shadow_enabled = true
 shadow_gradient_length = 2.0
 shadow_item_cull_mask = 2
 
@@ -94,11 +90,11 @@ shadow_item_cull_mask = 2
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 972.524, -264.766 )
-frame = 9
+frame = 7
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 748.977, -264.766 )
-frame = 8
+frame = 6
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -118.691, 1077.03 )

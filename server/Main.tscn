@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Start_TileMap.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://portal.gd" type="Script" id=5]
 [ext_resource path="res://Ship_TileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mob.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -179,6 +180,9 @@ itemName = "leathergloves"
 luck = 100
 
 [node name="Mobs" type="Node2D" parent="Maps/Start"]
+
+[node name="Blob" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( -1.73199, -892.962 )
 
 [node name="Portals" type="Node2D" parent="Maps/Start"]
 

@@ -9,6 +9,7 @@ var last_harm = null
 
 func _ready():
 	._ready()
+	current_map = $"../../".name
 	rotation = rand_range(0, 2*PI)
 			
 func _process(delta):
@@ -23,10 +24,11 @@ func _process(delta):
 func _physics_process(delta):
 	if health <= 0:
 		return
-	if is_network_master():
-		velocity = transform.x * speed
-		if chase_player:
-			$AnimationPlayer.play("Attack")
+	
+	velocity = transform.x * speed
+	if chase_player:
+		$AnimationPlayer.play("Attack")
+		if get_tree().get_network_unique_id() == int(chase_player.name): # the attacked player does the movement
 			var space_state = get_world_2d().direct_space_state
 			var result = space_state.intersect_ray(position, chase_player.position)
 			if result and result.collider and result.collider.is_in_group("players"):
@@ -38,20 +40,59 @@ func _physics_process(delta):
 					if collision:
 						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 					rotation = velocity.angle()
+					
+			for player in get_node("/root/World/Players").get_children():
+				if player.name != chase_player.name and player.current_map == current_map:
+					rset_id(int(player.name), "puppet_velocity", velocity)
+					rset_id(int(player.name), "puppet_rotation", rotation)
+					rset_id(int(player.name), "puppet_pos", position)
+					#print(player.name + " informed ")
+				
+			puppet_pos = position
+			puppet_velocity = velocity
+			puppet_rotation = rotation
+			rset_id(1, "puppet_velocity", velocity)
+			rset_id(1, "puppet_rotation", rotation)
+			rset_id(1, "puppet_pos", position)
 		else:
-			$AnimationPlayer.play("Idle")
-			var collision = move_and_collide(velocity * delta)
-			if collision:
-				velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
-			rotation = velocity.angle()
-		rset("puppet_velocity", velocity)
-		rset("puppet_rotation", rotation)
-		rset("puppet_pos", position)
+			position = puppet_pos
+			velocity = puppet_velocity
+			rotation = puppet_rotation
 	else:
-		position = puppet_pos
-		velocity = puppet_velocity
-		rotation = puppet_rotation
-
+		$AnimationPlayer.play("Idle")
+		var players = $"/root/gamestate".playerScenes
+		var nearestPlayer = null
+		for p in players:
+			var player = players[p]
+			if player.current_map == current_map:
+				if nearestPlayer == null:
+					nearestPlayer = player
+				else:
+					if (player.position - position).length() < (nearestPlayer.position - position).length():
+						nearestPlayer = player
+		
+		if nearestPlayer != null: # some near player in same map does the movement
+			print (int(nearestPlayer.name))
+			if get_tree().get_network_unique_id() == int(nearestPlayer.name):
+				print ("im moving it")
+				var collision = move_and_collide(velocity * delta)
+				if collision:
+					velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
+					
+				rotation = velocity.angle()
+					
+				puppet_pos = position
+				puppet_velocity = velocity
+				puppet_rotation = rotation
+				rset_id(1, "puppet_velocity", velocity)
+				rset_id(1, "puppet_rotation", rotation)
+				rset_id(1, "puppet_pos", position)
+			else:
+				position = puppet_pos
+				velocity = puppet_velocity
+				rotation = puppet_rotation
+			
+	print(puppet_pos)
 	
 master func _on_death(by_who):
 	var score = $"../../CanvasLayer/Score"
@@ -84,11 +125,13 @@ func _on_health_changed():
 
 func _on_Detect_body_entered(body):
 	if body.is_in_group("players"):
-		chase_player = body
+		if get_tree().get_network_unique_id() == int(body.name):
+			chase_player = body
 
 func _on_Detect_body_exited(body):
 	if body.is_in_group("players"):
-		chase_player = null
+		if get_tree().get_network_unique_id() == int(body.name):
+			chase_player = null
 
 func _on_Harm_body_entered(body):
 	if body.is_in_group("players"):
