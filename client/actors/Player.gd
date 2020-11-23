@@ -82,7 +82,8 @@ func setspeedmultiplier(f):
 	
 func addhealth(h):
 	health = min(health + h, max_health)
-	get_node("/root/World/CanvasLayer/HealthAnimations").play("Heal")
+	if is_network_master():
+		get_node("/root/World/CanvasLayer/HealthAnimations").play("Heal")
 	
 var locked = false
 func lockPlayer():
@@ -315,8 +316,9 @@ func _on_damage():
 	if locked:
 		return
 	if health > 0:
-		$HitPlayer.play("Hit")
-		get_node("/root/World/CanvasLayer/HealthAnimations").play("Damage")
+		if is_network_master():
+			$HitPlayer.play("Hit")
+			get_node("/root/World/CanvasLayer/HealthAnimations").play("Damage")
 
 func _on_heal():
 	if locked:

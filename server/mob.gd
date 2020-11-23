@@ -12,6 +12,19 @@ func _ready():
 	for w in get_children():
 		items.append(w.id)
 
+var mobControlID = 0
+remote func set_mob_control(id):
+	mobControlID = id
+		
+func _process(delta):
+	var players = $"/root/gamestate".playerScenes
+	for p in players:
+		var player = players[p]
+		if mobControlID > 0 and mobControlID != int(player.name):
+			rset_id(int(player.name), "puppet_velocity", puppet_velocity)
+			rset_id(int(player.name), "puppet_rotation", puppet_rotation)
+			rset_id(int(player.name), "puppet_pos", puppet_pos)
+
 func save():
 	if .has_method("save"):
 		var saveDict = .save()

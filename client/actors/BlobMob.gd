@@ -24,11 +24,23 @@ func _process(delta):
 func _physics_process(delta):
 	if health <= 0:
 		return
+
+	var players = $"/root/gamestate".playerScenes
+	var nearestPlayer = null
+	for p in players:
+		var player = players[p]
+		if player.current_map == current_map:
+			if nearestPlayer == null:
+				nearestPlayer = player
+			else:
+				if (player.position - position).length() < (nearestPlayer.position - position).length():
+					nearestPlayer = player
 	
-	velocity = transform.x * speed
-	if chase_player:
-		$AnimationPlayer.play("Attack")
-		if get_tree().get_network_unique_id() == int(chase_player.name): # the attacked player does the movement
+	if nearestPlayer != null and get_tree().get_network_unique_id() == int(nearestPlayer.name):
+		
+		velocity = transform.x * speed
+		if chase_player:
+			$AnimationPlayer.play("Attack")
 			var space_state = get_world_2d().direct_space_state
 			var result = space_state.intersect_ray(position, chase_player.position)
 			if result and result.collider and result.collider.is_in_group("players"):
@@ -41,58 +53,42 @@ func _physics_process(delta):
 						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 					rotation = velocity.angle()
 					
-			for player in get_node("/root/World/Players").get_children():
-				if player.name != chase_player.name and player.current_map == current_map:
-					rset_id(int(player.name), "puppet_velocity", velocity)
-					rset_id(int(player.name), "puppet_rotation", rotation)
-					rset_id(int(player.name), "puppet_pos", position)
+			#for player in get_node("/root/World/Players").get_children():
+			#	if player.name != chase_player.name and player.current_map == current_map:
+		#			rset_id(int(player.name), "puppet_velocity", velocity)
+		#			rset_id(int(player.name), "puppet_rotation", rotation)
+		#			rset_id(int(player.name), "puppet_pos", position)
 					#print(player.name + " informed ")
 				
 			puppet_pos = position
 			puppet_velocity = velocity
 			puppet_rotation = rotation
+			rpc_id(1, "set_mob_control", get_tree().get_network_unique_id())
 			rset_id(1, "puppet_velocity", velocity)
 			rset_id(1, "puppet_rotation", rotation)
 			rset_id(1, "puppet_pos", position)
 		else:
-			position = puppet_pos
-			velocity = puppet_velocity
-			rotation = puppet_rotation
-	else:
-		$AnimationPlayer.play("Idle")
-		var players = $"/root/gamestate".playerScenes
-		var nearestPlayer = null
-		for p in players:
-			var player = players[p]
-			if player.current_map == current_map:
-				if nearestPlayer == null:
-					nearestPlayer = player
-				else:
-					if (player.position - position).length() < (nearestPlayer.position - position).length():
-						nearestPlayer = player
+			$AnimationPlayer.play("Idle")
 		
-		if nearestPlayer != null: # some near player in same map does the movement
-			print (int(nearestPlayer.name))
-			if get_tree().get_network_unique_id() == int(nearestPlayer.name):
-				print ("im moving it")
-				var collision = move_and_collide(velocity * delta)
-				if collision:
-					velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
+			var collision = move_and_collide(velocity * delta)
+			if collision:
+				velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
+				
+			rotation = velocity.angle()
 					
-				rotation = velocity.angle()
-					
-				puppet_pos = position
-				puppet_velocity = velocity
-				puppet_rotation = rotation
-				rset_id(1, "puppet_velocity", velocity)
-				rset_id(1, "puppet_rotation", rotation)
-				rset_id(1, "puppet_pos", position)
-			else:
-				position = puppet_pos
-				velocity = puppet_velocity
-				rotation = puppet_rotation
-			
-	print(puppet_pos)
+			puppet_pos = position
+			puppet_velocity = velocity
+			puppet_rotation = rotation
+			rpc_id(1, "set_mob_control", get_tree().get_network_unique_id())
+			rset_id(1, "puppet_velocity", velocity)
+			rset_id(1, "puppet_rotation", rotation)
+			rset_id(1, "puppet_pos", position)
+	else:
+		rpc_id(1, "set_mob_control", 0)
+		position = puppet_pos
+		velocity = puppet_velocity
+		rotation = puppet_rotation
+				
 	
 master func _on_death(by_who):
 	var score = $"../../CanvasLayer/Score"
