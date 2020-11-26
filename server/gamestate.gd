@@ -111,6 +111,21 @@ func init_map(id, mapName, tileMap = null):
 		portalDict[portalID]["triggerName"] = portal.triggerName
 		portalDict[portalID]["color"] = portal.color
 		
+	var scraps = get_node("/root/World/Maps/" + mapName + "/Scrap").get_children()
+	
+	var scrapDict = {}
+	for scrap in scraps:
+		var scrapID = scrap.id
+		scrapDict[scrapID] = {}
+		scrapDict[scrapID]["name"] = scrap.get_name()
+		scrapDict[scrapID]["x"] = scrap.position.x
+		scrapDict[scrapID]["y"] = scrap.position.y
+		scrapDict[scrapID]["id"] = scrapID
+		scrapDict[scrapID]["randImage"] = scrap.randImage
+		scrapDict[scrapID]["quantity"] = scrap.quantity
+		scrapDict[scrapID]["rotation_degrees"] = scrap.rotation_degrees
+		
+		
 	
 	var startPosition = get_random_start(mapName)
 		
@@ -118,7 +133,7 @@ func init_map(id, mapName, tileMap = null):
 		var n = get_node("/root/World/Maps/" + mapName)
 		tileMap = n.mapDict
 		
-	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict, tileMap, player.colors)
+	rpc_id(id, "init_map", mapName, startPosition, itemDict, mobDict, portalDict, scrapDict, tileMap, player.colors)
 	
 	
 var spawnsUsed = Array()

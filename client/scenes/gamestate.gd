@@ -157,7 +157,7 @@ func create_character(bColor, hColor):
 	rpc_id(1, "join_game", get_tree().get_network_unique_id(), pColors)
 	
 	
-remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap, colors):
+remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, scrapDict, tileMap, colors):
 	
 	print("creating world")
 		
@@ -192,6 +192,18 @@ remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, tileMap,
 		newPortal.set_portal_properties(portalDict[portal])
 		get_node("/root/World/Maps/" + mapName + "/Portals").add_child(newPortal)
 		
+	print("creating scrap")
+	
+	
+	for scrap in scrapDict:
+		
+		var newScrap = load("res://items/scrap.tscn").instance()
+		newScrap.set_scrap_properties(scrapDict[scrap])
+		get_node("/root/World/Maps/" + mapName + "/Scrap").add_child(newScrap)
+		newScrap.name = scrapDict[scrap].name
+	
+	
+	
 	if playerScenes.has(get_tree().get_network_unique_id()):
 		playerScenes[get_tree().get_network_unique_id()].set_map(mapName)
 		playerScenes[get_tree().get_network_unique_id()].set_position(spawn_pos)

@@ -33,7 +33,7 @@
 	
 	"mobs": {
 		"TimeCop": 0,
-		"BlobMob": 10
+		"BlobMob": 50
 	},
 	
 	"prefabs": {
@@ -70,5 +70,6 @@
 				"level": 1
 			},
 		}
-	}
+	},
+	"scrap": 50
 }

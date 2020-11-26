@@ -48,6 +48,7 @@ func _physics_process(delta):
 				if chase_player.position.distance_to(position) < 40:
 					velocity = Vector2(0,0)
 				else:
+					#var path = $"../../Navigation2D".get_simple_path(position, chase_player.position)
 					var collision = move_and_collide(velocity * delta)
 					if collision:
 						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))

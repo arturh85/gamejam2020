@@ -89,12 +89,12 @@ shadow_item_cull_mask = 2
 [node name="Weapons" type="Node" parent="."]
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
-position = Vector2( 972.524, -264.766 )
-frame = 7
+position = Vector2( 1021.33, 5.23129 )
+frame = 5
 
-[node name="GreenLight2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 748.977, -264.766 )
-frame = 6
+[node name="GreenLight4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 680.995, 5.54237 )
+frame = 8
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -118.691, 1077.03 )
@@ -126,3 +126,5 @@ color = Color( 1, 0, 0.772549, 1 )
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Portals" type="Node2D" parent="."]
+
+[node name="Scrap" type="Node2D" parent="."]

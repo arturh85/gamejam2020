@@ -17,9 +17,8 @@ remote func set_mob_control(id):
 	mobControlID = id
 		
 func _process(delta):
-	var players = $"/root/gamestate".playerScenes
-	for p in players:
-		var player = players[p]
+	var players = $"/root/World/Players".get_children()
+	for player in players:
 		if mobControlID > 0 and mobControlID != int(player.name):
 			rset_id(int(player.name), "puppet_velocity", puppet_velocity)
 			rset_id(int(player.name), "puppet_rotation", puppet_rotation)

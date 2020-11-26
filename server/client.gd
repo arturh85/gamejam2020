@@ -77,3 +77,12 @@ sync func pickup_item(itemID):
 			
 	
 	
+sync func pickup_scrap(scrapID):
+	var scrapNode = get_node("/root/World/Maps/" + current_map + "/Scrap")
+	var scp = scrapNode.get_children()
+	for scrap in scp:
+		if scrap.id == scrapID:
+			scrapNode.remove_child(scrap)
+			
+	
+	

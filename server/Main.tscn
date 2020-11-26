@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Start_TileMap.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://portal.gd" type="Script" id=5]
 [ext_resource path="res://Ship_TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://mob.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scrap.tscn" type="PackedScene" id=8]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -60,6 +61,8 @@ createInstance = false
 back = true
 color = "0000ff"
 
+[node name="Scrap" type="Node2D" parent="Maps/Ship"]
+
 [node name="Start" type="Node2D" parent="Maps"]
 
 [node name="TileMap" parent="Maps/Start" instance=ExtResource( 2 )]
@@ -103,16 +106,16 @@ itemName = "laser"
 luck = 10
 
 [node name="Flamethrower" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -999.332, -311.589 )
+position = Vector2( -995.768, -286.644 )
 itemName = "flamethrower"
 luck = 10
 
 [node name="Uzis" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -938.787, -242.636 )
+position = Vector2( -935.223, -182.055 )
 itemName = "uzis"
 
 [node name="Flamethrower2" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -1048.1, -240.954 )
+position = Vector2( -1040.97, -187.5 )
 itemName = "flamethrower2"
 luck = 10
 
@@ -122,16 +125,16 @@ itemName = "elecgun"
 luck = 100
 
 [node name="Railgun" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -1044.74, 334.828 )
+position = Vector2( -1037.61, 384.718 )
 itemName = "railgun"
 
 [node name="LuckyShotgun" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -942.912, 334.829 )
+position = Vector2( -935.785, 384.719 )
 itemName = "shotgun"
 luck = 50
 
 [node name="Rifle" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -993.824, 269.775 )
+position = Vector2( -993.824, 305.411 )
 itemName = "rifle"
 
 [node name="Plasmagun" parent="Maps/Start/Items" instance=ExtResource( 4 )]
@@ -151,27 +154,27 @@ position = Vector2( -789.86, -405.777 )
 itemName = "armor_camouflage2"
 
 [node name="Shoes2" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -744.476, -325.686 )
+position = Vector2( -740.912, -282.923 )
 itemName = "shoes_greensneaker"
 
 [node name="Gloves2" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -789.86, -250.935 )
+position = Vector2( -789.86, -176.099 )
 itemName = "convenient_gloves"
 
 [node name="Pants2" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -688.412, -249.6 )
+position = Vector2( -677.721, -189.019 )
 itemName = "pants_blueshorts"
 
 [node name="Pants" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -739.266, 261.29 )
+position = Vector2( -735.702, 304.053 )
 itemName = "pants_camouflage"
 
 [node name="Shoes" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -784.521, 329.172 )
+position = Vector2( -784.521, 382.626 )
 itemName = "normalshoes"
 
 [node name="Helmet" parent="Maps/Start/Items" instance=ExtResource( 4 )]
-position = Vector2( -688.354, 329.172 )
+position = Vector2( -688.354, 375.499 )
 itemName = "helmet_police"
 
 [node name="Gloves" parent="Maps/Start/Items" instance=ExtResource( 4 )]
@@ -187,9 +190,21 @@ position = Vector2( -1.73199, -892.962 )
 [node name="Portals" type="Node2D" parent="Maps/Start"]
 
 [node name="RandomLvl1" parent="Maps/Start/Portals" instance=ExtResource( 3 )]
+position = Vector2( -172.219, 895.937 )
 
 [node name="ToShip" parent="Maps/Start/Portals" instance=ExtResource( 3 )]
-position = Vector2( -85.8648, -73.8363 )
+position = Vector2( 110.133, 906.152 )
 targetSceneName = "Ship"
 randomLevelTemplate = ""
 color = "00ff00"
+
+[node name="Scrap" type="Node2D" parent="Maps/Start"]
+
+[node name="Scrap" parent="Maps/Start/Scrap" instance=ExtResource( 8 )]
+position = Vector2( -2206.16, -122.561 )
+
+[node name="Scrap2" parent="Maps/Start/Scrap" instance=ExtResource( 8 )]
+position = Vector2( -2055.2, 16.619 )
+
+[node name="Scrap3" parent="Maps/Start/Scrap" instance=ExtResource( 8 )]
+position = Vector2( -2263.76, 80.5637 )

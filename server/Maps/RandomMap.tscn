@@ -12,3 +12,5 @@ script = ExtResource( 1 )
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Portals" type="Node2D" parent="."]
+
+[node name="Scrap" type="Node2D" parent="."]

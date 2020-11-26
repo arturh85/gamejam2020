@@ -32,3 +32,5 @@ __meta__ = {
 [node name="Portals" type="Node2D" parent="."]
 
 [node name="Items" type="Node2D" parent="."]
+
+[node name="Scrap" type="Node2D" parent="."]

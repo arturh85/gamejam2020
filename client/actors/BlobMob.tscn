@@ -24,7 +24,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 0.554784, 1.62451 ),
 "update": 0,
-"values": [ 2.0, 0.0, 2.0 ]
+"values": [ 1.0, 0.0, 1.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -118,7 +118,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2.0 ]
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -157,7 +157,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 2.0 ]
+"values": [ 1.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite2:scale")
@@ -217,14 +217,13 @@ speed = 100
 [node name="Sprite2" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 light_mask = 2
-scale = Vector2( 1e-05, 0.1 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 light_mask = 2
 position = Vector2( 0.51662, -0.31502 )
-scale = Vector2( 0.859894, 0.771406 )
 texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -275,6 +274,7 @@ bus = "Effects"
 anims/Hit = SubResource( 9 )
 
 [node name="Light2D2" type="Light2D" parent="."]
+visible = false
 light_mask = 2
 texture = ExtResource( 2 )
 texture_scale = 0.7

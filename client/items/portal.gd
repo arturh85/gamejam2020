@@ -32,7 +32,7 @@ func unset():
 	
 var once = false
 
-func _on_body_entered(body):
+func _on_body_entered(body):	
 	if body.is_in_group("players"):
 		if not once:
 			once = true

@@ -763,16 +763,14 @@ room2 = NodePath("../../../Ship/Rooms/DroneControl")
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 315.116, -233.6 )
-frame = 11
+frame = 1
 offset = Vector2( 325.383, -71.1333 )
 
 [node name="GreenLight2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -141.922, -138.258 )
-frame = 10
 
 [node name="GreenLight3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.304, 52.3939 )
-frame = 10
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]
 
@@ -785,6 +783,8 @@ frame = 10
 [node name="Items" type="Node" parent="."]
 
 [node name="Weapons" type="Node" parent="."]
+
+[node name="Scrap" type="Node2D" parent="."]
 [connection signal="body_entered" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_entered"]
 [connection signal="body_exited" from="Rooms/WeaponControl" to="Rooms/WeaponControl" method="_on_body_exited"]
 [connection signal="body_entered" from="Rooms/Cloaking" to="Rooms/Cloaking" method="_on_body_entered"]

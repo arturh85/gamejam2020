@@ -397,8 +397,10 @@ func toggle_door_controls_gui():
 		gui_state = GuiState.door_controls
 	set_gui_state(gui_state)
 
-
-			
+func pickup_scrap(quantity):
+	print(quantity)
+	
+	
 func set_trigger(t):
 	trigger = t
 

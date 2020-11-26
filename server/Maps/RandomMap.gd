@@ -8,6 +8,7 @@ var MG # instance
 var portal_scene = load("res://portal.tscn")
 var item_scene = load("res://Item.tscn")
 var mob_scene = load("res://Mob.tscn")
+var scrap_scene = load("res://scrap.tscn")
 
 var rnd = RandomNumberGenerator.new()
 
@@ -65,7 +66,7 @@ func init(levelName, rseed):
 	var pid = 0
 	if settings.has("portals"):
 		for portal in settings["portals"]:
-			var pos = RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, size / 3, TILE.PORTAL)			
+			var pos = RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, size / 4, TILE.PORTAL)
 			p = portal_scene.instance()
 			p.randomLevelTemplate = portal
 			p.createInstance = true
@@ -137,12 +138,25 @@ func init(levelName, rseed):
 						itm.position = RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM))
 						$Items.add_child(itm)
 						
-	#if settings.has("mobs"):
-	#	for mob in settings["mobs"]:
-	#		for i in range(int(settings["mobs"][mob])):
-	#			var pos = RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN))
-	#			mapObject["mobs"][i]["name"] = mob
-				
+	if settings.has("scrap"):
+		for i in range(int(settings["scrap"])):
+			var scrap = scrap_scene.instance()
+			scrap.name = "Scrap" + str(i)
+			scrap.position = RF.b2p(RF.getValidRandomPos(TILE.GROUND, TILE.ITEM))
+			$Scrap.add_child(scrap)
+						
+	var n = 0
+	if settings.has("mobs"):
+		for mob in settings["mobs"]:
+			for i in range(int(settings["mobs"][mob])):
+				var pos = RF.b2p(RF.getValidRandomPosOutDistance(TILE.GROUND, startpoint, int(settings["map"]["SafeSpawnRadius"]), TILE.MOBSPAWN))
+				var mb = mob_scene.instance()
+				mb.name = mob + str(n)
+				mb.position = pos
+				mb.puppet_pos = pos
+				n = n + 1
+				$Mobs.add_child(mb)
+			
 	mapDict["map"] = map
 	mapDict["cell"] = cell
 	mapDict["color"] = settings["map"]["Color"]
