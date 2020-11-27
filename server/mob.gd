@@ -20,9 +20,10 @@ func _process(delta):
 	var players = $"/root/World/Players".get_children()
 	for player in players:
 		if mobControlID > 0 and mobControlID != int(player.name):
-			rset_id(int(player.name), "puppet_velocity", puppet_velocity)
-			rset_id(int(player.name), "puppet_rotation", puppet_rotation)
-			rset_id(int(player.name), "puppet_pos", puppet_pos)
+			if player.current_map == current_map:
+				rset_id(int(player.name), "puppet_velocity", puppet_velocity)
+				rset_id(int(player.name), "puppet_rotation", puppet_rotation)
+				rset_id(int(player.name), "puppet_pos", puppet_pos)
 
 func save():
 	if .has_method("save"):

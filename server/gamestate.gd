@@ -141,7 +141,7 @@ func get_random_start(mapName):
 	var startPosition = Vector2.ZERO
 	var spawnPoints = get_node("/root/World/Maps/" + mapName + "/SpawnPoints").get_children()
 	
-	if spawnsUsed.size() == spawnPoints.size():
+	if spawnsUsed.size() >= spawnPoints.size():
 		spawnsUsed = Array()
 	
 	var s = rng.randi_range(0, spawnPoints.size() - 1)

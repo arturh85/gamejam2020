@@ -1,35 +1,29 @@
 {
 	"map": {
-		"Color": "223322",
+		"Color": "ffffff",
 		"Circular": 1,
-		"Hollow": 1,
+		"Hollow": 0,
 		"Size": 200,
 		"MapBoundary": 2,
 		"SpawnPoints": 4,
 		"SafeSpawnRadius": 20,
 		"SpawnRadius": 5,
 		
-		"Floors": {
-			"Iterations": 1000,
-			"Loops": 1,
-			"Directed": 15
-		},
-		
 		"Rooms": {
-			"Iterations": 300,
-			"Loops": 10,
+			"Iterations": 100000,
+			"Loops": 1,
 			"Directed": -15
 		},
+		"Floors": {
+			"Iterations": 500,
+			"Loops": 0,
+			"Directed": 10
+		},
 		
-		"Tileset": "spaceship.tres",
+		"Tileset": "planet.tres",
 
 	},
 	
-	"portals": {
-		"equip": "ffffff",
-		"equip": "ffffff",
-		"level2": "ff0000"
-	},
 	
 	"mobs": {
 		"TimeCop": 0,
