@@ -201,7 +201,7 @@ color = "00ff00"
 [node name="ToPlanet" parent="Maps/Start/Portals" instance=ExtResource( 3 )]
 position = Vector2( 6.01556, 1044.98 )
 randomLevelTemplate = "planet"
-color = "00f66"
+color = "00ff66"
 
 [node name="Scrap" type="Node2D" parent="Maps/Start"]
 

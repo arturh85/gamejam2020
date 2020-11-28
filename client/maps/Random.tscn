@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://maps/Random.gd" type="Script" id=1]
+[ext_resource path="res://data/images/lights/area.png" type="Texture" id=2]
 [ext_resource path="res://data/images/background.png" type="Texture" id=22]
 
 [node name="Level" type="Node2D"]
@@ -25,6 +26,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="Mobs" type="Node2D" parent="."]
@@ -34,3 +37,12 @@ __meta__ = {
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Scrap" type="Node2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 2
+scale = Vector2( 738.852, 482.141 )
+texture = ExtResource( 2 )
+texture_scale = 10.0
+energy = 0.0
+range_item_cull_mask = 2
+shadow_item_cull_mask = 2

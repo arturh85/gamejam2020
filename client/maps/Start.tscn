@@ -31,7 +31,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TileMap" parent="." instance=ExtResource( 3 )]
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="TileMap" parent="Navigation2D" instance=ExtResource( 3 )]
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
@@ -90,11 +92,11 @@ shadow_item_cull_mask = 2
 
 [node name="GreenLight" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1021.33, 5.23129 )
-frame = 10
+frame = 5
 
 [node name="GreenLight4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 680.995, 5.54237 )
-frame = 1
+frame = 8
 
 [node name="Button3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -118.691, 1077.03 )

@@ -41,18 +41,21 @@ func _physics_process(delta):
 		velocity = transform.x * speed
 		if chase_player:
 			$AnimationPlayer.play("Attack")
-			var space_state = get_world_2d().direct_space_state
-			var result = space_state.intersect_ray(position, chase_player.position)
-			if result and result.collider and result.collider.is_in_group("players"):
-				velocity = position.direction_to(chase_player.position) * speed * 1.5
-				if chase_player.position.distance_to(position) < 40:
-					velocity = Vector2(0,0)
-				else:
-					#var path = $"../../Navigation2D".get_simple_path(position, chase_player.position)
-					var collision = move_and_collide(velocity * delta)
-					if collision:
-						velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
-					rotation = velocity.angle()
+			velocity = position.direction_to(chase_player.position) * speed * 1.5
+			if chase_player.position.distance_to(position) < 40:
+				velocity = Vector2(0,0)
+			else:
+				#var space_state = get_world_2d().direct_space_state
+				#var result = space_state.intersect_ray(position, chase_player.position)
+				#if result and result.collider and result.collider.is_in_group("players"):
+				#	var collision = move_and_collide(velocity * delta)
+				#	rotation = velocity.angle()
+				#else:
+				var nav = $"../../Navigation2D"
+				var path = nav.get_simple_path(position, chase_player.position, false)
+				var p = path[1] - path[0]
+				var collision = move_and_collide(speed * p.normalized() * delta)
+				rotation = p.angle()
 					
 			#for player in get_node("/root/World/Players").get_children():
 			#	if player.name != chase_player.name and player.current_map == current_map:

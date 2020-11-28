@@ -160,4 +160,5 @@ func init(levelName, rseed):
 	mapDict["map"] = map
 	mapDict["cell"] = cell
 	mapDict["color"] = settings["map"]["Color"]
+	mapDict["light"] = settings["map"]["Light"]
 	mapDict["tileset"] = settings["map"]["Tileset"]

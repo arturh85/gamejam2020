@@ -37,7 +37,7 @@ func createTileMap():
 	tileMap.name = "TileMap"
 	tileMap.cell_size.x = mapDict["cell"]
 	tileMap.cell_size.y = mapDict["cell"]
-	tileMap.modulate = mapDict["color"]
+	tileMap.modulate = "333333"
 	tileMap.light_mask = 2
 	tileMap.occluder_light_mask = 2
 	tileMap.z_index = -1
@@ -53,8 +53,9 @@ func createTileMap():
 		
 	tileMap.update_bitmask_region()
 	
-	self.add_child(tileMap)
-	
+	$Navigation2D.add_child(tileMap)
+	$Light2D.energy = float(mapDict["light"])
+	$Light2D.color = mapDict["color"]
 
 func createZeroZero():
 	

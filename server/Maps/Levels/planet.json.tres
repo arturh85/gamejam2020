@@ -1,5 +1,6 @@
 {
 	"map": {
+		"Light": "2",
 		"Color": "ffffff",
 		"Circular": 1,
 		"Hollow": 0,
