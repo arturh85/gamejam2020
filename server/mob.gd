@@ -9,6 +9,7 @@ var items = Array()
 func _ready():
 	._ready()
 	current_map = get_node("../../").name
+	puppet_pos = position
 	for w in get_children():
 		items.append(w.id)
 

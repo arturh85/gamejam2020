@@ -89,8 +89,8 @@ func init_map(id, mapName, tileMap = null):
 		mobDict[mobID] = {}
 		mobDict[mobID]["name"] = mob.name
 		mobDict[mobID]["mobname"] = mob.mobName
-		mobDict[mobID]["x"] = mob.position.x
-		mobDict[mobID]["y"] = mob.position.y
+		mobDict[mobID]["x"] = mob.puppet_pos.x
+		mobDict[mobID]["y"] = mob.puppet_pos.y
 		if mob.has_node("Weapon"):
 			var weapon = mob.get_node("Weapon")["stats"]
 			mobDict[mobID]["weapon"] = weapon
