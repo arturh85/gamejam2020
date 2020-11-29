@@ -18,15 +18,14 @@ func _process(delta):
 	._process(delta)
 		
 		
-	for i in range(isInDectionBody.size()):
+	if isInDectionBody.size() > 0:
 		var space_state = get_world_2d().direct_space_state
 		var exclude = Array()
 		exclude.append(self)
-		var ray = space_state.intersect_ray(position, isInDectionBody[i].position, exclude)
+		var ray = space_state.intersect_ray(position, isInDectionBody[0].position, exclude)
 		if ray and ray.collider and ray.collider.is_in_group("players"):
-			chase_player = isInDectionBody[i]
+			chase_player = isInDectionBody[0]
 			#print("chasing " + chase_player.name)
-			break
 		
 		
 	if harm_player and OS.get_unix_time() - last_harm > 0.3:
