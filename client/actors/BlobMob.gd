@@ -80,9 +80,10 @@ func _physics_process(delta):
 				else:
 					var nav = $"../../Navigation2D"
 					var path = nav.get_simple_path(position, chase_player.position, false)
-					var p = path[1] - path[0]
-					var collision = move_and_collide(speed * p.normalized() * 1.5 * delta)
-					rotation = p.angle()
+					if path.size() > 1:
+						var p = path[1] - path[0]
+						var collision = move_and_collide(speed * p.normalized() * 1.5 * delta)
+						rotation = p.angle()
 					
 					
 			puppet_pos = position

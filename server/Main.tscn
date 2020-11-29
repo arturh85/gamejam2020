@@ -185,7 +185,49 @@ luck = 100
 [node name="Mobs" type="Node2D" parent="Maps/Start"]
 
 [node name="Blob" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
-position = Vector2( -1.73199, -892.962 )
+position = Vector2( 1131.8, -1414.32 )
+
+[node name="Blob2" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1175.52, -1283.14 )
+
+[node name="Blob3" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1340.34, -1421.04 )
+
+[node name="Blob4" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1367.25, -1195.68 )
+
+[node name="Blob5" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1444.61, -1353.77 )
+
+[node name="Blob6" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1320.16, -1293.23 )
+
+[node name="Blob9" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1488.34, -1178.87 )
+
+[node name="Blob10" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1555.61, -1316.77 )
+
+[node name="Blob11" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1417.7, -1528.68 )
+
+[node name="Blob12" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1363.88, -1054.41 )
+
+[node name="Blob13" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1037.62, -1323.5 )
+
+[node name="Blob14" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1505.15, -1431.14 )
+
+[node name="Blob15" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1333.61, -1579.13 )
+
+[node name="Blob7" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1262.98, -1498.41 )
+
+[node name="Blob8" parent="Maps/Start/Mobs" instance=ExtResource( 7 )]
+position = Vector2( 1242.79, -1151.96 )
 
 [node name="Portals" type="Node2D" parent="Maps/Start"]
 
