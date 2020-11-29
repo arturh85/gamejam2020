@@ -121,18 +121,11 @@ func _physics_process(delta):
 				
 	
 master func _on_death(by_who):
-	var score = $"../../CanvasLayer/Score"
-	if not score:
-		score = $"../../../CanvasLayer/Score"
-	if score and by_who > 0:
-		score.rpc("increase_score", by_who, 20)
 	$AnimationPlayer.play("Die")
 	emit_signal("on_removed", self)
 	yield(get_tree().create_timer(3), "timeout")
+	rpc_id(1, "death")
 	queue_free()
-	#var SpawnPoints = get_node("../SpawnPoints")
-	#var spawn = SpawnPoints.get_child( randi() % SpawnPoints.get_child_count())
-	#rpc("respawn_at", spawn.position)
 	
 func _on_respawn():
 	show()

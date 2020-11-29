@@ -66,6 +66,10 @@ sync func take_damage(damage, by_who):
 	pass
 
 
+sync func death():
+	$"../".remove_child(self)
+	
+	
 sync func on_took_damage():
 	print(name + " took damage")
 	print("health: " + str(health))
