@@ -42,7 +42,8 @@ func _physics_process(delta):
 		var player = players[p]
 		if player.current_map == current_map:
 			if nearestPlayer == null:
-				nearestPlayer = player
+				if (player.position - position).length() < 1000:
+					nearestPlayer = player
 			else:
 				if (player.position - position).length() < (nearestPlayer.position - position).length():
 					nearestPlayer = player

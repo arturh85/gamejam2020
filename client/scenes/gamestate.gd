@@ -159,7 +159,7 @@ func create_character(bColor, hColor):
 	
 remote func init_map(mapName, spawn_pos, itemDict, mobDict, portalDict, scrapDict, tileMap, colors):
 	
-	print("creating world")
+	print("creating world " + mapName)
 		
 	world.load_level(mapName, tileMap)
 
