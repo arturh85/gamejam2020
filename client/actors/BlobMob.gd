@@ -11,11 +11,23 @@ func _ready():
 	._ready()
 	current_map = $"../../".name
 	rotation = rand_range(0, 2*PI)
-			
+	
 func _process(delta):
 	if health <= 0:
 		return
 	._process(delta)
+		
+		
+	for i in range(isInDectionBody.size()):
+		var space_state = get_world_2d().direct_space_state
+		var exclude = Array()
+		exclude.append(self)
+		var ray = space_state.intersect_ray(position, isInDectionBody[i].position, exclude)
+		if ray and ray.collider and ray.collider.is_in_group("players"):
+			chase_player = isInDectionBody[i]
+			#print("chasing " + chase_player.name)
+			break
+		
 		
 	if harm_player and OS.get_unix_time() - last_harm > 0.3:
 		last_harm = OS.get_unix_time()
@@ -45,25 +57,35 @@ func _physics_process(delta):
 			if chase_player.position.distance_to(position) < 40:
 				velocity = Vector2(0,0)
 			else:
-				#var space_state = get_world_2d().direct_space_state
-				#var result = space_state.intersect_ray(position, chase_player.position)
-				#if result and result.collider and result.collider.is_in_group("players"):
-				#	var collision = move_and_collide(velocity * delta)
-				#	rotation = velocity.angle()
-				#else:
-				var nav = $"../../Navigation2D"
-				var path = nav.get_simple_path(position, chase_player.position, false)
-				var p = path[1] - path[0]
-				var collision = move_and_collide(speed * p.normalized() * delta)
-				rotation = p.angle()
-					
-			#for player in get_node("/root/World/Players").get_children():
-			#	if player.name != chase_player.name and player.current_map == current_map:
-		#			rset_id(int(player.name), "puppet_velocity", velocity)
-		#			rset_id(int(player.name), "puppet_rotation", rotation)
-		#			rset_id(int(player.name), "puppet_pos", position)
-					#print(player.name + " informed ")
+				var space_state = get_world_2d().direct_space_state
+				var collisionCircle = $CollisionShape2D.shape.radius * 1.2
 				
+				var exclude = Array()
+				exclude.append(self)
+				exclude.append(chase_player)
+				
+				var a = -velocity.angle()
+				var p1s = position + collisionCircle * Vector2(sin(a), cos(a))
+				var p1e = chase_player.position + collisionCircle * Vector2(sin(a), cos(a))
+				var p2s = position - collisionCircle * Vector2(sin(a), cos(a))
+				var p2e = chase_player.position - collisionCircle * Vector2(sin(a), cos(a))
+				
+				var ray1 = space_state.intersect_ray(position, chase_player.position, exclude)
+				var ray2 = space_state.intersect_ray(p1s, chase_player.position, exclude)
+				var ray3 = space_state.intersect_ray(p2s, chase_player.position, exclude)
+				
+				if !ray1 and !ray2 and !ray3:
+					var collision = move_and_collide(velocity * delta)
+					rotation = velocity.angle()
+					
+				else:
+					var nav = $"../../Navigation2D"
+					var path = nav.get_simple_path(position, chase_player.position, false)
+					var p = path[1] - path[0]
+					var collision = move_and_collide(speed * p.normalized() * 1.5 * delta)
+					rotation = p.angle()
+					
+					
 			puppet_pos = position
 			puppet_velocity = velocity
 			puppet_rotation = rotation
@@ -72,7 +94,10 @@ func _physics_process(delta):
 			rset_id(1, "puppet_rotation", rotation)
 			rset_id(1, "puppet_pos", position)
 		else:
-			$AnimationPlayer.play("Idle")
+			if isInDectionBody.size() > 0:
+				$AnimationPlayer.play("Detect")
+			else:
+				$AnimationPlayer.play("Idle")
 		
 			var collision = move_and_collide(velocity * delta)
 			if collision:
@@ -123,15 +148,24 @@ func _on_health_changed():
 	pass
 		
 
+var isInDectionBody = Array()
 func _on_Detect_body_entered(body):
 	if body.is_in_group("players"):
-		if get_tree().get_network_unique_id() == int(body.name):
-			chase_player = body
+		if get_tree().get_network_unique_id() == int(body.name) :
+			isInDectionBody.append(body)
+			#print(body.name + " in detection")
 
 func _on_Detect_body_exited(body):
 	if body.is_in_group("players"):
 		if get_tree().get_network_unique_id() == int(body.name):
-			chase_player = null
+			for i in range(isInDectionBody.size()):
+				if isInDectionBody[i].name == body.name:
+					isInDectionBody.remove(i)
+					#print(body.name + " removed")
+					
+			if isInDectionBody.size() == 0:
+				chase_player = null
+				#print("nothing to chase")
 
 func _on_Harm_body_entered(body):
 	if body.is_in_group("players"):

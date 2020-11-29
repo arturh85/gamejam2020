@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/HealthDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/images/lights/spot.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://data/sounds/hit_mob.wav" type="AudioStream" id=4]
 [ext_resource path="res://data/images/sprites/teleporter.png" type="Texture" id=5]
 [ext_resource path="res://data/sounds/death_mob.wav" type="AudioStream" id=6]
-[ext_resource path="res://data/images/sprites/blob.png" type="Texture" id=7]
+[ext_resource path="res://data/images/enemies/blob1.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.2508
@@ -19,12 +19,52 @@ tracks/0/path = NodePath("Light2D:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 0.554784, 1.62451 ),
 "update": 0,
-"values": [ 1.0, 0.0, 1.0 ]
+"values": [ 2.0, 1.0, 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Detect"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0.0627451, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -118,7 +158,19 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1.0 ]
+"values": [ 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.00784314, 1, 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -217,12 +269,12 @@ speed = 100
 [node name="Sprite2" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 light_mask = 2
-scale = Vector2( 1e-05, 1e-05 )
+scale = Vector2( 1e-05, 0.1 )
 texture = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
-light_mask = 2
+light_mask = 6
 position = Vector2( 0.51662, -0.31502 )
 texture = ExtResource( 7 )
 
@@ -238,14 +290,15 @@ position = Vector2( -0.128037, 0.105028 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 texture_scale = 0.75
-color = Color( 0.431373, 1, 0, 1 )
+color = Color( 0.00784314, 1, 0, 1 )
 energy = 2.0
-range_item_cull_mask = 2
+range_item_cull_mask = 4
 shadow_color = Color( 0.435294, 1, 0.278431, 0 )
 shadow_item_cull_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 2 )
+anims/Detect = SubResource( 10 )
 anims/Die = SubResource( 3 )
 anims/Hit = SubResource( 4 )
 anims/Idle = SubResource( 5 )
